@@ -1,58 +1,71 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Simetri — Laravel + Filament Company Profile Starter Kit
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Simetri adalah starter kit **company profile** berbasis **Laravel + Filament** yang dirancang untuk dipakai ulang (reusable) di berbagai proyek klien. Tujuannya mempercepat pembuatan website company profile dengan modul konten yang sudah jadi, admin panel yang di-white-label per klien, dan sistem tema yang bisa disesuaikan tanpa perlu full page builder.
 
-## About Laravel
+Referensi awal dikembangkan dari [`superduper-filament-starter-kit`](https://github.com), lalu di-upgrade dengan modul dan tooling tambahan.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Fitur Utama (Rencana)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Konten Company Profile
+- **Services** — CRUD layanan/produk (icon, deskripsi, gambar)
+- **Portfolio/Project Showcase** — gallery, kategori, tautan proyek
+- **Team Members** — foto, jabatan, bio singkat, social link
+- **Testimonials** — nama, perusahaan, foto, rating
+- **Client Logos** — logo strip perusahaan partner/klien
+- **Career/Lowongan Kerja** — opsional, toggle aktif per klien
+- **Blog/Artikel** — kategori, tag, featured image, draft/publish
+- **Banner Management** — gambar, link, urutan, periode tayang
+- **Menu Builder** — navigasi navbar/footer dinamis, multi-lokasi
+- **Contact Us** — form + notifikasi email/WA + resource di admin panel
+- **Custom Page** — halaman statis (About Us, TnC, Privacy Policy) dengan rich text editor + slug
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Admin Panel & Autentikasi
+- Filament v3 sebagai panel admin dasar
+- Filament Shield untuk role & permission (Super Admin, Editor, Viewer)
+- White-labeling panel (nama, logo, favicon, brand color)
+- Dark/light mode switching + halaman profile admin (Filament Breezy)
+- Activity log & audit trail admin (spatie/laravel-activitylog + filament-logger)
+- Media manager berbasis folder (tomatophp/filament-media-manager)
+- Widget Google Analytics di dashboard admin
 
-## Learning Laravel
+### Theme & Branding System
+- Settings-driven theme (warna, font, logo) via Spatie Settings
+- CSS variable-based theming (Tailwind config dinamis)
+- Varian komponen Blade per section (hero, about, dll) yang bisa dipilih per klien
+- Live preview theme di admin panel (nice-to-have)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### SEO & Performance
+- SEO meta global & per halaman/konten (meta title, description, OG image)
+- Sitemap.xml & robots.txt otomatis
+- Optimasi performa (caching, lazy load gambar, asset bundling)
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Deployment & Client Setup Tooling
+- Artisan command `app:setup-client` untuk generate `.env`, set nama app, generate key, clear cache
+- Seeder dummy content demo (services, team, testimonials, portfolio) untuk showcase ke calon klien
+- Strategi git/versioning lintas klien (template repo + upstream remote atau composer package private)
+- Dokumentasi deployment lengkap (requirement server, langkah deploy, checklist go-live)
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Tech Stack
 
-## Agentic Development
+- **Backend**: Laravel 11
+- **Admin Panel**: Filament v3 + Filament Shield, Filament Breezy
+- **Package pendukung**: Spatie Media Library, Spatie Settings, Spatie Tags, Spatie Activity Log
+- **Frontend**: Tailwind CSS (dengan CSS variable-based theming)
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Roadmap (Epics)
 
-```bash
-composer require laravel/boost --dev
+| Epic | Deskripsi |
+|------|-----------|
+| 1. Setup Fondasi Proyek | Inisialisasi project Laravel + Filament: repo, environment, dependensi wajib |
+| 2. Autentikasi, Otorisasi & White-labeling Panel | Role & permission dasar + white-labeling admin panel |
+| 3. Modul Konten Company Profile | Services, Portfolio, Team, Testimonials, Client Logos, Career, Blog |
+| 4. Theme & Branding System | Settings-driven theme + varian section Blade per klien |
+| 5. SEO & Performance | SEO meta, sitemap otomatis, optimasi performa frontend |
+| 6. Deployment & Client Setup Tooling | Installer/seeder demo, strategi versioning lintas klien, dokumentasi deploy |
+| 7. QA, Dokumentasi & Rilis | Testing menyeluruh, dokumentasi teknis & user manual, rilis v1.0 |
 
-php artisan boost:install
-```
-
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Progres detail tugas dapat dilihat di [Jira board "Simetri" (SIM)](https://murdiantokops.atlassian.net/jira/software/projects/SIM/boards/34/backlog).
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Proyek ini dibangun di atas [Laravel](https://laravel.com), yang open-sourced di bawah [MIT license](https://opensource.org/licenses/MIT).
