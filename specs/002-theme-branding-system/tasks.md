@@ -29,7 +29,7 @@ Single Laravel + Filament application (lihat [plan.md](./plan.md) § Project Str
 
 **Purpose**: Verifikasi baseline sebelum perubahan dimulai — belum ada infrastruktur baru yang dibagikan di phase ini (lihat Phase 2).
 
-- [ ] T001 Jalankan `vendor/bin/pint --format agent` dan `php artisan test --compact` untuk memastikan baseline hijau sebelum mulai (tidak ada file diubah di task ini)
+- [X] T001 Jalankan `vendor/bin/pint --format agent` dan `php artisan test --compact` untuk memastikan baseline hijau sebelum mulai (tidak ada file diubah di task ini)
 
 **Checkpoint**: Baseline project terverifikasi bersih sebelum perubahan dimulai.
 
@@ -41,16 +41,16 @@ Single Laravel + Filament application (lihat [plan.md](./plan.md) § Project Str
 
 **⚠️ CRITICAL**: T002–T011 harus selesai sebelum task apa pun di Phase 3/4/5 (US1/US2/US3) dimulai.
 
-- [ ] T002 [P] Install `alpinejs` via npm dan inisialisasi di `resources/js/app.js` (`import Alpine from 'alpinejs'; window.Alpine = Alpine; Alpine.start()`) — lihat research.md §3
-- [ ] T003 [P] Tambahkan daftar font kurasi ke `vite.config.js` via helper `bunny()` yang sudah dipakai (Manrope, Be Vietnam Pro, Inter, Poppins, Plus Jakarta Sans, Nunito Sans, Work Sans, Lato) — lihat research.md §5 dan data-model.md § Theme Settings
-- [ ] T004 Buat settings-migration `database/settings/2026_09_01_000001_add_theme_fields_to_brand_settings.php` yang menambah `secondary_color`, `font_heading`, `font_body` ke group `brand` dengan default Luminous Azure (`#3a5f94`, `Manrope`, `Be Vietnam Pro`), lalu tambahkan properti yang sama di `app/Settings/BrandSettings.php` dan jalankan `php artisan migrate` (FR-003, FR-005)
-- [ ] T005 [P] Tambahkan media collection `brand-og-image` (single-file, Spatie Media Library) pada `app/Settings/BrandSettings.php` beserta asset fallback default Luminous Azure di `public/images/og-default.jpg` (FR-009, FR-010)
-- [ ] T006 Perluas `resources/css/app.css` `@theme` dengan token warna, radius, dan spacing lengkap Luminous Azure dari `public/mockup-html/luminous_azure/DESIGN.md` sebagai default CSS statis (research.md §2)
-- [ ] T007 Buat `resources/views/layouts/partials/theme-vars.blade.php` yang meng-echo CSS custom property `--color-primary`, `--color-secondary`, `--font-heading`, `--font-body` dari `app(BrandSettings::class)` dengan fallback ke default Luminous Azure (FR-002, FR-005; depends on T004)
-- [ ] T008 Buat `resources/views/layouts/public.blade.php` sebagai layout dasar (include `theme-vars` partial di `<head>`, meta OG default dari `BrandSettings`, `@yield('content')`/slot) (depends on T005, T007)
-- [ ] T009 [P] Buat `resources/views/components/layout/header.blade.php` (nav + brand name/logo dari `BrandSettings`, konsisten di semua mockup "TopNavBar"/"Navigasi")
-- [ ] T010 [P] Buat `resources/views/components/layout/footer.blade.php` (konsisten di semua mockup "Footer")
-- [ ] T011 Sertakan `<x-layout.header>` dan `<x-layout.footer>` di `resources/views/layouts/public.blade.php` (depends on T008, T009, T010)
+- [X] T002 [P] Install `alpinejs` via npm dan inisialisasi di `resources/js/app.js` (`import Alpine from 'alpinejs'; window.Alpine = Alpine; Alpine.start()`) — lihat research.md §3
+- [X] T003 [P] Tambahkan daftar font kurasi ke `vite.config.js` via helper `bunny()` yang sudah dipakai (Manrope, Be Vietnam Pro, Inter, Poppins, Plus Jakarta Sans, Nunito Sans, Work Sans, Lato) — lihat research.md §5 dan data-model.md § Theme Settings
+- [X] T004 Buat settings-migration `database/settings/2026_09_01_000001_add_theme_fields_to_brand_settings.php` yang menambah `secondary_color`, `font_heading`, `font_body` ke group `brand` dengan default Luminous Azure (`#3a5f94`, `Manrope`, `Be Vietnam Pro`), lalu tambahkan properti yang sama di `app/Settings/BrandSettings.php` dan jalankan `php artisan migrate` (FR-003, FR-005)
+- [X] T005 [P] Tambahkan media collection `brand-og-image` (single-file, Spatie Media Library) pada `app/Settings/BrandSettings.php` beserta asset fallback default Luminous Azure di `public/images/og-default.jpg` (FR-009, FR-010)
+- [X] T006 Perluas `resources/css/app.css` `@theme` dengan token warna, radius, dan spacing lengkap Luminous Azure dari `public/mockup-html/luminous_azure/DESIGN.md` sebagai default CSS statis (research.md §2)
+- [X] T007 Buat `resources/views/layouts/partials/theme-vars.blade.php` yang meng-echo CSS custom property `--color-primary`, `--color-secondary`, `--font-heading`, `--font-body` dari `app(BrandSettings::class)` dengan fallback ke default Luminous Azure (FR-002, FR-005; depends on T004)
+- [X] T008 Buat `resources/views/layouts/public.blade.php` sebagai layout dasar (include `theme-vars` partial di `<head>`, meta OG default dari `BrandSettings`, `@yield('content')`/slot) (depends on T005, T007)
+- [X] T009 [P] Buat `resources/views/components/layout/header.blade.php` (nav + brand name/logo dari `BrandSettings`, konsisten di semua mockup "TopNavBar"/"Navigasi")
+- [X] T010 [P] Buat `resources/views/components/layout/footer.blade.php` (konsisten di semua mockup "Footer")
+- [X] T011 Sertakan `<x-layout.header>` dan `<x-layout.footer>` di `resources/views/layouts/public.blade.php` (depends on T008, T009, T010)
 
 **Checkpoint**: Layout publik + Theme Settings dasar siap — US1, US2, US3 bisa mulai dikerjakan (paralel oleh developer berbeda bila perlu).
 
@@ -64,24 +64,24 @@ Single Laravel + Filament application (lihat [plan.md](./plan.md) § Project Str
 
 ### Tests for User Story 1
 
-- [ ] T012 [P] [US1] Feature test: `GET /` mengembalikan 200 dan menampilkan section kunci (hero, kalkulator, produk kami), di `tests/Feature/Pages/HomePageTest.php`
-- [ ] T013 [P] [US1] Feature test: `GET /produk` menampilkan daftar produk seed; `GET /produk/{slug}` menampilkan detail produk dan related products dari kategori sama; slug tidak dikenal mengembalikan 404, di `tests/Feature/Pages/ProductPageTest.php`
+- [X] T012 [P] [US1] Feature test: `GET /` mengembalikan 200 dan menampilkan section kunci (hero, kalkulator, produk kami), di `tests/Feature/Pages/HomePageTest.php`
+- [X] T013 [P] [US1] Feature test: `GET /produk` menampilkan daftar produk seed; `GET /produk/{slug}` menampilkan detail produk dan related products dari kategori sama; slug tidak dikenal mengembalikan 404, di `tests/Feature/Pages/ProductPageTest.php`
 
 ### Implementation for User Story 1
 
-- [ ] T014 [P] [US1] Buat migration & model `Product` sesuai skema di [data-model.md](./data-model.md#product-seed) (`app/Models/Product.php`, `database/migrations/xxxx_create_products_table.php`)
-- [ ] T015 [US1] Buat `database/seeders/ProductSeeder.php` berisi 7 produk dari mockup (`produk_suoer_luminous_azure`, `produk_detail_suoer_header_aligned` — nama, harga, spesifikasi, fitur) dan daftarkan di `DatabaseSeeder` (depends on T014)
-- [ ] T016 [P] [US1] Buat `resources/views/components/sections/hero.blade.php` sesuai mockup Home section "Hero" (`home_suoer_html_calculator_results`)
-- [ ] T017 [P] [US1] Buat `resources/views/components/sections/why-choose.blade.php` sesuai mockup Home section "Kenapa Pilih SUOER"
-- [ ] T018 [P] [US1] Buat `resources/views/components/sections/how-it-works.blade.php` sesuai mockup Home section "Cara Kerja" (4 langkah)
-- [ ] T019 [P] [US1] Buat `resources/views/components/sections/product-card.blade.php` (dipakai Home "Produk Kami", list Produk, dan related products)
-- [ ] T020 [US1] Buat `resources/views/components/sections/calculator.blade.php` + `resources/js/calculator.js` (komponen Alpine: mode "Per Tagihan"/"Per Alat", update grafik SVG "Investment Line"/"Savings Curve" client-side, validasi input 0/negatif) sesuai mockup Home section "Kalkulator Estimasi Hemat" (FR-006; edge case validasi kalkulator; research.md §4)
-- [ ] T021 [US1] Rangkai `resources/views/pages/home.blade.php` memakai `layouts.public` + section T016–T020 sesuai urutan mockup `home_suoer_html_calculator_results` (depends on T008, T016–T020)
-- [ ] T022 [US1] Buat `resources/views/pages/produk/index.blade.php` (daftar produk memakai `product-card`) sesuai mockup `produk_suoer_luminous_azure` (depends on T019)
-- [ ] T023 [US1] Buat `resources/views/pages/produk/show.blade.php` (showcase, tabel spesifikasi, fitur, related products) sesuai mockup `produk_detail_suoer_header_aligned` (depends on T014, T019)
-- [ ] T024 [P] [US1] Buat `app/Http/Controllers/Public/HomeController.php` (ambil 3 produk untuk section "Produk Kami")
-- [ ] T025 [P] [US1] Buat `app/Http/Controllers/Public/ProductController.php` (`index`, `show` by slug dengan route model binding, 404 otomatis, related products dari kategori sama)
-- [ ] T026 [US1] Daftarkan route `GET /`, `GET /produk`, `GET /produk/{product:slug}` di `routes/web.php` sesuai [contracts/public-routes.md](./contracts/public-routes.md) (depends on T021–T025)
+- [X] T014 [P] [US1] Buat migration & model `Product` sesuai skema di [data-model.md](./data-model.md#product-seed) (`app/Models/Product.php`, `database/migrations/xxxx_create_products_table.php`)
+- [X] T015 [US1] Buat `database/seeders/ProductSeeder.php` berisi 7 produk dari mockup (`produk_suoer_luminous_azure`, `produk_detail_suoer_header_aligned` — nama, harga, spesifikasi, fitur) dan daftarkan di `DatabaseSeeder` (depends on T014)
+- [X] T016 [P] [US1] Buat `resources/views/components/sections/hero.blade.php` sesuai mockup Home section "Hero" (`home_suoer_html_calculator_results`)
+- [X] T017 [P] [US1] Buat `resources/views/components/sections/why-choose.blade.php` sesuai mockup Home section "Kenapa Pilih SUOER"
+- [X] T018 [P] [US1] Buat `resources/views/components/sections/how-it-works.blade.php` sesuai mockup Home section "Cara Kerja" (4 langkah)
+- [X] T019 [P] [US1] Buat `resources/views/components/sections/product-card.blade.php` (dipakai Home "Produk Kami", list Produk, dan related products)
+- [X] T020 [US1] Buat `resources/views/components/sections/calculator.blade.php` + `resources/js/calculator.js` (komponen Alpine: mode "Per Tagihan"/"Per Alat", update grafik SVG "Investment Line"/"Savings Curve" client-side, validasi input 0/negatif) sesuai mockup Home section "Kalkulator Estimasi Hemat" (FR-006; edge case validasi kalkulator; research.md §4)
+- [X] T021 [US1] Rangkai `resources/views/pages/home.blade.php` memakai `layouts.public` + section T016–T020 sesuai urutan mockup `home_suoer_html_calculator_results` (depends on T008, T016–T020)
+- [X] T022 [US1] Buat `resources/views/pages/produk/index.blade.php` (daftar produk memakai `product-card`) sesuai mockup `produk_suoer_luminous_azure` (depends on T019)
+- [X] T023 [US1] Buat `resources/views/pages/produk/show.blade.php` (showcase, tabel spesifikasi, fitur, related products) sesuai mockup `produk_detail_suoer_header_aligned` (depends on T014, T019)
+- [X] T024 [P] [US1] Buat `app/Http/Controllers/Public/HomeController.php` (ambil 3 produk untuk section "Produk Kami")
+- [X] T025 [P] [US1] Buat `app/Http/Controllers/Public/ProductController.php` (`index`, `show` by slug dengan route model binding, 404 otomatis, related products dari kategori sama)
+- [X] T026 [US1] Daftarkan route `GET /`, `GET /produk`, `GET /produk/{product:slug}` di `routes/web.php` sesuai [contracts/public-routes.md](./contracts/public-routes.md) (depends on T021–T025)
 
 **Checkpoint**: User Story 1 selesai — Home & Produk tampil penuh dengan data seed, bisa dites dan didemo independen dari US2/US3.
 
