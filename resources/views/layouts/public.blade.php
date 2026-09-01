@@ -11,12 +11,7 @@
     <title>@yield('title', $appName)</title>
     <meta name="description" content="@yield('meta_description', 'Solusi panel surya untuk rumah, bisnis, dan industri.')">
 
-    {{-- Open Graph (FR-010) --}}
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="{{ $appName }}">
-    <meta property="og:title" content="@yield('og_title', $appName)">
-    <meta property="og:description" content="@yield('meta_description', 'Solusi panel surya untuk rumah, bisnis, dan industri.')">
-    <meta property="og:image" content="@yield('og_image', $brand->ogImageUrl())">
+    @include('layouts.partials.og-meta')
 
     {{-- Material Symbols dipakai sebagai icon set di seluruh mockup — bukan bagian dari
          sistem font kurasi (FR-004), jadi tetap dimuat lewat Google Fonts langsung. --}}

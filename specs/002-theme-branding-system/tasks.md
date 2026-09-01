@@ -139,14 +139,14 @@ Single Laravel + Filament application (lihat [plan.md](./plan.md) § Project Str
 
 ### Tests for User Story 3
 
-- [ ] T053 [P] [US3] Feature test: Theme Settings menampilkan default Luminous Azure saat belum diubah; admin bisa mengubah `secondary_color`/`font_heading`/`font_body`/OG image dan tersimpan; submit font di luar daftar kurasi ditolak, di `tests/Feature/Settings/BrandSettingsTest.php` (perluas file yang sudah ada dari Epic 2)
-- [ ] T054 [P] [US3] Feature test: meta tag `og:image` halaman publik memakai default Luminous Azure saat belum diatur, dan berubah ke gambar yang diupload admin setelah disimpan, di `tests/Feature/Settings/OgMetaTagTest.php`
+- [X] T053 [P] [US3] Feature test: Theme Settings menampilkan default Luminous Azure saat belum diubah; admin bisa mengubah `secondary_color`/`font_heading`/`font_body`/OG image dan tersimpan; submit font di luar daftar kurasi ditolak, di `tests/Feature/Settings/BrandSettingsTest.php` (perluas file yang sudah ada dari Epic 2)
+- [X] T054 [P] [US3] Feature test: meta tag `og:image` halaman publik memakai default Luminous Azure saat belum diatur, dan berubah ke gambar yang diupload admin setelah disimpan, di `tests/Feature/Settings/OgMetaTagTest.php`
 
 ### Implementation for User Story 3
 
-- [ ] T055 [US3] Perluas `app/Filament/Pages/BrandSettingsPage.php`: tambahkan `ColorPicker` untuk `secondary_color`, `Select` (opsi kurasi) untuk `font_heading`/`font_body`, dan `FileUpload` untuk `og_image` (FR-003, FR-004, FR-009; depends on T004, T005)
-- [ ] T056 [US3] Buat `resources/views/layouts/partials/og-meta.blade.php` yang meng-echo `<meta property="og:image">` dari `BrandSettings` dengan fallback default, sertakan di `resources/views/layouts/public.blade.php` (FR-010; depends on T005, T008)
-- [ ] T057 [US3] Pastikan accessor/getter `BrandSettings` fallback ke konstanta default Luminous Azure saat `secondary_color`/`font_heading`/`font_body` dikosongkan kembali oleh admin (edge case reset; depends on T004)
+- [X] T055 [US3] Perluas `app/Filament/Pages/BrandSettingsPage.php`: tambahkan `ColorPicker` untuk `secondary_color`, `Select` (opsi kurasi) untuk `font_heading`/`font_body`, dan `FileUpload` untuk `og_image` (FR-003, FR-004, FR-009; depends on T004, T005)
+- [X] T056 [US3] Buat `resources/views/layouts/partials/og-meta.blade.php` yang meng-echo `<meta property="og:image">` dari `BrandSettings` dengan fallback default, sertakan di `resources/views/layouts/public.blade.php` (FR-010; depends on T005, T008)
+- [X] T057 [US3] Pastikan accessor/getter `BrandSettings` fallback ke konstanta default Luminous Azure saat `secondary_color`/`font_heading`/`font_body` dikosongkan kembali oleh admin (edge case reset; depends on T004)
 
 **Checkpoint**: User Story 3 selesai — Theme Settings admin berfungsi penuh, independen dari US1/US2 (asalkan Foundational sudah selesai).
 
@@ -156,9 +156,9 @@ Single Laravel + Filament application (lihat [plan.md](./plan.md) § Project Str
 
 **Purpose**: Verifikasi akhir lintas story sebelum dianggap selesai.
 
-- [ ] T058 [P] Jalankan `vendor/bin/pint --dirty --format agent` untuk merapikan seluruh file PHP yang diubah
-- [ ] T059 Jalankan test yang relevan: `php artisan test --compact --filter=PageTest`, `--filter=BrandSettingsTest`, `--filter=OgMetaTagTest`
-- [ ] T060 Jalankan `php artisan test --compact` penuh untuk memastikan tidak ada regresi ke test lain (termasuk Epic 2)
+- [X] T058 [P] Jalankan `vendor/bin/pint --dirty --format agent` untuk merapikan seluruh file PHP yang diubah
+- [X] T059 Jalankan test yang relevan: `php artisan test --compact --filter=PageTest`, `--filter=BrandSettingsTest`, `--filter=OgMetaTagTest`
+- [X] T060 Jalankan `php artisan test --compact` penuh untuk memastikan tidak ada regresi ke test lain (termasuk Epic 2)
 - [ ] T061 Ikuti langkah verifikasi manual di [quickstart.md](./quickstart.md) untuk ketiga user story
 
 ---
