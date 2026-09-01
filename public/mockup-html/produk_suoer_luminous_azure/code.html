@@ -1,0 +1,347 @@
+<!DOCTYPE html><html lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Produk - Consistent Code (V1)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Be+Vietnam+Pro:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-surface": "#0b1c30",
+                "primary": "#006397",
+                "on-tertiary-fixed": "#001f28",
+                "error-container": "#ffdad6",
+                "tertiary": "#00677f",
+                "surface-container": "#e5eeff",
+                "primary-fixed": "#cce5ff",
+                "error": "#ba1a1a",
+                "surface-variant": "#d3e4fe",
+                "tertiary-fixed-dim": "#47d6ff",
+                "on-primary-fixed": "#001d31",
+                "secondary-fixed": "#d5e3ff",
+                "background": "#f8f9ff",
+                "on-primary": "#ffffff",
+                "surface-container-low": "#eff4ff",
+                "on-secondary": "#ffffff",
+                "outline-variant": "#bec7d3",
+                "secondary-container": "#9fc2fe",
+                "on-tertiary-fixed-variant": "#004e60",
+                "inverse-surface": "#213145",
+                "on-background": "#0b1c30",
+                "primary-container": "#0099e5",
+                "surface-dim": "#cbdbf5",
+                "on-tertiary": "#ffffff",
+                "surface-container-high": "#dce9ff",
+                "surface-bright": "#f8f9ff",
+                "on-primary-fixed-variant": "#004b73",
+                "secondary-fixed-dim": "#a7c8ff",
+                "on-secondary-fixed-variant": "#1f477b",
+                "primary-fixed-dim": "#92ccff",
+                "on-secondary-fixed": "#001b3c",
+                "outline": "#6f7882",
+                "tertiary-fixed": "#b6ebff",
+                "tertiary-container": "#009ec1",
+                "surface-tint": "#006397",
+                "on-tertiary-container": "#002f3b",
+                "on-error": "#ffffff",
+                "surface-container-highest": "#d3e4fe",
+                "inverse-primary": "#92ccff",
+                "on-primary-container": "#002d48",
+                "surface": "#f8f9ff",
+                "on-surface-variant": "#3f4851",
+                "on-secondary-container": "#294f83",
+                "inverse-on-surface": "#eaf1ff",
+                "secondary": "#3a5f94",
+                "on-error-container": "#93000a",
+                "surface-container-lowest": "#ffffff"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "md": "24px",
+                "base": "8px",
+                "margin-desktop": "64px",
+                "margin-mobile": "16px",
+                "gutter": "24px",
+                "lg": "48px",
+                "xs": "4px",
+                "xl": "80px",
+                "sm": "12px"
+        },
+        "fontFamily": {
+                "label-bold": [
+                        "Be Vietnam Pro"
+                ],
+                "body-sm": [
+                        "Be Vietnam Pro"
+                ],
+                "headline-lg-mobile": [
+                        "Manrope"
+                ],
+                "headline-lg": [
+                        "Manrope"
+                ],
+                "body-md": [
+                        "Be Vietnam Pro"
+                ],
+                "headline-xl": [
+                        "Manrope"
+                ]
+        },
+        "fontSize": {
+                "label-bold": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-sm": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "36px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-xl": [
+                        "48px",
+                        {
+                                "lineHeight": "56px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased selection:bg-primary-container selection:text-on-primary overflow-x-hidden h-auto min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 transition-all duration-300 py-4 bg-white shadow-sm" id="main-nav"><div class="max-w-7xl mx-auto px-6 flex justify-between items-center"><div class="flex items-center space-x-12"><a class="font-headline-lg font-extrabold text-3xl text-primary tracking-tight" href="#">SUOER</a><nav class="hidden md:flex space-x-8"><a class="font-medium text-primary hover:text-tertiary-container transition-colors" href="#">Beranda</a><a class="font-medium text-primary hover:text-tertiary-container transition-colors" href="#">Tentang Kami</a><a class="font-medium text-primary hover:text-tertiary-container transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-tertiary-container" href="#">Produk</a><a class="font-medium text-primary hover:text-tertiary-container transition-colors" href="#">Kontak</a></nav></div><div class="hidden md:block"><a class="text-white px-6 py-3 font-medium hover:-translate-y-0.5 transition-transform inline-block shadow-md rounded-lg bg-primary-container text-on-primary hover:bg-tertiary-container" href="#">Konsultasi Gratis</a></div><button class="md:hidden text-primary"><span class="material-symbols-outlined text-3xl">menu</span></button></div></header>
+<!-- Page Hero -->
+<section class="relative h-[40vh] md:h-[50vh] min-h-[400px] w-full flex items-end overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" data-alt="A wide, sweeping shot of a modern solar array on a commercial building roof at sunrise." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbw_BUoJmvD7u2lPKnA5BszjnwYfBwbC-w77fIDtuKb5DL51xVgljEye1apmvOM6V75YqNp_SJgGdNEFn0H19W4K_Co-Y34i1FccJcDqBxPQ7n87kwg2HnKHgz0kGTOdKe44NwYgjxvlN2KgypJW3WfOJPWjz32Imr-aGkUaX09MtPtIWVaDuXi8oDF2SiNY_lEAvpO31kPTIT9t2Gq5LOOobpRu6SihbptqnOoIEwhXvgPQlwJqBN">
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+</div>
+<div class="relative z-10 w-full px-margin-mobile md:px-margin-desktop max-w-[1280px] mx-auto pb-12">
+<div class="mb-4">
+<p class="font-label-bold text-label-bold text-white/80 uppercase tracking-widest"><a class="hover:text-secondary-fixed transition-colors" href="#">Beranda</a> <span class="mx-2">/</span> Produk</p>
+</div>
+<h1 class="font-headline-lg-mobile md:font-headline-xl text-headline-lg-mobile md:text-headline-xl text-white max-w-2xl">Katalog Produk</h1>
+</div>
+</section>
+<main class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop py-[120px] overflow-visible">
+<!-- Intro + Filter -->
+<div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-16">
+<p class="font-body-md text-body-md text-on-surface-variant max-w-lg">Temukan panel surya dan inverter yang tepat untuk proyek Anda, dari skala rumah tangga hingga industri besar.</p>
+<div class="flex flex-wrap gap-3">
+<button class="bg-primary-container text-on-primary px-5 py-2 font-label-bold text-label-bold transition-colors shadow-sm rounded-lg">Semua</button>
+<button class="bg-transparent border border-outline text-on-surface px-5 py-2 font-label-bold text-label-bold hover:bg-surface-variant transition-colors rounded-lg">Residensial</button>
+<button class="bg-transparent border border-outline text-on-surface px-5 py-2 font-label-bold text-label-bold hover:bg-surface-variant transition-colors rounded-lg">Komersial &amp; Industri</button>
+<button class="bg-transparent border border-outline text-on-surface px-5 py-2 font-label-bold text-label-bold hover:bg-surface-variant transition-colors rounded-lg">Pompa Air</button>
+</div>
+</div>
+<!-- Product Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter auto-rows-[400px]">
+<!-- Row 1: Large (span 2) + Small -->
+<div class="md:col-span-2 bg-surface-container-lowest p-8 lg:p-10 shadow-xl shadow-black/5 relative overflow-hidden flex flex-col md:flex-row gap-8 hover:-translate-y-1 transition-transform duration-300 border border-surface-container-high rounded-lg">
+<div class="w-full md:w-1/2 rounded-lg overflow-hidden relative">
+<img class="object-cover w-full h-full rounded-lg" data-alt="A high-end product photograph of a sleek, black, premium residential solar panel shown against a clean, off-white studio background. Subtle, natural-looking shadows give it a floating effect. The lighting emphasizes the high quality and modern design of the panel, perfectly matching an editorial, eco-friendly energy aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtJbeIic557NcP76tfaRgwwSI-kbnubkN7FP0AXEsa3uq19vZfpnWTfnrwY9keoOM0Pi60SfYON_mxlLQ5WVqUOE7AcPkRVQdHLuwqOq1s0DiG2NibSdaC9MrdIpXsNEPOZLwlAaPBU1d3dKul8W29I8JlmWwNqjunQ8U-Ukcf_QComFjseogL4WEHWjEiSLAhwW99Ieq8ScBELzjLFqIMLoVAxaQ-EtgIwN-7slBO4sIRBRgT457R">
+</div>
+<div class="w-full md:w-1/2 flex flex-col justify-center">
+<div class="flex gap-2 mb-4">
+<span class="bg-primary-fixed text-on-primary-fixed px-3 py-1 rounded-full font-label-bold text-label-bold font-extrabold uppercase tracking-wider text-[11px]">Terlaris</span>
+<span class="bg-surface-variant text-on-surface-variant px-3 py-1 rounded-full font-label-bold text-label-bold uppercase tracking-wider text-[11px]">Residensial</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-primary-container mb-3">SUOER Mono X-Pro 550W</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">Panel surya monocrystalline berkinerja tinggi yang dirancang khusus for estetika atap rumah modern dengan efisiensi konversi maksimal.</p>
+<div class="grid grid-cols-2 gap-y-2 gap-x-4 mb-6 text-sm font-mono text-outline">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">bolt</span> 550W Output</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">percent</span> 21.5% Efisiensi</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">verified</span> 25 Thn Garansi</div>
+</div>
+<a class="inline-flex items-center gap-2 text-primary-container font-label-bold text-label-bold font-semibold hover:text-secondary-container transition-colors mt-auto w-fit" href="#">
+                    Tanya produk ini <span class="material-symbols-outlined">arrow_right_alt</span>
+</a>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-8 shadow-xl shadow-black/5 relative flex flex-col hover:-translate-y-1 transition-transform duration-300 border border-surface-container-high rounded-lg">
+<div class="w-full h-40 rounded-lg overflow-hidden mb-6 relative">
+<img class="object-cover w-full h-full" data-alt="A clean, minimalist product shot of a smart solar inverter unit mounted on a textured white wall. The device has a sleek interface and indicator lights. Soft, directional light highlights its modern industrial design. High-resolution, crisp, representing cutting-edge clean energy technology." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2Y7wPUmXNS8h5FiVQUOQ74GuCFgzTJ66dxIq6lFTDrWqflO2qWgr-MEjKHOG1Gbe_dimjgvtA5lvVMWdUHFFt6AuYpp6y47i9O62iJ7_8yV8Z6P6K7DmwzQYqoWpBe-Aou-Odwy5OjsaKlE1cdTxpPUmLy9A_RY-TpuZhNCHxK2s2JjnH70xhKRu0qrCYmLi4tNt6XX_q4l5buUrhcC-taih1A4-tVBFT03Ql7hlngoNbYEPHNWtP">
+</div>
+<span class="bg-surface-variant text-on-surface-variant px-3 py-1 rounded-full font-label-bold text-label-bold uppercase tracking-wider text-[11px] w-fit mb-3">Inverter</span>
+<h3 class="font-headline-lg text-headline-lg text-primary-container text-2xl mb-4">SUOER Smart Inverter 5kW</h3>
+<div class="grid grid-cols-1 gap-y-2 mb-6 text-sm font-mono text-outline">
+<div class="flex items-center gap-1 rounded-lg"><span class="material-symbols-outlined text-[16px]">wifi</span> WiFi Monitoring</div>
+<div class="flex items-center gap-1 rounded-lg"><span class="material-symbols-outlined text-[16px]">security</span> IP65 Protection</div>
+</div>
+<a class="inline-flex items-center gap-2 text-primary-container font-label-bold text-label-bold font-semibold hover:text-secondary-container transition-colors mt-auto w-fit" href="#">
+                Tanya produk ini <span class="material-symbols-outlined">arrow_right_alt</span>
+</a>
+</div>
+<!-- Row 2: 3 Equal -->
+<div class="bg-surface-container-lowest p-8 shadow-xl shadow-black/5 relative flex flex-col hover:-translate-y-1 transition-transform duration-300 border border-surface-container-high rounded-lg">
+<div class="w-full h-32 rounded-lg overflow-hidden mb-6 relative">
+<img class="object-cover w-full h-full" data-alt="A commercial-grade solar panel designed for large scale installations, photographed from an isometric angle against a neutral grey background. The rugged frame and deep blue cells denote high durability and power. Editorial lighting, crisp focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARZxENuTYWcAi4YMYl_8OLgM_3Rlh1chhBlSe8fl-aKvsocnFLMmJXj8XbOsS2ubKoqrQSsp3lCaafMqOEknMRZKdFxGPimXHiRx8x3dvWENSrAFPdkZpGLpEEoYCN27KDNHL-pfgklOGsZjoleuzDLSaF54hLc23Zo97mNC0UkDh6LDfYPmPoFYPc6tfoLuNKAHtwAJ5GvUe_RFztHZ21j-KxKO28GUWqDFktmH3GCzF2ZnO4Iq5U">
+</div>
+<span class="bg-surface-variant text-on-surface-variant px-3 py-1 rounded-full font-label-bold text-label-bold uppercase tracking-wider text-[11px] w-fit mb-3">Komersial</span>
+<h3 class="font-headline-lg text-headline-lg text-primary-container text-xl mb-4 leading-tight">SUOER Pro-Industrial 600W</h3>
+<a class="inline-flex items-center gap-2 text-primary-container font-label-bold text-label-bold font-semibold hover:text-secondary-container transition-colors mt-auto w-fit" href="#">
+                Tanya produk ini <span class="material-symbols-outlined">arrow_right_alt</span>
+</a>
+</div>
+<div class="bg-surface-container-lowest p-8 shadow-xl shadow-black/5 relative flex flex-col hover:-translate-y-1 transition-transform duration-300 border border-surface-container-high rounded-lg">
+<div class="w-full h-32 rounded-lg overflow-hidden mb-6 relative">
+<img class="object-cover w-full h-full" data-alt="A solar-powered water pump system displayed beautifully in a studio setting with a hint of natural botanical elements in the background to suggest agriculture. The metallic pump housing reflects soft, diffused light, emphasizing its robust engineering and ecological purpose." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAby3QBIE0N2FzkXYlhNpaATf428NFhgcIpeIEorN3tzw5Ew0Ubx4xc5G5QMo-tkYOvjgJohUmXwDrcXbTiUhxAdqMcvAdyKb9seBxxbd3t-AOFdH7XKJKFqbYUEDzyOkUnw3Nvr6a-g1w26nl4hAxSk6iji6PmAN0M-N3JAg9mc5h2yDs03-L-VbYBkl42D_7yNoBMADLkyXk2Gw_6QA_dgLyJC6zkPTaM1hRuSabZTnKHf9VoVzKl">
+</div>
+<span class="bg-surface-variant text-on-surface-variant px-3 py-1 rounded-full font-label-bold text-label-bold uppercase tracking-wider text-[11px] w-fit mb-3">Pompa Air</span>
+<h3 class="font-headline-lg text-headline-lg text-primary-container text-xl mb-4 leading-tight">SUOER Aqua-Solar System</h3>
+<a class="inline-flex items-center gap-2 text-primary-container font-label-bold text-label-bold font-semibold hover:text-secondary-container transition-colors mt-auto w-fit" href="#">
+                Tanya produk ini <span class="material-symbols-outlined">arrow_right_alt</span>
+</a>
+</div>
+<div class="bg-surface-container-lowest p-8 shadow-xl shadow-black/5 relative flex flex-col hover:-translate-y-1 transition-transform duration-300 border border-surface-container-high rounded-lg">
+<div class="w-full h-32 rounded-lg overflow-hidden mb-6 relative">
+<img class="object-cover w-full h-full" data-alt="A modern lithium-ion solar battery storage unit, tall and sleek with an off-white finish, standing against a minimalist architectural background. Soft ambient lighting creates subtle shadows, emphasizing its unobtrusive, premium home integration aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuASxCxV0cU8-YEVNgD_GYQ2oj2D6nojrdzJqiCThJHBfbXnul10tR0aAyjNnBHXR5uU2DpeQmZNZRJ9V43jA-NHfGecOn4gqo4gYzhW60G_eZ8vAAKZ0r3vOjkBPFp0SJJv-MS62D8DJ3hvgDBHjB9MWcOOMZerU08jTZ3shdspjeEpY8pVXiLaNtgBOK92c4del_R30ZmtlvphdUQOcYz9LgqhKW4V8Bcpu9RHe3AAjS6ttrkAC-UZ">
+</div>
+<span class="bg-surface-variant text-on-surface-variant px-3 py-1 rounded-full font-label-bold text-label-bold uppercase tracking-wider text-[11px] w-fit mb-3">Penyimpanan</span>
+<h3 class="font-headline-lg text-headline-lg text-primary-container text-xl mb-4 leading-tight">SUOER PowerBank Home 10kWh</h3>
+<a class="inline-flex items-center gap-2 text-primary-container font-label-bold text-label-bold font-semibold hover:text-secondary-container transition-colors mt-auto w-fit" href="#">
+                Tanya produk ini <span class="material-symbols-outlined">arrow_right_alt</span>
+</a>
+</div>
+<!-- Row 3: Small + Large (span 2) -->
+<div class="bg-surface-container-lowest p-8 shadow-xl shadow-black/5 relative flex flex-col hover:-translate-y-1 transition-transform duration-300 border border-surface-container-high rounded-lg">
+<div class="w-full h-40 rounded-lg overflow-hidden mb-6 relative">
+<img class="object-cover w-full h-full" data-alt="A set of high-quality solar panel mounting brackets and rails, arranged neatly on a flat surface in a knolling style layout. The metallic textures shine under precise, soft studio lighting, conveying strength, reliability, and precision engineering for solar installations." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPl2msuqcXJFRxeRe8jDpp2RQ9iDM29nhk7v7rcO9FARgkpnfggLtdVsdSnBE4jnwkKwFsjPIrPEUBiDQ2wHm0vZaqljQ2LJ8eZnsdne5QtcqOl0nZeJ3hVRLxADyiPl9iIeZTt6CU2gQu0lXcvzo7R-mQIgQiZBsDdb7Yi-448d9Ufy9j4P6wwjke0taDudO2p2MFNYOoiWN1A_wKa8dqsojZVduHGSJKOo_cg6qp7-n7loNL9BQQ">
+</div>
+<span class="bg-surface-variant text-on-surface-variant px-3 py-1 rounded-full font-label-bold text-label-bold uppercase tracking-wider text-[11px] w-fit mb-3">Aksesoris</span>
+<h3 class="font-headline-lg text-headline-lg text-primary-container text-2xl mb-4">Mounting Kit Standar</h3>
+<a class="inline-flex items-center gap-2 text-primary-container font-label-bold text-label-bold font-semibold hover:text-secondary-container transition-colors mt-auto w-fit" href="#">
+                Tanya produk ini <span class="material-symbols-outlined">arrow_right_alt</span>
+</a>
+</div>
+<div class="md:col-span-2 bg-surface-container-lowest p-8 lg:p-10 shadow-xl shadow-black/5 relative overflow-hidden flex flex-col md:flex-row gap-8 hover:-translate-y-1 transition-transform duration-300 border border-surface-container-high rounded-lg">
+<div class="w-full md:w-1/2 rounded-lg overflow-hidden relative">
+<img class="object-cover w-full h-full rounded-lg" data-alt="A majestic aerial photograph of a large commercial rooftop fully covered with a neat array of solar panels. The scene is bathed in golden hour light, emphasizing scale, efficiency, and industrial sustainability. The composition is clean, airy, and professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3bCgk8JSQYa3Mrxnwn_HPpQu9x3aGwROe6O3Usd-oO9AxtYo5hFHCaae4JazTKJeZc30Hd35yD5-WPC0vRCWV0q9NfC41PTvAYxYsgahL7DlEn4zaPL71srejtlggtOll_XkToochKVxCQsN7rJ0iRYu_v4-pnn0vtk8UlbwduxXsXOfTZDfO3Ap7vH9OgBX7YX3ToE5M9AVqH0VtzzrUufPM4XtqVkMssAEH6LlJlpRhgFsAL5D5">
+</div>
+<div class="w-full md:w-1/2 flex flex-col justify-center">
+<div class="flex gap-2 mb-4">
+<span class="bg-surface-variant text-on-surface-variant px-3 py-1 rounded-full font-label-bold text-label-bold uppercase tracking-wider text-[11px]">Solusi Lengkap</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-primary-container mb-3">SUOER Turnkey Commercial Package</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">Sistem energi surya terintegrasi penuh untuk kebutuhan industri. Termasuk panel efisiensi tinggi, inverter sentral, dan instalasi standar EPC.</p>
+<div class="grid grid-cols-2 gap-y-2 gap-x-4 mb-6 text-sm font-mono text-outline">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">design_services</span> Custom Design</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">engineering</span> EPC Service</div>
+</div>
+<a class="inline-flex items-center gap-2 text-primary-container font-label-bold text-label-bold font-semibold hover:text-secondary-container transition-colors mt-auto w-fit" href="#">
+                    Tanya produk ini <span class="material-symbols-outlined">arrow_right_alt</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Disclaimer -->
+<div class="mt-12 p-6 border border-dashed border-outline-variant rounded-lg">
+<p class="font-label-bold text-label-bold text-outline text-center">Spesifikasi di atas adalah acuan umum. Angka final mengikuti datasheet resmi produk yang dikonfirmasi tim kami saat konsultasi.</p>
+</div>
+</main>
+<!-- Bingung Section -->
+<section class="bg-primary-container py-[120px] px-margin-mobile md:px-margin-desktop my-12">
+<div class="max-w-3xl mx-auto text-center">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-6">Bingung pilih yang mana?</h2>
+<p class="font-body-md text-body-md text-white/90 mb-10">Gunakan kalkulator kami untuk memperkirakan kebutuhan daya dan potensi penghematan bulanan Anda.</p>
+<a class="inline-flex items-center justify-center bg-white text-primary-container px-8 py-4 font-label-bold text-label-bold hover:bg-surface transition-all hover:-translate-y-0.5 rounded-lg" href="#">
+            Coba kalkulator hemat listrik <span class="material-symbols-outlined ml-2">arrow_forward</span>
+</a>
+</div>
+</section>
+<!-- FAQ -->
+<section class="max-w-3xl mx-auto px-margin-mobile md:px-margin-desktop py-[120px]">
+<h2 class="font-headline-lg text-headline-lg text-primary-container mb-12 text-center">Pertanyaan Seputar Produk</h2>
+<div class="space-y-4">
+<details class="group bg-surface-container-lowest shadow-xl shadow-black/5 border border-surface-container-high overflow-hidden rounded-lg" open="">
+<summary class="flex justify-between items-center font-headline-lg text-headline-lg text-xl text-primary-container cursor-pointer p-6 list-none hover:bg-surface transition-colors">
+<span class="">Berapa lama garansi panel?</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-6 pb-6 pt-2 font-body-md text-body-md text-on-surface-variant">
+                Panel surya SUOER dilengkapi dengan garansi kinerja linier hingga 25 tahun, memastikan efisiensi panel tidak akan turun di bawah 80% dalam kurun waktu tersebut. Inverter biasanya memiliki garansi standar 5 hingga 10 tahun tergantung model.
+            </div>
+</details>
+<details class="group bg-surface-container-lowest shadow-xl shadow-black/5 border border-surface-container-high overflow-hidden rounded-lg">
+<summary class="flex justify-between items-center font-headline-lg text-headline-lg text-xl text-primary-container cursor-pointer p-6 list-none hover:bg-surface transition-colors">
+<span class="">Apakah bisa custom kapasitas?</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-6 pb-6 pt-2 font-body-md text-body-md text-on-surface-variant">
+                Sangat bisa. Kami merancang sistem berdasarkan kebutuhan beban listrik spesifik dan luas atap yang tersedia. Tim teknisi kami akan melakukan survey untuk merancang kapasitas yang paling optimal.
+            </div>
+</details>
+<details class="group bg-surface-container-lowest shadow-xl shadow-black/5 border border-surface-container-high overflow-hidden rounded-lg">
+<summary class="flex justify-between items-center font-headline-lg text-headline-lg text-xl text-primary-container cursor-pointer p-6 list-none hover:bg-surface transition-colors">
+<span class="">Bagaimana proses instalasinya?</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-6 pb-6 pt-2 font-body-md text-body-md text-on-surface-variant">
+                Proses dimulai dari survey lokasi, perancangan sistem, pengajuan izin (jika on-grid), instalasi fisik oleh teknisi bersertifikat kami, hingga tahap commissioning dan serah terima pengoperasian sistem kepada Anda.
+            </div>
+</details>
+</div>
+</section>
+<!-- Footer CTA -->
+<section class="bg-primary-container text-on-primary py-[120px] px-margin-mobile md:px-margin-desktop relative overflow-hidden">
+<div class="absolute inset-0 z-0 opacity-10 mix-blend-overlay">
+<div class="bg-cover bg-center w-full h-full" data-alt="Abstract macro photography of solar cell texture, showing the intricate grid lines and deep blue/green silicon surface. The image provides a subtle, technical background pattern that reinforces the high-tech, organic precision identity." style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuD27xUOF3cIVd4rY9AnBpd9A9r6apE0KMhHzBd7eKtYs4TGZXVf98qUrHsoJBLQvBUhW52Sd5jkz1W22Go_5mXiOPq6x9HNTSw2WOI2smTBhiPAoemS5osBSFqmF1vbaNN38727qSknQAgz2YVgNgzWu3h6ZmfStxf4WdIWD1yjeSFAoAEHmfYQIApMHrL3Q3AazvoXIqpBgrjqFwnQmIc09kz1stvgsprNnxnI_VCnHww_VqCz0gg2&quot;);"></div>
+</div>
+<div class="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-6">Belum yakin kapasitas yang Anda butuhkan?</h2>
+<p class="font-body-md text-body-md text-white/90 mb-10">Konsultasi gratis dengan tim teknis ahli kami untuk mendapatkan perhitungan yang akurat dan solusi yang tepat.</p>
+<button class="px-8 py-4 font-label-bold text-label-bold font-bold hover:bg-opacity-90 hover:-translate-y-1 transition-all shadow-lg border border-white/20 bg-white text-primary rounded-lg">Konsultasi gratis dengan tim SUOER</button>
+</div>
+</section>
+<!-- Footer - Synced with SCREEN_15 -->
+<footer class="bg-on-background pt-20 pb-10 px-6 border-t border-white/10"><div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16"><div class="col-span-1 md:col-span-1 rounded-lg"><div class="font-headline-lg font-extrabold text-3xl text-white mb-6 tracking-tight">SUOER</div><p class="text-white/80 text-sm leading-relaxed mb-6">Menginspirasi masa depan berkelanjutan melalui inovasi tenaga surya yang elegan dan presisi tinggi untuk masyarakat Indonesia.</p></div><div class="rounded-lg"><h4 class="font-bold text-white mb-6">Solusi</h4><ul class="space-y-4 text-white/60 text-sm"><li class=""><a class="hover:text-white transition-colors" href="#">Panel Residensial</a></li><li class=""><a class="hover:text-white transition-colors" href="#">B2B &amp; Industri</a></li><li class=""><a class="hover:text-white transition-colors" href="#">Pompa Air Surya</a></li><li class=""><a class="hover:text-white transition-colors" href="#">Net Metering PLN</a></li></ul></div><div class="rounded-lg"><h4 class="font-bold text-white mb-6">Perusahaan</h4><ul class="space-y-4 text-white/60 text-sm"><li class=""><a class="hover:text-white transition-colors" href="#">Tentang Kami</a></li><li class=""><a class="hover:text-white transition-colors" href="#">Blog &amp; Artikel</a></li><li class=""><a class="hover:text-white transition-colors" href="#">Karir</a></li><li class=""><a class="hover:text-white transition-colors" href="#">FAQ</a></li></ul></div><div class="rounded-lg"><h4 class="font-bold text-white mb-6">Kontak</h4><ul class="space-y-4 text-white/60 text-sm"><li class="flex items-start"><span class="material-symbols-outlined text-white text-lg mr-2">location_on</span> Jl. Jend. Sudirman Kav. 52-53, Jakarta Selatan 12190</li><li class="flex items-center"><span class="material-symbols-outlined text-white text-lg mr-2">mail</span> hello@suoer.id</li><li class="flex items-center"><span class="material-symbols-outlined text-white text-lg mr-2">call</span> (021) 555-0123</li></ul></div></div><div class="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs text-white/40"><p class="">© 2024 SUOER Solar Energy. All Rights Reserved.</p><div class="flex space-x-6 mt-4 md:mt-0"><a class="hover:text-white transition-colors" href="#">Kebijakan Privasi</a><a class="hover:text-white transition-colors" href="#">Syarat &amp; Ketentuan</a></div></div></footer>
+
+
+
+
+
+
+
+
+</body></html>
