@@ -10,15 +10,14 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class JobOpeningFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->jobTitle(),
+            'location' => fake()->randomElement(['Jakarta', 'Jakarta / Remote', 'Bandung']),
+            'employment_type' => fake()->randomElement(['full-time', 'internship', 'contract']),
+            'description' => fake()->paragraph(),
+            'is_active' => true,
         ];
     }
 }

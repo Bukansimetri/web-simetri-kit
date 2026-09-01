@@ -95,35 +95,35 @@ Single Laravel + Filament application (lihat [plan.md](./plan.md) § Project Str
 
 ### Tests for User Story 2
 
-- [ ] T027 [P] [US2] Feature test: `GET /tentang-kami` mengembalikan 200 dan menampilkan section kunci (Visi, Misi, Nilai), di `tests/Feature/Pages/AboutPageTest.php`
-- [ ] T028 [P] [US2] Feature test: `GET /kontak` mengembalikan 200, menampilkan seluruh field form, dan TIDAK ada route `POST /kontak` terdaftar, di `tests/Feature/Pages/ContactPageTest.php`
-- [ ] T029 [P] [US2] Feature test: `GET /karir` hanya menampilkan `JobOpening` dengan `is_active = true`, di `tests/Feature/Pages/CareerPageTest.php`
-- [ ] T030 [P] [US2] Feature test: `GET /artikel` menampilkan daftar artikel published terbaru dulu dan empty state wajar saat kosong; `GET /artikel/{slug}` menampilkan detail atau 404, di `tests/Feature/Pages/ArticlePageTest.php`
-- [ ] T031 [P] [US2] Feature test: `GET /faq` menampilkan FAQ item terurut sesuai `order`, di `tests/Feature/Pages/FaqPageTest.php`
+- [X] T027 [P] [US2] Feature test: `GET /tentang-kami` mengembalikan 200 dan menampilkan section kunci (Visi, Misi, Nilai), di `tests/Feature/Pages/AboutPageTest.php`
+- [X] T028 [P] [US2] Feature test: `GET /kontak` mengembalikan 200, menampilkan seluruh field form, dan TIDAK ada route `POST /kontak` terdaftar, di `tests/Feature/Pages/ContactPageTest.php`
+- [X] T029 [P] [US2] Feature test: `GET /karir` hanya menampilkan `JobOpening` dengan `is_active = true`, di `tests/Feature/Pages/CareerPageTest.php`
+- [X] T030 [P] [US2] Feature test: `GET /artikel` menampilkan daftar artikel published terbaru dulu dan empty state wajar saat kosong; `GET /artikel/{slug}` menampilkan detail atau 404, di `tests/Feature/Pages/ArticlePageTest.php`
+- [X] T031 [P] [US2] Feature test: `GET /faq` menampilkan FAQ item terurut sesuai `order`, di `tests/Feature/Pages/FaqPageTest.php`
 
 ### Implementation for User Story 2
 
-- [ ] T032 [P] [US2] Buat migration & model `Article` sesuai [data-model.md](./data-model.md#article-seed) (`app/Models/Article.php`)
-- [ ] T033 [P] [US2] Buat migration & model `JobOpening` sesuai [data-model.md](./data-model.md#job-opening-seed) (`app/Models/JobOpening.php`)
-- [ ] T034 [P] [US2] Buat migration & model `FaqItem` sesuai [data-model.md](./data-model.md#faq-item-seed) (`app/Models/FaqItem.php`)
-- [ ] T035 [US2] Buat `database/seeders/ArticleSeeder.php` dari konten mockup `artikel_suoer_consistent_header_footer` dan daftarkan di `DatabaseSeeder` (depends on T032)
-- [ ] T036 [US2] Buat `database/seeders/JobOpeningSeeder.php` dari konten mockup `karir_suoer_header_consistent` (3 lowongan) dan daftarkan di `DatabaseSeeder` (depends on T033)
-- [ ] T037 [US2] Buat `database/seeders/FaqItemSeeder.php` dari konten mockup `faq_suoer_100_consistent_header_footer` (5 item) dan daftarkan di `DatabaseSeeder` (depends on T034)
-- [ ] T038 [P] [US2] Buat `resources/views/components/sections/article-card.blade.php`
-- [ ] T039 [P] [US2] Buat `resources/views/components/sections/job-card.blade.php`
-- [ ] T040 [P] [US2] Buat `resources/views/components/sections/faq-accordion.blade.php` (komponen Alpine `x-data` untuk expand/collapse)
-- [ ] T041 [P] [US2] Buat `resources/views/components/sections/cta-band.blade.php` (dipakai Kontak/Karir/FAQ/Tentang Kami)
-- [ ] T042 [US2] Buat `resources/views/pages/tentang-kami.blade.php` sesuai mockup `tentang_kami_suoer_luminous_azure` (depends on T041)
-- [ ] T043 [US2] Buat `resources/views/pages/kontak.blade.php` + validasi client-side Alpine (field wajib, format nomor HP) sesuai mockup `kontak_suoer_proportional_fix`, tanpa route POST (FR-007; research.md §7; depends on T041)
-- [ ] T044 [US2] Buat `resources/views/pages/karir.blade.php` memakai `job-card` sesuai mockup `karir_suoer_header_consistent` (depends on T039, T041)
-- [ ] T045 [US2] Buat `resources/views/pages/artikel/index.blade.php` dan `resources/views/pages/artikel/show.blade.php` memakai `article-card` sesuai mockup `artikel_suoer_consistent_header_footer`, termasuk empty state saat data kosong (depends on T038)
-- [ ] T046 [US2] Buat `resources/views/pages/faq.blade.php` memakai `faq-accordion` sesuai mockup `faq_suoer_100_consistent_header_footer` (depends on T040, T041)
-- [ ] T047 [P] [US2] Buat `app/Http/Controllers/Public/AboutController.php`
-- [ ] T048 [P] [US2] Buat `app/Http/Controllers/Public/ContactController.php` (`show` saja — tanpa method submit, FR-007)
-- [ ] T049 [P] [US2] Buat `app/Http/Controllers/Public/CareerController.php` (filter `is_active`)
-- [ ] T050 [P] [US2] Buat `app/Http/Controllers/Public/ArticleController.php` (`index`, `show` by slug dengan route model binding, 404 otomatis)
-- [ ] T051 [P] [US2] Buat `app/Http/Controllers/Public/FaqController.php`
-- [ ] T052 [US2] Daftarkan route `GET /tentang-kami`, `GET /kontak`, `GET /karir`, `GET /artikel`, `GET /artikel/{article:slug}`, `GET /faq` di `routes/web.php` sesuai [contracts/public-routes.md](./contracts/public-routes.md) (depends on T042–T051; edit file yang sama dengan T026, kerjakan setelahnya — bukan paralel)
+- [X] T032 [P] [US2] Buat migration & model `Article` sesuai [data-model.md](./data-model.md#article-seed) (`app/Models/Article.php`)
+- [X] T033 [P] [US2] Buat migration & model `JobOpening` sesuai [data-model.md](./data-model.md#job-opening-seed) (`app/Models/JobOpening.php`)
+- [X] T034 [P] [US2] Buat migration & model `FaqItem` sesuai [data-model.md](./data-model.md#faq-item-seed) (`app/Models/FaqItem.php`)
+- [X] T035 [US2] Buat `database/seeders/ArticleSeeder.php` dari konten mockup `artikel_suoer_consistent_header_footer` dan daftarkan di `DatabaseSeeder` (depends on T032)
+- [X] T036 [US2] Buat `database/seeders/JobOpeningSeeder.php` dari konten mockup `karir_suoer_header_consistent` (3 lowongan) dan daftarkan di `DatabaseSeeder` (depends on T033)
+- [X] T037 [US2] Buat `database/seeders/FaqItemSeeder.php` dari konten mockup `faq_suoer_100_consistent_header_footer` (5 item) dan daftarkan di `DatabaseSeeder` (depends on T034)
+- [X] T038 [P] [US2] Buat `resources/views/components/sections/article-card.blade.php`
+- [X] T039 [P] [US2] Buat `resources/views/components/sections/job-card.blade.php`
+- [X] T040 [P] [US2] Buat `resources/views/components/sections/faq-accordion.blade.php` (komponen Alpine `x-data` untuk expand/collapse)
+- [X] T041 [P] [US2] Buat `resources/views/components/sections/cta-band.blade.php` (dipakai Kontak/Karir/FAQ/Tentang Kami)
+- [X] T042 [US2] Buat `resources/views/pages/tentang-kami.blade.php` sesuai mockup `tentang_kami_suoer_luminous_azure` (depends on T041)
+- [X] T043 [US2] Buat `resources/views/pages/kontak.blade.php` + validasi client-side Alpine (field wajib, format nomor HP) sesuai mockup `kontak_suoer_proportional_fix`, tanpa route POST (FR-007; research.md §7; depends on T041)
+- [X] T044 [US2] Buat `resources/views/pages/karir.blade.php` memakai `job-card` sesuai mockup `karir_suoer_header_consistent` (depends on T039, T041)
+- [X] T045 [US2] Buat `resources/views/pages/artikel/index.blade.php` dan `resources/views/pages/artikel/show.blade.php` memakai `article-card` sesuai mockup `artikel_suoer_consistent_header_footer`, termasuk empty state saat data kosong (depends on T038)
+- [X] T046 [US2] Buat `resources/views/pages/faq.blade.php` memakai `faq-accordion` sesuai mockup `faq_suoer_100_consistent_header_footer` (depends on T040, T041)
+- [X] T047 [P] [US2] Buat `app/Http/Controllers/Public/AboutController.php`
+- [X] T048 [P] [US2] Buat `app/Http/Controllers/Public/ContactController.php` (`show` saja — tanpa method submit, FR-007)
+- [X] T049 [P] [US2] Buat `app/Http/Controllers/Public/CareerController.php` (filter `is_active`)
+- [X] T050 [P] [US2] Buat `app/Http/Controllers/Public/ArticleController.php` (`index`, `show` by slug dengan route model binding, 404 otomatis)
+- [X] T051 [P] [US2] Buat `app/Http/Controllers/Public/FaqController.php`
+- [X] T052 [US2] Daftarkan route `GET /tentang-kami`, `GET /kontak`, `GET /karir`, `GET /artikel`, `GET /artikel/{article:slug}`, `GET /faq` di `routes/web.php` sesuai [contracts/public-routes.md](./contracts/public-routes.md) (depends on T042–T051; edit file yang sama dengan T026, kerjakan setelahnya — bukan paralel)
 
 **Checkpoint**: User Story 2 selesai — seluruh halaman pendukung tampil dengan data seed, independen dari US1/US3 (asalkan Foundational sudah selesai).
 
