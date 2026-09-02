@@ -13,7 +13,7 @@
         </div>
     </section>
 
-    <main class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop py-[80px]">
+    <main class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop py-20">
         <p class="font-body-md text-body-md text-on-surface-variant max-w-lg mb-12">
             Temukan panel surya dan inverter yang tepat untuk proyek Anda, dari skala rumah tangga hingga industri besar.
         </p>
@@ -28,4 +28,51 @@
             </div>
         @endif
     </main>
+
+    {{-- CTA Kalkulator --}}
+    <section class="bg-primary-container py-20 px-margin-mobile md:px-margin-desktop my-12">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-6">Bingung pilih yang mana?</h2>
+            <p class="font-body-md text-body-md text-white/90 mb-10">Gunakan kalkulator kami untuk memperkirakan kebutuhan daya dan potensi penghematan bulanan Anda.</p>
+            <a href="{{ url('/#kalkulator') }}" class="inline-flex items-center justify-center bg-white text-primary-container px-8 py-4 font-label-bold text-label-bold hover:bg-surface transition-all hover:-translate-y-0.5 rounded-lg">
+                Coba kalkulator hemat listrik <span class="material-symbols-outlined ml-2">arrow_forward</span>
+            </a>
+        </div>
+    </section>
+
+    {{-- FAQ Seputar Produk --}}
+    <section class="max-w-3xl mx-auto px-margin-mobile md:px-margin-desktop py-20">
+        <h2 class="font-headline-lg text-headline-lg text-primary-container mb-12 text-center">Pertanyaan Seputar Produk</h2>
+        <div class="space-y-4">
+            @php
+                $productFaqs = [
+                    ['question' => 'Berapa lama garansi panel?', 'answer' => 'Panel surya SUOER dilengkapi dengan garansi kinerja linier hingga 25 tahun, memastikan efisiensi panel tidak akan turun di bawah 80% dalam kurun waktu tersebut. Inverter biasanya memiliki garansi standar 5 hingga 10 tahun tergantung model.'],
+                    ['question' => 'Apakah bisa custom kapasitas?', 'answer' => 'Sangat bisa. Kami merancang sistem berdasarkan kebutuhan beban listrik spesifik dan luas atap yang tersedia. Tim teknisi kami akan melakukan survey untuk merancang kapasitas yang paling optimal.'],
+                    ['question' => 'Bagaimana proses instalasinya?', 'answer' => 'Proses dimulai dari survey lokasi, perancangan sistem, pengajuan izin (jika on-grid), instalasi fisik oleh teknisi bersertifikat kami, hingga tahap commissioning dan serah terima pengoperasian sistem kepada Anda.'],
+                ];
+            @endphp
+            @foreach ($productFaqs as $index => $faq)
+                <details class="group bg-surface-container-lowest shadow-md border border-surface-container-high overflow-hidden rounded-lg" @if ($index === 0) open @endif>
+                    <summary class="flex justify-between items-center gap-4 font-headline-lg text-headline-lg text-xl text-primary-container cursor-pointer p-6 list-none hover:bg-surface transition-colors">
+                        <span>{{ $faq['question'] }}</span>
+                        <span class="material-symbols-outlined transition-transform group-open:rotate-180 shrink-0">expand_more</span>
+                    </summary>
+                    <div class="px-6 pb-6 pt-2 font-body-md text-body-md text-on-surface-variant">
+                        {{ $faq['answer'] }}
+                    </div>
+                </details>
+            @endforeach
+        </div>
+    </section>
+
+    {{-- CTA Penutup --}}
+    <section class="bg-primary-container text-on-primary py-20 px-margin-mobile md:px-margin-desktop">
+        <div class="max-w-4xl mx-auto text-center flex flex-col items-center">
+            <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-6">Belum yakin kapasitas yang Anda butuhkan?</h2>
+            <p class="font-body-md text-body-md text-white/90 mb-10">Konsultasi gratis dengan tim teknis ahli kami untuk mendapatkan perhitungan yang akurat dan solusi yang tepat.</p>
+            <a href="{{ url('/kontak') }}" class="px-8 py-4 font-label-bold text-label-bold font-bold hover:-translate-y-1 transition-all shadow-lg border border-white/20 bg-white text-primary rounded-lg inline-block">
+                Konsultasi gratis dengan tim SUOER
+            </a>
+        </div>
+    </section>
 @endsection

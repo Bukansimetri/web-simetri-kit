@@ -18,6 +18,9 @@ class ProductPageTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('SUOER Mono X-Pro 550W', escape: false);
+        $response->assertSee('Bingung pilih yang mana?', escape: false);
+        $response->assertSee('Pertanyaan Seputar Produk', escape: false);
+        $response->assertSee('Belum yakin kapasitas yang Anda butuhkan?', escape: false);
     }
 
     public function test_product_show_displays_detail_and_related_products_from_same_category(): void
