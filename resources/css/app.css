@@ -90,13 +90,17 @@
     --radius-xl: 0.75rem;
     --radius-full: 9999px;
 
-    /* Spacing (skala tambahan di atas skala bawaan Tailwind) */
+    /*
+     * Spacing tambahan di atas skala bawaan Tailwind. PENTING: --spacing-* berbagi
+     * namespace dengan HAMPIR SEMUA utility sizing (w-*, h-*, max-w-*, p-*, m-*,
+     * gap-*, inset-*, dst). Jangan pernah pakai nama yang sama dengan skala
+     * bawaan Tailwind (xs/sm/md/lg/xl/2xl/...) di sini — itu akan diam-diam
+     * menimpa `max-w-lg`, `max-w-xl`, dst. di SELURUH halaman (lihat insiden
+     * 2026-09-03). Untuk padding/gap custom sesuai mockup yang nilainya beda
+     * dari skala bawaan, pakai arbitrary value langsung di Blade (mis. `p-[48px]`),
+     * bukan token @theme baru.
+     */
     --spacing-base: 8px;
-    --spacing-xs: 4px;
-    --spacing-sm: 12px;
-    --spacing-md: 24px;
-    --spacing-lg: 48px;
-    --spacing-xl: 80px;
     --spacing-gutter: 24px;
     --spacing-margin-mobile: 16px;
     --spacing-margin-desktop: 64px;
