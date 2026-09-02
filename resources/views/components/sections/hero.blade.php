@@ -3,7 +3,7 @@
 
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
         <div class="md:w-[55%] relative z-10 pt-10">
-            <div class="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full font-semibold text-sm mb-6 -rotate-2">
+            <div class="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full font-semibold text-sm mb-6">
                 <span class="material-symbols-outlined text-sm">solar_power</span>
                 <span>Solar Panel Terpercaya</span>
             </div>
@@ -29,7 +29,7 @@
                 </a>
             </div>
 
-            <div class="absolute -bottom-24 -right-12 md:right-0 bg-white p-4 shadow-md flex items-center space-x-4 border border-gray-100 rotate-2 rounded-lg">
+            <div class="absolute -bottom-24 -right-12 md:right-0 bg-white p-4 shadow-md flex items-center space-x-4 border border-gray-100 rounded-lg">
                 <div class="w-10 h-10 rounded-full bg-primary-container border-2 border-white flex items-center justify-center text-on-primary-container font-bold text-xs">
                     500+
                 </div>

@@ -15,7 +15,7 @@
         @foreach ($reasons as $reason)
             <div @class([
                 'p-8 shadow-md transition-all duration-300 rounded-lg',
-                'bg-primary-container -translate-y-4 shadow-lg rotate-1' => $reason['emphasized'],
+                'bg-primary-container -translate-y-4 shadow-lg' => $reason['emphasized'],
                 'bg-white border border-gray-100 hover:-translate-y-4 hover:shadow-lg' => ! $reason['emphasized'],
             ])>
                 <div @class([
