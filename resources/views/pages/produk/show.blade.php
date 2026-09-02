@@ -4,7 +4,7 @@
 @section('meta_description', $product->short_description)
 
 @section('content')
-    <section class="px-margin-mobile md:px-margin-desktop py-[48px] max-w-[1280px] mx-auto">
+    <section class="px-margin-mobile md:px-margin-desktop pt-32 pb-12 max-w-[1280px] mx-auto">
         <p class="font-label-bold text-label-bold text-on-surface-variant uppercase tracking-widest mb-6">
             <a href="{{ url('/') }}" class="hover:text-primary">Beranda</a>
             <span class="mx-2">/</span>
