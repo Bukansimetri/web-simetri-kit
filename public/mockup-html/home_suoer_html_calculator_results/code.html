@@ -1,0 +1,925 @@
+<!DOCTYPE html><html lang="id" style=""><head></head><body class="font-body-md text-on-surface antialiased"><svg class="inline-defs-container" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"></svg>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>SUOER - Energi Matahari untuk Masa Depan Indonesia</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "tertiary-fixed-dim": "#47d6ff",
+                "on-primary-container": "#002d48",
+                "tertiary": "#00677f",
+                "on-error-container": "#93000a",
+                "error-container": "#ffdad6",
+                "primary-container": "#0099e5",
+                "on-surface": "#0b1c30",
+                "primary-fixed": "#cce5ff",
+                "outline": "#6f7882",
+                "surface-container-lowest": "#ffffff",
+                "outline-variant": "#bec7d3",
+                "on-tertiary": "#ffffff",
+                "tertiary-container": "#009ec1",
+                "on-primary": "#ffffff",
+                "on-secondary-fixed-variant": "#1f477b",
+                "on-tertiary-container": "#002f3b",
+                "surface-container-high": "#dce9ff",
+                "on-secondary": "#ffffff",
+                "on-surface-variant": "#3f4851",
+                "on-secondary-container": "#294f83",
+                "surface-container-low": "#eff4ff",
+                "on-tertiary-fixed": "#001f28",
+                "primary-fixed-dim": "#92ccff",
+                "on-primary-fixed": "#001d31",
+                "on-background": "#0b1c30",
+                "on-error": "#ffffff",
+                "secondary": "#3a5f94",
+                "tertiary-fixed": "#b6ebff",
+                "surface-container": "#e5eeff",
+                "on-primary-fixed-variant": "#004b73",
+                "surface-variant": "#d3e4fe",
+                "inverse-primary": "#92ccff",
+                "error": "#ba1a1a",
+                "primary": "#006397",
+                "inverse-on-surface": "#eaf1ff",
+                "surface-container-highest": "#d3e4fe",
+                "surface-tint": "#006397",
+                "inverse-surface": "#213145",
+                "on-tertiary-fixed-variant": "#004e60",
+                "secondary-fixed-dim": "#a7c8ff",
+                "background": "#f8f9ff",
+                "secondary-fixed": "#d5e3ff",
+                "surface-bright": "#f8f9ff",
+                "surface-dim": "#cbdbf5",
+                "on-secondary-fixed": "#001b3c",
+                "secondary-container": "#9fc2fe",
+                "surface": "#f8f9ff"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "lg": "48px",
+                "xs": "4px",
+                "xl": "80px",
+                "sm": "12px",
+                "margin-desktop": "64px",
+                "md": "24px",
+                "margin-mobile": "16px",
+                "gutter": "24px",
+                "base": "8px"
+        },
+        "fontFamily": {
+                "label-bold": [
+                        "Be Vietnam Pro"
+                ],
+                "headline-lg": [
+                        "Manrope"
+                ],
+                "body-md": [
+                        "Be Vietnam Pro"
+                ],
+                "headline-xl": [
+                        "Manrope"
+                ],
+                "body-sm": [
+                        "Be Vietnam Pro"
+                ],
+                "headline-lg-mobile": [
+                        "Manrope"
+                ]
+        },
+        "fontSize": {
+                "label-bold": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-xl": [
+                        "48px",
+                        {
+                                "lineHeight": "56px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-sm": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "36px",
+                                "fontWeight": "600"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        html { scroll-behavior: smooth; }
+        body { background-color: #f8f9ff; overflow-x: hidden; }
+        
+        /* Reveal Animation Classes */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal-element.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-element, .animate-fade-in-up, .animate-float {
+                animation: none !important;
+                transition: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
+        /* Button Fill Effect */
+        .btn-fill {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .btn-fill::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.15);
+            z-index: -1;
+            transition: transform 0.3s ease-in-out;
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+        .btn-fill:hover::before {
+            transform: scaleX(1);
+        }
+    </style>
+
+
+<!-- 1. Navigasi -->
+<header class="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent py-4" id="main-nav">
+<div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+<div class="flex items-center space-x-12">
+<a class="font-headline-lg font-extrabold text-primary tracking-tight" href="#">SUOER</a>
+<nav class="hidden md:flex space-x-8">
+<a class="font-medium text-primary hover:text-primary-container transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-primary-container" href="#">Beranda</a>
+<a class="font-medium text-primary hover:text-primary-container transition-colors" href="#">Tentang Kami</a>
+<a class="font-medium text-primary hover:text-primary-container transition-colors" href="#">Produk</a>
+<a class="font-medium text-primary hover:text-primary-container transition-colors" href="#">Kontak</a>
+</nav>
+</div>
+<div class="hidden md:block">
+<a class="btn-fill text-white px-6 py-3 font-medium hover:-translate-y-0.5 transition-transform inline-block shadow-md bg-primary-container rounded-lg" href="#">Konsultasi Gratis</a>
+</div>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</div>
+</header>
+<!-- 2. Hero -->
+<section class="relative pt-32 pb-48 px-6 overflow-hidden">
+<!-- WebGL Background -->
+<canvas class="absolute inset-0 w-full h-full -z-20 opacity-100" data-shader="ANIMATION_16" height="977" id="hero-gl-canvas" width="1280"></canvas>
+<!-- Background decor -->
+<div class="absolute top-0 right-0 w-[800px] h-[800px] bg-primary-fixed rounded-full -translate-y-1/3 translate-x-1/3 opacity-50 blur-3xl -z-10"></div>
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
+<!-- Left (55%) -->
+<div class="md:w-[55%] relative z-10 pt-10">
+<div class="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full font-semibold text-sm mb-6 -rotate-2 animate-fade-in-up" style="animation-delay: 0.1s">
+<span class="material-symbols-outlined text-sm">solar_power</span>
+<span class="">Solar Panel Terpercaya</span>
+</div>
+<h1 class="font-headline-xl text-on-surface mb-6 animate-fade-in-up">
+                Nyalakan rumah Anda dengan energi <span class="text-primary relative inline-block">matahari<svg class="absolute -bottom-2 left-0 w-full" fill="none" viewBox="0 0 100 10" xmlns="http://www.w3.org/2000/svg"><path d="M0 5C20 0 80 10 100 5" stroke="#0099e5" stroke-linecap="round" stroke-width="4"></path></svg></span>
+</h1>
+<p class="text-lg text-on-surface-variant mb-10 max-w-lg leading-relaxed animate-fade-in-up">
+                Transisi energi yang mulus dan elegan. Hadirkan keandalan teknologi tata surya terdepan untuk hunian dan bisnis Anda, tanpa mengorbankan estetika.
+            </p>
+<div class="flex flex-col sm:flex-row items-center gap-6 animate-fade-in-up" style="animation-delay: 0.4s">
+<a class="btn-fill px-8 py-4 font-semibold hover:scale-105 transition-all shadow-md w-full sm:w-auto text-center bg-primary-container text-white rounded-lg" href="#">
+                    Konsultasi Gratis
+                </a>
+<a class="flex items-center space-x-3 text-primary font-semibold hover:text-primary-container transition-colors group" href="#">
+<div class="w-12 h-12 rounded-full border-2 border-primary/20 flex items-center justify-center group-hover:border-primary-container transition-colors">
+<span class="material-symbols-outlined ml-1">play_arrow</span>
+</div>
+<span class="">Lihat cara kerjanya</span>
+</a>
+</div>
+<!-- Floating Card Overlap -->
+<div class="absolute -bottom-24 -right-12 md:right-0 bg-white p-4 shadow-md flex items-center space-x-4 border border-gray-100 rotate-2 animate-fade-in-up rounded-lg" style="animation-delay: 0.6s;">
+<div class="flex -space-x-3">
+<div class="w-10 h-10 rounded-full bg-gray-200 border-2 border-white overflow-hidden"><img alt="User" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArTWe5V8aJfmIxwCGaJS2uVX86TpopuisAbOBXSJsxxH_NBVV4DN7U-MQL9IwzJS5R7uPzyoh8Lv3eBTIviWTCu_igoNvRDbpRn1dOrPEuHM2mVYxSgSWHPVLBGd3Yg5_PjoddbznzbFMkoPm38_NmEP6RpFSD7IueKxuc2xlZoBIoHjAUs_FbuKd0gebaFPamgWlLgJgoEEgeXft2VURH8c1-fF-ia4_4CnhHI45RNI6GHkyYhhZk"></div>
+<div class="w-10 h-10 rounded-full bg-gray-200 border-2 border-white overflow-hidden"><img alt="User" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9rf8rfM52Os8dELqDzi4c45EGhL4A9Ltkt6K2YgPZ48ThbMR2w9oWyFiYpQCvoXvAzwbFgUr6T2-A7Hd9DTCVnmbSXFwuWlrhnZj19o_uSW5Ibecf0y9_Xgz_-9pTYA_CRqcG-Nh2bdrXYOstUMrRcW3SRCsQDHa9Sr5d88bmqtJ6Uam1sZiyhtyFfEKKk4p1KoanpFo1Fpz5uuHUL7P1LbbbCXStaa31CnMnozeG7vrhlMRf2gWI"></div>
+<div class="w-10 h-10 rounded-full bg-primary-container border-2 border-white flex items-center justify-center text-on-primary-container font-bold text-xs">500+</div>
+</div>
+<p class="font-medium text-sm leading-tight text-on-surface pr-2">Dipercaya 500+<br>pelanggan di Indonesia</p>
+</div>
+</div>
+<!-- Right (45%) -->
+<div class="md:w-[45%] relative z-0 mt-16 md:mt-0 animate-float">
+<div class="relative rounded-xl overflow-hidden shadow-md aspect-[4/5]">
+<img alt="Instalasi Solar Panel" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA55pGvG6sg-Nyh8woPC79xhXp-zocmQ3KkgGR9WPv9u2lPtkrnH18K2pm5JvGZOMoHsfgNFhk4JbwHPrsyvw3cpp9N82aRefEXG6gNy3hpxJbdSJyIiixfF648tjSNAfEisnh13GVnKtkmDXZFVR07iiCIwnXQrCfSvipCfTSr5_POBrqdMdrppqqE7AB3I2d8BQdcHb83GZ9V3CnGszMEXqApsUdNScb00Ct8Bh1R1V6nUwjsuEP0">
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/40 to-transparent"></div>
+</div>
+<!-- Decor element -->
+<div class="absolute -top-6 -right-6 w-24 h-24 bg-primary-container rounded-full blur-2xl opacity-60"></div>
+</div>
+</div>
+</section>
+<!-- 3. Kalkulator Estimasi Hemat -->
+<section class="relative z-20 max-w-6xl mx-auto px-6 -mt-32 mb-32 reveal-element is-visible">
+<div class="bg-white p-8 md:p-12 shadow-md border border-gray-50/50 transition-transform duration-300 shadow-2xl max-w-5xl mx-auto rounded-lg">
+<div class="text-center mb-10"><h2 class="font-headline-lg text-primary mb-2">Hitung Estimasi Penghematan</h2><p class="text-on-surface-variant">Dapatkan analisis mendalam untuk kebutuhan energi Anda.</p></div>
+<div class="flex flex-col gap-8">
+<!-- Category Tabs -->
+<div class="flex justify-center p-1 bg-surface-container-low rounded-lg max-w-md mx-auto mb-4 border border-outline-variant/30">
+<button class="flex-1 py-3 px-6 rounded-md font-bold text-sm transition-all hover:opacity-90 active:scale-95 bg-primary text-white shadow-sm" id="btn-residential">Residential</button>
+<button class="flex-1 py-3 px-6 rounded-md font-bold text-sm transition-all hover:shadow-sm active:scale-95 text-primary hover:bg-white/50" id="btn-industrial">Industrial</button>
+</div>
+<div class="flex flex-col md:flex-row items-stretch gap-12">
+<!-- Input Side -->
+<div class="md:w-1/2 flex flex-col justify-between h-full">
+<!-- Sub-options for Residential -->
+<div class="space-y-6">
+<div>
+<label class="block font-semibold text-primary mb-4 text-sm">Metode Perhitungan</label>
+<div class="grid grid-cols-2 gap-4">
+<button class="flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all hover:bg-primary/10 active:scale-[0.98] border-primary bg-primary/5" id="method-bill">
+<span class="material-symbols-outlined mb-2 text-primary">receipt_long</span>
+<span class="text-xs font-bold text-primary">Berdasarkan Tagihan</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all hover:border-primary/30 hover:bg-surface-variant active:scale-[0.98] border-transparent bg-surface-container-low" id="method-appliance">
+<span class="material-symbols-outlined mb-2 text-primary/70">kitchen</span>
+<span class="text-xs font-bold text-primary/70">Berdasarkan Peralatan</span>
+</button>
+</div>
+</div>
+<!-- Input Section: By Bill -->
+<div class="space-y-4 transition-all duration-300 block" id="section-bill">
+<div class="space-y-2">
+<label class="block text-sm font-bold text-primary/70">Tagihan Listrik Bulanan (Rp)</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-gray-400">Rp</span>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-low border border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 hover:bg-surface-variant transition-all text-lg font-semibold rounded-lg" id="input-bill" placeholder="2.500.000" type="text">
+</div>
+</div><div class="grid grid-cols-1 gap-4"><div class="space-y-2"><label class="block text-sm font-bold text-primary/70">Kapasitas Daya PLN (VA)</label><select class="w-full px-4 py-4 bg-surface-container-low border border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 hover:bg-surface-variant transition-all text-sm cursor-pointer rounded-lg"><option value="900">900 VA</option><option value="1300">1300 VA</option><option value="2200">2200 VA</option><option value="3500">3500 VA</option><option value="4400">4400 VA</option><option value="5500">5500 VA</option><option value="6600">6600 VA</option><option value="7700">7700 VA</option><option value="11000">11.000 VA</option><option value="above">Diatas 11.000 VA</option></select></div></div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="block text-sm font-bold text-primary/70">Nama Lengkap</label>
+<input class="w-full px-4 py-4 bg-surface-container-low border border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 hover:bg-surface-variant transition-all text-sm rounded-lg" placeholder="Budi Santoso" type="text">
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-bold text-primary/70">Nomor WhatsApp</label>
+<input class="w-full px-4 py-4 bg-surface-container-low border border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 hover:bg-surface-variant transition-all text-sm rounded-lg" placeholder="0812..." type="tel">
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="block text-sm font-bold text-primary/70">Email</label>
+<input class="w-full px-4 py-4 bg-surface-container-low border border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 hover:bg-surface-variant transition-all text-sm rounded-lg" placeholder="budi@email.com" type="email">
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-bold text-primary/70">Area</label>
+<select class="w-full px-4 py-4 bg-surface-container-low border border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 hover:bg-surface-variant transition-all text-sm cursor-pointer rounded-lg">
+<option>Jakarta Selatan</option>
+<option>Jakarta Timur</option>
+<option>Jakarta Barat</option>
+<option>Jakarta Utara</option>
+<option>Jakarta Pusat</option>
+<option>Luar Jakarta</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Input Section: By Appliance -->
+<div class="space-y-4 transition-all duration-300 hidden" id="section-appliance"><p class="text-sm text-primary/70 mb-2">Pilih jumlah peralatan listrik di rumah Anda:</p><div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-64 overflow-y-auto pr-2 custom-scrollbar"><div class="flex flex-col gap-2 h-full"><div class="flex items-center justify-between bg-surface-container-low p-3 border border-transparent hover:border-primary/20 transition-all h-20 rounded-lg"><div class="flex items-center gap-3 h-full"><div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-primary shadow-sm"><span class="material-symbols-outlined">tv</span></div><div class="flex flex-col"><span class="font-bold text-sm text-on-surface">TV</span><span class="text-[10px] text-primary/60">~100W</span></div></div><div class="flex items-center bg-white rounded-lg border border-outline-variant overflow-hidden h-10"><button class="w-7 h-7 flex items-center justify-center text-primary hover:bg-primary/5 appliance-minus transition-colors" data-target="app-tv">-</button><input class="w-8 h-7 text-center bg-transparent border-none p-0 text-xs font-bold focus:ring-0 appliance-input" data-watts="100" id="app-tv" min="0" type="number" value="0"><button class="w-7 h-7 flex items-center justify-center text-primary hover:bg-primary/5 appliance-plus transition-colors" data-target="app-tv">+</button></div></div><div class="flex items-center justify-between bg-surface-container-low p-3 border border-transparent hover:border-primary/20 transition-all h-20 rounded-lg"><div class="flex items-center gap-3 h-full"><div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-primary shadow-sm"><span class="material-symbols-outlined">kitchen</span></div><div class="flex flex-col"><span class="font-bold text-sm text-on-surface">Kulkas</span><span class="text-[10px] text-primary/60">~200W</span></div></div><div class="flex items-center bg-white rounded-lg border border-outline-variant overflow-hidden h-10"><button class="w-7 h-7 flex items-center justify-center text-primary hover:bg-primary/5 appliance-minus transition-colors" data-target="app-kulkas">-</button><input class="w-8 h-7 text-center bg-transparent border-none p-0 text-xs font-bold focus:ring-0 appliance-input" data-watts="200" id="app-kulkas" min="0" type="number" value="0"><button class="w-7 h-7 flex items-center justify-center text-primary hover:bg-primary/5 appliance-plus transition-colors" data-target="app-kulkas">+</button></div></div><div class="flex items-center justify-between bg-surface-container-low p-3 border border-transparent hover:border-primary/20 transition-all h-20 rounded-lg"><div class="flex items-center gap-3 h-full"><div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-primary shadow-sm"><span class="material-symbols-outlined">ac_unit</span></div><div class="flex flex-col"><span class="font-bold text-sm text-on-surface">AC</span><span class="text-[10px] text-primary/60">~1000W</span></div></div><div class="flex items-center bg-white rounded-lg border border-outline-variant overflow-hidden h-10"><button class="w-7 h-7 flex items-center justify-center text-primary hover:bg-primary/5 appliance-minus transition-colors" data-target="app-ac">-</button><input class="w-8 h-7 text-center bg-transparent border-none p-0 text-xs font-bold focus:ring-0 appliance-input" data-watts="1000" id="app-ac" min="0" type="number" value="0"><button class="w-7 h-7 flex items-center justify-center text-primary hover:bg-primary/5 appliance-plus transition-colors" data-target="app-ac">+</button></div></div></div><div class="flex flex-col gap-2 h-full"><div class="flex items-center justify-between bg-surface-container-low p-3 border border-transparent hover:border-primary/20 transition-all h-20 rounded-lg"><div class="flex items-center gap-3 h-full"><div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-primary shadow-sm"><span class="material-symbols-outlined">water_drop</span></div><div class="flex flex-col"><span class="font-bold text-sm text-on-surface">Pompa Air</span><span class="text-[10px] text-primary/60">~250W</span></div></div><div class="flex items-center bg-white rounded-lg border border-outline-variant overflow-hidden h-10"><button class="w-7 h-7 flex items-center justify-center text-primary hover:bg-primary/5 appliance-minus transition-colors" data-target="app-pompa">-</button><input class="w-8 h-7 text-center bg-transparent border-none p-0 text-xs font-bold focus:ring-0 appliance-input" data-watts="250" id="app-pompa" min="0" type="number" value="0"><button class="w-7 h-7 flex items-center justify-center text-primary hover:bg-primary/5 appliance-plus transition-colors" data-target="app-pompa">+</button></div></div><div class="flex items-center justify-between bg-surface-container-low p-3 border border-transparent hover:border-primary/20 transition-all h-20 rounded-lg"><div class="flex items-center gap-3 h-full"><div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-primary shadow-sm"><span class="material-symbols-outlined">hot_tub</span></div><div class="flex flex-col"><span class="font-bold text-sm text-on-surface">Pemanas Air</span><span class="text-[10px] text-primary/60">~1500W</span></div></div><div class="flex items-center bg-white rounded-lg border border-outline-variant overflow-hidden h-10"><button class="w-7 h-7 flex items-center justify-center text-primary hover:bg-primary/5 appliance-minus transition-colors" data-target="app-pemanas">-</button><input class="w-8 h-7 text-center bg-transparent border-none p-0 text-xs font-bold focus:ring-0 appliance-input" data-watts="1500" id="app-pemanas" min="0" type="number" value="0"><button class="w-7 h-7 flex items-center justify-center text-primary hover:bg-primary/5 appliance-plus transition-colors" data-target="app-pemanas">+</button></div></div><div class="flex items-center justify-between bg-surface-container-low p-3 border border-transparent hover:border-primary/20 transition-all h-20 rounded-lg"><div class="flex items-center gap-3 h-full"><div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-primary shadow-sm"><span class="material-symbols-outlined">cooking</span></div><div class="flex flex-col"><span class="font-bold text-sm text-on-surface">Kompor Listrik</span><span class="text-[10px] text-primary/60">~2000W</span></div></div><div class="flex items-center bg-white rounded-lg border border-outline-variant overflow-hidden h-10"><button class="w-7 h-7 flex items-center justify-center text-primary hover:bg-primary/5 appliance-minus transition-colors" data-target="app-kompor">-</button><input class="w-8 h-7 text-center bg-transparent border-none p-0 text-xs font-bold focus:ring-0 appliance-input" data-watts="2000" id="app-kompor" min="0" type="number" value="0"><button class="w-7 h-7 flex items-center justify-center text-primary hover:bg-primary/5 appliance-plus transition-colors" data-target="app-kompor">+</button></div></div></div></div><div class="grid grid-cols-2 gap-4 mt-6 mb-6"><div class="space-y-2"><label class="block text-sm font-bold text-primary/70">Nama Lengkap</label><input class="w-full px-4 py-4 bg-surface-container-low border border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 hover:bg-surface-variant transition-all text-sm rounded-lg" placeholder="Budi Santoso" type="text"></div><div class="space-y-2"><label class="block text-sm font-bold text-primary/70">Nomor WhatsApp</label><input class="w-full px-4 py-4 bg-surface-container-low border border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 hover:bg-surface-variant transition-all text-sm rounded-lg" placeholder="0812..." type="tel"></div></div><div class="grid grid-cols-2 gap-4 mb-6"><div class="space-y-2"><label class="block text-sm font-bold text-primary/70">Email</label><input class="w-full px-4 py-4 bg-surface-container-low border border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 hover:bg-surface-variant transition-all text-sm rounded-lg" placeholder="budi@email.com" type="email"></div><div class="space-y-2"><label class="block text-sm font-bold text-primary/70">Area</label><select class="w-full px-4 py-4 bg-surface-container-low border border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 hover:bg-surface-variant transition-all text-sm cursor-pointer rounded-lg"><option>Jakarta Selatan</option><option>Jakarta Timur</option><option>Jakarta Barat</option><option>Jakarta Utara</option><option>Jakarta Pusat</option><option>Luar Jakarta</option></select></div></div></div>
+</div>
+<button class="btn-fill text-white py-5 font-bold hover:shadow-lg hover:bg-primary/90 active:scale-[0.98] transition-all mt-6 flex items-center justify-center gap-2 group bg-primary-container text-on-primary-container w-full rounded-lg" id="btn-calculate">Dapatkan Hasil Analisis <span class="material-symbols-outlined transition-transform group-hover:translate-x-1 text-white">arrow_forward</span></button></div>
+<!-- Output Side (Preview State) -->
+<div class="md:w-1/2 bg-surface-container-low flex flex-col justify-center relative overflow-hidden transition-all duration-500 flex-1 border border-primary/10 rounded-lg">
+<div class="w-full h-full p-6 flex flex-col gap-6 bg-surface-container-low">
+<!-- Chart Header -->
+<div class="flex justify-between items-center">
+<h3 class="font-headline-lg text-sm text-primary">Cumulative Savings vs. Investment</h3>
+<div class="flex gap-3">
+<div class="flex items-center gap-1">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="text-[10px] font-medium">Savings</span>
+</div>
+<div class="flex items-center gap-1">
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+<span class="text-[10px] font-medium">Investment</span>
+</div>
+</div>
+</div>
+<!-- SVG Chart -->
+<div class="flex-1 relative min-h-[180px]">
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 400 150">
+<!-- Grid Lines -->
+<line stroke="#bec7d3" stroke-dasharray="4" stroke-width="0.5" x1="0" x2="400" y1="120" y2="120"></line>
+<line stroke="#bec7d3" stroke-dasharray="4" stroke-width="0.5" x1="0" x2="400" y1="80" y2="80"></line>
+<line stroke="#bec7d3" stroke-dasharray="4" stroke-width="0.5" x1="0" x2="400" y1="40" y2="40"></line>
+<!-- Investment Line (Static) -->
+<path d="M 0 100 L 400 100" fill="none" stroke="#bec7d3" stroke-width="2"></path>
+<!-- Savings Curve -->
+<path d="M 0 140 Q 100 130, 200 100 T 400 20" fill="none" stroke="#0099e5" stroke-width="3"></path>
+<path d="M 0 140 Q 100 130, 200 100 T 400 20 L 400 150 L 0 150 Z" fill="url(#grad1)" opacity="0.1"></path>
+<defs>
+<linearGradient id="grad1" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#0099e5;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#0099e5;stop-opacity:0"></stop>
+</linearGradient>
+</defs>
+</svg>
+<div class="absolute bottom-0 left-0 w-full flex justify-between text-[10px] text-outline font-bold pt-2">
+<span class="">Year 0</span>
+<span class="">Year 5</span>
+<span class="">Year 10</span>
+<span class="">Year 15</span>
+<span class="">Year 20</span>
+<span class="">Year 25</span>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-white p-3 rounded-xl border border-outline-variant/20 shadow-sm rounded-lg">
+<p class="text-[10px] font-bold text-outline uppercase tracking-wider mb-1">Est. Savings (Year 1)</p>
+<p class="font-headline-lg text-lg text-primary">Rp 2.150.000</p>
+</div>
+<div class="bg-white p-3 rounded-xl border border-outline-variant/20 shadow-sm rounded-lg">
+<p class="text-[10px] font-bold text-outline uppercase tracking-wider mb-1">Total Savings (25 Yrs)</p>
+<p class="font-headline-lg text-lg text-primary">Rp 88.400.000</p>
+</div>
+<div class="bg-white p-3 rounded-xl border border-outline-variant/20 shadow-sm rounded-lg">
+<p class="text-[10px] font-bold text-outline uppercase tracking-wider mb-1">Breakeven</p>
+<p class="font-headline-lg text-lg text-primary">6.8 Yrs</p>
+</div>
+<div class="bg-white p-3 rounded-xl border border-outline-variant/20 shadow-sm rounded-lg">
+<p class="text-[10px] font-bold text-outline uppercase tracking-wider mb-1">Solar Gen (Annual)</p>
+<p class="font-headline-lg text-lg text-primary">10.5 MWh</p>
+</div>
+</div>
+</div>
+</div></div>
+</div>
+</div>
+<style>
+/* Custom Scrollbar for appliances list */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 99, 151, 0.2);
+  border-radius: 10px;
+}
+/* Hide number input spinners */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+</style>
+</section>
+<!-- 4. Kenapa Pilih SUOER -->
+<section class="py-24 px-6 max-w-7xl mx-auto reveal-element is-visible">
+<div class="mb-16 md:w-1/2">
+<h2 class="font-headline-lg text-primary mb-4">Mengapa Beralih<br>Bersama SUOER?</h2>
+<p class="text-lg text-on-surface-variant">Investasi cerdas untuk masa depan, dirancang dengan presisi untuk kondisi iklim Indonesia.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-white p-8 shadow-md border border-gray-100 hover:-translate-y-4 hover:shadow-lg transition-all duration-300 rounded-lg">
+<div class="w-14 h-14 bg-surface-container-low rounded-lg flex items-center justify-center mb-6 text-primary">
+<span class="material-symbols-outlined text-3xl">savings</span>
+</div>
+<h3 class="font-headline-lg text-xl text-primary mb-3">Efisien &amp; Terjangkau</h3>
+<p class="text-on-surface-variant">Turunkan tagihan listrik hingga 80% dengan panel efisiensi tinggi berteknologi monokristalin terbaru.</p>
+</div>
+<!-- Card 2 (Emphasized) -->
+<div class="bg-primary-container p-8 shadow-lg -translate-y-4 hover:-translate-y-6 hover:scale-105 transition-all duration-300 rotate-1 rounded-lg">
+<div class="w-14 h-14 bg-white/30 rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-3xl text-white">verified</span>
+</div>
+<h3 class="font-headline-lg text-xl text-white mb-3">Garansi Panjang</h3>
+<p class="text-white/90 font-medium">Ketenangan pikiran dengan garansi performa panel hingga 25 tahun dan garansi pengerjaan profesional.</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-white p-8 shadow-md border border-gray-100 hover:-translate-y-4 hover:shadow-lg transition-all duration-300 rounded-lg">
+<div class="w-14 h-14 bg-surface-container-low rounded-lg flex items-center justify-center mb-6 text-primary">
+<span class="material-symbols-outlined text-3xl">eco</span>
+</div>
+<h3 class="font-headline-lg text-xl text-primary mb-3">Ramah Lingkungan</h3>
+<p class="text-on-surface-variant">Kurangi jejak karbon Anda. Satu instalasi setara dengan menanam puluhan pohon setiap tahunnya.</p>
+</div>
+</div>
+</section>
+<!-- 5. Cara Kerja -->
+<section class="py-24 px-6 overflow-hidden reveal-element is-visible">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-20">
+<h2 class="font-headline-lg text-primary mb-4">Sederhana dan Mulus</h2>
+<p class="text-lg text-on-surface-variant">Bagaimana cahaya matahari berubah menjadi energi di rumah Anda.</p>
+</div>
+<div class="relative flex flex-col md:flex-row justify-between items-center md:items-start gap-8 md:gap-4 gap-16">
+<!-- Connecting Dashed Line -->
+<div class="hidden md:block absolute top-12 left-10 right-10 h-0.5 border-t-2 border-dashed border-primary/20 -z-10"></div>
+<!-- Step 1 -->
+<div class="w-full md:w-1/4 relative group md:mt-0 transition-transform duration-300 hover:-translate-y-2">
+<div class="w-20 h-20 bg-white rounded-full border-4 border-surface shadow-sm flex items-center justify-center font-headline-lg text-2xl text-primary mx-auto mb-6 group-hover:scale-110 group-hover:border-primary-container group-hover:shadow-md transition-all z-10 relative">01</div>
+<div class="bg-white p-6 shadow-md text-center -rotate-1 group-hover:shadow-lg transition-shadow rounded-lg">
+<h4 class="font-bold text-lg text-primary mb-2">Panel &amp; PV Cell</h4>
+<p class="text-sm text-on-surface-variant">Menyerap sinar matahari dan mengubahnya menjadi energi listrik searah (DC).</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="w-full md:w-1/4 relative group md:mt-12 transition-transform duration-300 hover:-translate-y-2">
+<div class="w-20 h-20 bg-white rounded-full border-4 border-surface shadow-sm flex items-center justify-center font-headline-lg text-2xl text-primary mx-auto mb-6 group-hover:scale-110 group-hover:border-primary-container group-hover:shadow-md transition-all z-10 relative">02</div>
+<div class="bg-white p-6 shadow-md text-center rotate-2 group-hover:shadow-lg transition-shadow rounded-lg">
+<h4 class="font-bold text-lg text-primary mb-2">DC Power</h4>
+<p class="text-sm text-on-surface-variant">Aliran listrik DC mengalir aman melalui kabel khusus menuju inverter utama.</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="w-full md:w-1/4 relative group md:mt-4 transition-transform duration-300 hover:-translate-y-2">
+<div class="w-20 h-20 rounded-full border-4 border-surface shadow-sm flex items-center justify-center font-headline-lg text-2xl mx-auto mb-6 group-hover:scale-110 group-hover:shadow-md transition-all z-10 relative text-white bg-primary-container">03</div>
+<div class="bg-white p-6 shadow-md text-center -rotate-2 group-hover:shadow-lg transition-shadow rounded-lg">
+<h4 class="font-bold text-lg text-primary mb-2">Inverter</h4>
+<p class="text-sm text-on-surface-variant">Jantung sistem. Mengubah arus DC menjadi arus bolak-balik (AC) untuk alat elektronik.</p>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="w-full md:w-1/4 relative group md:mt-16 transition-transform duration-300 hover:-translate-y-2">
+<div class="w-20 h-20 bg-white rounded-full border-4 border-surface shadow-sm flex items-center justify-center font-headline-lg text-2xl text-primary mx-auto mb-6 group-hover:scale-110 group-hover:border-primary-container group-hover:shadow-md transition-all z-10 relative">04</div>
+<div class="bg-white p-6 shadow-md text-center rotate-1 group-hover:shadow-lg transition-shadow rounded-lg">
+<h4 class="font-bold text-lg text-primary mb-2">Storage / Grid</h4>
+<p class="text-sm text-on-surface-variant">Energi digunakan langsung, disimpan di baterai, atau diekspor ke PLN (net-metering).</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. Produk Kami -->
+<section class="bg-primary py-32 px-6 mt-12 relative overflow-hidden reveal-element is-visible">
+<div class="max-w-7xl mx-auto relative z-10">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-white mb-4">Solusi Untuk Setiap Kebutuhan</h2>
+<p class="text-lg text-white/70 max-w-2xl mx-auto">Dirancang spesifik untuk berbagai skala, dari atap hunian minimalis hingga kompleks industri masif.</p>
+</div>
+<div class="flex flex-col md:flex-row items-end gap-6 h-auto md:h-[500px] gap-16">
+<!-- Card 1 -->
+<div class="w-full md:w-1/3 bg-white/5 overflow-hidden border border-white/10 hover:bg-white/10 hover:-translate-y-2 transition-all duration-300 h-full md:h-[85%] flex flex-col relative group rounded-lg">
+<div class="h-48 overflow-hidden"><img alt="Panel Rumahan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBb-9R1CVvSJGc4jdx3xxbQH40VAyhxSNpb63Kj1YRYy-oknKILM_kWu4ytglebVhGPgdezGpV1qYuErxB9eYYpErVWb-Be-kNwtyd0USXGB7oqbtEp-G34M0SA8Ufr8GU3ZkuxuvUX2UQWi8ZJhjN6GQF0V-fGTj0LSYBnxZb6xVncHVR2cJfKmM_B_c71DZNEVxAr-MpSRTsRczNXSJuD1jKspAbJLbPiLrSynoVAYUSSGmvSU2xY"></div>
+<div class="p-8 flex-1 flex flex-col justify-between">
+<div>
+<h3 class="font-headline-lg text-2xl text-white mb-2">Panel Rumahan</h3>
+<p class="text-white/70 text-sm">Sistem elegan on-grid/hybrid untuk hunian modern. Kapasitas 2kWp - 10kWp.</p>
+</div>
+<a class="font-semibold text-sm flex items-center mt-6 group-hover:translate-x-2 transition-transform text-white" href="#">Pelajari lebih lanjut <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span></a>
+</div>
+</div>
+<!-- Card 2 (Middle Larger) -->
+<div class="w-full md:w-1/3 bg-white overflow-hidden shadow-2xl hover:shadow-lg hover:scale-[1.02] transition-all duration-300 h-full flex flex-col relative group md:-translate-y-8 z-10 rounded-lg">
+<div class="absolute top-4 right-4 bg-primary-container text-xs font-bold px-3 py-1 rounded-full z-20 text-white">Terpopuler</div>
+<div class="h-56 overflow-hidden"><img alt="Komersial &amp; Industri" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV9ZF1oXgJV_HjIppo9tq9eRUeck5lQ0cHtcfjFqllflZj3JPHawl-aAYMHzAkoilyMiRC7pOucPtK_GUFr5X8dzlCKf7w5Kwa2rntNWXFzl8Scc0t3Tg_M6g9hmnVbnQFErbIJ35Bw0Crn9MYhsijjqQI4MKunhwzBKBzQwCdy0T5nbUSK19HiH5-hXlWKRClndQHiOFunMsQbSiOx8i15pDT0KZQmOZb4P0daBRJdE2mWb_dXIm9"></div>
+<div class="p-8 flex-1 flex flex-col justify-between bg-white">
+<div>
+<h3 class="font-headline-lg text-2xl text-primary mb-2">Komersial &amp; Industri</h3>
+<p class="text-on-surface-variant text-sm">Instalasi masif atap pabrik &amp; gudang untuk reduksi beban puncak dan efisiensi operasional skala besar.</p>
+</div>
+<a class="btn-fill text-white text-center py-3 rounded-xl font-semibold text-sm mt-6 transition-colors bg-primary-container" href="#">Minta Penawaran B2B</a>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="w-full md:w-1/3 bg-white/5 overflow-hidden border border-white/10 hover:bg-white/10 hover:-translate-y-2 transition-all duration-300 h-full md:h-[75%] flex flex-col relative group rounded-lg">
+<div class="h-40 overflow-hidden"><img alt="Pompa Air Tenaga Surya" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXcfzfsrDIan9f_FNTLbr9p17Ms9ETCI4n2nLT6Im-pPX1W62J4x1qmbeg716A2CVNaCYvE1tuZynAhTANrVbg7483B-l3Vj9bVgYBBXXwWm4Psa2taerBdaAdU3yJmuRBxAJ1QXEYGa-7Gr0mDAsWCN06DOkl_fscqVdWcb7oQD3pQpb6CjVtQsQoqr735C_8DJ0FA9bpCkr7dHVU8AhS-xqXxEz8m_xtCI22wmcer5ESpjY97poT"></div>
+<div class="p-8 flex-1 flex flex-col justify-between">
+<div>
+<h3 class="font-headline-lg text-2xl text-white mb-2">Pompa Air Tenaga Surya</h3>
+<p class="text-white/70 text-sm">Solusi irigasi perkebunan dan suplai air daerah terpencil tanpa akses jaringan listrik.</p>
+</div>
+<a class="text-white font-semibold text-sm flex items-center mt-6 group-hover:translate-x-2 transition-transform" href="#">Pelajari lebih lanjut <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span></a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 11. CTA Penutup -->
+<section class="py-32 px-6 max-w-5xl mx-auto reveal-element is-visible">
+<div class="bg-primary p-12 md:p-16 text-center relative overflow-hidden shadow-md rounded-lg">
+<!-- Decor -->
+<div class="absolute -bottom-20 -left-20 w-64 h-64 bg-primary-container rounded-full blur-3xl opacity-40 mix-blend-screen"></div>
+<div class="absolute top-10 right-10 w-32 h-32 bg-surface-container-low rounded-full blur-2xl opacity-20"></div>
+<div class="relative z-10">
+<h2 class="font-headline-xl md:text-5xl text-white mb-6">Siap beralih ke<br>energi matahari?</h2>
+<p class="text-white/80 mb-10 max-w-xl mx-auto text-lg">Mulai perjalanan hijau Anda hari ini. Tim ahli kami siap membantu menganalisa kebutuhan dan memberikan desain sistem gratis.</p>
+<div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+<button class="btn-fill w-full sm:w-auto bg-primary-container font-bold px-8 py-4 hover:scale-105 transition-transform shadow-lg flex items-center justify-center space-x-2 text-white rounded-lg">
+<svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"></path></svg>
+<span class="">Chat via WhatsApp</span>
+</button>
+<button class="btn-fill w-full sm:w-auto bg-white/10 border border-white/20 text-white font-bold px-8 py-4 hover:bg-white/20 transition-colors rounded-lg">
+                    Isi Form Online
+                </button>
+</div>
+</div>
+</div>
+</section>
+<!-- 12. Footer -->
+<footer class="bg-on-surface pt-20 pb-10 px-6 border-t border-primary reveal-element is-visible">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+<div class="col-span-1 md:col-span-1">
+<div class="font-headline-lg font-extrabold text-3xl text-primary-container mb-6 tracking-tight">SUOER</div>
+<p class="text-white/60 text-sm leading-relaxed mb-6">Menginspirasi masa depan berkelanjutan melalui inovasi tenaga surya yang elegan dan presisi tinggi untuk masyarakat Indonesia.</p>
+</div>
+<div>
+<h4 class="font-bold text-white mb-6">Solusi</h4>
+<ul class="space-y-4 text-white/60 text-sm">
+<li class=""><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">Panel Residensial</a></li>
+<li class=""><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">B2B &amp; Industri</a></li>
+<li class=""><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">Pompa Air Surya</a></li>
+<li class=""><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">Net Metering PLN</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-white mb-6">Perusahaan</h4>
+<ul class="space-y-4 text-white/60 text-sm">
+<li class=""><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">Tentang Kami</a></li>
+<li class=""><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">Blog &amp; Artikel</a></li>
+<li class=""><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">Karir</a></li>
+<li class=""><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">FAQ</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-white mb-6">Kontak</h4>
+<ul class="space-y-4 text-white/60 text-sm">
+<li class="flex items-start"><span class="material-symbols-outlined text-primary-container text-lg mr-2">location_on</span> Jl. Jend. Sudirman Kav. 52-53, Jakarta Selatan 12190</li>
+<li class="flex items-center"><span class="material-symbols-outlined text-primary-container text-lg mr-2">mail</span> hello@suoer.id</li>
+<li class="flex items-center"><span class="material-symbols-outlined text-primary-container text-lg mr-2">call</span> (021) 555-0123</li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs text-white/40 gap-16">
+<p class="">© 2024 SUOER Solar Energy. All Rights Reserved.</p>
+<div class="flex space-x-6 mt-4 md:mt-0">
+<a class="hover:text-white transition-colors" href="#">Kebijakan Privasi</a>
+<a class="hover:text-white transition-colors" href="#">Syarat &amp; Ketentuan</a>
+</div>
+</div>
+</footer>
+<script>
+    // Navigation Scroll Effect
+    document.addEventListener('DOMContentLoaded', () => {
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.remove('bg-transparent', 'py-4');
+                nav.classList.add('bg-white/90', 'backdrop-blur-md', 'py-2', 'shadow-sm');
+            } else {
+                nav.classList.add('bg-transparent', 'py-4');
+                nav.classList.remove('bg-white/90', 'backdrop-blur-md', 'py-2', 'shadow-sm');
+            }
+        });
+
+        // Intersection Observer for Scroll Reveals
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-element').forEach(element => {
+            observer.observe(element);
+        });
+    });
+
+    // WebGL Background Shader Setup
+    const canvas = document.getElementById('hero-gl-canvas');
+    if (canvas) {
+        const gl = canvas.getContext('webgl');
+        if (gl) {
+            const vertexShaderSource = `
+                attribute vec2 position;
+                void main() {
+                    gl_Position = vec4(position, 0.0, 1.0);
+                }
+            `;
+            const fragmentShaderSource = `
+                precision highp float;
+                uniform float u_time;
+                uniform vec2 u_resolution;
+
+                void main() {
+                    vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+                    
+                    // Smooth, slow-moving organic color field (Light / Off-white Theme)
+                    vec3 color1 = vec3(0.988, 0.976, 0.973); // #fcf9f8 (surface-bright)
+                    vec3 color2 = vec3(0.965, 0.953, 0.949); // #f6f3f2 (surface-container-low)
+                    vec3 color3 = vec3(0.914, 0.902, 0.898); // slightly darker for contrast
+                    
+                    float noise = sin(uv.x * 3.0 + u_time * 0.2) * cos(uv.y * 2.0 + u_time * 0.3);
+                    noise += sin(uv.y * 5.0 - u_time * 0.4) * 0.5;
+                    
+                    vec3 color = mix(color1, color2, clamp(noise + 0.5, 0.0, 1.0));
+                    color = mix(color, color3, clamp(sin(u_time * 0.1) * 0.1, 0.0, 1.0) * uv.y);
+                    
+                    gl_FragColor = vec4(color, 1.0);
+                }
+            `;
+
+            function createShader(gl, type, source) {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                    console.error(gl.getShaderInfoLog(shader));
+                    gl.deleteShader(shader);
+                    return null;
+                }
+                return shader;
+            }
+
+            const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+            const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+
+            const program = gl.createProgram();
+            gl.attachShader(program, vertexShader);
+            gl.attachShader(program, fragmentShader);
+            gl.linkProgram(program);
+
+            if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+                console.error(gl.getProgramInfoLog(program));
+            }
+
+            const positionBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+            const positions = [
+                -1.0, -1.0,
+                 1.0, -1.0,
+                -1.0,  1.0,
+                 1.0, -1.0,
+                 1.0,  1.0,
+                -1.0,  1.0,
+            ];
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+
+            const positionLocation = gl.getAttribLocation(program, "position");
+            const timeLocation = gl.getUniformLocation(program, "u_time");
+            const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
+
+            function resizeCanvasToDisplaySize(canvas) {
+                const displayWidth  = canvas.clientWidth;
+                const displayHeight = canvas.clientHeight;
+                if (canvas.width  !== displayWidth || canvas.height !== displayHeight) {
+                    canvas.width  = displayWidth;
+                    canvas.height = displayHeight;
+                }
+            }
+
+            function render(time) {
+                time *= 0.001; 
+
+                resizeCanvasToDisplaySize(gl.canvas);
+                gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+
+                gl.useProgram(program);
+                gl.enableVertexAttribArray(positionLocation);
+                gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+                gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+                gl.uniform1f(timeLocation, time);
+                gl.uniform2f(resolutionLocation, gl.canvas.width, gl.canvas.height);
+
+                gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+                requestAnimationFrame(render);
+            }
+            
+            // Only start WebGL animation if user hasn't requested reduced motion
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (!prefersReducedMotion) {
+                requestAnimationFrame(render);
+            }
+        }
+    }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const resBtn = document.getElementById('btn-residential');
+        const indBtn = document.getElementById('btn-industrial');
+        const billBtn = document.getElementById('method-bill');
+        const appBtn = document.getElementById('method-appliance');
+        const calcBtn = document.getElementById('btn-calculate');
+        const overlay = document.getElementById('result-overlay');
+        const content1 = document.getElementById('result-content-1');
+        const content2 = document.getElementById('result-content-2');
+        const inputBill = document.getElementById('input-bill');
+        
+        const sectionBill = document.getElementById('section-bill');
+        const sectionApp = document.getElementById('section-appliance');
+        
+        let currentMethod = 'bill'; // 'bill' or 'appliance'
+
+        const toggleActive = (active, inactive) => {
+            active.classList.add('bg-primary', 'text-white', 'shadow-sm');
+            active.classList.remove('text-primary', 'hover:bg-white/50');
+            inactive.classList.remove('bg-primary', 'text-white', 'shadow-sm');
+            inactive.classList.add('text-primary', 'hover:bg-white/50');
+        };
+
+        const toggleMethod = (active, inactive, activeSec, inactiveSec, method) => {
+            active.classList.add('border-primary', 'bg-primary/5');
+            active.classList.remove('border-transparent', 'bg-surface-container-low');
+            
+            // Active icon/text color
+            active.querySelector('span.material-symbols-outlined').classList.add('text-primary');
+            active.querySelector('span.material-symbols-outlined').classList.remove('text-primary/70');
+            active.querySelectorAll('span')[1].classList.add('text-primary');
+            active.querySelectorAll('span')[1].classList.remove('text-primary/70');
+            
+            inactive.classList.remove('border-primary', 'bg-primary/5');
+            inactive.classList.add('border-transparent', 'bg-surface-container-low');
+            
+            // Inactive icon/text color
+            inactive.querySelector('span.material-symbols-outlined').classList.remove('text-primary');
+            inactive.querySelector('span.material-symbols-outlined').classList.add('text-primary/70');
+            inactive.querySelectorAll('span')[1].classList.remove('text-primary');
+            inactive.querySelectorAll('span')[1].classList.add('text-primary/70');
+            
+            activeSec.classList.remove('hidden');
+            activeSec.classList.add('block');
+            inactiveSec.classList.remove('block');
+            inactiveSec.classList.add('hidden');
+            
+            currentMethod = method;
+        };
+
+        resBtn?.addEventListener('click', () => toggleActive(resBtn, indBtn));
+        indBtn?.addEventListener('click', () => toggleActive(indBtn, resBtn));
+        
+        billBtn?.addEventListener('click', () => toggleMethod(billBtn, appBtn, sectionBill, sectionApp, 'bill'));
+        appBtn?.addEventListener('click', () => toggleMethod(appBtn, billBtn, sectionApp, sectionBill, 'appliance'));
+
+        // Appliance counters
+        document.querySelectorAll('.appliance-minus').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const targetId = e.currentTarget.getAttribute('data-target');
+                const input = document.getElementById(targetId);
+                let val = parseInt(input.value);
+                if(val > 0) input.value = val - 1;
+            });
+        });
+        
+        document.querySelectorAll('.appliance-plus').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const targetId = e.currentTarget.getAttribute('data-target');
+                const input = document.getElementById(targetId);
+                let val = parseInt(input.value);
+                input.value = val + 1;
+            });
+        });
+
+        calcBtn?.addEventListener('click', () => {
+            let kwp = 0;
+            let kwh = 0;
+            let savings = 0;
+            let showTotalPower = false;
+            let totalWatts = 0;
+            
+            if (currentMethod === 'bill') {
+                let billValue = parseInt(inputBill.value.replace(/\./g, ''));
+                if (isNaN(billValue) || billValue <= 0) {
+                     billValue = 2500000;
+                     inputBill.value = "2.500.000";
+                }
+                kwp = (billValue / 500000).toFixed(1);
+                kwh = (kwp * 120).toFixed(0);
+                savings = (billValue * 0.8 * 12).toLocaleString('id-ID');
+                
+                document.getElementById('res-savings-label').innerText = 'Potensi Hemat / Tahun';
+                document.getElementById('res-savings-container').innerHTML = `Rp <span class="" id="res-savings">${savings}</span>`;
+            } else {
+                // Appliance calculation
+                document.querySelectorAll('.appliance-input').forEach(input => {
+                    const watts = parseInt(input.getAttribute('data-watts'));
+                    const qty = parseInt(input.value) || 0;
+                    totalWatts += (watts * qty);
+                });
+                
+                if (totalWatts === 0) totalWatts = 500; // minimum fallback
+                
+                kwp = (totalWatts / 1000).toFixed(1);
+                kwh = (kwp * 120).toFixed(0); // rough estimate of monthly kwh based on capacity
+                showTotalPower = true;
+                
+                document.getElementById('res-savings-label').innerText = 'Total Kebutuhan Daya Estimasi';
+                document.getElementById('res-savings-container').innerHTML = `<span class="" id="res-savings">${totalWatts.toLocaleString('id-ID')}</span> Watt`;
+            }
+
+            document.getElementById('res-kwp').innerText = kwp;
+            document.getElementById('res-kwh').innerText = kwh;
+
+            // Smooth transition
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                content1.classList.remove('opacity-30');
+                content2.classList.remove('opacity-30');
+            }, 500);
+        });
+        
+        // Input formatter for thousands separator
+        inputBill?.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if(value !== '') {
+                e.target.value = parseInt(value).toLocaleString('id-ID');
+            }
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>

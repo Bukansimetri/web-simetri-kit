@@ -1,0 +1,491 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>SUOER - Tentang Kami</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet">
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-surface": "#0b1c30",
+                "primary": "#006397",
+                "on-tertiary-fixed": "#001f28",
+                "error-container": "#ffdad6",
+                "tertiary": "#00677f",
+                "surface-container": "#e5eeff",
+                "primary-fixed": "#cce5ff",
+                "error": "#ba1a1a",
+                "surface-variant": "#d3e4fe",
+                "tertiary-fixed-dim": "#47d6ff",
+                "on-primary-fixed": "#001d31",
+                "secondary-fixed": "#d5e3ff",
+                "background": "#f8f9ff",
+                "on-primary": "#ffffff",
+                "surface-container-low": "#eff4ff",
+                "on-secondary": "#ffffff",
+                "outline-variant": "#bec7d3",
+                "secondary-container": "#9fc2fe",
+                "on-tertiary-fixed-variant": "#004e60",
+                "inverse-surface": "#213145",
+                "on-background": "#0b1c30",
+                "primary-container": "#0099e5",
+                "surface-dim": "#cbdbf5",
+                "on-tertiary": "#ffffff",
+                "surface-container-high": "#dce9ff",
+                "surface-bright": "#f8f9ff",
+                "on-primary-fixed-variant": "#004b73",
+                "secondary-fixed-dim": "#a7c8ff",
+                "on-secondary-fixed-variant": "#1f477b",
+                "primary-fixed-dim": "#92ccff",
+                "on-secondary-fixed": "#001b3c",
+                "outline": "#6f7882",
+                "tertiary-fixed": "#b6ebff",
+                "tertiary-container": "#009ec1",
+                "surface-tint": "#006397",
+                "on-tertiary-container": "#002f3b",
+                "on-error": "#ffffff",
+                "surface-container-highest": "#d3e4fe",
+                "inverse-primary": "#92ccff",
+                "on-primary-container": "#002d48",
+                "surface": "#f8f9ff",
+                "on-surface-variant": "#3f4851",
+                "on-secondary-container": "#294f83",
+                "inverse-on-surface": "#eaf1ff",
+                "secondary": "#3a5f94",
+                "on-error-container": "#93000a",
+                "surface-container-lowest": "#ffffff"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px",
+                '4xl': '2.5rem',
+                '5xl': '3.5rem',
+        },
+        "spacing": {
+                "md": "24px",
+                "base": "8px",
+                "margin-desktop": "64px",
+                "margin-mobile": "16px",
+                "gutter": "24px",
+                "lg": "48px",
+                "xs": "4px",
+                "xl": "80px",
+                "sm": "12px"
+        },
+        "fontFamily": {
+                "label-bold": [
+                        "Be Vietnam Pro", "sans-serif"
+                ],
+                "body-sm": [
+                        "Be Vietnam Pro", "sans-serif"
+                ],
+                "headline-lg-mobile": [
+                        "Manrope", "sans-serif"
+                ],
+                "headline-lg": [
+                        "Manrope", "sans-serif"
+                ],
+                "body-md": [
+                        "Be Vietnam Pro", "sans-serif"
+                ],
+                "headline-xl": [
+                        "Manrope", "sans-serif"
+                ],
+                "heading": ["Manrope", "sans-serif"],
+                "body": ["Be Vietnam Pro", "sans-serif"]
+        },
+        "fontSize": {
+                "label-bold": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-sm": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "36px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-xl": [
+                        "48px",
+                        {
+                                "lineHeight": "56px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ]
+        },
+        boxShadow: {
+            'soft': '0 20px 40px -15px rgba(0, 99, 151, 0.05)',
+            'float': '0 30px 60px -20px rgba(0, 99, 151, 0.1)',
+            'float-lg': '0 40px 70px -20px rgba(0, 99, 151, 0.15)',
+        },
+        animation: {
+            'slow-zoom': 'slow-zoom 20s ease-out forwards',
+            'subtle-pulse': 'subtle-pulse 3s ease-in-out infinite',
+            'wiggle': 'wiggle 4s ease-in-out infinite',
+        },
+        keyframes: {
+            'slow-zoom': {
+                '0%': { transform: 'scale(1)' },
+                '100%': { transform: 'scale(1.1)' },
+            },
+            'subtle-pulse': {
+                '0%, 100%': { transform: 'scale(1)' },
+                '50%': { transform: 'scale(1.05)' },
+            },
+            'wiggle': {
+                '0%, 10%, 100%': { transform: 'rotate(0deg)' },
+                '2%': { transform: 'rotate(-5deg)' },
+                '4%': { transform: 'rotate(5deg)' },
+                '6%': { transform: 'rotate(-5deg)' },
+                '8%': { transform: 'rotate(5deg)' },
+            }
+        }
+      }
+    }
+  }
+</script>
+<style>
+        body { background-color: #f8f9ff; overflow-x: hidden; }
+        .blob-bg {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%230099e5' d='M44.7,-76.4C58.8,-69.2,71.8,-59.1,81.1,-46.1C90.4,-33.1,96,-16.6,95.5,-0.3C95.1,16,88.7,31.9,78.8,45.3C68.9,58.7,55.5,69.5,40.7,76.9C25.9,84.3,9.7,88.3,-5.7,85.7C-21.1,83.1,-35.6,73.8,-48.9,62.8C-62.2,51.8,-74.3,39.1,-81.4,23.8C-88.5,8.5,-90.6,-9.4,-84.9,-24.5C-79.2,-39.6,-65.7,-51.9,-51.1,-59.4C-36.5,-66.9,-20.8,-69.6,-4.8,-72.6C11.2,-75.6,22.4,-78.9,30.6,-83.6L44.7,-76.4Z' transform='translate(100 100)' /%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-size: cover;
+            opacity: 0.1;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+    </style>
+</head>
+<body class="font-body text-on-surface antialiased selection:bg-secondary/30 selection:text-on-surface">
+<!-- Navigasi -->
+<header class="fixed top-0 w-full z-50 transition-all duration-300 bg-white shadow-sm py-4" id="main-nav">
+<div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+<div class="flex items-center space-x-12">
+<a class="font-heading font-extrabold text-3xl text-primary tracking-tight" href="#">SUOER</a>
+<nav class="hidden md:flex space-x-8">
+<a class="font-medium text-primary hover:text-secondary transition-colors" href="#">Beranda</a>
+<a class="font-medium text-primary hover:text-secondary transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-secondary" href="#">Tentang Kami</a>
+<a class="font-medium text-primary hover:text-secondary transition-colors" href="#">Produk</a>
+<a class="font-medium text-primary hover:text-secondary transition-colors" href="#">Kontak</a>
+</nav>
+</div>
+<div class="hidden md:block">
+<a class="bg-primary-container text-white px-6 py-3 font-medium hover:bg-inverse-surface hover:-translate-y-0.5 transition-transform inline-block shadow-md rounded-lg" href="#">Konsultasi Gratis</a>
+</div>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</div>
+</header>
+<main>
+<!-- Page Hero -->
+<section class="relative pt-32 pb-16 h-[50vh] min-h-[400px] w-full flex items-end overflow-hidden mt-16 reveal active">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover animate-slow-zoom" data-alt="A wide, sweeping shot of a modern solar array on a commercial building roof at sunrise." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbw_BUoJmvD7u2lPKnA5BszjnwYfBwbC-w77fIDtuKb5DL51xVgljEye1apmvOM6V75YqNp_SJgGdNEFn0H19W4K_Co-Y34i1FccJcDqBxPQ7n87kwg2HnKHgz0kGTOdKe44NwYgjxvlN2KgypJW3WfOJPWjz32Imr-aGkUaX09MtPtIWVaDuXi8oDF2SiNY_lEAvpO31kPTIT9t2Gq5LOOobpRu6SihbptqnOoIEwhXvgPQlwJqBN">
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/90 via-inverse-surface/40 to-transparent"></div>
+</div>
+<div class="relative z-10 w-full px-6 max-w-7xl mx-auto pb-8">
+<div class="mb-4 reveal active delay-100">
+<p class="text-sm font-semibold text-white/80 uppercase tracking-widest"><a class="hover:text-secondary transition-colors" href="#">Beranda</a> <span class="mx-2">/</span> Tentang Kami</p>
+</div>
+<h1 class="font-heading text-4xl md:text-6xl font-bold text-white max-w-2xl leading-tight reveal active delay-200">Mengenal SUOER lebih dekat</h1>
+</div>
+</section>
+<!-- Siapa Kami -->
+<section class="py-24 px-6 max-w-7xl mx-auto reveal active">
+<div class="flex flex-col md:flex-row gap-16 md:gap-24 items-center">
+<div class="w-full md:w-[40%] relative reveal delay-100 active">
+<div class="overflow-hidden shadow-float aspect-square rounded-lg">
+<img class="w-full h-full object-cover" data-alt="Close up of high quality solar panels reflecting the sky." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8o6wZmHzInxy10MSPTtktnua4w1CjXMC-DBawItAykdbEE2SeLS1lTp8U5_j5FysfGRJkblLCk-bv26xFcXkkiPbsqyobWdVt7QY30NxJS3SbByg-K8I0Ipp49VXEhyI2sBUSaW_PpqjVUnrdksRYwjbiQxHwSh6D-ZQXkjSqQ9cbs7SVvqfi7CQ2ktfYptSEEIEhvBkron5-abO9qmI5xHHfrB7OvntdFC86JB1-gv2MwK6fNpp1">
+</div>
+<div class="absolute -bottom-6 -right-6 md:-right-12 bg-white p-6 shadow-float -rotate-3 max-w-[220px] border border-gray-100 animate-subtle-pulse rounded-lg">
+<p class="font-semibold text-sm text-primary text-center">Bagian dari Sinar Mas Elektrindo</p>
+</div>
+</div>
+<div class="w-full md:w-[60%] reveal delay-200 active">
+<span class="text-sm font-bold text-secondary uppercase tracking-widest block mb-4">Tentang Kami</span>
+<p class="text-lg text-on-surface-variant mb-8 leading-relaxed">Sebagai bagian dari <strong>PT Sinar Mas Elektrindo</strong>, SUOER hadir membawa komitmen kuat dalam menghadirkan solusi energi surya yang inovatif, efisien, dan andal. Kami memadukan kekuatan infrastruktur global dengan pemahaman mendalam tentang kebutuhan lokal Indonesia.</p>
+<div class="pl-8 border-l-4 border-secondary">
+<p class="font-heading text-2xl md:text-3xl font-bold text-primary leading-snug">
+                            "Misi kami bukan sekadar menjual panel, tetapi menjadi <span class="text-secondary animate-subtle-pulse inline-block">mitra transformasi energi</span> yang memberdayakan masyarakat dan bisnis menuju masa depan yang lebih hijau."
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Visi -->
+<section class="py-32 px-6 bg-white relative overflow-hidden reveal active">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[400px] text-surface-container-high/50 font-serif leading-none select-none z-0">
+                ”
+            </div>
+<div class="relative z-10 max-w-4xl mx-auto text-center reveal delay-100 active">
+<h2 class="font-heading text-3xl md:text-5xl font-bold text-primary mb-10 leading-tight">Menjadi pelopor energi surya di Asia Tenggara yang paling dipercaya, mendorong masa depan di mana setiap bangunan mandiri energi dan berkelanjutan.</h2>
+<p class="font-mono text-sm font-bold text-outline uppercase tracking-[0.3em]">Visi Kami</p>
+</div>
+</section>
+<!-- Misi -->
+<section class="py-24 px-6 max-w-7xl mx-auto reveal active">
+<div class="mb-16 reveal delay-100 active">
+<span class="text-sm font-bold text-secondary uppercase tracking-widest block mb-4">Misi</span>
+<h2 class="font-heading text-4xl md:text-5xl font-bold text-primary">Bagaimana kami mewujudkannya</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-24">
+<div class="md:col-span-3 space-y-10 reveal delay-200 active">
+<div class="flex gap-5">
+<span class="material-symbols-outlined text-secondary shrink-0 text-3xl mt-0.5 animate-subtle-pulse" data-icon="check_circle">check_circle</span>
+<div>
+<h4 class="font-heading text-xl font-bold text-primary mb-2">Solusi Premium &amp; Teruji</h4>
+<p class="text-on-surface-variant leading-relaxed">Menyediakan panel surya dan inverter berkualitas terbaik yang telah teruji secara global untuk performa maksimal di iklim tropis.</p>
+</div>
+</div>
+<div class="flex gap-5">
+<span class="material-symbols-outlined text-secondary shrink-0 text-3xl mt-0.5 animate-subtle-pulse" data-icon="check_circle">check_circle</span>
+<div>
+<h4 class="font-heading text-xl font-bold text-primary mb-2">Pemasangan Presisi</h4>
+<p class="text-on-surface-variant leading-relaxed">Menjamin instalasi yang aman, rapi, dan efisien oleh tim teknisi bersertifikat yang memahami standar kelistrikan nasional.</p>
+</div>
+</div>
+<div class="flex gap-5">
+<span class="material-symbols-outlined text-secondary shrink-0 text-3xl mt-0.5 animate-subtle-pulse" data-icon="check_circle">check_circle</span>
+<div>
+<h4 class="font-heading text-xl font-bold text-primary mb-2">Dukungan Purna Jual</h4>
+<p class="text-on-surface-variant leading-relaxed">Memberikan ketenangan pikiran melalui pemeliharaan responsif dan garansi performa jangka panjang yang dapat diandalkan.</p>
+</div>
+</div>
+</div>
+<div class="md:col-span-2 space-y-10 reveal delay-300 active">
+<div class="flex gap-5">
+<span class="material-symbols-outlined text-secondary shrink-0 text-3xl mt-0.5 animate-subtle-pulse" data-icon="check_circle">check_circle</span>
+<div>
+<h4 class="font-heading text-xl font-bold text-primary mb-2">Edukasi Berkelanjutan</h4>
+<p class="text-on-surface-variant leading-relaxed">Meningkatkan kesadaran masyarakat tentang manfaat dan pentingnya beralih ke energi bersih.</p>
+</div>
+</div>
+<div class="flex gap-5">
+<span class="material-symbols-outlined text-secondary shrink-0 text-3xl mt-0.5 animate-subtle-pulse" data-icon="check_circle">check_circle</span>
+<div>
+<h4 class="font-heading text-xl font-bold text-primary mb-2">Inovasi Teknologi</h4>
+<p class="text-on-surface-variant leading-relaxed">Terus mengadopsi teknologi terbaru dalam penyimpanan dan manajemen energi untuk efisiensi yang lebih baik.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Nilai (Values) Bento Grid -->
+<section class="py-24 px-6 max-w-7xl mx-auto mb-12 reveal active">
+<div class="mb-16 text-center reveal delay-100 active">
+<h2 class="font-heading text-4xl md:text-5xl font-bold text-primary">Nilai-Nilai Kami</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px] reveal delay-200 active">
+<!-- Large Card (Ekonomi Hijau) -->
+<div class="md:col-span-2 md:row-span-2 bg-primary p-10 flex flex-col justify-end relative overflow-hidden group shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-float-lg rounded-lg">
+<img class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay group-hover:scale-105 transition-transform duration-700" data-alt="Workers installing solar panels" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFJJ6DXCBAajkYPcLyC8LQSO8seqRfKTlroOaHQeXZgMtJj9Qzylr0AHhxJkCyZf8G3eh66YPiYeISt7Hzwsj21oRZq_lpLRIHVPrNwh_vuKa-X0UYG-Bke5KCqzyVFbrEkjBUx4EiHfZwCTlFo-MzxqroeO6lD_jM72W3lgTDhxKEXmvj-7siUFAGvKnbqs-ShRt3tR8bxx9E_5ISLvLzOxR0kKMFmATrpSMeG4sls4Jv7mNXEgR7">
+<div class="relative z-10">
+<div class="w-16 h-16 bg-secondary flex items-center justify-center mb-6 text-white shadow-md animate-subtle-pulse group-hover:animate-none group-hover:scale-110 transition-transform duration-300 rounded-lg">
+<span class="material-symbols-outlined text-3xl" data-icon="eco">eco</span>
+</div>
+<h3 class="font-heading text-3xl font-bold text-white mb-4">Ekonomi Hijau &amp; Lapangan Kerja</h3>
+<p class="text-lg text-white/80 max-w-xl">Kami tidak hanya membangun infrastruktur energi, tetapi juga menggerakkan roda ekonomi hijau dengan menciptakan lapangan kerja baru bagi tenaga kerja lokal.</p>
+</div>
+</div>
+<!-- Small Card 1 -->
+<div class="bg-white p-8 flex flex-col justify-center shadow-soft border border-surface-container-low transition-all duration-300 hover:-translate-y-2 hover:shadow-float-lg group rounded-lg">
+<div class="w-12 h-12 bg-surface-container-high flex items-center justify-center mb-5 text-primary group-hover:bg-primary group-hover:text-surface-container-high transition-colors duration-300 rounded-lg">
+<span class="material-symbols-outlined text-2xl animate-subtle-pulse group-hover:animate-none" data-icon="savings">savings</span>
+</div>
+<h3 class="font-heading text-xl font-bold text-primary mb-3">Efisien &amp; Terjangkau</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Menghadirkan solusi energi yang menekan biaya operasional jangka panjang.</p>
+</div>
+<!-- Small Card 2 -->
+<div class="bg-white p-8 flex flex-col justify-center shadow-soft border border-surface-container-low transition-all duration-300 hover:-translate-y-2 hover:shadow-float-lg group rounded-lg">
+<div class="w-12 h-12 bg-surface-container-high flex items-center justify-center mb-5 text-primary group-hover:bg-primary group-hover:text-surface-container-high transition-colors duration-300 rounded-lg">
+<span class="material-symbols-outlined text-2xl animate-subtle-pulse group-hover:animate-none" data-icon="school">school</span>
+</div>
+<h3 class="font-heading text-xl font-bold text-primary mb-3">Edukasi Masyarakat</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Memberikan pemahaman mendalam tentang transisi energi terbarukan.</p>
+</div>
+<!-- Small Card 3 -->
+<div class="bg-white p-8 flex flex-col justify-center shadow-soft border border-surface-container-low transition-all duration-300 hover:-translate-y-2 hover:shadow-float-lg group rounded-lg">
+<div class="w-12 h-12 bg-surface-container-high flex items-center justify-center mb-5 text-primary group-hover:bg-primary group-hover:text-surface-container-high transition-colors duration-300 rounded-lg">
+<span class="material-symbols-outlined text-2xl animate-subtle-pulse group-hover:animate-none" data-icon="handshake">handshake</span>
+</div>
+<h3 class="font-heading text-xl font-bold text-primary mb-3">Kolaborasi &amp; Infrastruktur</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Membangun ekosistem bersama mitra strategis untuk jangkauan luas.</p>
+</div>
+</div>
+</section>
+<!-- Trust Strip -->
+<section class="py-16 bg-white border-y border-surface-container-low reveal active">
+<div class="max-w-7xl mx-auto px-6 reveal delay-100 active">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8 md:gap-0 divide-y md:divide-y-0 md:divide-x divide-outline-variant">
+<div class="w-full md:flex-1 text-center py-4 md:py-0">
+<div class="flex flex-col items-center justify-center gap-2">
+<span class="material-symbols-outlined text-primary text-4xl mb-2 animate-subtle-pulse" data-icon="group">group</span>
+<span class="font-heading text-4xl font-bold text-primary">5,000+</span>
+<span class="text-xs font-bold text-outline uppercase tracking-wider">Pelanggan Puas</span>
+</div>
+</div>
+<div class="w-full md:flex-1 text-center py-4 md:py-0">
+<div class="flex flex-col items-center justify-center gap-2">
+<span class="material-symbols-outlined text-primary text-4xl mb-2 animate-subtle-pulse" data-icon="solar_power">solar_power</span>
+<span class="font-heading text-4xl font-bold text-primary">10+ MW</span>
+<span class="text-xs font-bold text-outline uppercase tracking-wider">Total Kapasitas Terpasang</span>
+</div>
+</div>
+<div class="w-full md:flex-1 text-center py-4 md:py-0">
+<div class="flex flex-col items-center justify-center gap-2">
+<span class="material-symbols-outlined text-primary text-4xl mb-2 animate-subtle-pulse" data-icon="calendar_month">calendar_month</span>
+<span class="font-heading text-4xl font-bold text-primary">15+ Tahun</span>
+<span class="text-xs font-bold text-outline uppercase tracking-wider">Pengalaman Industri</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Band -->
+<section class="py-24 px-6 bg-primary text-center reveal active">
+<div class="max-w-4xl mx-auto reveal delay-100 active">
+<h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-10 leading-tight">Ingin tahu lebih lanjut tentang SUOER?<br>Ngobrol langsung dengan tim kami</h2>
+<a class="inline-flex items-center justify-center gap-3 text-white font-bold text-lg px-10 py-5 hover:scale-105 transition-transform shadow-float animate-wiggle hover:animate-none bg-primary-container hover:bg-primary rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="forum">forum</span>
+                    Hubungi via WhatsApp
+                </a>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-on-background pt-20 pb-10 px-6 border-t border-white/10 reveal active">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 reveal delay-100 active">
+<div class="col-span-1 md:col-span-1">
+<div class="font-heading font-extrabold text-3xl text-white mb-6 tracking-tight">SUOER</div>
+<p class="text-white/60 text-sm leading-relaxed mb-6">Menginspirasi masa depan berkelanjutan melalui inovasi tenaga surya yang elegan dan presisi tinggi untuk masyarakat Indonesia.</p>
+</div>
+<div>
+<h4 class="font-bold text-white mb-6">Solusi</h4>
+<ul class="space-y-4 text-white/60 text-sm">
+<li class=""><a class="hover:text-primary-fixed transition-colors" href="#">Panel Residensial</a></li>
+<li class=""><a class="hover:text-primary-fixed transition-colors" href="#">B2B &amp; Industri</a></li>
+<li class=""><a class="hover:text-primary-fixed transition-colors" href="#">Pompa Air Surya</a></li>
+<li class=""><a class="hover:text-primary-fixed transition-colors" href="#">Net Metering PLN</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-white mb-6">Perusahaan</h4>
+<ul class="space-y-4 text-white/60 text-sm">
+<li class=""><a class="hover:text-primary-fixed transition-colors" href="#">Tentang Kami</a></li>
+<li class=""><a class="hover:text-primary-fixed transition-colors" href="#">Blog &amp; Artikel</a></li>
+<li class=""><a class="hover:text-primary-fixed transition-colors" href="#">Karir</a></li>
+<li class=""><a class="hover:text-primary-fixed transition-colors" href="#">FAQ</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-white mb-6">Kontak</h4>
+<ul class="space-y-4 text-white/60 text-sm">
+<li class="flex items-start"><span class="material-symbols-outlined text-primary-fixed text-lg mr-2">location_on</span> Jl. Jend. Sudirman Kav. 52-53, Jakarta Selatan 12190</li>
+<li class="flex items-center"><span class="material-symbols-outlined text-primary-fixed text-lg mr-2">mail</span> hello@suoer.id</li>
+<li class="flex items-center"><span class="material-symbols-outlined text-primary-fixed text-lg mr-2">call</span> (021) 555-0123</li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs text-white/40 reveal delay-200 active">
+<p class="">© 2024 SUOER Solar Energy. All Rights Reserved.</p>
+<div class="flex space-x-6 mt-4 md:mt-0">
+<a class="hover:text-white transition-colors" href="#">Kebijakan Privasi</a>
+<a class="hover:text-white transition-colors" href="#">Syarat &amp; Ketentuan</a>
+</div>
+</div>
+</footer>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const nav = document.getElementById('main-nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    nav.classList.remove('py-4');
+                    nav.classList.add('py-2');
+                } else {
+                    nav.classList.add('py-4');
+                    nav.classList.remove('py-2');
+                }
+            });
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                if(!el.classList.contains('active')) {
+                    observer.observe(el);
+                }
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+
+</body></html>

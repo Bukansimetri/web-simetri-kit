@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FAQ - SUOER Solar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Be+Vietnam+Pro:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#ffdad6",
+                        "inverse-primary": "#92ccff",
+                        "surface-container-low": "#eff4ff",
+                        "primary-fixed-dim": "#92ccff",
+                        "secondary": "#3a5f94",
+                        "surface-tint": "#006397",
+                        "surface": "#f8f9ff",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#d5e3ff",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#dce9ff",
+                        "outline-variant": "#bec7d3",
+                        "surface-variant": "#d3e4fe",
+                        "primary-container": "#0099e5",
+                        "surface-bright": "#f8f9ff",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#009ec1",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#6f7882",
+                        "on-secondary-container": "#294f83",
+                        "surface-container-highest": "#d3e4fe",
+                        "primary": "#006397",
+                        "surface-container": "#e5eeff",
+                        "surface-dim": "#cbdbf5",
+                        "primary-fixed": "#cce5ff",
+                        "on-secondary-fixed": "#001b3c",
+                        "secondary-fixed-dim": "#a7c8ff",
+                        "on-surface-variant": "#3f4851",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#1f477b",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#213145",
+                        "tertiary": "#00677f",
+                        "secondary-container": "#9fc2fe",
+                        "on-primary-fixed-variant": "#004b73",
+                        "on-tertiary-container": "#002f3b",
+                        "on-background": "#0b1c30",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#b6ebff",
+                        "on-tertiary-fixed-variant": "#004e60",
+                        "on-surface": "#0b1c30",
+                        "background": "#f8f9ff",
+                        "on-tertiary-fixed": "#001f28",
+                        "on-primary-container": "#002d48",
+                        "on-primary-fixed": "#001d31",
+                        "inverse-on-surface": "#eaf1ff",
+                        "tertiary-fixed-dim": "#47d6ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "xl": "80px",
+                        "lg": "48px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope"],
+                        "label-bold": ["Be Vietnam Pro"],
+                        "headline-xl": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "body-sm": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "label-bold": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .accordion-content {
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .accordion-active .accordion-content {
+            max-height: 500px;
+        }
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+        .accordion-active .accordion-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col font-body-md">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 transition-all duration-300 bg-white py-4 shadow-sm" id="main-nav"><div class="max-w-7xl mx-auto px-6 flex justify-between items-center"><div class="flex items-center space-x-12"><a class="font-heading font-extrabold text-3xl text-primary tracking-tight" href="#">SUOER</a><nav class="hidden md:flex space-x-8"><a class="font-medium text-primary hover:text-primary-container transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-primary-container" href="#">Beranda</a><a class="font-medium text-primary hover:text-primary-container transition-colors" href="#">Tentang Kami</a><a class="font-medium text-primary hover:text-primary-container transition-colors" href="#">Produk</a><a class="font-medium text-primary hover:text-primary-container transition-colors" href="#">Kontak</a></nav></div><div class="hidden md:block"><a class="bg-primary-container text-white px-6 py-3 rounded-lg font-medium hover:-translate-y-0.5 transition-transform inline-block shadow-md" href="#">Konsultasi Gratis</a></div><button class="md:hidden text-primary"><span class="material-symbols-outlined text-3xl">menu</span></button></div></header>
+<!-- Main Content -->
+<main class="flex-grow pt-24 pb-xl">
+<!-- Hero Section -->
+<section class="px-margin-mobile md:px-margin-desktop max-w-screen-xl mx-auto pt-lg pb-xl text-center">
+<h1 class="font-headline-xl text-headline-xl text-primary mb-md">Pertanyaan Umum</h1>
+<p class="text-on-surface-variant font-body-md text-body-md max-w-2xl mx-auto mb-lg">
+                Temukan jawaban cepat untuk pertanyaan seputar layanan, instalasi, dan produk solar panel kami.
+            </p>
+<div class="max-w-xl mx-auto relative group">
+<span class="material-symbols-outlined absolute left-sm top-1/2 transform -translate-y-1/2 text-outline-variant group-focus-within:text-primary transition-colors" data-icon="search">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-sm pl-lg pr-sm focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/30 transition-all font-body-md text-body-md shadow-sm" placeholder="Cari pertanyaan..." type="text"/>
+</div>
+</section>
+<!-- FAQ Content -->
+<section class="px-margin-mobile md:px-margin-desktop max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter items-start">
+<!-- Sidebar Categories (Desktop) -->
+<aside class="hidden md:flex flex-col gap-xs col-span-3 sticky top-32">
+<button class="text-left px-sm py-sm rounded-lg bg-primary-container/10 text-primary-container font-label-bold text-label-bold transition-colors">
+                    Semua Kategori
+                </button>
+<button class="text-left px-sm py-sm rounded-lg hover:bg-surface-container-low text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md">
+                    Instalasi
+                </button>
+<button class="text-left px-sm py-sm rounded-lg hover:bg-surface-container-low text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md">
+                    Produk &amp; Teknologi
+                </button>
+<button class="text-left px-sm py-sm rounded-lg hover:bg-surface-container-low text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md">
+                    Biaya &amp; Penghematan
+                </button>
+<button class="text-left px-sm py-sm rounded-lg hover:bg-surface-container-low text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md">
+                    Garansi
+                </button>
+</aside>
+<!-- Mobile Categories (Horizontal Scroll) -->
+<div class="md:hidden flex overflow-x-auto pb-sm gap-sm no-scrollbar col-span-1 border-b border-outline-variant/30 mb-md">
+<button class="whitespace-nowrap px-md py-xs rounded-full bg-primary-container/10 text-primary-container font-label-bold text-label-bold border border-primary-container/20">
+                    Semua
+                </button>
+<button class="whitespace-nowrap px-md py-xs rounded-full bg-surface-container-lowest text-on-surface-variant font-body-sm text-body-sm border border-outline-variant/50">
+                    Instalasi
+                </button>
+<button class="whitespace-nowrap px-md py-xs rounded-full bg-surface-container-lowest text-on-surface-variant font-body-sm text-body-sm border border-outline-variant/50">
+                    Produk
+                </button>
+<button class="whitespace-nowrap px-md py-xs rounded-full bg-surface-container-lowest text-on-surface-variant font-body-sm text-body-sm border border-outline-variant/50">
+                    Biaya
+                </button>
+</div>
+<!-- Accordion List -->
+<div class="col-span-1 md:col-span-9 flex flex-col gap-sm">
+<!-- Item 1 -->
+<div class="accordion-item bg-surface-container-lowest border border-outline-variant/40 rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden cursor-pointer" onclick="toggleAccordion(this)">
+<div class="p-md flex justify-between items-center gap-md">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-body-md font-semibold text-primary-container">Berapa lama proses instalasi panel surya?</h3>
+<span class="material-symbols-outlined text-outline-variant accordion-icon" data-icon="expand_more">expand_more</span>
+</div>
+<div class="accordion-content px-md text-on-surface-variant font-body-md text-body-md border-t border-transparent">
+<p class="pb-md pt-xs">Proses instalasi biasanya memakan waktu 1-3 hari kerja tergantung pada ukuran sistem dan kompleksitas atap Anda. Tim kami akan melakukan survei lokasi terlebih dahulu untuk memberikan estimasi waktu yang lebih akurat.</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="accordion-item bg-surface-container-lowest border border-outline-variant/40 rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden cursor-pointer" onclick="toggleAccordion(this)">
+<div class="p-md flex justify-between items-center gap-md">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-body-md font-semibold text-on-surface">Apakah panel surya bekerja saat mendung atau hujan?</h3>
+<span class="material-symbols-outlined text-outline-variant accordion-icon" data-icon="expand_more">expand_more</span>
+</div>
+<div class="accordion-content px-md text-on-surface-variant font-body-md text-body-md border-t border-transparent">
+<p class="pb-md pt-xs">Ya, panel surya tetap menghasilkan listrik saat cuaca mendung atau hujan, meskipun efisiensinya akan berkurang dibandingkan saat cuaca cerah. Sistem hybrid kami dilengkapi baterai untuk menyimpan energi ekstra untuk digunakan saat produksi rendah.</p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="accordion-item bg-surface-container-lowest border border-outline-variant/40 rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden cursor-pointer" onclick="toggleAccordion(this)">
+<div class="p-md flex justify-between items-center gap-md">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-body-md font-semibold text-on-surface">Berapa besar penghematan tagihan listrik bulanan?</h3>
+<span class="material-symbols-outlined text-outline-variant accordion-icon" data-icon="expand_more">expand_more</span>
+</div>
+<div class="accordion-content px-md text-on-surface-variant font-body-md text-body-md border-t border-transparent">
+<p class="pb-md pt-xs">Pelanggan kami rata-rata mengalami penghematan tagihan listrik antara 40% hingga 70% per bulan, tergantung pada kapasitas sistem yang diinstal dan pola konsumsi energi rumah tangga.</p>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="accordion-item bg-surface-container-lowest border border-outline-variant/40 rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden cursor-pointer" onclick="toggleAccordion(this)">
+<div class="p-md flex justify-between items-center gap-md">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-body-md font-semibold text-on-surface">Bagaimana dengan garansi produk dan layanan?</h3>
+<span class="material-symbols-outlined text-outline-variant accordion-icon" data-icon="expand_more">expand_more</span>
+</div>
+<div class="accordion-content px-md text-on-surface-variant font-body-md text-body-md border-t border-transparent">
+<p class="pb-md pt-xs">SUOER Solar memberikan garansi performa panel hingga 25 tahun, garansi inverter 5-10 tahun, dan garansi instalasi/layanan selama 1 tahun. Kami memastikan sistem Anda beroperasi optimal jangka panjang.</p>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="accordion-item bg-surface-container-lowest border border-outline-variant/40 rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden cursor-pointer" onclick="toggleAccordion(this)">
+<div class="p-md flex justify-between items-center gap-md">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-body-md font-semibold text-on-surface">Apakah sistem perlu perawatan rutin?</h3>
+<span class="material-symbols-outlined text-outline-variant accordion-icon" data-icon="expand_more">expand_more</span>
+</div>
+<div class="accordion-content px-md text-on-surface-variant font-body-md text-body-md border-t border-transparent">
+<p class="pb-md pt-xs">Sistem panel surya membutuhkan perawatan minimal. Kami menyarankan pembersihan permukaan panel 1-2 kali setahun untuk memastikan debu atau kotoran tidak menghalangi sinar matahari. Anda dapat memantau performa melalui aplikasi pintar kami.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="px-margin-mobile md:px-margin-desktop max-w-screen-xl mx-auto mt-xl">
+<div class="bg-surface-container-low rounded-xl p-lg md:p-xl flex flex-col md:flex-row items-center justify-between gap-lg border border-primary-container/20 relative overflow-hidden">
+<!-- Decorative blurred shape -->
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary-container/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="text-center md:text-left z-10">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Belum menemukan jawaban?</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">
+                        Tim ahli ekologi kami siap membantu Anda memahami lebih lanjut tentang transisi ke energi surya yang cerdas.
+                    </p>
+</div>
+<div class="z-10">
+<a class="inline-flex items-center gap-sm bg-primary-container text-on-primary px-xl py-md rounded-lg font-label-bold text-label-bold hover:opacity-90 transition-colors shadow-md hover:shadow-lg" href="#">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+                        Hubungi Tim Ahli
+                    </a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-on-surface pt-20 pb-10 px-6 border-t border-primary"><div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16"><div class="col-span-1 md:col-span-1"><div class="font-heading font-extrabold text-3xl text-primary-container mb-6 tracking-tight">SUOER</div><p class="text-white/60 text-sm leading-relaxed mb-6">Menginspirasi masa depan berkelanjutan melalui inovasi tenaga surya yang elegan dan presisi tinggi untuk masyarakat Indonesia.</p></div><div><h4 class="font-bold text-white mb-6">Solusi</h4><ul class="space-y-4 text-white/60 text-sm"><li><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">Panel Residensial</a></li><li><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">B2B &amp; Industri</a></li><li><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">Pompa Air Surya</a></li><li><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">Net Metering PLN</a></li></ul></div><div><h4 class="font-bold text-white mb-6">Perusahaan</h4><ul class="space-y-4 text-white/60 text-sm"><li><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">Tentang Kami</a></li><li><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">Blog &amp; Artikel</a></li><li><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">Karir</a></li><li><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">FAQ</a></li></ul></div><div><h4 class="font-bold text-white mb-6">Kontak</h4><ul class="space-y-4 text-white/60 text-sm"><li class="flex items-start"><span class="material-symbols-outlined text-primary-container text-lg mr-2">location_on</span> Jl. Jend. Sudirman Kav. 52-53, Jakarta Selatan 12190</li><li class="flex items-center"><span class="material-symbols-outlined text-primary-container text-lg mr-2">mail</span> hello@suoer.id</li><li class="flex items-center"><span class="material-symbols-outlined text-primary-container text-lg mr-2">call</span> (021) 555-0123</li></ul></div></div><div class="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs text-white/40"><p>© 2024 SUOER Solar Energy. All Rights Reserved.</p><div class="flex space-x-6 mt-4 md:mt-0"><a class="hover:text-white transition-colors" href="#">Kebijakan Privasi</a><a class="hover:text-white transition-colors" href="#">Syarat &amp; Ketentuan</a></div></div></footer>
+<script>
+        function toggleAccordion(element) {
+            // Close other open items
+            const allItems = document.querySelectorAll('.accordion-item');
+            allItems.forEach(item => {
+                if(item !== element && item.classList.contains('accordion-active')) {
+                    item.classList.remove('accordion-active');
+                    item.querySelector('h3').classList.remove('text-primary');
+                    item.querySelector('h3').classList.add('text-on-surface');
+                    item.querySelector('.accordion-content').classList.remove('border-outline-variant/20');
+                    item.querySelector('.accordion-content').classList.add('border-transparent');
+                }
+            });
+
+            // Toggle current item
+            element.classList.toggle('accordion-active');
+            
+            // Toggle title color based on active state
+            const title = element.querySelector('h3');
+            const content = element.querySelector('.accordion-content');
+            
+            if(element.classList.contains('accordion-active')) {
+                title.classList.remove('text-on-surface');
+                title.classList.add('text-primary');
+                content.classList.remove('border-transparent');
+                content.classList.add('border-outline-variant/20');
+            } else {
+                title.classList.remove('text-primary');
+                title.classList.add('text-on-surface');
+                content.classList.remove('border-outline-variant/20');
+                content.classList.add('border-transparent');
+            }
+        }
+    </script>
+</body></html>

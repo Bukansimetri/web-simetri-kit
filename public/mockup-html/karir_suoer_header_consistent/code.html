@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html lang="id" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Karir - SUOER Solar Energy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#e5eeff",
+                        "on-tertiary-fixed": "#001f28",
+                        "on-secondary-fixed": "#001b3c",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#cce5ff",
+                        "tertiary-container": "#009ec1",
+                        "secondary-fixed-dim": "#a7c8ff",
+                        "secondary-fixed": "#d5e3ff",
+                        "outline": "#6f7882",
+                        "primary-fixed-dim": "#92ccff",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#0099e5",
+                        "secondary-container": "#9fc2fe",
+                        "surface-variant": "#d3e4fe",
+                        "tertiary": "#00677f",
+                        "on-tertiary-fixed-variant": "#004e60",
+                        "inverse-surface": "#213145",
+                        "surface-container-highest": "#d3e4fe",
+                        "tertiary-fixed": "#b6ebff",
+                        "background": "#f8f9ff",
+                        "on-primary-fixed": "#001d31",
+                        "surface-bright": "#f8f9ff",
+                        "surface-dim": "#cbdbf5",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "surface": "#f8f9ff",
+                        "surface-container-low": "#eff4ff",
+                        "inverse-primary": "#92ccff",
+                        "on-background": "#0b1c30",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#bec7d3",
+                        "inverse-on-surface": "#eaf1ff",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#dce9ff",
+                        "tertiary-fixed-dim": "#47d6ff",
+                        "secondary": "#3a5f94",
+                        "on-primary-container": "#002d48",
+                        "on-secondary-fixed-variant": "#1f477b",
+                        "surface-tint": "#006397",
+                        "on-secondary-container": "#294f83",
+                        "on-primary-fixed-variant": "#004b73",
+                        "on-surface": "#0b1c30",
+                        "primary": "#006397",
+                        "on-surface-variant": "#3f4851",
+                        "on-tertiary-container": "#002f3b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "md": "24px",
+                        "margin-desktop": "64px",
+                        "lg": "48px",
+                        "xl": "80px",
+                        "margin-mobile": "16px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Manrope"],
+                        "headline-xl": ["Manrope"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "label-bold": ["Be Vietnam Pro"],
+                        "body-sm": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "label-bold": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 transition-all duration-300 bg-white py-4 shadow-sm" id="main-nav"><div class="max-w-7xl mx-auto px-6 flex justify-between items-center"><div class="flex items-center space-x-12"><a class="font-heading font-extrabold text-3xl text-primary tracking-tight" href="#">SUOER</a><nav class="hidden md:flex space-x-8"><a class="font-medium text-on-surface-variant hover:text-primary transition-colors" href="#">Beranda</a><a class="font-medium text-on-surface-variant hover:text-primary transition-colors" href="#">Tentang Kami</a><a class="font-medium text-on-surface-variant hover:text-primary transition-colors" href="#">Produk</a><a class="font-medium text-on-surface-variant hover:text-primary transition-colors" href="#">Kontak</a><a class="font-medium text-primary hover:text-primary-container transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-primary-container" href="#">Karir</a></nav></div><div class="hidden md:block"><a class="btn-fill bg-primary-container text-white px-6 py-3 rounded-lg font-medium hover:-translate-y-0.5 transition-transform inline-block shadow-md" href="#">Konsultasi Gratis</a></div><button class="md:hidden text-primary"><span class="material-symbols-outlined text-3xl">menu</span></button></div></header>
+<!-- Main Content -->
+<main class="pt-24 md:pt-32 pb-xl px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
+<!-- Hero Section -->
+<section class="relative rounded-2xl overflow-hidden mb-xl glassmorphism border border-surface-variant/50 shadow-sm">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center min-h-[500px]">
+<div class="p-8 md:p-12 z-10">
+<h1 class="font-headline-xl text-headline-xl text-on-background mb-4 md:font-headline-xl md:text-headline-xl font-headline-lg-mobile text-headline-lg-mobile">
+                        Gabung dengan Revolusi Energi Bersama SUOER
+                    </h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 max-w-lg">
+                        Kami mencari pemikir inovatif dan bersemangat untuk membangun masa depan yang berkelanjutan. Jadilah bagian dari tim yang menciptakan solusi energi ramah lingkungan untuk dunia yang lebih baik.
+                    </p>
+<a class="inline-flex items-center justify-center bg-primary-container text-on-primary px-8 py-3 rounded-lg font-label-bold text-label-bold hover:bg-surface-tint transition-all shadow-md hover:shadow-lg active:scale-95" href="#positions">Lihat Posisi Terbuka</a>
+</div>
+<div class="relative h-full w-full min-h-[300px] md:min-h-full">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A bright, modern office space with a diverse team of professionals collaborating enthusiastically around a large wooden table, flooded with natural light from large windows overlooking greenery. The lighting is soft and airy, highlighting a positive, sustainable, and forward-thinking corporate culture in a light-mode aesthetic with subtle blue and green accents." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCS1lPUFzTRTE3QBIDgMtzngE5cuyBFbql2bczfLYmHdSl3P9TKp07srLrJ6_mYZScVmZe_ziPK0zTLC8JEU38ON08ysx0YrdwkePNQGIGfGKMhJV-4Xzm5oVolH8DdiP6XGXyo7YGRaeNPj4lg-ceOKiuMLwPfkHwdInoktPTfgmSXIWjaThElC6QJyN_SqMrYkQeflsxzojFXzs0CEZVB2npdSgg9Cs4j2NJXpqvTBbncJ-J7EoUh')"></div>
+<!-- Luminous overlay -->
+<div class="absolute inset-0 bg-gradient-to-r from-surface-container-lowest/90 via-surface-container-lowest/40 to-transparent"></div>
+</div>
+</div>
+</section>
+<!-- Values Section -->
+<section class="mb-xl">
+<div class="text-center mb-12">
+<h2 class="font-headline-lg text-headline-lg md:font-headline-lg md:text-headline-lg font-headline-lg-mobile text-headline-lg-mobile text-on-background mb-2">Mengapa Bergabung dengan Kami?</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Budaya kerja yang mendukung pertumbuhan dan inovasi Anda.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Value 1 -->
+<div class="bg-surface rounded-xl p-8 border border-surface-variant hover:border-primary-fixed-dim transition-colors group">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white" data-icon="lightbulb">lightbulb</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-xl mb-3 text-on-background">Inovasi Berkelanjutan</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Kami selalu mencari cara baru untuk memaksimalkan efisiensi energi surya dan meminimalkan dampak lingkungan.</p>
+</div>
+<!-- Value 2 -->
+<div class="bg-surface rounded-xl p-8 border border-surface-variant hover:border-primary-fixed-dim transition-colors group">
+<div class="w-12 h-12 rounded-full text-on-secondary-container flex items-center justify-center mb-6 group-hover:scale-110 transition-transform bg-primary-container">
+<span class="material-symbols-outlined text-white" data-icon="groups">groups</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-xl mb-3 text-on-background">Kolaborasi Tim</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Lingkungan kerja yang inklusif di mana setiap ide didengar dan kolaborasi lintas disiplin didorong.</p>
+</div>
+<!-- Value 3 -->
+<div class="bg-surface rounded-xl p-8 border border-surface-variant hover:border-primary-fixed-dim transition-colors group">
+<div class="w-12 h-12 rounded-full text-on-tertiary-container flex items-center justify-center mb-6 group-hover:scale-110 transition-transform bg-primary-container">
+<span class="material-symbols-outlined text-white" data-icon="public">public</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-xl mb-3 text-on-background">Dampak Nyata</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Pekerjaan Anda secara langsung berkontribusi pada pengurangan emisi karbon dan menciptakan masa depan yang lebih hijau.</p>
+</div>
+</div>
+</section>
+<!-- Open Positions Section -->
+<section class="mb-xl" id="positions">
+<h2 class="font-headline-lg text-headline-lg md:font-headline-lg md:text-headline-lg font-headline-lg-mobile text-headline-lg-mobile text-on-background mb-8">Posisi Terbuka</h2>
+<div class="space-y-4">
+<!-- Job Card 1 -->
+<div class="bg-surface rounded-lg p-6 border border-surface-variant flex flex-col md:flex-row md:items-center justify-between hover:shadow-md transition-shadow">
+<div class="mb-4 md:mb-0">
+<div class="flex items-center gap-3 mb-2">
+<h3 class="font-headline-lg text-headline-lg text-lg text-on-background">Solar Systems Engineer</h3>
+<span class="bg-surface-container-high text-on-surface text-xs px-2 py-1 rounded-md font-label-bold text-label-bold">Full-time</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">location_on</span> Jakarta Selatan, Indonesia (Hybrid)
+                        </p>
+</div>
+<button class="border border-primary-container text-primary-container px-4 py-2 rounded-lg font-label-bold text-label-bold hover:bg-primary-container hover:text-on-primary transition-colors">Lihat Detail</button>
+</div>
+<!-- Job Card 2 -->
+<div class="bg-surface rounded-lg p-6 border border-surface-variant flex flex-col md:flex-row md:items-center justify-between hover:shadow-md transition-shadow">
+<div class="mb-4 md:mb-0">
+<div class="flex items-center gap-3 mb-2">
+<h3 class="font-headline-lg text-headline-lg text-lg text-on-background">Sales Specialist - B2B</h3>
+<span class="bg-surface-container-high text-on-surface text-xs px-2 py-1 rounded-md font-label-bold text-label-bold">Full-time</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">location_on</span> Bandung, Indonesia (Remote)
+                        </p>
+</div>
+<button class="border border-primary-container text-primary-container px-4 py-2 rounded-lg font-label-bold text-label-bold hover:bg-primary-container hover:text-on-primary transition-colors">Lihat Detail</button>
+</div>
+<!-- Job Card 3 -->
+<div class="bg-surface rounded-lg p-6 border border-surface-variant flex flex-col md:flex-row md:items-center justify-between hover:shadow-md transition-shadow">
+<div class="mb-4 md:mb-0">
+<div class="flex items-center gap-3 mb-2">
+<h3 class="font-headline-lg text-headline-lg text-lg text-on-background">Digital Marketing Lead</h3>
+<span class="bg-surface-container-high text-on-surface text-xs px-2 py-1 rounded-md font-label-bold text-label-bold">Full-time</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">location_on</span> Jakarta Selatan, Indonesia (On-site)
+                        </p>
+</div>
+<button class="border border-primary-container text-primary-container px-4 py-2 rounded-lg font-label-bold text-label-bold hover:bg-primary-container hover:text-on-primary transition-colors">Lihat Detail</button>
+</div>
+</div>
+</section>
+<!-- Recruitment Process -->
+<section class="mb-xl bg-surface-container-low rounded-2xl p-8 md:p-12 border border-surface-variant/30">
+<h2 class="font-headline-lg text-headline-lg md:font-headline-lg md:text-headline-lg font-headline-lg-mobile text-headline-lg-mobile text-on-background text-center mb-10">Proses Rekrutmen</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+<!-- Connecting Line (Desktop) -->
+<div class="hidden md:block absolute top-6 left-[12.5%] right-[12.5%] h-0.5 bg-outline-variant z-0"></div>
+<!-- Step 1 -->
+<div class="relative z-10 flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-label-bold text-label-bold text-lg mb-4 shadow-sm">1</div>
+<h4 class="font-headline-lg text-headline-lg text-base mb-2 text-on-background">Lamar</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Kirimkan CV dan portofolio Anda melalui portal karir kami.</p>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-label-bold text-label-bold text-lg mb-4 shadow-sm">2</div>
+<h4 class="font-headline-lg text-headline-lg text-base mb-2 text-on-background">Wawancara HR</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Sesi perkenalan untuk menilai kecocokan budaya dan pengalaman dasar.</p>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-label-bold text-label-bold text-lg mb-4 shadow-sm">3</div>
+<h4 class="font-headline-lg text-headline-lg text-base mb-2 text-on-background">Penilaian Teknis</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Wawancara mendalam dengan tim terkait atau studi kasus.</p>
+</div>
+<!-- Step 4 -->
+<div class="relative z-10 flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-label-bold text-label-bold text-lg mb-4 shadow-sm">4</div>
+<h4 class="font-headline-lg text-headline-lg text-base mb-2 text-on-background">Penawaran</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Selamat datang di tim! Persiapan onboarding dimulai.</p>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="text-center py-12 px-6 bg-primary-fixed/20 rounded-xl border border-primary-fixed-dim/30">
+<h3 class="font-headline-lg text-headline-lg text-xl mb-4 text-on-background">Belum menemukan posisi yang pas?</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Kami selalu mencari talenta hebat. Kirimkan CV Anda secara proaktif.</p>
+<a class="inline-flex items-center gap-2 text-primary font-label-bold text-label-bold hover:underline" href="mailto:talent@suoer.id">
+<span class="material-symbols-outlined text-sm">mail</span> talent@suoer.id
+            </a>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-on-surface pt-20 pb-10 px-6 border-t border-primary"><div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16"><div class="col-span-1 md:col-span-1"><div class="font-heading font-extrabold text-3xl text-primary-container mb-6 tracking-tight">SUOER</div><p class="text-white/60 text-sm leading-relaxed mb-6">Menginspirasi masa depan berkelanjutan melalui inovasi tenaga surya yang elegan dan presisi tinggi untuk masyarakat Indonesia.</p></div><div><h4 class="font-bold text-white mb-6">Solusi</h4><ul class="space-y-4 text-white/60 text-sm"><li class=""><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">Panel Residensial</a></li><li class=""><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">B2B &amp; Industri</a></li><li class=""><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">Pompa Air Surya</a></li><li class=""><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">Net Metering PLN</a></li></ul></div><div><h4 class="font-bold text-white mb-6">Perusahaan</h4><ul class="space-y-4 text-white/60 text-sm"><li class=""><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">Tentang Kami</a></li><li class=""><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">Blog &amp; Artikel</a></li><li class=""><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">Karir</a></li><li class=""><a class="hover:text-primary-container transition-colors hover:translate-x-1 inline-block" href="#">FAQ</a></li></ul></div><div><h4 class="font-bold text-white mb-6">Kontak</h4><ul class="space-y-4 text-white/60 text-sm"><li class="flex items-start"><span class="material-symbols-outlined text-primary-container text-lg mr-2">location_on</span> Jl. Jend. Sudirman Kav. 52-53, Jakarta Selatan 12190</li><li class="flex items-center"><span class="material-symbols-outlined text-primary-container text-lg mr-2">mail</span> hello@suoer.id</li><li class="flex items-center"><span class="material-symbols-outlined text-primary-container text-lg mr-2">call</span> (021) 555-0123</li></ul></div></div><div class="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs text-white/40"><p class="">© 2024 SUOER Solar Energy. All Rights Reserved.</p><div class="flex space-x-6 mt-4 md:mt-0"><a class="hover:text-white transition-colors" href="#">Kebijakan Privasi</a><a class="hover:text-white transition-colors" href="#">Syarat &amp; Ketentuan</a></div></div></footer>
+</body></html>
