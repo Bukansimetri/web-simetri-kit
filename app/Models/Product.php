@@ -12,6 +12,19 @@ class Product extends Model
     use HasFactory;
 
     /**
+     * Default kosong untuk kolom json — supaya form Filament yang belum
+     * menyertakan field ini (mis. create dasar di US2, sebelum galeri/specs/
+     * fitur ditambahkan di US3/US4) tetap bisa menyimpan tanpa error NOT NULL.
+     *
+     * @var array<string, mixed>
+     */
+    protected $attributes = [
+        'images' => '[]',
+        'specs' => '[]',
+        'features' => '[]',
+    ];
+
+    /**
      * @var array<int, string>
      */
     protected $fillable = [

@@ -83,13 +83,13 @@ Perluasan langsung admin panel Filament yang sudah ada — semua path relatif ke
 
 ### Tests for User Story 2
 
-- [ ] T013 [P] [US2] Feature test: admin bisa membuat produk baru (field wajib terisi) dan langsung muncul di `/produk`; slug kosong auto-generate dari nama, di `tests/Feature/Admin/ProductResourceTest.php`
-- [ ] T014 [P] [US2] Feature test: admin bisa mengedit produk, perubahan tercermin di `/produk/{slug}`; slug duplikat ditolak; submit tanpa field wajib (nama/kategori/harga) ditolak dengan pesan per field, di `tests/Feature/Admin/ProductResourceTest.php`
+- [X] T013 [P] [US2] Feature test: admin bisa membuat produk baru (field wajib terisi) dan langsung muncul di `/produk`; slug kosong auto-generate dari nama, di `tests/Feature/Admin/ProductResourceTest.php`
+- [X] T014 [P] [US2] Feature test: admin bisa mengedit produk, perubahan tercermin di `/produk/{slug}`; slug duplikat ditolak; submit tanpa field wajib (nama/kategori/harga) ditolak dengan pesan per field, di `tests/Feature/Admin/ProductResourceTest.php`
 
 ### Implementation for User Story 2
 
-- [ ] T015 [US2] Buat `app/Filament/Resources/ProductResource.php` + `Pages/{ListProducts,CreateProduct,EditProduct}.php` — form dasar: `name` TextInput (reactive → auto-fill slug), `slug` TextInput (unique, bisa di-override), `category_id` Select (opsi dari `Category::pluck('name','id')`, required), `short_description`/`description` Textarea, `price`/`strikethrough_price` TextInput numeric (depends on T005, T010)
-- [ ] T016 [US2] Tambahkan validasi & pesan error Filament untuk field wajib (`name`, `category_id`, `price`) dan slug unik (`ignoreRecord: true` saat edit) di `ProductResource` (FR-006, FR-007, FR-014; depends on T015)
+- [X] T015 [US2] Buat `app/Filament/Resources/ProductResource.php` + `Pages/{ListProducts,CreateProduct,EditProduct}.php` — form dasar: `name` TextInput (reactive → auto-fill slug), `slug` TextInput (unique, bisa di-override), `category_id` Select (opsi dari `Category::pluck('name','id')`, required), `short_description`/`description` Textarea, `price`/`strikethrough_price` TextInput numeric (depends on T005, T010)
+- [X] T016 [US2] Tambahkan validasi & pesan error Filament untuk field wajib (`name`, `category_id`, `price`) dan slug unik (`ignoreRecord: true` saat edit) di `ProductResource` (FR-006, FR-007, FR-014; depends on T015)
 
 **Checkpoint**: User Story 2 selesai — admin bisa kelola produk dasar penuh, bisa didemo/dirilis sebagai MVP bersama US1.
 
