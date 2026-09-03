@@ -105,14 +105,14 @@ Perluasan langsung admin panel Filament yang sudah ada — semua path relatif ke
 
 ### Tests for User Story 3
 
-- [ ] T017 [P] [US3] Feature test: admin upload beberapa gambar untuk satu produk, urutan tersimpan sesuai input; gambar pertama jadi cover di kartu `/produk`, di `tests/Feature/Admin/ProductResourceTest.php`
-- [ ] T018 [P] [US3] Feature test: `/produk/{slug}` untuk produk tanpa gambar sama sekali menampilkan placeholder wajar (bukan error/gambar rusak), di `tests/Feature/Pages/ProductPageTest.php` (perluas file yang sudah ada dari 002)
+- [X] T017 [P] [US3] Feature test: admin upload beberapa gambar untuk satu produk, urutan tersimpan sesuai input; gambar pertama jadi cover di kartu `/produk`, di `tests/Feature/Admin/ProductResourceTest.php`
+- [X] T018 [P] [US3] Feature test: `/produk/{slug}` untuk produk tanpa gambar sama sekali menampilkan placeholder wajar (bukan error/gambar rusak), di `tests/Feature/Pages/ProductPageTest.php` (perluas file yang sudah ada dari 002)
 
 ### Implementation for User Story 3
 
-- [ ] T019 [US3] Tambahkan `FileUpload::make('images')->multiple()->reorderable()->image()->disk('public')->directory('products')` ke form `ProductResource` (FR-010, FR-011, FR-015; depends on T015)
-- [ ] T020 [P] [US3] Update `resources/views/components/sections/product-card.blade.php`: render `<img>` dari `$product->images[0] ?? null` dengan fallback placeholder wajar saat kosong (menggantikan div placeholder statis dari 002)
-- [ ] T021 [P] [US3] Update `resources/views/pages/produk/show.blade.php`: render galeri penuh dari `$product->images` (gambar pertama sebagai showcase utama, sisanya sebagai thumbnail/galeri di bawahnya), fallback placeholder wajar saat kosong
+- [X] T019 [US3] Tambahkan `FileUpload::make('images')->multiple()->reorderable()->image()->disk('public')->directory('products')` ke form `ProductResource` (FR-010, FR-011, FR-015; depends on T015)
+- [X] T020 [P] [US3] Update `resources/views/components/sections/product-card.blade.php`: render `<img>` dari `$product->images[0] ?? null` dengan fallback placeholder wajar saat kosong (menggantikan div placeholder statis dari 002)
+- [X] T021 [P] [US3] Update `resources/views/pages/produk/show.blade.php`: render galeri penuh dari `$product->images` (gambar pertama sebagai showcase utama, sisanya sebagai thumbnail/galeri di bawahnya), fallback placeholder wajar saat kosong
 
 **Checkpoint**: User Story 3 selesai — galeri gambar berfungsi penuh dari admin sampai frontend publik, independen dari US4/US5.
 

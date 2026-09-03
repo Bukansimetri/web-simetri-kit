@@ -56,4 +56,14 @@ class ProductPageTest extends TestCase
 
         $response->assertNotFound();
     }
+
+    public function test_product_without_images_shows_placeholder(): void
+    {
+        $product = Product::factory()->create(['name' => 'Produk Tanpa Gambar', 'images' => []]);
+
+        $response = $this->get('/produk/'.$product->slug);
+
+        $response->assertOk();
+        $response->assertSee('data-product-image-placeholder', escape: false);
+    }
 }

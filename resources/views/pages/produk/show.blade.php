@@ -14,7 +14,32 @@
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-[80px] items-center">
-            <div class="relative bg-surface-container rounded-lg overflow-hidden h-[400px] md:h-[500px]"></div>
+            @php $images = $product->imageUrls(); @endphp
+            @if (count($images) > 0)
+                <div x-data="{ active: 0, images: {{ json_encode($images, JSON_UNESCAPED_SLASHES) }} }" class="flex flex-col gap-4">
+                    <div class="relative bg-surface-container rounded-lg overflow-hidden h-[400px] md:h-[500px]">
+                        <img :src="images[active]" alt="{{ $product->name }}" class="w-full h-full object-cover">
+                    </div>
+                    @if (count($images) > 1)
+                        <div class="flex gap-3 overflow-x-auto">
+                            <template x-for="(image, index) in images" :key="index">
+                                <button
+                                    type="button"
+                                    @click="active = index"
+                                    :class="active === index ? 'border-primary' : 'border-transparent'"
+                                    class="shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-colors"
+                                >
+                                    <img :src="image" class="w-full h-full object-cover">
+                                </button>
+                            </template>
+                        </div>
+                    @endif
+                </div>
+            @else
+                <div data-product-image-placeholder class="relative bg-surface-container rounded-lg overflow-hidden h-[400px] md:h-[500px] flex items-center justify-center text-outline">
+                    <span class="material-symbols-outlined text-6xl">image</span>
+                </div>
+            @endif
 
             <div class="flex flex-col gap-[24px]">
                 <h1 class="font-headline-xl text-headline-xl text-on-surface">{{ $product->name }}</h1>

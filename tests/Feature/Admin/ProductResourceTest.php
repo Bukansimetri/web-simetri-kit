@@ -8,6 +8,8 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -89,5 +91,39 @@ class ProductResourceTest extends TestCase
             ])
             ->call('create')
             ->assertHasFormErrors(['name', 'category_id', 'price']);
+    }
+
+    public function test_admin_can_upload_multiple_images_and_first_becomes_cover(): void
+    {
+        Storage::fake('public');
+        $user = User::factory()->create();
+        $category = Category::factory()->create();
+
+        $images = [
+            UploadedFile::fake()->image('satu.jpg'),
+            UploadedFile::fake()->image('dua.jpg'),
+            UploadedFile::fake()->image('tiga.jpg'),
+        ];
+
+        Livewire::actingAs($user)
+            ->test(CreateProduct::class)
+            ->fillForm([
+                'name' => 'Produk Galeri',
+                'category_id' => $category->id,
+                'short_description' => 'x',
+                'description' => 'x',
+                'price' => 1000,
+                'images' => $images,
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $product = Product::where('name', 'Produk Galeri')->first();
+
+        $this->assertCount(3, $product->images);
+
+        $response = $this->get('/produk/'.$product->slug);
+        $response->assertOk();
+        $response->assertSee($product->coverImageUrl(), escape: false);
     }
 }

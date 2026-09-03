@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Models\Category;
 use App\Models\Product;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -61,6 +62,18 @@ class ProductResource extends Resource
                             ->required(),
                     ])
                     ->columns(2),
+                Section::make('Galeri Gambar')
+                    ->description('Gambar pertama otomatis jadi sampul (cover) di kartu produk & daftar.')
+                    ->schema([
+                        FileUpload::make('images')
+                            ->label('Gambar Produk')
+                            ->image()
+                            ->multiple()
+                            ->reorderable()
+                            ->appendFiles()
+                            ->disk('public')
+                            ->directory('products'),
+                    ]),
                 Section::make('Deskripsi')
                     ->schema([
                         Textarea::make('short_description')
