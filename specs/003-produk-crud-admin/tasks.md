@@ -165,10 +165,10 @@ Perluasan langsung admin panel Filament yang sudah ada — semua path relatif ke
 
 **Purpose**: Verifikasi akhir lintas story sebelum dianggap selesai.
 
-- [ ] T029 [P] Jalankan `vendor/bin/pint --dirty --format agent` untuk merapikan seluruh file PHP yang diubah
-- [ ] T030 Jalankan test yang relevan: `php artisan test --compact --filter=CategoryResourceTest`, `--filter=ProductResourceTest`, `--filter=ProductPageTest`
-- [ ] T031 Jalankan `php artisan test --compact` penuh untuk memastikan tidak ada regresi ke test lain (termasuk 001-epic2-cleanup dan 002-theme-branding-system)
-- [ ] T032 `php artisan migrate:fresh --seed` di lokal untuk memastikan migration + seeder baru jalan bersih dari kosong; `npm run build` untuk memastikan asset tetap valid
+- [X] T029 [P] Jalankan `vendor/bin/pint --dirty --format agent` untuk merapikan seluruh file PHP yang diubah
+- [X] T030 Jalankan test yang relevan: `php artisan test --compact --filter=CategoryResourceTest`, `--filter=ProductResourceTest`, `--filter=ProductPageTest`
+- [X] T031 Jalankan `php artisan test --compact` penuh untuk memastikan tidak ada regresi ke test lain (termasuk 001-epic2-cleanup dan 002-theme-branding-system)
+- [X] T032 `php artisan migrate:fresh --seed` di lokal untuk memastikan migration + seeder baru jalan bersih dari kosong; `npm run build` untuk memastikan asset tetap valid
 - [ ] T033 Ikuti langkah verifikasi manual di [quickstart.md](./quickstart.md) untuk kelima user story
 
 ---
