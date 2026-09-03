@@ -66,10 +66,10 @@
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <tbody>
-                            @foreach ($product->specs as $label => $value)
+                            @foreach ($product->specs as $spec)
                                 <tr class="border-b border-outline-variant/20">
-                                    <th class="py-[12px] font-label-bold text-label-bold text-on-surface-variant w-1/3">{{ $label }}</th>
-                                    <td class="py-[12px] font-body-md text-body-md text-on-surface">{{ $value }}</td>
+                                    <th class="py-[12px] font-label-bold text-label-bold text-on-surface-variant w-1/3">{{ $spec['label'] }}</th>
+                                    <td class="py-[12px] font-body-md text-body-md text-on-surface">{{ $spec['value'] }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

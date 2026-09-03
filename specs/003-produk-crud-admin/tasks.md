@@ -128,12 +128,12 @@ Perluasan langsung admin panel Filament yang sudah ada — semua path relatif ke
 
 ### Tests for User Story 4
 
-- [ ] T022 [P] [US4] Feature test: admin menambah beberapa baris specs (label+value) dan features (icon+title+description) lewat repeater, tersimpan dan tampil di `/produk/{slug}` sesuai urutan; baris yang dihapus sebelum simpan tidak ikut tersimpan, di `tests/Feature/Admin/ProductResourceTest.php`
+- [X] T022 [P] [US4] Feature test: admin menambah beberapa baris specs (label+value) dan features (icon+title+description) lewat repeater, tersimpan dan tampil di `/produk/{slug}` sesuai urutan; baris yang dihapus sebelum simpan tidak ikut tersimpan, di `tests/Feature/Admin/ProductResourceTest.php`
 
 ### Implementation for User Story 4
 
-- [ ] T023 [US4] Tambahkan `Repeater::make('specs')` (sub-field `label`, `value` — keduanya TextInput) ke form `ProductResource`, mapping ke struktur JSON yang sudah dikonsumsi `produk/show.blade.php` dari 002 (FR-012; depends on T015)
-- [ ] T024 [US4] Tambahkan `Repeater::make('features')` (sub-field `icon` TextInput/Select ikon Material Symbols, `title` TextInput, `description` Textarea) ke form `ProductResource`, mapping ke struktur JSON yang sama (FR-012; depends on T015)
+- [X] T023 [US4] Tambahkan `Repeater::make('specs')` (sub-field `label`, `value` — keduanya TextInput) ke form `ProductResource`, mapping ke struktur JSON yang sudah dikonsumsi `produk/show.blade.php` dari 002 (FR-012; depends on T015)
+- [X] T024 [US4] Tambahkan `Repeater::make('features')` (sub-field `icon` TextInput/Select ikon Material Symbols, `title` TextInput, `description` Textarea) ke form `ProductResource`, mapping ke struktur JSON yang sama (FR-012; depends on T015)
 
 **Checkpoint**: User Story 4 selesai — spesifikasi & fitur unggulan bisa dikelola penuh dari admin, independen dari US5.
 

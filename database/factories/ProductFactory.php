@@ -25,7 +25,7 @@ class ProductFactory extends Factory
             'price' => fake()->numberBetween(1_000_000, 20_000_000),
             'strikethrough_price' => null,
             'images' => [],
-            'specs' => ['Daya Maksimum (Pmax)' => '550W'],
+            'specs' => [['label' => 'Daya Maksimum (Pmax)', 'value' => '550W']],
             'features' => [
                 ['icon' => 'bolt', 'title' => 'Efisiensi Maksimal', 'description' => fake()->sentence()],
             ],

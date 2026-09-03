@@ -126,4 +126,40 @@ class ProductResourceTest extends TestCase
         $response->assertOk();
         $response->assertSee($product->coverImageUrl(), escape: false);
     }
+
+    public function test_admin_can_manage_specs_and_features_via_repeater(): void
+    {
+        $user = User::factory()->create();
+        $category = Category::factory()->create();
+
+        Livewire::actingAs($user)
+            ->test(CreateProduct::class)
+            ->fillForm([
+                'name' => 'Produk Specs',
+                'category_id' => $category->id,
+                'short_description' => 'x',
+                'description' => 'x',
+                'price' => 1000,
+                'specs' => [
+                    ['label' => 'Daya Maksimum', 'value' => '550W'],
+                    ['label' => 'Efisiensi', 'value' => '21%'],
+                ],
+                'features' => [
+                    ['icon' => 'bolt', 'title' => 'Efisien', 'description' => 'Hemat listrik'],
+                ],
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $product = Product::where('name', 'Produk Specs')->first();
+
+        $this->assertCount(2, $product->specs);
+        $this->assertCount(1, $product->features);
+
+        $response = $this->get('/produk/'.$product->slug);
+        $response->assertOk();
+        $response->assertSee('Daya Maksimum', escape: false);
+        $response->assertSee('550W', escape: false);
+        $response->assertSee('Efisien', escape: false);
+    }
 }

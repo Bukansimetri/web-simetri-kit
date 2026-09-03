@@ -6,6 +6,7 @@ use App\Filament\Resources\ProductResource\Pages;
 use App\Models\Category;
 use App\Models\Product;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -100,6 +101,47 @@ class ProductResource extends Resource
                             ->prefix('Rp'),
                     ])
                     ->columns(2),
+                Section::make('Spesifikasi Teknis')
+                    ->description('Baris bebas ditambah/dihapus sesuai kebutuhan — ditampilkan sebagai tabel di halaman detail produk.')
+                    ->schema([
+                        Repeater::make('specs')
+                            ->label('')
+                            ->schema([
+                                TextInput::make('label')
+                                    ->label('Label')
+                                    ->required(),
+                                TextInput::make('value')
+                                    ->label('Nilai')
+                                    ->required(),
+                            ])
+                            ->columns(2)
+                            ->addActionLabel('Tambah Spesifikasi')
+                            ->defaultItems(0)
+                            ->reorderable(),
+                    ]),
+                Section::make('Fitur Unggulan')
+                    ->description('Baris bebas ditambah/dihapus sesuai kebutuhan — ditampilkan sebagai kartu fitur di halaman detail produk.')
+                    ->schema([
+                        Repeater::make('features')
+                            ->label('')
+                            ->schema([
+                                TextInput::make('icon')
+                                    ->label('Icon (nama Material Symbols)')
+                                    ->helperText('Mis. bolt, shield, verified — lihat fonts.google.com/icons')
+                                    ->required(),
+                                TextInput::make('title')
+                                    ->label('Judul')
+                                    ->required(),
+                                Textarea::make('description')
+                                    ->label('Deskripsi')
+                                    ->required()
+                                    ->rows(2),
+                            ])
+                            ->columns(1)
+                            ->addActionLabel('Tambah Fitur')
+                            ->defaultItems(0)
+                            ->reorderable(),
+                    ]),
             ]);
     }
 

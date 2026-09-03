@@ -143,6 +143,14 @@ class ProductSeeder extends Seeder
         foreach ($products as $order => $product) {
             $category = Category::query()->where('name', $product['category_name'])->first();
 
+            // Data literal di atas ditulis asosiatif (label => value) supaya ringkas
+            // dibaca; dikonversi ke format list {label, value} yang dipakai kolom
+            // `specs` (sesuai output Repeater ProductResource — lihat data-model.md).
+            $specs = collect($product['specs'])
+                ->map(fn (string $value, string $label) => ['label' => $label, 'value' => $value])
+                ->values()
+                ->all();
+
             Product::query()->updateOrCreate(
                 ['slug' => Str::slug($product['name'])],
                 [
@@ -153,7 +161,7 @@ class ProductSeeder extends Seeder
                     'price' => $product['price'],
                     'strikethrough_price' => $product['strikethrough_price'],
                     'images' => [],
-                    'specs' => $product['specs'],
+                    'specs' => $specs,
                     'features' => $product['features'],
                     'order' => $order,
                 ]
