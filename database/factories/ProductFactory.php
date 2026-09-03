@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -18,12 +19,12 @@ class ProductFactory extends Factory
         return [
             'slug' => Str::slug($name).'-'.fake()->unique()->numberBetween(1, 100000),
             'name' => $name,
-            'category' => fake()->randomElement(['residensial', 'komersial', 'pompa-air']),
+            'category_id' => Category::factory(),
             'short_description' => fake()->sentence(),
             'description' => fake()->paragraph(),
             'price' => fake()->numberBetween(1_000_000, 20_000_000),
             'strikethrough_price' => null,
-            'image_path' => 'products/placeholder.jpg',
+            'images' => [],
             'specs' => ['Daya Maksimum (Pmax)' => '550W'],
             'features' => [
                 ['icon' => 'bolt', 'title' => 'Efisiensi Maksimal', 'description' => fake()->sentence()],

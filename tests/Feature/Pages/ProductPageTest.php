@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Pages;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -25,17 +26,20 @@ class ProductPageTest extends TestCase
 
     public function test_product_show_displays_detail_and_related_products_from_same_category(): void
     {
+        $residensial = Category::factory()->create(['name' => 'Residensial']);
+        $komersial = Category::factory()->create(['name' => 'Komersial & Industri']);
+
         $product = Product::factory()->create([
             'name' => 'Panel Surya Monokristalin 550W',
-            'category' => 'residensial',
+            'category_id' => $residensial->id,
         ]);
         $related = Product::factory()->create([
             'name' => 'Panel Surya Residensial Lain',
-            'category' => 'residensial',
+            'category_id' => $residensial->id,
         ]);
         Product::factory()->create([
             'name' => 'Produk Komersial',
-            'category' => 'komersial',
+            'category_id' => $komersial->id,
         ]);
 
         $response = $this->get('/produk/'.$product->slug);

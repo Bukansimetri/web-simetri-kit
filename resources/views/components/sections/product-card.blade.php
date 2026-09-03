@@ -4,7 +4,7 @@
     <div class="aspect-video w-full rounded-lg overflow-hidden mb-6 bg-surface-container"></div>
 
     <span class="self-start bg-surface-variant text-on-surface-variant px-3 py-1 rounded-full font-label-bold text-label-bold uppercase tracking-wider text-[11px] mb-4">
-        {{ str($product->category)->replace('-', ' ')->title() }}
+        {{ $product->category->name }}
     </span>
 
     <h3 class="font-headline-lg text-headline-lg text-primary-container mb-3">{{ $product->name }}</h3>

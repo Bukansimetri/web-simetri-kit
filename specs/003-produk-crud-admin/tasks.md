@@ -29,7 +29,7 @@ Perluasan langsung admin panel Filament yang sudah ada — semua path relatif ke
 
 **Purpose**: Verifikasi baseline sebelum perubahan dimulai.
 
-- [ ] T001 Jalankan `vendor/bin/pint --format agent` dan `php artisan test --compact` untuk memastikan baseline hijau sebelum mulai (tidak ada file diubah di task ini)
+- [X] T001 Jalankan `vendor/bin/pint --format agent` dan `php artisan test --compact` untuk memastikan baseline hijau sebelum mulai (tidak ada file diubah di task ini)
 
 **Checkpoint**: Baseline project terverifikasi bersih sebelum perubahan dimulai.
 
@@ -41,12 +41,12 @@ Perluasan langsung admin panel Filament yang sudah ada — semua path relatif ke
 
 **⚠️ CRITICAL**: T002–T007 harus selesai sebelum task apa pun di Phase 3–7 (US1–US5) dimulai.
 
-- [ ] T002 Buat migration `database/migrations/xxxx_create_categories_table.php` (kolom `name` unique, `order` default 0, timestamps) sesuai [data-model.md](./data-model.md#category-baru)
-- [ ] T003 Buat model & factory `app/Models/Category.php` + `database/factories/CategoryFactory.php` (relasi `hasMany(Product::class)`)
-- [ ] T004 Buat migration `database/migrations/xxxx_update_products_table_for_category_and_gallery.php`: tambah `category_id` (FK nullable dulu → `restrictOnDelete()`), tambah `images` (json, default `[]`); backfill `Category` dari nilai unik `products.category` existing lalu isi `category_id`; ubah `category_id` jadi `NOT NULL`; drop kolom `category` (string) dan `image_path` (lihat research.md §3 untuk urutan aman)
-- [ ] T005 Update `app/Models/Product.php`: tambah relasi `belongsTo(Category::class)`, cast `images` sebagai `array`, hapus referensi ke kolom `category`/`image_path` yang sudah di-drop
-- [ ] T006 Buat `database/seeders/CategorySeeder.php` (3 kategori: Residensial, Komersial & Industri, Pompa Air) dan daftarkan di `DatabaseSeeder` SEBELUM `ProductSeeder`
-- [ ] T007 Update `database/seeders/ProductSeeder.php` dan `database/factories/ProductFactory.php`: ganti `category` (string) jadi `category_id` (lookup/factory relasi ke `Category`), ganti `image_path` jadi `images` (array minimal 1 path placeholder)
+- [X] T002 Buat migration `database/migrations/xxxx_create_categories_table.php` (kolom `name` unique, `order` default 0, timestamps) sesuai [data-model.md](./data-model.md#category-baru)
+- [X] T003 Buat model & factory `app/Models/Category.php` + `database/factories/CategoryFactory.php` (relasi `hasMany(Product::class)`)
+- [X] T004 Buat migration `database/migrations/xxxx_update_products_table_for_category_and_gallery.php`: tambah `category_id` (FK nullable dulu → `restrictOnDelete()`), tambah `images` (json, default `[]`); backfill `Category` dari nilai unik `products.category` existing lalu isi `category_id`; ubah `category_id` jadi `NOT NULL`; drop kolom `category` (string) dan `image_path` (lihat research.md §3 untuk urutan aman)
+- [X] T005 Update `app/Models/Product.php`: tambah relasi `belongsTo(Category::class)`, cast `images` sebagai `array`, hapus referensi ke kolom `category`/`image_path` yang sudah di-drop
+- [X] T006 Buat `database/seeders/CategorySeeder.php` (3 kategori: Residensial, Komersial & Industri, Pompa Air) dan daftarkan di `DatabaseSeeder` SEBELUM `ProductSeeder`
+- [X] T007 Update `database/seeders/ProductSeeder.php` dan `database/factories/ProductFactory.php`: ganti `category` (string) jadi `category_id` (lookup/factory relasi ke `Category`), ganti `image_path` jadi `images` (array minimal 1 path placeholder)
 
 **Checkpoint**: Skema `categories`/`products` siap, data existing ter-migrasi — US1–US5 bisa mulai dikerjakan.
 

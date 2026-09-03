@@ -18,7 +18,7 @@ class ProductController extends Controller
     public function show(Product $product): View
     {
         $relatedProducts = Product::query()
-            ->where('category', $product->category)
+            ->where('category_id', $product->category_id)
             ->whereKeyNot($product->getKey())
             ->orderBy('order')
             ->take(3)
