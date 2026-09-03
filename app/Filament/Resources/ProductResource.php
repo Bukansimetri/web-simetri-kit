@@ -61,6 +61,12 @@ class ProductResource extends Resource
                             ->relationship('category', 'name')
                             ->options(fn () => Category::orderBy('order')->pluck('name', 'id'))
                             ->required(),
+                        TextInput::make('order')
+                            ->label('Urutan Tampil')
+                            ->numeric()
+                            ->default(0)
+                            ->required()
+                            ->helperText('Angka lebih kecil tampil lebih dulu di daftar Produk & section "Produk Kami" Home.'),
                     ])
                     ->columns(2),
                 Section::make('Galeri Gambar')

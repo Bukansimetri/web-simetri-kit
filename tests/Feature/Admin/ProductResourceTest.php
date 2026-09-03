@@ -4,6 +4,7 @@ namespace Tests\Feature\Admin;
 
 use App\Filament\Resources\ProductResource\Pages\CreateProduct;
 use App\Filament\Resources\ProductResource\Pages\EditProduct;
+use App\Filament\Resources\ProductResource\Pages\ListProducts;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
@@ -161,5 +162,39 @@ class ProductResourceTest extends TestCase
         $response->assertSee('Daya Maksimum', escape: false);
         $response->assertSee('550W', escape: false);
         $response->assertSee('Efisien', escape: false);
+    }
+
+    public function test_changing_order_affects_public_listing_order(): void
+    {
+        $category = Category::factory()->create();
+        $first = Product::factory()->create(['name' => 'Produk Pertama', 'order' => 0, 'category_id' => $category->id]);
+        $second = Product::factory()->create(['name' => 'Produk Kedua', 'order' => 1, 'category_id' => $category->id]);
+
+        $user = User::factory()->create();
+        Livewire::actingAs($user)
+            ->test(EditProduct::class, ['record' => $first->getRouteKey()])
+            ->fillForm(['order' => 5])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $response = $this->get('/produk');
+        $response->assertOk();
+        $response->assertSeeInOrder(['Produk Kedua', 'Produk Pertama'], escape: false);
+    }
+
+    public function test_admin_can_delete_product_and_old_slug_returns_404(): void
+    {
+        $category = Category::factory()->create();
+        $product = Product::factory()->create(['category_id' => $category->id]);
+        $slug = $product->slug;
+
+        $user = User::factory()->create();
+        Livewire::actingAs($user)
+            ->test(ListProducts::class)
+            ->callTableAction('delete', $product);
+
+        $this->assertDatabaseMissing('products', ['id' => $product->id]);
+        $this->get('/produk/'.$slug)->assertNotFound();
+        $this->get('/produk')->assertOk()->assertDontSee($product->name, escape: false);
     }
 }

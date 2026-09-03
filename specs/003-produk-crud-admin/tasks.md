@@ -149,13 +149,13 @@ Perluasan langsung admin panel Filament yang sudah ada — semua path relatif ke
 
 ### Tests for User Story 5
 
-- [ ] T025 [P] [US5] Feature test: perubahan `order` di admin mengubah urutan tampil di `/produk` dan section "Produk Kami" Home, di `tests/Feature/Admin/ProductResourceTest.php`
-- [ ] T026 [P] [US5] Feature test: hapus produk (via admin) membuat produk hilang dari `/produk`/Home dan `/produk/{slug-lama}` mengembalikan 404, di `tests/Feature/Admin/ProductResourceTest.php`
+- [X] T025 [P] [US5] Feature test: perubahan `order` di admin mengubah urutan tampil di `/produk` dan section "Produk Kami" Home, di `tests/Feature/Admin/ProductResourceTest.php`
+- [X] T026 [P] [US5] Feature test: hapus produk (via admin) membuat produk hilang dari `/produk`/Home dan `/produk/{slug-lama}` mengembalikan 404, di `tests/Feature/Admin/ProductResourceTest.php`
 
 ### Implementation for User Story 5
 
-- [ ] T027 [US5] Tambahkan kolom `order` (numeric input, sortable di table) ke form & table `ProductResource`; pastikan table admin default terurut berdasarkan `order` (FR-013; depends on T015)
-- [ ] T028 [US5] Pastikan `DeleteAction`/`DeleteBulkAction` bawaan Filament di `ProductResource` menampilkan dialog konfirmasi (default Filament sudah begitu — verifikasi & sesuaikan pesan konfirmasi bila perlu) (FR-009; depends on T015)
+- [X] T027 [US5] Tambahkan kolom `order` (numeric input, sortable di table) ke form & table `ProductResource`; pastikan table admin default terurut berdasarkan `order` (FR-013; depends on T015)
+- [X] T028 [US5] Pastikan `DeleteAction`/`DeleteBulkAction` bawaan Filament di `ProductResource` menampilkan dialog konfirmasi (default Filament sudah begitu — verifikasi & sesuaikan pesan konfirmasi bila perlu) (FR-009; depends on T015)
 
 **Checkpoint**: User Story 5 selesai — seluruh scope AMC-207 (kategori, produk dasar, galeri, specs/fitur, urutan & hapus) lengkap.
 
