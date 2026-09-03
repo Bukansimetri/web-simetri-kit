@@ -21,10 +21,37 @@
         @if ($products->isEmpty())
             <p class="text-on-surface-variant">Produk belum tersedia saat ini.</p>
         @else
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-                @foreach ($products as $product)
-                    <x-sections.product-card :product="$product" />
-                @endforeach
+            <div x-data="{ activeCategory: 'all' }">
+                @if ($categories->isNotEmpty())
+                    <div class="flex flex-wrap gap-3 mb-10">
+                        <button
+                            type="button"
+                            @click="activeCategory = 'all'"
+                            :class="activeCategory === 'all' ? 'bg-primary text-white' : 'bg-transparent border border-outline text-on-surface hover:bg-surface-variant'"
+                            class="px-5 py-2 font-label-bold text-label-bold rounded-lg transition-colors"
+                        >
+                            Semua
+                        </button>
+                        @foreach ($categories as $category)
+                            <button
+                                type="button"
+                                @click="activeCategory = '{{ $category->id }}'"
+                                :class="activeCategory === '{{ $category->id }}' ? 'bg-primary text-white' : 'bg-transparent border border-outline text-on-surface hover:bg-surface-variant'"
+                                class="px-5 py-2 font-label-bold text-label-bold rounded-lg transition-colors"
+                            >
+                                {{ $category->name }}
+                            </button>
+                        @endforeach
+                    </div>
+                @endif
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+                    @foreach ($products as $product)
+                        <div x-show="activeCategory === 'all' || activeCategory === '{{ $product->category_id }}'">
+                            <x-sections.product-card :product="$product" />
+                        </div>
+                    @endforeach
+                </div>
             </div>
         @endif
     </main>

@@ -60,14 +60,14 @@ Perluasan langsung admin panel Filament yang sudah ada — semua path relatif ke
 
 ### Tests for User Story 1
 
-- [ ] T008 [P] [US1] Feature test: admin bisa membuat, mengedit kategori; nama duplikat ditolak dengan error jelas, di `tests/Feature/Admin/CategoryResourceTest.php`
-- [ ] T009 [P] [US1] Feature test: hapus kategori yang masih dipakai produk ditolak dengan notifikasi jelas (record tidak terhapus); kategori tanpa produk berhasil dihapus, di `tests/Feature/Admin/CategoryResourceTest.php`
+- [X] T008 [P] [US1] Feature test: admin bisa membuat, mengedit kategori; nama duplikat ditolak dengan error jelas, di `tests/Feature/Admin/CategoryResourceTest.php`
+- [X] T009 [P] [US1] Feature test: hapus kategori yang masih dipakai produk ditolak dengan notifikasi jelas (record tidak terhapus); kategori tanpa produk berhasil dihapus, di `tests/Feature/Admin/CategoryResourceTest.php`
 
 ### Implementation for User Story 1
 
-- [ ] T010 [US1] Buat `app/Filament/Resources/CategoryResource.php` + `Pages/{ListCategories,CreateCategory,EditCategory}.php` (form: `name` TextInput unique, `order` numeric input; table: kolom `name`, `order`, jumlah produk)
-- [ ] T011 [US1] Tambahkan guard hapus di `CategoryResource`: `DeleteAction`/`DeleteBulkAction` dengan `->before()` cek `products()->count() > 0`, batalkan + `Notification::make()->danger()` kalau masih dipakai (FR-004; depends on T010)
-- [ ] T012 [US1] Sesuaikan tab filter kategori di `resources/views/pages/produk/index.blade.php` supaya mengambil daftar dari `Category::orderBy('order')->get()` (bukan 4 tombol hardcode `Semua/Residensial/Komersial & Industri/Pompa Air`) — controller `ProductController@index` meneruskan `$categories` ke view (depends on T010; lihat FR-002 "urutan tab filter mengikuti `order`")
+- [X] T010 [US1] Buat `app/Filament/Resources/CategoryResource.php` + `Pages/{ListCategories,CreateCategory,EditCategory}.php` (form: `name` TextInput unique, `order` numeric input; table: kolom `name`, `order`, jumlah produk)
+- [X] T011 [US1] Tambahkan guard hapus di `CategoryResource`: `DeleteAction`/`DeleteBulkAction` dengan `->before()` cek `products()->count() > 0`, batalkan + `Notification::make()->danger()` kalau masih dipakai (FR-004; depends on T010)
+- [X] T012 [US1] Sesuaikan tab filter kategori di `resources/views/pages/produk/index.blade.php` supaya mengambil daftar dari `Category::orderBy('order')->get()` (bukan 4 tombol hardcode `Semua/Residensial/Komersial & Industri/Pompa Air`) — controller `ProductController@index` meneruskan `$categories` ke view (depends on T010; lihat FR-002 "urutan tab filter mengikuti `order`")
 
 **Checkpoint**: User Story 1 selesai — kategori bisa dikelola penuh via admin, independen dari US2–US5.
 
