@@ -75,14 +75,14 @@
 
 ### Tests for User Story 2 ⚠️
 
-- [ ] T017 [P] [US2] Feature test in `tests/Feature/Admin/ArticleResourceTest.php` — create article with required fields (title, excerpt, content, article_category_id) succeeds; slug auto-generates from title when left blank; manual slug override is respected; duplicate slug is rejected; missing required field is rejected with a field-level error; edit updates the record (route-key gotcha: pass `$article->getRouteKey()`, not `getKey()`, per 003/004 convention)
+- [X] T017 [P] [US2] Feature test in `tests/Feature/Admin/ArticleResourceTest.php` — create article with required fields (title, excerpt, content, article_category_id) succeeds; slug auto-generates from title when left blank; manual slug override is respected; duplicate slug is rejected; missing required field is rejected with a field-level error; edit updates the record (route-key gotcha: pass `$article->getRouteKey()`, not `getKey()`, per 003/004 convention)
 
 ### Implementation for User Story 2
 
-- [ ] T018 [US2] Generate resource: `php artisan make:filament-resource Article --no-interaction` (creates `app/Filament/Resources/ArticleResource.php` + `Pages/{ListArticles,CreateArticle,EditArticle}.php`)
-- [ ] T019 [US2] Implement `form()` in `app/Filament/Resources/ArticleResource.php` — `TextInput::make('title')->required()->live(onBlur: true)->afterStateUpdated(...)` to auto-fill `slug` via `Str::slug()`, `TextInput::make('slug')->required()->unique(ignoreRecord: true)`, `Select::make('article_category_id')->relationship('articleCategory', 'name')->required()`, `Textarea::make('excerpt')->required()`, `RichEditor::make('content')->required()`, `TextInput::make('redaksi')` (optional, FR-022)
-- [ ] T020 [US2] Implement `table()` in `app/Filament/Resources/ArticleResource.php` — columns `title`, `articleCategory.name`, `published_at`, row actions Edit/Delete with confirmation (FR-008)
-- [ ] T021 [US2] Update `resources/views/pages/artikel/show.blade.php` — render `content` as raw HTML (`{!! $article->content !!}`) instead of `explode("\n", ...)`, and display `redaksi` as a byline near the title/date (FR-019, FR-022)
+- [X] T018 [US2] Generate resource: `php artisan make:filament-resource Article --no-interaction` (creates `app/Filament/Resources/ArticleResource.php` + `Pages/{ListArticles,CreateArticle,EditArticle}.php`)
+- [X] T019 [US2] Implement `form()` in `app/Filament/Resources/ArticleResource.php` — `TextInput::make('title')->required()->live(onBlur: true)->afterStateUpdated(...)` to auto-fill `slug` via `Str::slug()`, `TextInput::make('slug')->required()->unique(ignoreRecord: true)`, `Select::make('article_category_id')->relationship('articleCategory', 'name')->required()`, `Textarea::make('excerpt')->required()`, `RichEditor::make('content')->required()`, `TextInput::make('redaksi')` (optional, FR-022)
+- [X] T020 [US2] Implement `table()` in `app/Filament/Resources/ArticleResource.php` — columns `title`, `articleCategory.name`, `published_at`, row actions Edit/Delete with confirmation (FR-008)
+- [X] T021 [US2] Update `resources/views/pages/artikel/show.blade.php` — render `content` as raw HTML (`{!! $article->content !!}`) instead of `explode("\n", ...)`, and display `redaksi` as a byline near the title/date (FR-019, FR-022)
 
 **Checkpoint**: User Stories 1 AND 2 both work independently; MVP is deliverable at this point.
 
@@ -96,13 +96,13 @@
 
 ### Tests for User Story 3 ⚠️
 
-- [ ] T022 [P] [US3] Feature test in `tests/Feature/Public/ArticleVisibilityTest.php` — article with `published_at = null` (Draft) is absent from `/artikel` and 404s on `/artikel/{slug}`; article with `published_at` in the future (Scheduled) is absent from `/artikel` and 404s on direct access; article with `published_at <= now()` is visible on both
+- [X] T022 [P] [US3] Feature test in `tests/Feature/Public/ArticleVisibilityTest.php` — article with `published_at = null` (Draft) is absent from `/artikel` and 404s on `/artikel/{slug}`; article with `published_at` in the future (Scheduled) is absent from `/artikel` and 404s on direct access; article with `published_at <= now()` is visible on both
 
 ### Implementation for User Story 3
 
-- [ ] T023 [US3] Add a status control to `form()` in `app/Filament/Resources/ArticleResource.php` — e.g. `Radio::make('publish_status')` (Draft / Publish now / Schedule) as a non-persisted form field, plus `DateTimePicker::make('published_at')` shown only for Schedule, with `mutateFormDataBeforeCreate()`/`mutateFormDataBeforeSave()` translating the choice into `published_at` (`null` for Draft, `now()` for Publish now, the picked datetime for Schedule) — data-model.md § Status turunan
-- [ ] T024 [US3] Fix `app/Http/Controllers/Public/ArticleController.php@index` — add `->where('published_at', '<=', now())` to the existing `whereNotNull('published_at')` query, closing the FR-010 gap identified in research.md §2
-- [ ] T025 [US3] Update `app/Http/Controllers/Public/ArticleController.php@show` — return 404 (via `abort(404)`) when the resolved `Article`'s `published_at` is null or in the future, instead of always rendering
+- [X] T023 [US3] Add a status control to `form()` in `app/Filament/Resources/ArticleResource.php` — `Radio::make('publish_status')` (Draft / Publish now / Schedule) plus `DateTimePicker::make('published_at')` shown only for Schedule, with `mutatePublishStatus()` (called from `mutateFormDataBeforeCreate()`/`mutateFormDataBeforeSave()`) translating the choice into `published_at` (`null` for Draft, `now()` for Publish now, the picked datetime for Schedule) — data-model.md § Status turunan
+- [X] T024 [US3] Fix `app/Http/Controllers/Public/ArticleController.php@index` — add `->where('published_at', '<=', now())` to the existing `whereNotNull('published_at')` query, closing the FR-010 gap identified in research.md §2
+- [X] T025 [US3] Update `app/Http/Controllers/Public/ArticleController.php@show` — return 404 (via `abort_unless($article->isPublished(), 404)`) when the resolved `Article`'s `published_at` is null or in the future, instead of always rendering
 
 **Checkpoint**: User Stories 1, 2, and 3 all independently functional — draft/schedule/publish semantics fully enforced.
 
