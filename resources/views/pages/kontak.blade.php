@@ -44,10 +44,13 @@
             </div>
         </div>
 
-        {{-- Form Kontak (FR-007: validasi client-side saja, tanpa submit sungguhan) --}}
+        {{-- Form Kontak (AMC-216: submit sungguhan ke POST /kontak) --}}
         <div
             x-data="{
                 submitted: false,
+                submitting: false,
+                whatsappUrl: null,
+                serverError: null,
                 errors: {},
                 form: { nama: '', phone: '', kebutuhan: '', pesan: '' },
                 validate() {
@@ -57,9 +60,61 @@
                     if (! this.form.pesan.trim()) this.errors.pesan = 'Pesan tidak boleh kosong.';
                     return Object.keys(this.errors).length === 0;
                 },
-                submit() {
-                    if (this.validate()) {
+                async submit() {
+                    this.serverError = null;
+
+                    if (! this.validate()) {
+                        return;
+                    }
+
+                    this.submitting = true;
+
+                    try {
+                        const response = await fetch('{{ route('kontak.store') }}', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name=\"csrf-token\"]').content,
+                            },
+                            body: JSON.stringify({
+                                nama: this.form.nama,
+                                phone: this.form.phone,
+                                kebutuhan: this.form.kebutuhan,
+                                pesan: this.form.pesan,
+                            }),
+                        });
+
+                        const data = await response.json();
+
+                        if (response.status === 422) {
+                            this.errors = {
+                                nama: data.errors?.nama?.[0],
+                                phone: data.errors?.phone?.[0],
+                                pesan: data.errors?.pesan?.[0],
+                            };
+
+                            return;
+                        }
+
+                        if (! response.ok) {
+                            this.serverError = 'Terjadi kesalahan. Silakan coba lagi beberapa saat lagi.';
+
+                            return;
+                        }
+
                         this.submitted = true;
+                        this.whatsappUrl = data.whatsapp_url;
+
+                        // Buka WhatsApp otomatis (FR-012) — tombol fallback tetap
+                        // ditampilkan di bawah untuk kasus pop-up diblokir browser.
+                        if (this.whatsappUrl) {
+                            window.open(this.whatsappUrl, '_blank');
+                        }
+                    } catch (e) {
+                        this.serverError = 'Tidak dapat terhubung ke server. Periksa koneksi internet Anda.';
+                    } finally {
+                        this.submitting = false;
                     }
                 },
             }"
@@ -72,8 +127,15 @@
                     <span class="material-symbols-outlined text-3xl mb-2">check_circle</span>
                     <p class="font-semibold">Terima kasih! Pesan Anda telah kami terima.</p>
                     <p class="font-body-sm text-body-sm mt-1">Tim kami akan segera menghubungi Anda kembali.</p>
+                    <template x-if="whatsappUrl">
+                        <a :href="whatsappUrl" target="_blank" class="inline-flex items-center gap-2 mt-4 bg-primary text-white px-6 py-3 rounded-lg font-semibold">
+                            <span class="material-symbols-outlined">chat</span> Buka WhatsApp
+                        </a>
+                    </template>
                 </div>
             </template>
+
+            <p x-show="serverError" x-cloak x-text="serverError" class="text-sm text-error font-medium mb-4"></p>
 
             <form @submit.prevent="submit()" x-show="! submitted" class="space-y-6">
                 <div>
@@ -117,8 +179,14 @@
                     <p x-show="errors.pesan" x-cloak x-text="errors.pesan" class="text-sm text-error mt-1"></p>
                 </div>
 
-                <button type="submit" class="btn-fill w-full bg-primary-container text-white font-bold py-4 rounded-lg hover:shadow-md transition-all">
-                    Kirim Pesan
+                <button
+                    type="submit"
+                    :disabled="submitting"
+                    :class="submitting && 'opacity-60 cursor-not-allowed'"
+                    class="btn-fill w-full bg-primary-container text-white font-bold py-4 rounded-lg hover:shadow-md transition-all"
+                >
+                    <span x-show="! submitting">Kirim Pesan</span>
+                    <span x-show="submitting" x-cloak>Mengirim...</span>
                 </button>
             </form>
         </div>

@@ -41,3 +41,11 @@
 **Rationale**: Mempertahankan UX "tanpa reload halaman penuh" (FR-003) yang sudah dibangun di 002 — perubahan minimal, hanya mengganti simulasi lokal dengan request sungguhan ke server.
 
 **Alternatives considered**: Livewire component — ditolak, menambah overhead Livewire untuk satu form sederhana yang sudah berfungsi baik dengan Alpine + fetch (konsisten dengan keputusan Alpine-only untuk halaman publik dari 002-theme-branding-system research.md §3).
+
+## 6. Temuan implementasi: `bootstrap/app.php` cuma render JSON exception untuk path `api/*`
+
+**Decision**: Validasi di `ContactController@store` dilakukan manual lewat `Validator::make()->fails()` + `response()->json(..., 422)` eksplisit — BUKAN `$request->validate()` (yang melempar `ValidationException` dan bergantung pada exception handler global untuk menentukan format respons).
+
+**Rationale**: Project ini sudah punya konfigurasi `withExceptions(fn ($exceptions) => $exceptions->shouldRenderJsonWhen(fn ($request) => $request->is('api/*')))` di `bootstrap/app.php` — artinya SEMUA exception (termasuk `ValidationException`) di luar path `api/*` selalu dirender sebagai HTML/redirect, terlepas dari header `Accept: application/json` yang dikirim `fetch()`/`postJson()`. Karena route `/kontak` (sesuai kontrak spec, bukan `/api/kontak`) ada di luar `api/*`, `$request->validate()` akan selalu redirect, bukan mengembalikan 422 JSON yang dibutuhkan FR-002. Validasi manual menghindari jalur exception handler ini sepenuhnya — controller membangun response JSON-nya sendiri, tidak bergantung pada content-negotiation global.
+
+**Alternatives considered**: Pindahkan endpoint ke `/api/kontak` — ditolak, mengubah kontrak spec/quickstart yang sudah disepakati (`POST /kontak`) hanya untuk bekerja di sekitar konfigurasi exception handler yang sifatnya global/tidak terkait fitur ini. Mengubah `shouldRenderJsonWhen` di `bootstrap/app.php` supaya lebih permisif (mis. berdasarkan `Accept` header, bukan path) — dipertimbangkan tapi berisiko mengubah perilaku endpoint lain di luar scope fitur ini; validasi manual jauh lebih terisolasi.

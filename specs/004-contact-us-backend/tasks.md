@@ -58,15 +58,15 @@ Perluasan langsung controller/view publik dan admin panel Filament yang sudah ad
 
 ### Tests for User Story 1
 
-- [ ] T006 [P] [US1] Feature test: `POST /kontak` dengan data valid mengembalikan 201, submission tersimpan; field wajib kosong/format phone tidak valid mengembalikan 422 dan TIDAK tersimpan, di `tests/Feature/Pages/ContactPageTest.php` (perluas file yang sudah ada dari 002)
-- [ ] T007 [P] [US1] Feature test: response sukses menyertakan `whatsapp_url` berisi nomor & pesan pre-filled ketika `whatsapp_number` terkonfigurasi; `whatsapp_url` bernilai `null` ketika belum dikonfigurasi, di `tests/Feature/Pages/ContactPageTest.php`
-- [ ] T008 [P] [US1] Feature test: submission ke-6 dalam 1 menit dari IP yang sama mengembalikan 429 (rate limit), di `tests/Feature/Pages/ContactPageTest.php`
+- [X] T006 [P] [US1] Feature test: `POST /kontak` dengan data valid mengembalikan 201, submission tersimpan; field wajib kosong/format phone tidak valid mengembalikan 422 dan TIDAK tersimpan, di `tests/Feature/Pages/ContactPageTest.php` (perluas file yang sudah ada dari 002)
+- [X] T007 [P] [US1] Feature test: response sukses menyertakan `whatsapp_url` berisi nomor & pesan pre-filled ketika `whatsapp_number` terkonfigurasi; `whatsapp_url` bernilai `null` ketika belum dikonfigurasi, di `tests/Feature/Pages/ContactPageTest.php`
+- [X] T008 [P] [US1] Feature test: submission ke-6 dalam 1 menit dari IP yang sama mengembalikan 429 (rate limit), di `tests/Feature/Pages/ContactPageTest.php`
 
 ### Implementation for User Story 1
 
-- [ ] T009 [US1] Tambahkan method `store(Request $request)` di `app/Http/Controllers/Public/ContactController.php`: validasi (FR-002), simpan `ContactSubmission`, bangun `whatsapp_url` dari `BrandSettings::whatsapp_number` + pesan ter-encode (FR-012/FR-013, null bila kosong), dispatch notifikasi (lihat US3, T014) tanpa menunggu hasil, return JSON 201 (depends on T003, T004)
-- [ ] T010 [US1] Daftarkan route `POST /kontak` di `routes/web.php` dengan middleware `throttle:5,1` (FR-004; depends on T009)
-- [ ] T011 [US1] Update `resources/views/pages/kontak.blade.php`: method `submit()` Alpine memanggil `fetch('/kontak', {...})` sungguhan (menggantikan `this.submitted = true` palsu), tangani response sukses (tampilkan konfirmasi + `window.open(whatsapp_url)` bila ada, sertakan link fallback yang sama sebagai tombol) dan response 422 (tampilkan `errors` per field) (FR-003, FR-012, edge case pop-up blocker; depends on T010)
+- [X] T009 [US1] Tambahkan method `store(Request $request)` di `app/Http/Controllers/Public/ContactController.php`: validasi (FR-002), simpan `ContactSubmission`, bangun `whatsapp_url` dari `BrandSettings::whatsapp_number` + pesan ter-encode (FR-012/FR-013, null bila kosong), dispatch notifikasi (lihat US3, T014) tanpa menunggu hasil, return JSON 201 (depends on T003, T004)
+- [X] T010 [US1] Daftarkan route `POST /kontak` di `routes/web.php` dengan middleware `throttle:5,1` (FR-004; depends on T009)
+- [X] T011 [US1] Update `resources/views/pages/kontak.blade.php`: method `submit()` Alpine memanggil `fetch('/kontak', {...})` sungguhan (menggantikan `this.submitted = true` palsu), tangani response sukses (tampilkan konfirmasi + `window.open(whatsapp_url)` bila ada, sertakan link fallback yang sama sebagai tombol) dan response 422 (tampilkan `errors` per field) (FR-003, FR-012, edge case pop-up blocker; depends on T010)
 
 **Checkpoint**: User Story 1 selesai — form Kontak berfungsi penuh end-to-end (simpan + WA redirect), bisa didemo/dirilis sebagai MVP.
 
@@ -102,7 +102,7 @@ Perluasan langsung controller/view publik dan admin panel Filament yang sudah ad
 
 ### Tests for User Story 3
 
-- [ ] T014 [P] [US3] Feature test: `Notification::fake()` — submission baru dengan `contact_notification_email` terkonfigurasi men-dispatch `NewContactSubmission` ke alamat tsb; tanpa `contact_notification_email`, tidak ada notifikasi ter-dispatch; submission tetap 201 di kedua kasus, di `tests/Feature/Pages/ContactPageTest.php`
+- [X] T014 [P] [US3] Feature test: `Notification::fake()` — submission baru dengan `contact_notification_email` terkonfigurasi men-dispatch `NewContactSubmission` ke alamat tsb; tanpa `contact_notification_email`, tidak ada notifikasi ter-dispatch; submission tetap 201 di kedua kasus, di `tests/Feature/Pages/ContactPageTest.php`
 
 ### Implementation for User Story 3
 
