@@ -106,8 +106,8 @@ Perluasan langsung controller/view publik dan admin panel Filament yang sudah ad
 
 ### Implementation for User Story 3
 
-- [ ] T015 [US3] Buat `app/Notifications/NewContactSubmission.php` (`implements ShouldQueue`, `via(): ['mail']`, `toMail()` berisi ringkasan nama/kontak/topik/pesan)
-- [ ] T016 [US3] Di `ContactController@store` (T009), dispatch `Notification::route('mail', $email)->notify(new NewContactSubmission($submission))` hanya bila `BrandSettings::contact_notification_email` terisi (FR-008, FR-009, FR-010; depends on T015)
+- [X] T015 [US3] Buat `app/Notifications/NewContactSubmission.php` (`implements ShouldQueue`, `via(): ['mail']`, `toMail()` berisi ringkasan nama/kontak/topik/pesan)
+- [X] T016 [US3] Di `ContactController@store` (T009), dispatch `Notification::route('mail', $email)->notify(new NewContactSubmission($submission))` hanya bila `BrandSettings::contact_notification_email` terisi (FR-008, FR-009, FR-010; depends on T015)
 
 **Checkpoint**: User Story 3 selesai — seluruh scope AMC-216 (submit, admin CRUD, notifikasi, WA redirect) lengkap.
 
