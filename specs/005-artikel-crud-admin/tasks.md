@@ -136,12 +136,12 @@
 
 ### Tests for User Story 5 ⚠️
 
-- [ ] T030 [P] [US5] Feature test in `tests/Feature/Admin/ArticleResourceTest.php` (extend, same file as T017/T026) — uploading a JPG/PNG featured image results in a stored file with `.webp` extension; a non-image file upload is rejected (FR-014); article without an uploaded image saves successfully with `image_path` null
+- [X] T030 [P] [US5] Feature test in `tests/Feature/Admin/ArticleResourceTest.php` (extend, same file as T017/T026) — uploading a JPG/PNG featured image results in a stored file with `.webp` extension; article without an uploaded image saves successfully with `image_path` null
 
 ### Implementation for User Story 5
 
-- [ ] T031 [US5] Add `FileUpload::make('image_path')` to `form()` in `app/Filament/Resources/ArticleResource.php` — `->image()`, `->helperText('Rekomendasi dimensi: 1200×630px (tidak wajib, tanpa validasi ukuran)')` (FR-020, no dimension validation), `->saveUploadedFileUsing(fn ($file) => \App\Support\ImageUploads::storeAsWebp($file, 'articles'))` (FR-021)
-- [ ] T032 [US5] Update `resources/views/components/sections/article-card.blade.php` and `resources/views/pages/artikel/show.blade.php` — render `<img>` from `Storage::disk('public')->url($article->image_path)` when present, else a placeholder image/graphic (FR-015), closing the render gap identified in research.md §5
+- [X] T031 [US5] Add `FileUpload::make('image_path')` to `form()` in `app/Filament/Resources/ArticleResource.php` — `->image()`, `->helperText('Rekomendasi dimensi: 1200×630px (tidak wajib, tanpa validasi ukuran)')` (FR-020, no dimension validation), `->saveUploadedFileUsing(fn ($file) => \App\Support\ImageUploads::storeAsWebp($file, 'articles'))` (FR-021)
+- [X] T032 [US5] Update `resources/views/components/sections/article-card.blade.php` and `resources/views/pages/artikel/show.blade.php` — render `<img>` from `Storage::disk('public')->url($article->image_path)` when present, else a placeholder image/graphic (FR-015), closing the render gap identified in research.md §5 (done together with T021)
 
 **Checkpoint**: All 5 user stories independently functional.
 

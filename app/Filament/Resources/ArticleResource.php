@@ -5,7 +5,9 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ArticleResource\Pages;
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Support\ImageUploads;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
@@ -69,6 +71,16 @@ class ArticleResource extends Resource
                             ->helperText('Nama penulis/tim penulis (opsional) — ditampilkan sebagai byline, bukan akun admin.'),
                     ])
                     ->columns(2),
+                Section::make('Featured Image')
+                    ->schema([
+                        FileUpload::make('image_path')
+                            ->label('Gambar Sampul')
+                            ->image()
+                            ->disk('public')
+                            ->directory('articles')
+                            ->helperText('Rekomendasi dimensi: 1200×630px (opsional, tidak ada validasi ukuran). Gambar otomatis dikonversi ke format WebP.')
+                            ->saveUploadedFileUsing(fn ($file) => ImageUploads::storeAsWebp($file, 'articles')),
+                    ]),
                 Section::make('Konten')
                     ->schema([
                         Textarea::make('excerpt')

@@ -9,6 +9,8 @@ use App\Models\Article;
 use App\Models\ArticleCategory;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 use Spatie\Tags\Tag;
 use Tests\TestCase;
@@ -152,6 +154,50 @@ class ArticleResourceTest extends TestCase
 
         $this->assertSame(['panel-surya'], $article->fresh()->tags->pluck('name')->all());
         $this->assertSame(1, Tag::get()->pluck('name')->filter(fn ($name) => $name === 'hemat-listrik')->count());
+    }
+
+    public function test_uploaded_featured_image_is_converted_to_webp(): void
+    {
+        Storage::fake('public');
+        $user = User::factory()->create();
+        $category = ArticleCategory::factory()->create();
+
+        Livewire::actingAs($user)
+            ->test(CreateArticle::class)
+            ->fillForm([
+                'title' => 'Artikel Bergambar',
+                'article_category_id' => $category->id,
+                'excerpt' => 'x',
+                'content' => 'x',
+                'image_path' => UploadedFile::fake()->image('sampul.jpg'),
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $article = Article::where('title', 'Artikel Bergambar')->first();
+
+        $this->assertNotNull($article->image_path);
+        $this->assertSame('webp', pathinfo($article->image_path, PATHINFO_EXTENSION));
+        Storage::disk('public')->assertExists($article->image_path);
+    }
+
+    public function test_article_without_featured_image_saves_successfully(): void
+    {
+        $user = User::factory()->create();
+        $category = ArticleCategory::factory()->create();
+
+        Livewire::actingAs($user)
+            ->test(CreateArticle::class)
+            ->fillForm([
+                'title' => 'Artikel Tanpa Gambar',
+                'article_category_id' => $category->id,
+                'excerpt' => 'x',
+                'content' => 'x',
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $this->assertDatabaseHas('articles', ['title' => 'Artikel Tanpa Gambar', 'image_path' => null]);
     }
 
     public function test_admin_can_delete_article_and_old_slug_returns_404(): void
