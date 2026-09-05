@@ -56,9 +56,30 @@ class BrandSettings extends Settings
 
     public ?string $og_image_path;
 
+    public ?string $whatsapp_number;
+
+    public ?string $contact_notification_email;
+
     public static function group(): string
     {
         return 'brand';
+    }
+
+    /**
+     * Link `wa.me` ke nomor WhatsApp bisnis instalasi ini dengan pesan
+     * pre-filled (FR-012). Null bila `whatsapp_number` belum dikonfigurasi
+     * (FR-013) — dipanggil pemanggil harus menangani null tsb (lewati langkah
+     * buka WhatsApp, bukan error).
+     */
+    public function whatsappUrl(string $message): ?string
+    {
+        if (blank($this->whatsapp_number)) {
+            return null;
+        }
+
+        $number = preg_replace('/[^0-9]/', '', $this->whatsapp_number);
+
+        return sprintf('https://wa.me/%s?text=%s', $number, rawurlencode($message));
     }
 
     /**

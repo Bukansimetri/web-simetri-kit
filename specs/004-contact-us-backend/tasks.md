@@ -29,7 +29,7 @@ Perluasan langsung controller/view publik dan admin panel Filament yang sudah ad
 
 **Purpose**: Verifikasi baseline sebelum perubahan dimulai.
 
-- [ ] T001 Jalankan `vendor/bin/pint --format agent` dan `php artisan test --compact` untuk memastikan baseline hijau sebelum mulai (tidak ada file diubah di task ini)
+- [X] T001 Jalankan `vendor/bin/pint --format agent` dan `php artisan test --compact` untuk memastikan baseline hijau sebelum mulai (tidak ada file diubah di task ini)
 
 **Checkpoint**: Baseline project terverifikasi bersih sebelum perubahan dimulai.
 
@@ -41,10 +41,10 @@ Perluasan langsung controller/view publik dan admin panel Filament yang sudah ad
 
 **⚠️ CRITICAL**: T002–T005 harus selesai sebelum task apa pun di Phase 3–5 (US1–US3) dimulai.
 
-- [ ] T002 Buat migration `database/migrations/xxxx_create_contact_submissions_table.php` (`name`, `phone`, `topic` nullable, `message`, `status` default `new`, timestamps) sesuai [data-model.md](./data-model.md#contact-submission-baru)
-- [ ] T003 [P] Buat model & factory `app/Models/ContactSubmission.php` + `database/factories/ContactSubmissionFactory.php`
-- [ ] T004 Buat settings-migration `database/settings/xxxx_add_whatsapp_and_notification_email_to_brand_settings.php` menambah `whatsapp_number` dan `contact_notification_email` (nullable) ke group `brand`, lalu tambahkan properti yang sama di `app/Settings/BrandSettings.php` dan jalankan `php artisan migrate`
-- [ ] T005 [P] Tambahkan Section "Kontak & Notifikasi" (field `whatsapp_number`, `contact_notification_email`) ke `app/Filament/Pages/BrandSettingsPage.php` (form + `mount()`/`save()`) sesuai [contracts/admin-panel-surface.md](./contracts/admin-panel-surface.md#brand-settings-perluasan--whatsapp--email-notifikasi) (depends on T004)
+- [X] T002 Buat migration `database/migrations/xxxx_create_contact_submissions_table.php` (`name`, `phone`, `topic` nullable, `message`, `status` default `new`, timestamps) sesuai [data-model.md](./data-model.md#contact-submission-baru)
+- [X] T003 [P] Buat model & factory `app/Models/ContactSubmission.php` + `database/factories/ContactSubmissionFactory.php`
+- [X] T004 Buat settings-migration `database/settings/xxxx_add_whatsapp_and_notification_email_to_brand_settings.php` menambah `whatsapp_number` dan `contact_notification_email` (nullable) ke group `brand`, lalu tambahkan properti yang sama di `app/Settings/BrandSettings.php` dan jalankan `php artisan migrate`
+- [X] T005 [P] Tambahkan Section "Kontak & Notifikasi" (field `whatsapp_number`, `contact_notification_email`) ke `app/Filament/Pages/BrandSettingsPage.php` (form + `mount()`/`save()`) sesuai [contracts/admin-panel-surface.md](./contracts/admin-panel-surface.md#brand-settings-perluasan--whatsapp--email-notifikasi) (depends on T004)
 
 **Checkpoint**: Skema `contact_submissions` + field Brand Settings siap — US1–US3 bisa mulai dikerjakan.
 
