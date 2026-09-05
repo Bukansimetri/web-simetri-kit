@@ -54,14 +54,14 @@
 
 ### Tests for User Story 1 ⚠️
 
-- [ ] T012 [P] [US1] Feature test in `tests/Feature/Admin/ArticleCategoryResourceTest.php` — create category, reject duplicate `name`, edit category, delete unused category succeeds, delete category with `articles_count > 0` is blocked with a notification (pattern: `CategoryResourceTest` from 003-produk-crud-admin)
+- [X] T012 [P] [US1] Feature test in `tests/Feature/Admin/ArticleCategoryResourceTest.php` — create category, reject duplicate `name`, edit category, delete unused category succeeds, delete category with `articles_count > 0` is blocked with a notification (pattern: `CategoryResourceTest` from 003-produk-crud-admin)
 
 ### Implementation for User Story 1
 
-- [ ] T013 [US1] Generate resource: `php artisan make:filament-resource ArticleCategory --no-interaction` (creates `app/Filament/Resources/ArticleCategoryResource.php` + `Pages/{ListArticleCategories,CreateArticleCategory,EditArticleCategory}.php`)
-- [ ] T014 [US1] Implement `form()` in `app/Filament/Resources/ArticleCategoryResource.php` — `TextInput::make('name')->required()->unique(ignoreRecord: true)`, `TextInput::make('order')->numeric()->default(0)`
-- [ ] T015 [US1] Implement `table()` in `app/Filament/Resources/ArticleCategoryResource.php` — columns `name`, `order`, `articles_count` (withCount), row actions Edit/Delete
-- [ ] T016 [US1] Add delete guard in `app/Filament/Resources/ArticleCategoryResource/Pages/ListArticleCategories.php` (or table `DeleteAction`) — `DeleteAction::make()->before(function ($record, $action) { if ($record->articles()->count() > 0) { Notification::make()->danger()->title('Kategori masih dipakai')->send(); $action->cancel(); } })` (pattern from `CategoryResource` in 003-produk-crud-admin)
+- [X] T013 [US1] Generate resource: `php artisan make:filament-resource ArticleCategory --no-interaction` (creates `app/Filament/Resources/ArticleCategoryResource.php` + `Pages/{ListArticleCategories,CreateArticleCategory,EditArticleCategory}.php`)
+- [X] T014 [US1] Implement `form()` in `app/Filament/Resources/ArticleCategoryResource.php` — `TextInput::make('name')->required()->unique(ignoreRecord: true)`, `TextInput::make('order')->numeric()->default(0)`
+- [X] T015 [US1] Implement `table()` in `app/Filament/Resources/ArticleCategoryResource.php` — columns `name`, `order`, `articles_count` (withCount), row actions Edit/Delete
+- [X] T016 [US1] Add delete guard in `app/Filament/Resources/ArticleCategoryResource/Pages/ListArticleCategories.php` (or table `DeleteAction`) — `DeleteAction::make()->before(function ($record, $action) { if ($record->articles()->count() > 0) { Notification::make()->danger()->title('Kategori masih dipakai')->send(); $action->cancel(); } })` (pattern from `CategoryResource` in 003-produk-crud-admin)
 
 **Checkpoint**: User Story 1 fully functional and testable independently (`php artisan test --compact tests/Feature/Admin/ArticleCategoryResourceTest.php`).
 
