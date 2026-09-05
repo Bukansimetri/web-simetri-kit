@@ -82,11 +82,11 @@ Perluasan langsung controller/view publik dan admin panel Filament yang sudah ad
 
 ### Tests for User Story 2
 
-- [ ] T012 [P] [US2] Feature test: admin bisa melihat daftar submission dengan seluruh detail, mengubah status, memfilter berdasarkan status, dan menghapus submission, di `tests/Feature/Admin/ContactSubmissionResourceTest.php`
+- [X] T012 [P] [US2] Feature test: admin bisa melihat daftar submission dengan seluruh detail, mengubah status, memfilter berdasarkan status, dan menghapus submission, di `tests/Feature/Admin/ContactSubmissionResourceTest.php`
 
 ### Implementation for User Story 2
 
-- [ ] T013 [US2] Buat `app/Filament/Resources/ContactSubmissionResource.php` + `Pages/{ListContactSubmissions,EditContactSubmission}.php` — table: kolom nama/phone/topic/status/waktu masuk, filter status, aksi edit+delete; form edit: field `status` (Select: Baru/Sudah Dihubungi/Selesai), field lain read-only (depends on T003)
+- [X] T013 [US2] Buat `app/Filament/Resources/ContactSubmissionResource.php` + `Pages/{ListContactSubmissions,EditContactSubmission}.php` — table: kolom nama/phone/topic/status/waktu masuk, filter status, aksi edit+delete; form edit: field `status` (Select: Baru/Sudah Dihubungi/Selesai), field lain read-only (depends on T003)
 
 **Checkpoint**: User Story 2 selesai — admin bisa kelola submission penuh, independen dari US3.
 
