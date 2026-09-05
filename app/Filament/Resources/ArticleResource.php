@@ -10,6 +10,7 @@ use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -22,6 +23,7 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
+use Spatie\Tags\Tag;
 
 class ArticleResource extends Resource
 {
@@ -102,6 +104,14 @@ class ArticleResource extends Resource
                             ->label('Tanggal Publish')
                             ->visible(fn (Get $get) => $get('publish_status') === 'schedule')
                             ->required(fn (Get $get) => $get('publish_status') === 'schedule'),
+                    ]),
+                Section::make('Tag')
+                    ->schema([
+                        TagsInput::make('tags')
+                            ->label('')
+                            ->placeholder('Ketik lalu Enter untuk menambah tag baru')
+                            ->suggestions(fn () => Tag::pluck('name'))
+                            ->formatStateUsing(fn (?Article $record) => $record?->tags->pluck('name')->all() ?? []),
                     ]),
             ]);
     }

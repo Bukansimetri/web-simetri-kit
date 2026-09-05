@@ -116,13 +116,13 @@
 
 ### Tests for User Story 4 ⚠️
 
-- [ ] T026 [P] [US4] Feature test in `tests/Feature/Admin/ArticleResourceTest.php` (extend, same file as T017) — attaching new tag names creates them; attaching an existing tag name does not create a duplicate; detaching a tag from one article leaves it intact/available for others
+- [X] T026 [P] [US4] Feature test in `tests/Feature/Admin/ArticleResourceTest.php` (extend, same file as T017) — attaching new tag names creates them; attaching an existing tag name does not create a duplicate; detaching a tag from one article leaves it intact/available for others
 
 ### Implementation for User Story 4
 
-- [ ] T027 [US4] Add `TagsInput::make('tags')` to `form()` in `app/Filament/Resources/ArticleResource.php`, with `suggestions(fn () => \Spatie\Tags\Tag::pluck('name'))`, hydrated via `afterStateHydrated` from `$record?->tags->pluck('name')`
-- [ ] T028 [US4] Wire tag sync in `app/Filament/Resources/ArticleResource/Pages/CreateArticle.php` (`afterCreate()`) and `app/Filament/Resources/ArticleResource/Pages/EditArticle.php` (`afterSave()`) — call `$this->record->syncTags($this->data['tags'] ?? [])`
-- [ ] T029 [US4] Display tags on `resources/views/pages/artikel/show.blade.php` — render `$article->tags->pluck('name')` as a list of tag badges
+- [X] T027 [US4] Add `TagsInput::make('tags')` to `form()` in `app/Filament/Resources/ArticleResource.php`, with `suggestions(fn () => \Spatie\Tags\Tag::pluck('name'))`, hydrated via `formatStateUsing` from `$record?->tags->pluck('name')` (NOTE: `afterStateHydrated` re-fires and wipes test-filled state on every Livewire hydrate cycle — `formatStateUsing` is the correct hook)
+- [X] T028 [US4] Wire tag sync in `app/Filament/Resources/ArticleResource/Pages/CreateArticle.php` (`afterCreate()`) and `app/Filament/Resources/ArticleResource/Pages/EditArticle.php` (`afterSave()`) — call `$this->record->syncTags($this->data['tags'] ?? [])`
+- [X] T029 [US4] Display tags on `resources/views/pages/artikel/show.blade.php` — render `$article->tags->pluck('name')` as a list of tag badges
 
 **Checkpoint**: User Stories 1–4 all independently functional.
 

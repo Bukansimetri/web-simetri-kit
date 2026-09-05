@@ -10,6 +10,7 @@ use App\Models\ArticleCategory;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
+use Spatie\Tags\Tag;
 use Tests\TestCase;
 
 class ArticleResourceTest extends TestCase
@@ -110,6 +111,47 @@ class ArticleResourceTest extends TestCase
             ])
             ->call('create')
             ->assertHasFormErrors(['title', 'article_category_id', 'excerpt', 'content']);
+    }
+
+    public function test_admin_can_attach_new_and_existing_tags_without_duplicates(): void
+    {
+        $user = User::factory()->create();
+        $category = ArticleCategory::factory()->create();
+        $existing = Article::factory()->create();
+        $existing->syncTags(['panel-surya']);
+
+        Livewire::actingAs($user)
+            ->test(CreateArticle::class)
+            ->fillForm([
+                'title' => 'Artikel Bertag',
+                'article_category_id' => $category->id,
+                'excerpt' => 'x',
+                'content' => 'x',
+                'tags' => ['panel-surya', 'hemat-listrik'],
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $article = Article::where('title', 'Artikel Bertag')->first();
+
+        $this->assertSame(['hemat-listrik', 'panel-surya'], $article->tags->pluck('name')->sort()->values()->all());
+        $this->assertSame(1, Tag::get()->pluck('name')->filter(fn ($name) => $name === 'panel-surya')->count());
+    }
+
+    public function test_detaching_tag_from_one_article_keeps_it_available_for_others(): void
+    {
+        $user = User::factory()->create();
+        $article = Article::factory()->create();
+        $article->syncTags(['panel-surya', 'hemat-listrik']);
+
+        Livewire::actingAs($user)
+            ->test(EditArticle::class, ['record' => $article->getRouteKey()])
+            ->fillForm(['tags' => ['panel-surya']])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $this->assertSame(['panel-surya'], $article->fresh()->tags->pluck('name')->all());
+        $this->assertSame(1, Tag::get()->pluck('name')->filter(fn ($name) => $name === 'hemat-listrik')->count());
     }
 
     public function test_admin_can_delete_article_and_old_slug_returns_404(): void
