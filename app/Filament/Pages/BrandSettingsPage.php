@@ -8,6 +8,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
@@ -49,6 +50,7 @@ class BrandSettingsPage extends Page implements HasForms
             'og_image_path' => $settings->og_image_path,
             'whatsapp_number' => $settings->whatsapp_number,
             'contact_notification_email' => $settings->contact_notification_email,
+            'career_module_enabled' => $settings->career_module_enabled,
         ]);
     }
 
@@ -112,6 +114,14 @@ class BrandSettingsPage extends Page implements HasForms
                             ->email()
                             ->helperText('Menerima email setiap ada submission baru dari form Kontak.'),
                     ]),
+                Section::make('Modul Opsional')
+                    ->description('Aktifkan/nonaktifkan modul yang tidak dibutuhkan semua klien.')
+                    ->schema([
+                        Toggle::make('career_module_enabled')
+                            ->label('Modul Karir Aktif')
+                            ->helperText('Saat dimatikan, halaman /karir tidak lagi bisa diakses dan link "Karir" hilang dari navigasi footer. Data lowongan kerja yang sudah tersimpan TIDAK terhapus.')
+                            ->default(true),
+                    ]),
             ])
             ->statePath('data');
     }
@@ -131,6 +141,7 @@ class BrandSettingsPage extends Page implements HasForms
         $settings->og_image_path = $data['og_image_path'] ?? null;
         $settings->whatsapp_number = $data['whatsapp_number'] ?? null;
         $settings->contact_notification_email = $data['contact_notification_email'] ?? null;
+        $settings->career_module_enabled = $data['career_module_enabled'] ?? true;
         $settings->save();
 
         Notification::make()
