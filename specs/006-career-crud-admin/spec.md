@@ -60,14 +60,14 @@ Admin/operator instalasi klien yang tidak membutuhkan halaman karir sama sekali 
 - **FR-004**: Admin MUST bisa mengedit seluruh field lowongan yang sudah ada, dan perubahan MUST langsung tercermin di halaman publik `/karir` tanpa deploy ulang.
 - **FR-005**: Admin MUST bisa menghapus lowongan, dengan konfirmasi terlebih dahulu sebelum penghapusan diproses.
 - **FR-006**: Admin MUST bisa mengaktifkan/menonaktifkan sebuah lowongan tanpa menghapusnya — lowongan nonaktif TIDAK tampil di `/karir` tapi tetap ada di daftar admin.
-- **FR-007**: Tipe pekerjaan MUST dipilih dari daftar pilihan tetap (mis. Full-time, Part-time, Kontrak, Magang) — bukan teks bebas — supaya tampilan di halaman publik konsisten.
+- **FR-007**: Tipe pekerjaan MUST dipilih dari daftar pilihan tetap: Full-time, Part-time, Kontrak, Magang — bukan teks bebas dan bukan daftar yang bisa dikelola admin — supaya tampilan di halaman publik konsisten (lihat Clarifications).
 - **FR-008**: CRUD Lowongan Kerja MUST terbuka untuk semua role yang memiliki akses panel admin, konsisten dengan resource admin lain yang sudah ada.
 - **FR-009**: Sistem MUST menyediakan satu pengaturan global ("modul Karir aktif/nonaktif") yang independen dari status aktif/nonaktif masing-masing lowongan individual.
 - **FR-010**: Ketika modul Karir dinonaktifkan, halaman publik `/karir` MUST mengembalikan respons "tidak ditemukan" (404) untuk semua pengunjung.
 - **FR-011**: Ketika modul Karir dinonaktifkan, link "Karir" di navigasi footer publik MUST TIDAK ditampilkan di halaman manapun.
 - **FR-012**: Menonaktifkan modul Karir MUST TIDAK menghapus data lowongan kerja yang sudah tersimpan — mengaktifkan modul kembali MUST langsung menampilkan kembali lowongan-lowongan yang berstatus aktif tanpa perlu input ulang.
 - **FR-013**: Menonaktifkan modul Karir MUST TIDAK membatasi akses admin ke CRUD Lowongan Kerja di panel admin — admin tetap bisa menulis/mengedit/menghapus lowongan seperti biasa terlepas dari status modul.
-- **FR-014**: Pengaturan toggle modul Karir MUST dapat diubah oleh admin lewat panel admin, tanpa perlu mengedit file konfigurasi atau kode.
+- **FR-014**: Pengaturan toggle modul Karir MUST dapat diubah oleh admin lewat panel admin, tanpa perlu mengedit file konfigurasi atau kode — ditempatkan di layar pengaturan global yang sudah ada (tempat pengaturan nama aplikasi, logo, dan warna brand dikonfigurasi), bukan halaman admin baru (lihat Clarifications).
 
 ### Key Entities
 
@@ -85,11 +85,16 @@ Admin/operator instalasi klien yang tidak membutuhkan halaman karir sama sekali 
 - **SC-005**: Admin dapat menonaktifkan seluruh modul Karir untuk instalasinya dalam satu langkah pengaturan, dan perubahan berlaku langsung (halaman `/karir` 404, link navigasi hilang) tanpa deploy ulang atau bantuan developer.
 - **SC-006**: 100% instalasi yang menonaktifkan modul Karir tidak kehilangan data lowongan yang sudah tersimpan — data langsung tersedia kembali begitu modul diaktifkan ulang.
 
+## Clarifications
+
+### Session 2026-09-05
+
+- Q: Daftar tipe pekerjaan (FR-007) — apakah benar-benar tetap di kode, atau admin perlu bisa mengelola daftarnya sendiri? → A: Tetap di kode (Full-time, Part-time, Kontrak, Magang) — tidak ada CRUD tambahan, bukan entity taxonomy terpisah.
+- Q: Toggle modul Karir sebaiknya ditempatkan di mana dalam admin panel? → A: Sebagai field baru di halaman Theme/Brand Settings yang sudah ada (tempat pengaturan nama app, logo, warna, dll.) — tidak ada halaman/layar admin baru.
+
 ## Assumptions
 
 - Fitur ini memperluas model `JobOpening` yang sudah ada dari 002-theme-branding-system, bukan membuat entity terpisah untuk data lowongan itu sendiri.
 - `JobOpeningSeeder` tetap dipertahankan untuk kebutuhan demo/dev (konsisten pola AMC-207/AMC-213) — CRUD admin jadi sumber data utama pasca go-live.
-- Daftar pilihan tetap untuk tipe pekerjaan (FR-007) mengikuti istilah umum industri: Full-time, Part-time, Kontrak, Magang — daftar ini cukup ditentukan sekali saat implementasi, tidak perlu dikelola dinamis oleh admin (bukan entity taxonomy terpisah seperti Kategori Produk/Artikel), karena jumlah opsinya kecil dan jarang berubah.
-- Pengaturan toggle modul Karir (FR-009) disimpan sebagai satu boolean baru pada mekanisme pengaturan global yang sudah ada di project ini (tempat pengaturan lain seperti nama aplikasi, logo, dan warna brand disimpan) — bukan tabel/entity baru, dan bukan sistem toggle modul generik untuk seluruh fitur starter kit (Principle V: Simplicity).
 - Default nilai toggle modul Karir untuk instalasi baru adalah AKTIF — konsisten dengan perilaku saat ini (halaman `/karir` sudah ada dan berfungsi sejak 002-theme-branding-system) sehingga tidak ada perubahan perilaku mendadak bagi instalasi yang sudah berjalan.
 - Toggle modul Karir hanya memengaruhi visibilitas halaman publik dan link navigasi — tidak memengaruhi akses CRUD admin (lihat FR-013), supaya admin tetap bisa menyiapkan konten karir kapan saja.
