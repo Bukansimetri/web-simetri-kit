@@ -19,7 +19,7 @@
 
 **Purpose**: Bring in the one package surface this feature newly activates (`spatie/laravel-tags` — already in `composer.json` since Epic 1, but never published/used).
 
-- [ ] T001 Publish `spatie/laravel-tags` config & migrations: `php artisan vendor:publish --provider="Spatie\Tags\TagsServiceProvider" --tag="tags-migrations" --no-interaction` and `--tag="tags-config"` — produces `config/tags.php` and `database/migrations/*_create_tags_table.php` / `*_create_taggables_table.php` (research.md §3)
+- [X] T001 Publish `spatie/laravel-tags` config & migrations: `php artisan vendor:publish --provider="Spatie\Tags\TagsServiceProvider" --tag="tags-migrations" --no-interaction` and `--tag="tags-config"` — produces `config/tags.php` and `database/migrations/*_create_tags_table.php` / `*_create_taggables_table.php` (research.md §3)
 
 **Checkpoint**: Package migrations present on disk, not yet run.
 
@@ -31,16 +31,16 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete.
 
-- [ ] T002 [P] Create migration `database/migrations/xxxx_create_article_categories_table.php` — `id`, `name` (unique), `order` (integer, default 0), timestamps (data-model.md § Article Category)
-- [ ] T003 Create migration `database/migrations/xxxx_update_articles_table_for_category_and_image.php` — add nullable `article_category_id` (FK → `article_categories.id`, `restrictOnDelete()`), add nullable `redaksi` (string), make `image_path` nullable; in a `data.php`-less approach, backfill `article_category_id` from the existing `category` string column by matching against canonical category names (pattern from research.md 003-produk-crud-admin §3 backfill), THEN drop the old `category` column and make `article_category_id` non-nullable (depends on T002)
-- [ ] T004 [P] Create `ArticleCategory` model in `app/Models/ArticleCategory.php` — fillable `name`, `order`; `articles(): HasMany`
-- [ ] T005 Update `Article` model in `app/Models/Article.php` — replace `category` in `$fillable` with `article_category_id` and add `redaksi`; add `use Spatie\Tags\HasTags;`; add `articleCategory(): BelongsTo`; add derived status helpers (`isDraft()`, `isScheduled()`, `isPublished()`) based on `published_at` (data-model.md § Status turunan) (depends on T004)
-- [ ] T006 [P] Create `ArticleCategoryFactory` in `database/factories/ArticleCategoryFactory.php`
-- [ ] T007 [P] Create `ArticleCategorySeeder` in `database/seeders/ArticleCategorySeeder.php` — seed canonical categories "Tips", "Berita", "Edukasi" via `updateOrCreate` (idempotent, matches names used in migration backfill in T003)
-- [ ] T008 Update `ArticleFactory` in `database/factories/ArticleFactory.php` — replace `category` string with `article_category_id` (via `ArticleCategory::factory()` or `ArticleCategory::inRandomOrder()->first()->id`), add `redaksi` fake value (depends on T006)
-- [ ] T009 Update `ArticleSeeder` in `database/seeders/ArticleSeeder.php` — look up seeded `ArticleCategory` records by name instead of writing a `category` string, fill `redaksi` (e.g. "Tim Redaksi SUOER") (depends on T007)
-- [ ] T010 Update `database/seeders/DatabaseSeeder.php` — call `ArticleCategorySeeder::class` before `ArticleSeeder::class` (depends on T007, T009)
-- [ ] T011 [P] Create `App\Support\ImageUploads` helper in `app/Support/ImageUploads.php` — static `storeAsWebp(TemporaryUploadedFile $file, string $directory): string` using GD (`imagecreatefromstring`, `imagewebp`), returns the stored relative path (research.md §6)
+- [X] T002 [P] Create migration `database/migrations/xxxx_create_article_categories_table.php` — `id`, `name` (unique), `order` (integer, default 0), timestamps (data-model.md § Article Category)
+- [X] T003 Create migration `database/migrations/xxxx_update_articles_table_for_category_and_image.php` — add nullable `article_category_id` (FK → `article_categories.id`, `restrictOnDelete()`), add nullable `redaksi` (string), make `image_path` nullable; in a `data.php`-less approach, backfill `article_category_id` from the existing `category` string column by matching against canonical category names (pattern from research.md 003-produk-crud-admin §3 backfill), THEN drop the old `category` column and make `article_category_id` non-nullable (depends on T002)
+- [X] T004 [P] Create `ArticleCategory` model in `app/Models/ArticleCategory.php` — fillable `name`, `order`; `articles(): HasMany`
+- [X] T005 Update `Article` model in `app/Models/Article.php` — replace `category` in `$fillable` with `article_category_id` and add `redaksi`; add `use Spatie\Tags\HasTags;`; add `articleCategory(): BelongsTo`; add derived status helpers (`isDraft()`, `isScheduled()`, `isPublished()`) based on `published_at` (data-model.md § Status turunan) (depends on T004)
+- [X] T006 [P] Create `ArticleCategoryFactory` in `database/factories/ArticleCategoryFactory.php`
+- [X] T007 [P] Create `ArticleCategorySeeder` in `database/seeders/ArticleCategorySeeder.php` — seed canonical categories "Tips", "Berita", "Edukasi" via `updateOrCreate` (idempotent, matches names used in migration backfill in T003)
+- [X] T008 Update `ArticleFactory` in `database/factories/ArticleFactory.php` — replace `category` string with `article_category_id` (via `ArticleCategory::factory()` or `ArticleCategory::inRandomOrder()->first()->id`), add `redaksi` fake value (depends on T006)
+- [X] T009 Update `ArticleSeeder` in `database/seeders/ArticleSeeder.php` — look up seeded `ArticleCategory` records by name instead of writing a `category` string, fill `redaksi` (e.g. "Tim Redaksi SUOER") (depends on T007)
+- [X] T010 Update `database/seeders/DatabaseSeeder.php` — call `ArticleCategorySeeder::class` before `ArticleSeeder::class` (depends on T007, T009)
+- [X] T011 [P] Create `App\Support\ImageUploads` helper in `app/Support/ImageUploads.php` — static `storeAsWebp(TemporaryUploadedFile $file, string $directory): string` using GD (`imagecreatefromstring`, `imagewebp`), returns the stored relative path (research.md §6)
 
 **Checkpoint**: `php artisan migrate:fresh --seed` runs clean; `Article`/`ArticleCategory` models and factories are usable in tests. User story implementation can now begin.
 
