@@ -117,10 +117,10 @@ Perluasan langsung controller/view publik dan admin panel Filament yang sudah ad
 
 **Purpose**: Verifikasi akhir lintas story sebelum dianggap selesai.
 
-- [ ] T017 [P] Jalankan `vendor/bin/pint --dirty --format agent` untuk merapikan seluruh file PHP yang diubah
-- [ ] T018 Jalankan test yang relevan: `php artisan test --compact --filter=ContactPageTest`, `--filter=ContactSubmissionResourceTest`
-- [ ] T019 Jalankan `php artisan test --compact` penuh untuk memastikan tidak ada regresi ke test lain (001, 002, 003)
-- [ ] T020 `php artisan migrate:fresh --seed` di lokal untuk memastikan migration baru jalan bersih dari kosong
+- [X] T017 [P] Jalankan `vendor/bin/pint --dirty --format agent` untuk merapikan seluruh file PHP yang diubah
+- [X] T018 Jalankan test yang relevan: `php artisan test --compact --filter=ContactPageTest`, `--filter=ContactSubmissionResourceTest`
+- [X] T019 Jalankan `php artisan test --compact` penuh untuk memastikan tidak ada regresi ke test lain (001, 002, 003)
+- [X] T020 `php artisan migrate:fresh --seed` di lokal untuk memastikan migration baru jalan bersih dari kosong
 - [ ] T021 Ikuti langkah verifikasi manual di [quickstart.md](./quickstart.md) untuk ketiga user story + WA redirect
 
 ---
