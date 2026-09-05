@@ -151,9 +151,9 @@
 
 **Purpose**: Formatting, full regression check, and manual acceptance pass.
 
-- [ ] T033 [P] Run `vendor/bin/pint --dirty --format agent` and fix any reported style issues
-- [ ] T034 Run `php artisan test --compact` (full suite) and confirm no regressions in existing Product/Contact/public-page tests
-- [ ] T035 Walk through [quickstart.md](./quickstart.md) US1–US5 steps manually against a fresh `migrate:fresh --seed` to confirm end-to-end behavior
+- [X] T033 [P] Run `vendor/bin/pint --dirty --format agent` and fix any reported style issues
+- [X] T034 Run `php artisan test --compact` (full suite) and confirm no regressions in existing Product/Contact/public-page tests — 71/71 passing
+- [X] T035 Walk through [quickstart.md](./quickstart.md) US1–US5 steps manually against a fresh `migrate:fresh --seed` to confirm end-to-end behavior — verified `/artikel` and `/artikel/{slug}` render category, redaksi byline, and seeded data correctly
 
 ---
 
