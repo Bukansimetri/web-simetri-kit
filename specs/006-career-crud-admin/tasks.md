@@ -45,13 +45,13 @@
 
 ### Tests for User Story 1 ⚠️
 
-- [ ] T004 [P] [US1] Feature test in `tests/Feature/Admin/JobOpeningResourceTest.php` — create job opening with required fields succeeds and appears on `/karir`; edit updates the record and public page reflects it; missing required field is rejected with a field-level error; `employment_type` outside `JobOpening::EMPLOYMENT_TYPES` is rejected; toggling `is_active` to false hides it from `/karir` without deleting it; delete removes it from both admin and `/karir`
+- [X] T004 [P] [US1] Feature test in `tests/Feature/Admin/JobOpeningResourceTest.php` — create job opening with required fields succeeds and appears on `/karir`; edit updates the record and public page reflects it; missing required field is rejected with a field-level error; `employment_type` outside `JobOpening::EMPLOYMENT_TYPES` is rejected; toggling `is_active` to false hides it from `/karir` without deleting it; delete removes it from both admin and `/karir`
 
 ### Implementation for User Story 1
 
-- [ ] T005 [US1] Generate resource: `php artisan make:filament-resource JobOpening --no-interaction` (creates `app/Filament/Resources/JobOpeningResource.php` + `Pages/{ListJobOpenings,CreateJobOpening,EditJobOpening}.php`)
-- [ ] T006 [US1] Implement `form()` in `app/Filament/Resources/JobOpeningResource.php` — `TextInput::make('title')->required()`, `TextInput::make('location')->required()`, `Select::make('employment_type')->options(JobOpening::EMPLOYMENT_TYPES)->required()`, `Textarea::make('description')->required()`, `Toggle::make('is_active')->default(true)`
-- [ ] T007 [US1] Implement `table()` in `app/Filament/Resources/JobOpeningResource.php` — columns `title`, `location`, `employment_type` (formatted via `EMPLOYMENT_TYPES` label), `is_active` (as a `ToggleColumn` for quick in-table toggling per contracts/admin-panel-surface.md §1), row actions Edit/Delete with confirmation (FR-005)
+- [X] T005 [US1] Generate resource: `php artisan make:filament-resource JobOpening --no-interaction` (creates `app/Filament/Resources/JobOpeningResource.php` + `Pages/{ListJobOpenings,CreateJobOpening,EditJobOpening}.php`)
+- [X] T006 [US1] Implement `form()` in `app/Filament/Resources/JobOpeningResource.php` — `TextInput::make('title')->required()`, `TextInput::make('location')->required()`, `Select::make('employment_type')->options(JobOpening::EMPLOYMENT_TYPES)->required()->rule(Rule::in(...))` (explicit rule needed — Filament Select does not auto-validate server-side against options), `Textarea::make('description')->required()`, `Toggle::make('is_active')->default(true)`
+- [X] T007 [US1] Implement `table()` in `app/Filament/Resources/JobOpeningResource.php` — columns `title`, `location`, `employment_type` (formatted via `EMPLOYMENT_TYPES` label), `is_active` (as a `ToggleColumn` for quick in-table toggling per contracts/admin-panel-surface.md §1), row actions Edit/Delete with confirmation (FR-005)
 
 **Checkpoint**: User Story 1 fully functional and testable independently (`php artisan test --compact tests/Feature/Admin/JobOpeningResourceTest.php`) — this is the deliverable MVP.
 
