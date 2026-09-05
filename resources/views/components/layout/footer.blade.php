@@ -8,12 +8,12 @@
             ['label' => 'B2B & Industri', 'href' => url('/produk')],
             ['label' => 'Pompa Air Surya', 'href' => url('/produk')],
         ],
-        'Perusahaan' => [
+        'Perusahaan' => array_filter([
             ['label' => 'Tentang Kami', 'href' => url('/tentang-kami')],
             ['label' => 'Blog & Artikel', 'href' => url('/artikel')],
-            ['label' => 'Karir', 'href' => url('/karir')],
+            $brand->career_module_enabled ? ['label' => 'Karir', 'href' => url('/karir')] : null,
             ['label' => 'FAQ', 'href' => url('/faq')],
-        ],
+        ]),
     ];
 @endphp
 <footer class="pt-20 pb-10 px-6 border-t border-white/10" style="background-color: var(--color-on-background);">

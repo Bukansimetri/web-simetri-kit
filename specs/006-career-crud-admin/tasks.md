@@ -65,14 +65,14 @@
 
 ### Tests for User Story 2 ⚠️
 
-- [ ] T008 [P] [US2] Feature test in `tests/Feature/Public/CareerModuleToggleTest.php` — with `career_module_enabled = true` (default), `/karir` is 200 and footer contains "Karir" link; with it set `false`, `/karir` is 404 and the homepage (or any public page) does NOT contain a "Karir" footer link; toggling off then back on preserves existing `JobOpening` records (still visible once re-enabled)
-- [ ] T009 [P] [US2] Feature test in `tests/Feature/Admin/JobOpeningResourceTest.php` (extend, same file as T004) — `JobOpeningResource` list/create/edit remain fully accessible and functional even when `career_module_enabled = false` (FR-013)
+- [X] T008 [P] [US2] Feature test in `tests/Feature/Public/CareerModuleToggleTest.php` — with `career_module_enabled = true` (default), `/karir` is 200 and footer contains "Karir" link; with it set `false`, `/karir` is 404 and the homepage (or any public page) does NOT contain a "Karir" footer link; toggling off then back on preserves existing `JobOpening` records (still visible once re-enabled)
+- [X] T009 [P] [US2] Feature test in `tests/Feature/Admin/JobOpeningResourceTest.php` (extend, same file as T004) — `JobOpeningResource` list/create/edit remain fully accessible and functional even when `career_module_enabled = false` (FR-013)
 
 ### Implementation for User Story 2
 
-- [ ] T010 [US2] Add `Toggle::make('career_module_enabled')` to `form()` in `app/Filament/Pages/BrandSettingsPage.php`, under a new or existing Section (e.g. "Modul Opsional"), plus wire it in `mount()` (read from settings) and `save()` (write back to settings) alongside the existing fields
-- [ ] T011 [US2] Update `app/Http/Controllers/Public/CareerController.php` — `abort_unless(app(BrandSettings::class)->career_module_enabled, 404)` at the top of `__invoke()`, before querying `JobOpening` (research.md §3)
-- [ ] T012 [US2] Update `resources/views/components/layout/footer.blade.php` — conditionally omit the "Karir" entry from the `Perusahaan` column when `app(\App\Settings\BrandSettings::class)->career_module_enabled` is `false`
+- [X] T010 [US2] Add `Toggle::make('career_module_enabled')` to `form()` in `app/Filament/Pages/BrandSettingsPage.php`, under a new "Modul Opsional" Section, plus wire it in `mount()` (read from settings) and `save()` (write back to settings) alongside the existing fields
+- [X] T011 [US2] Update `app/Http/Controllers/Public/CareerController.php` — `abort_unless(app(BrandSettings::class)->career_module_enabled, 404)` at the top of `__invoke()`, before querying `JobOpening` (research.md §3)
+- [X] T012 [US2] Update `resources/views/components/layout/footer.blade.php` — conditionally omit the "Karir" entry from the `Perusahaan` column (via `array_filter`) when `$brand->career_module_enabled` is `false`
 
 **Checkpoint**: Both user stories independently functional — CRUD works regardless of toggle state; toggle state correctly gates only the public surface.
 

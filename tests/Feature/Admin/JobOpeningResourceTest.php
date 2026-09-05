@@ -7,6 +7,7 @@ use App\Filament\Resources\JobOpeningResource\Pages\EditJobOpening;
 use App\Filament\Resources\JobOpeningResource\Pages\ListJobOpenings;
 use App\Models\JobOpening;
 use App\Models\User;
+use App\Settings\BrandSettings;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -96,6 +97,32 @@ class JobOpeningResourceTest extends TestCase
 
         $this->assertDatabaseHas('job_openings', ['id' => $job->id, 'is_active' => false]);
         $this->get('/karir')->assertOk()->assertDontSee('Lowongan Aktif', escape: false);
+    }
+
+    public function test_admin_crud_remains_accessible_when_career_module_disabled(): void
+    {
+        $settings = app(BrandSettings::class);
+        $settings->career_module_enabled = false;
+        $settings->save();
+
+        $user = User::factory()->create();
+
+        Livewire::actingAs($user)
+            ->test(ListJobOpenings::class)
+            ->assertSuccessful();
+
+        Livewire::actingAs($user)
+            ->test(CreateJobOpening::class)
+            ->fillForm([
+                'title' => 'Lowongan Saat Modul Nonaktif',
+                'location' => 'Jakarta',
+                'employment_type' => 'full-time',
+                'description' => 'x',
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $this->assertDatabaseHas('job_openings', ['title' => 'Lowongan Saat Modul Nonaktif']);
     }
 
     public function test_admin_can_delete_job_opening_and_it_disappears_from_public_page(): void
