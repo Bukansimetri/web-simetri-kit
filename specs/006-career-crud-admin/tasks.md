@@ -29,9 +29,9 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete.
 
-- [ ] T001 [P] Add `JobOpening::EMPLOYMENT_TYPES` constant (array `value => label`: `'full-time' => 'Full-time'`, `'part-time' => 'Part-time'`, `'contract' => 'Kontrak'`, `'internship' => 'Magang'`) to `app/Models/JobOpening.php` (data-model.md, research.md §1) — pattern from `BrandSettings::FONT_OPTIONS`
-- [ ] T002 [P] Create settings migration `database/settings/xxxx_add_career_module_enabled_to_brand_settings.php` (extends `Spatie\LaravelSettings\Migrations\SettingsMigration`) — `$this->migrator->add('brand.career_module_enabled', true)` (research.md §2)
-- [ ] T003 Add `public bool $career_module_enabled;` property to `app/Settings/BrandSettings.php` (depends on T002)
+- [X] T001 [P] Add `JobOpening::EMPLOYMENT_TYPES` constant (array `value => label`: `'full-time' => 'Full-time'`, `'part-time' => 'Part-time'`, `'contract' => 'Kontrak'`, `'internship' => 'Magang'`) to `app/Models/JobOpening.php` (data-model.md, research.md §1) — pattern from `BrandSettings::FONT_OPTIONS`
+- [X] T002 [P] Create settings migration `database/settings/xxxx_add_career_module_enabled_to_brand_settings.php` (extends `Spatie\LaravelSettings\Migrations\SettingsMigration`) — `$this->migrator->add('brand.career_module_enabled', true)` (research.md §2)
+- [X] T003 Add `public bool $career_module_enabled;` property to `app/Settings/BrandSettings.php` (depends on T002)
 
 **Checkpoint**: `php artisan migrate` runs clean; `app(BrandSettings::class)->career_module_enabled` returns `true` by default. User story implementation can now begin.
 
