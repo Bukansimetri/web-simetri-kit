@@ -47,6 +47,8 @@ class BrandSettingsPage extends Page implements HasForms
             'font_heading' => $settings->font_heading ?: BrandSettings::DEFAULT_FONT_HEADING,
             'font_body' => $settings->font_body ?: BrandSettings::DEFAULT_FONT_BODY,
             'og_image_path' => $settings->og_image_path,
+            'whatsapp_number' => $settings->whatsapp_number,
+            'contact_notification_email' => $settings->contact_notification_email,
         ]);
     }
 
@@ -97,6 +99,19 @@ class BrandSettingsPage extends Page implements HasForms
                             ->directory('branding')
                             ->helperText('Dipakai sebagai gambar preview saat link situs dibagikan. Default: gambar bawaan Luminous Azure.'),
                     ]),
+                Section::make('Kontak & Notifikasi')
+                    ->description('Dipakai oleh form Kontak (AMC-216) — kosongkan bila belum ingin mengaktifkan salah satu.')
+                    ->schema([
+                        TextInput::make('whatsapp_number')
+                            ->label('Nomor WhatsApp Bisnis')
+                            ->placeholder('6281234567890')
+                            ->helperText('Format angka saja (kode negara tanpa +). Dipakai untuk redirect wa.me setelah pengunjung submit form Kontak.')
+                            ->tel(),
+                        TextInput::make('contact_notification_email')
+                            ->label('Email Notifikasi Kontak')
+                            ->email()
+                            ->helperText('Menerima email setiap ada submission baru dari form Kontak.'),
+                    ]),
             ])
             ->statePath('data');
     }
@@ -114,6 +129,8 @@ class BrandSettingsPage extends Page implements HasForms
         $settings->font_heading = $data['font_heading'] ?? null;
         $settings->font_body = $data['font_body'] ?? null;
         $settings->og_image_path = $data['og_image_path'] ?? null;
+        $settings->whatsapp_number = $data['whatsapp_number'] ?? null;
+        $settings->contact_notification_email = $data['contact_notification_email'] ?? null;
         $settings->save();
 
         Notification::make()
