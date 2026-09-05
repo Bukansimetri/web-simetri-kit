@@ -82,9 +82,9 @@
 
 **Purpose**: Formatting, full regression check, and manual acceptance pass.
 
-- [ ] T013 [P] Run `vendor/bin/pint --dirty --format agent` and fix any reported style issues
-- [ ] T014 Run `php artisan test --compact` (full suite) and confirm no regressions in existing Product/Article/Contact/public-page tests
-- [ ] T015 Walk through [quickstart.md](./quickstart.md) US1–US2 steps manually against a fresh `migrate:fresh --seed` to confirm end-to-end behavior
+- [X] T013 [P] Run `vendor/bin/pint --dirty --format agent` and fix any reported style issues
+- [X] T014 Run `php artisan test --compact` (full suite) and confirm no regressions in existing Product/Article/Contact/public-page tests — 81/81 passing
+- [X] T015 Walk through [quickstart.md](./quickstart.md) US1–US2 steps manually against a fresh `migrate:fresh --seed` to confirm end-to-end behavior — verified `/karir` 200→404 on toggle off, footer link hidden/restored, re-enable brings data back
 
 ---
 
