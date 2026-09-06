@@ -110,5 +110,7 @@
 
     <x-sections.testimonials :testimonials="$testimonials" />
 
+    <x-sections.client-logos :logos="$clientLogos" />
+
     <x-sections.cta-band />
 @endsection
