@@ -51,8 +51,8 @@
     <div class="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs text-white/40">
         <p>&copy; {{ now()->year }} {{ $appName }}. All Rights Reserved.</p>
         <div class="flex space-x-6 mt-4 md:mt-0">
-            <a class="hover:text-white transition-colors" href="{{ url('/tentang-kami') }}">Kebijakan Privasi</a>
-            <a class="hover:text-white transition-colors" href="{{ url('/tentang-kami') }}">Syarat &amp; Ketentuan</a>
+            <a class="hover:text-white transition-colors" href="{{ url('/halaman/kebijakan-privasi') }}">Kebijakan Privasi</a>
+            <a class="hover:text-white transition-colors" href="{{ url('/halaman/syarat-ketentuan') }}">Syarat &amp; Ketentuan</a>
         </div>
     </div>
 </footer>
