@@ -108,5 +108,7 @@
         </div>
     </section>
 
+    <x-sections.testimonials :testimonials="$testimonials" />
+
     <x-sections.cta-band />
 @endsection
