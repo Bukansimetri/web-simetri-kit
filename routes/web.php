@@ -7,6 +7,7 @@ use App\Http\Controllers\Public\ContactController;
 use App\Http\Controllers\Public\CustomPageController;
 use App\Http\Controllers\Public\FaqController;
 use App\Http\Controllers\Public\HomeController;
+use App\Http\Controllers\Public\PortfolioController;
 use App\Http\Controllers\Public\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,10 @@ Route::get('/karir', CareerController::class)->name('karir');
 Route::get('/artikel', [ArticleController::class, 'index'])->name('artikel.index');
 Route::get('/artikel/{article:slug}', [ArticleController::class, 'show'])->name('artikel.show');
 Route::get('/faq', FaqController::class)->name('faq');
+
+// Portfolio (spec 010-portfolio-showcase-module) — listing + filter kategori & detail.
+Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio.index');
+Route::get('/portfolio/{portfolioProject:slug}', [PortfolioController::class, 'show'])->name('portfolio.show');
 
 // Custom Page (spec 007-custom-page) — satu route dinamis, prefix /halaman/
 // supaya tidak pernah bentrok dengan route statis mana pun (FR-014).
