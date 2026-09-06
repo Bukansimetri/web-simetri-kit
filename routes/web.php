@@ -4,6 +4,7 @@ use App\Http\Controllers\Public\AboutController;
 use App\Http\Controllers\Public\ArticleController;
 use App\Http\Controllers\Public\CareerController;
 use App\Http\Controllers\Public\ContactController;
+use App\Http\Controllers\Public\CustomPageController;
 use App\Http\Controllers\Public\FaqController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\ProductController;
@@ -22,3 +23,7 @@ Route::get('/karir', CareerController::class)->name('karir');
 Route::get('/artikel', [ArticleController::class, 'index'])->name('artikel.index');
 Route::get('/artikel/{article:slug}', [ArticleController::class, 'show'])->name('artikel.show');
 Route::get('/faq', FaqController::class)->name('faq');
+
+// Custom Page (spec 007-custom-page) — satu route dinamis, prefix /halaman/
+// supaya tidak pernah bentrok dengan route statis mana pun (FR-014).
+Route::get('/halaman/{customPage:slug}', CustomPageController::class)->name('halaman.show');
