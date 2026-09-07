@@ -8,17 +8,20 @@ use Illuminate\Support\Str;
 
 /**
  * Helper konversi gambar upload ke WebP memakai GD (extension bawaan PHP),
- * TANPA dependency baru (Principle V, research.md §6). Hanya mengonversi
- * format — TIDAK ADA validasi/penolakan berdasarkan dimensi gambar (FR-020,
- * FR-021).
+ * TANPA dependency baru (Principle V). Secara default hanya mengonversi format;
+ * bila `$maxWidth` diberikan, gambar yang lebih lebar di-downscale ke lebar
+ * tsb dengan rasio dipertahankan (tidak pernah di-upscale). Tidak ada
+ * penolakan berdasarkan dimensi.
  */
 class ImageUploads
 {
     /**
      * Konversi file upload apa pun (JPG/PNG/GIF/dll.) ke WebP dan simpan ke
-     * disk yang diberikan. Mengembalikan path relatif hasil penyimpanan.
+     * disk yang diberikan. Bila `$maxWidth` diisi dan lebar gambar melebihi
+     * nilai tsb, gambar dikecilkan ke lebar `$maxWidth` (tinggi proporsional).
+     * Mengembalikan path relatif hasil penyimpanan.
      */
-    public static function storeAsWebp(UploadedFile $file, string $directory, string $disk = 'public', int $quality = 80): string
+    public static function storeAsWebp(UploadedFile $file, string $directory, string $disk = 'public', int $quality = 80, ?int $maxWidth = null): string
     {
         $contents = file_get_contents($file->getRealPath());
 
@@ -34,6 +37,10 @@ class ImageUploads
         imagealphablending($image, true);
         imagesavealpha($image, true);
 
+        if ($maxWidth !== null) {
+            $image = self::downscaleToWidth($image, $maxWidth);
+        }
+
         ob_start();
         imagewebp($image, null, $quality);
         $webpContents = ob_get_clean();
@@ -44,5 +51,34 @@ class ImageUploads
         Storage::disk($disk)->put($path, $webpContents);
 
         return $path;
+    }
+
+    /**
+     * Kecilkan resource GD ke lebar `$maxWidth` bila lebih lebar; kembalikan
+     * apa adanya bila sudah ≤ `$maxWidth` (tidak pernah di-upscale). Resource
+     * lama di-destroy saat penggantian.
+     *
+     * @param  \GdImage  $image
+     * @return \GdImage
+     */
+    private static function downscaleToWidth($image, int $maxWidth)
+    {
+        $width = imagesx($image);
+        $height = imagesy($image);
+
+        if ($width <= $maxWidth) {
+            return $image;
+        }
+
+        $newHeight = (int) round($height * ($maxWidth / $width));
+
+        $resized = imagecreatetruecolor($maxWidth, $newHeight);
+        imagealphablending($resized, false);
+        imagesavealpha($resized, true);
+        imagecopyresampled($resized, $image, 0, 0, 0, 0, $maxWidth, $newHeight, $width, $height);
+
+        imagedestroy($image);
+
+        return $resized;
     }
 }
