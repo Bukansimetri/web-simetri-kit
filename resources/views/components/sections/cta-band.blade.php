@@ -1,20 +1,24 @@
 @props([
-    'title' => 'Siap beralih ke energi matahari?',
-    'description' => 'Tim ahli kami siap membantu menganalisa kebutuhan dan memberikan desain sistem gratis.',
-    'buttonLabel' => 'Konsultasi Gratis',
-    'buttonHref' => url('/kontak'),
+    'title' => 'Ingin tahu lebih lanjut tentang SUOER?',
+    'subtitle' => 'Ngobrol langsung dengan tim kami',
+    'buttonLabel' => 'Hubungi via WhatsApp',
+    'buttonIcon' => 'forum',
+    'buttonHref' => null,
 ])
 
-<section class="py-24 px-6 max-w-5xl mx-auto">
-    <div class="bg-primary p-12 md:p-16 text-center relative overflow-hidden shadow-md rounded-lg">
-        <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-primary-container rounded-full blur-3xl opacity-40"></div>
+@php
+    $brand = app(\App\Settings\BrandSettings::class);
+    $href = $buttonHref ?: ($brand->whatsappUrl('Halo, saya ingin konsultasi tentang solusi tenaga surya SUOER.') ?: url('/kontak'));
+@endphp
 
-        <div class="relative z-10">
-            <h2 class="font-headline-lg text-headline-lg md:text-4xl text-white mb-4">{{ $title }}</h2>
-            <p class="text-white/80 mb-8 max-w-xl mx-auto">{{ $description }}</p>
-            <a href="{{ $buttonHref }}" class="btn-fill inline-block bg-primary-container font-bold px-8 py-4 hover:scale-105 transition-transform shadow-lg text-white rounded-lg">
-                {{ $buttonLabel }}
-            </a>
-        </div>
+<section class="reveal-element py-24 px-6 bg-primary text-center">
+    <div class="max-w-4xl mx-auto">
+        <h2 class="font-headline-xl text-3xl md:text-5xl font-bold text-white mb-10 leading-tight">
+            {{ $title }}@if ($subtitle)<br>{{ $subtitle }}@endif
+        </h2>
+        <a href="{{ $href }}" class="btn-fill inline-flex items-center justify-center gap-3 text-white font-bold text-lg px-10 py-5 hover:scale-105 transition-transform shadow-lg bg-primary-container hover:bg-primary-container/90 rounded-lg">
+            <span class="material-symbols-outlined">{{ $buttonIcon }}</span>
+            {{ $buttonLabel }}
+        </a>
     </div>
 </section>

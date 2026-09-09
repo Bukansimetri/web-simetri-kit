@@ -11,7 +11,7 @@ class HomeBannerTest extends TestCase
 {
     use RefreshDatabase;
 
-    private const HERO_HEADLINE = 'Nyalakan rumah Anda dengan energi';
+    private const HERO_HEADLINE = 'Nyalakan Rumah &amp; Bisnis Anda dengan Energi Matahari';
 
     protected function makeBanner(array $attributes = []): Banner
     {

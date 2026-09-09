@@ -58,12 +58,15 @@ class AboutPageTestimonialsTest extends TestCase
         $response->assertDontSee('Apa Kata Klien Kami', escape: false);
     }
 
-    public function test_home_page_does_not_show_testimonials(): void
+    public function test_home_page_shows_active_testimonials(): void
     {
-        Testimonial::factory()->create(['name' => 'Klien Beranda']);
+        Testimonial::factory()->create(['name' => 'Klien Beranda', 'content' => 'Sangat puas dengan layanan SUOER.']);
+        Testimonial::factory()->inactive()->create(['name' => 'Klien Nonaktif Beranda']);
 
         $this->get('/')
             ->assertOk()
-            ->assertDontSee('Klien Beranda', escape: false);
+            ->assertSee('Klien Beranda', escape: false)
+            ->assertSee('Apa Kata Mereka Tentang SUOER?', escape: false)
+            ->assertDontSee('Klien Nonaktif Beranda', escape: false);
     }
 }
