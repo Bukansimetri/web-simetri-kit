@@ -155,8 +155,12 @@ body {
  * Reveal-on-scroll (di-toggle oleh resources/js/scroll-fx.js). Elemen
  * ber-class .reveal-element mulai transparan + sedikit turun, lalu naik
  * saat .is-visible ditambahkan.
+ *
+ * PENTING: state "tersembunyi" hanya berlaku bila JS aktif (html.js —
+ * di-set inline di <head>). Tanpa JS / bila observer gagal, seluruh konten
+ * tetap terlihat (progressive enhancement, tidak merusak SEO/no-JS).
  */
-.reveal-element {
+.js .reveal-element {
     opacity: 0;
     transform: translateY(28px);
     transition:
@@ -164,13 +168,13 @@ body {
         transform 0.7s ease-out;
 }
 
-.reveal-element.is-visible {
+.js .reveal-element.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .reveal-element {
+    .js .reveal-element {
         opacity: 1 !important;
         transform: none !important;
         transition: none !important;
