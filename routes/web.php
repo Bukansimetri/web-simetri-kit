@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Public\AboutController;
 use App\Http\Controllers\Public\ArticleController;
+use App\Http\Controllers\Public\CalculatorController;
 use App\Http\Controllers\Public\CareerController;
 use App\Http\Controllers\Public\ContactController;
 use App\Http\Controllers\Public\CustomPageController;
@@ -20,6 +21,7 @@ Route::get('/produk/{product:slug}', [ProductController::class, 'show'])->name('
 Route::get('/tentang-kami', AboutController::class)->name('tentang-kami');
 Route::get('/kontak', [ContactController::class, 'show'])->name('kontak');
 Route::post('/kontak', [ContactController::class, 'store'])->name('kontak.store')->middleware('throttle:5,1');
+Route::post('/kalkulator/lead', [CalculatorController::class, 'storeLead'])->name('kalkulator.lead')->middleware('throttle:5,1');
 Route::get('/karir', CareerController::class)->name('karir');
 Route::get('/artikel', [ArticleController::class, 'index'])->name('artikel.index');
 Route::get('/artikel/{article:slug}', [ArticleController::class, 'show'])->name('artikel.show');
