@@ -8,12 +8,12 @@
 @section('meta_description', 'Bergabunglah dengan tim '.$appName.' dan jadi bagian dari transisi energi bersih Indonesia.')
 
 @section('content')
-    <section class="pt-32 pb-16 px-6 max-w-7xl mx-auto text-center">
-        <h1 class="font-headline-xl text-headline-xl text-on-surface mb-4">Bangun Karir di {{ $appName }}</h1>
-        <p class="font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto">
-            Jadilah bagian dari tim yang menggerakkan transisi energi bersih di Indonesia.
-        </p>
-    </section>
+    <x-sections.page-hero
+        title="Bangun Karir di {{ $appName }}"
+        breadcrumb="Karir"
+        subtitle="Jadilah bagian dari tim yang menggerakkan transisi energi bersih di Indonesia."
+        :image="asset('images/mockup/home-3.jpg')"
+    />
 
     @php
         $values = [

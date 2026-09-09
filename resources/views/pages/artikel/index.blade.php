@@ -8,14 +8,14 @@
 @section('meta_description', 'Tips, edukasi, dan berita seputar energi surya dari '.$appName.'.')
 
 @section('content')
-    <section class="pt-32 pb-16 px-6 max-w-7xl mx-auto text-center">
-        <h1 class="font-headline-xl text-headline-xl text-on-surface mb-4">Artikel &amp; Blog</h1>
-        <p class="font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto">
-            Tips, edukasi, dan kabar terbaru seputar energi surya.
-        </p>
-    </section>
+    <x-sections.page-hero
+        title="Artikel & Blog"
+        breadcrumb="Artikel"
+        subtitle="Tips, edukasi, dan kabar terbaru seputar energi surya."
+        :image="asset('images/mockup/artikel-1.jpg')"
+    />
 
-    <section class="px-6 max-w-7xl mx-auto pb-24">
+    <section class="reveal-element px-6 max-w-7xl mx-auto py-24">
         @if ($articles->isEmpty())
             <p class="text-center text-on-surface-variant py-16">Belum ada artikel yang dipublikasikan saat ini.</p>
         @else
