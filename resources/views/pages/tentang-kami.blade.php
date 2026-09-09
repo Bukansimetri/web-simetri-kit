@@ -108,6 +108,8 @@
         </div>
     </section>
 
+    <x-sections.team-members :members="$teamMembers" />
+
     <x-sections.testimonials :testimonials="$testimonials" />
 
     <x-sections.client-logos :logos="$clientLogos" />
