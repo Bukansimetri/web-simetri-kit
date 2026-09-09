@@ -4,7 +4,11 @@
 @section('meta_description', 'Solusi panel surya untuk rumah, bisnis, dan industri — hitung estimasi hemat listrik Anda.')
 
 @section('content')
-    <x-sections.hero />
+    @if ($banners->isNotEmpty())
+        <x-sections.banner-carousel :banners="$banners" />
+    @else
+        <x-sections.hero />
+    @endif
 
     <x-sections.calculator />
 
