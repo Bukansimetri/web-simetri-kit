@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
 use App\Models\ClientLogo;
+use App\Models\TeamMember;
 use App\Models\Testimonial;
 use Illuminate\View\View;
 
@@ -23,9 +24,16 @@ class AboutController extends Controller
             ->orderBy('id')
             ->get();
 
+        $teamMembers = TeamMember::query()
+            ->where('is_active', true)
+            ->orderBy('order')
+            ->orderBy('id')
+            ->get();
+
         return view('pages.tentang-kami', [
             'testimonials' => $testimonials,
             'clientLogos' => $clientLogos,
+            'teamMembers' => $teamMembers,
         ]);
     }
 }
