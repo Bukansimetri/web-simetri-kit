@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\Product;
 use Illuminate\View\View;
 
@@ -15,6 +16,11 @@ class HomeController extends Controller
             ->take(3)
             ->get();
 
-        return view('pages.home', ['products' => $products]);
+        $banners = Banner::live()->get();
+
+        return view('pages.home', [
+            'products' => $products,
+            'banners' => $banners,
+        ]);
     }
 }
