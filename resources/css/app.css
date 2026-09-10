@@ -150,3 +150,62 @@ body {
     background-color: var(--color-background);
     overflow-x: hidden;
 }
+
+/*
+ * Reveal-on-scroll (di-toggle oleh resources/js/scroll-fx.js). Elemen
+ * ber-class .reveal-element mulai transparan + sedikit turun, lalu naik
+ * saat .is-visible ditambahkan.
+ *
+ * PENTING: state "tersembunyi" hanya berlaku bila JS aktif (html.js —
+ * di-set inline di <head>). Tanpa JS / bila observer gagal, seluruh konten
+ * tetap terlihat (progressive enhancement, tidak merusak SEO/no-JS).
+ */
+.js .reveal-element {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+        opacity 0.7s ease-out,
+        transform 0.7s ease-out;
+}
+
+.js .reveal-element.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .js .reveal-element {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+}
+
+/*
+ * Efek "fill" pada tombol utama (port mockup-master): lapisan gelap tipis
+ * menyapu dari kiri saat hover.
+ */
+.btn-fill {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-fill::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-in-out;
+}
+
+.btn-fill:hover::before {
+    transform: scaleX(1);
+}
+
+[x-cloak] {
+    display: none !important;
+}

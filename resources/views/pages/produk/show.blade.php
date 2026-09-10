@@ -5,13 +5,13 @@
 
 @section('content')
     <section class="px-margin-mobile md:px-margin-desktop pt-32 pb-12 max-w-[1280px] mx-auto">
-        <p class="font-label-bold text-label-bold text-on-surface-variant uppercase tracking-widest mb-6">
-            <a href="{{ url('/') }}" class="hover:text-primary">Beranda</a>
-            <span class="mx-2">/</span>
-            <a href="{{ url('/produk') }}" class="hover:text-primary">Produk</a>
-            <span class="mx-2">/</span>
-            {{ $product->name }}
-        </p>
+        <nav aria-label="Breadcrumb" class="flex text-sm text-outline mb-8">
+            <ol class="inline-flex items-center flex-wrap gap-y-1">
+                <li><a class="hover:text-primary transition-colors" href="{{ url('/') }}">Beranda</a></li>
+                <li class="flex items-center"><span class="material-symbols-outlined text-sm mx-1">chevron_right</span><a class="hover:text-primary transition-colors" href="{{ url('/produk') }}">Produk</a></li>
+                <li class="flex items-center" aria-current="page"><span class="material-symbols-outlined text-sm mx-1">chevron_right</span><span class="text-primary font-medium">{{ $product->name }}</span></li>
+            </ol>
+        </nav>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-[80px] items-center">
             @php $images = $product->imageUrls(); @endphp
@@ -59,7 +59,7 @@
         </div>
     </section>
 
-    <section class="px-margin-mobile md:px-margin-desktop py-[80px] bg-surface-container-lowest">
+    <section class="reveal-element px-margin-mobile md:px-margin-desktop py-[80px] bg-surface-container-lowest">
         <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-[24px]">
             <div class="md:col-span-2 bg-surface border border-outline-variant/30 rounded-lg p-[48px]">
                 <h2 class="font-headline-lg text-headline-lg mb-[24px] text-on-surface">Spesifikasi Teknis</h2>
@@ -93,8 +93,31 @@
         </div>
     </section>
 
+    {{-- Masa Depan Energi Anda --}}
+    <section class="reveal-element px-margin-mobile md:px-margin-desktop py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-primary/5 -z-10"></div>
+        <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="flex flex-col gap-6">
+                <h2 class="font-headline-xl text-3xl md:text-4xl font-extrabold text-primary tracking-tight">Masa Depan Energi Anda</h2>
+                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                    Berinvestasi pada {{ Str::lower($product->name) }} bukan sekadar mengurangi tagihan listrik, tetapi juga bentuk komitmen terhadap kelestarian bumi — dirancang untuk integrasi mulus dengan arsitektur modern.
+                </p>
+                <a href="{{ url('/kontak') }}" class="inline-flex items-center gap-2 text-primary font-semibold hover:text-primary-container transition-colors w-fit">
+                    Konsultasi kebutuhan Anda <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                </a>
+            </div>
+            <div class="h-[300px] rounded-lg overflow-hidden bg-surface-container">
+                @if (count($product->imageUrls()) > 0)
+                    <img src="{{ $product->coverImageUrl() }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
+                @else
+                    <div class="w-full h-full flex items-center justify-center text-outline"><span class="material-symbols-outlined text-6xl">solar_power</span></div>
+                @endif
+            </div>
+        </div>
+    </section>
+
     @if ($relatedProducts->isNotEmpty())
-        <section class="px-margin-mobile md:px-margin-desktop py-[80px] max-w-[1280px] mx-auto">
+        <section class="reveal-element px-margin-mobile md:px-margin-desktop py-[80px] max-w-[1280px] mx-auto">
             <h2 class="font-headline-lg text-headline-lg text-primary mb-8">Produk Terkait</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
                 @foreach ($relatedProducts as $related)

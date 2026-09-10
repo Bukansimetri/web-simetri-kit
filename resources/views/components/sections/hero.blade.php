@@ -1,47 +1,57 @@
-<section class="relative pt-32 pb-48 px-6 overflow-hidden">
-    <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-primary-fixed rounded-full -translate-y-1/3 translate-x-1/3 opacity-50 blur-3xl -z-10"></div>
+@props([
+    'badge' => 'Solar Panel Terpercaya • Efisiensi Hingga 80%',
+    'title' => 'Nyalakan Rumah & Bisnis Anda dengan Energi Matahari',
+    'subtitle' => 'Solusi tata surya terdepan untuk efisiensi maksimal dan investasi jangka panjang tanpa mengorbankan estetika hunian Anda.',
+    'image' => null,
+])
 
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
-        <div class="md:w-[55%] relative z-10 pt-10">
-            <div class="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full font-semibold text-sm mb-6">
-                <span class="material-symbols-outlined text-sm">solar_power</span>
-                <span>Solar Panel Terpercaya</span>
+@php
+    $heroImage = $image ?: asset('images/mockup/home-1.jpg');
+@endphp
+
+<section class="relative pt-32 pb-48 px-6 overflow-hidden bg-on-surface text-white min-h-[640px] flex items-center">
+    <div class="absolute inset-0 z-0">
+        <img src="{{ $heroImage }}" alt="Instalasi solar panel rooftop modern" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-r from-on-surface/90 via-on-surface/65 to-transparent"></div>
+    </div>
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-container/20 rounded-full blur-3xl -z-0 pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto w-full relative z-10 py-12">
+        <div class="max-w-2xl">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-xs font-semibold text-white mb-6 backdrop-blur-md">
+                <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+                <span>{{ $badge }}</span>
             </div>
 
-            <h1 class="font-headline-xl text-headline-xl text-on-surface mb-6">
-                Nyalakan rumah Anda dengan energi
-                <span class="text-primary relative inline-block">matahari</span>
+            <h1 class="font-headline-xl text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-6">
+                {{ $title }}
             </h1>
 
-            <p class="text-lg font-body-md text-body-md text-on-surface-variant mb-10 max-w-lg leading-relaxed">
-                Transisi energi yang mulus dan elegan. Hadirkan keandalan teknologi tata surya terdepan untuk hunian dan bisnis Anda, tanpa mengorbankan estetika.
+            <p class="text-base md:text-lg text-white/90 font-medium leading-relaxed mb-8 max-w-xl">
+                {{ $subtitle }}
             </p>
 
-            <div class="flex flex-col sm:flex-row items-center gap-6">
-                <a href="{{ url('/kontak') }}" class="btn-fill px-8 py-4 font-semibold hover:scale-105 transition-all shadow-md w-full sm:w-auto text-center bg-primary-container text-white rounded-lg">
-                    Konsultasi Gratis
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-10">
+                <a href="{{ url('/kontak') }}" class="btn-fill bg-primary-container text-white font-bold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center justify-center gap-2 group">
+                    <span>Konsultasi Gratis</span>
+                    <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </a>
-                <a href="#kalkulator" class="flex items-center space-x-3 text-primary font-semibold hover:text-primary-container transition-colors group">
-                    <div class="w-12 h-12 rounded-full border-2 border-primary/20 flex items-center justify-center group-hover:border-primary-container transition-colors">
-                        <span class="material-symbols-outlined ml-1">play_arrow</span>
-                    </div>
-                    <span>Lihat cara kerjanya</span>
+                <a href="{{ url('/#kalkulator') }}" class="bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold px-8 py-4 rounded-lg transition-colors flex items-center justify-center">
+                    Pelajari Cara Kerja
                 </a>
             </div>
 
-            <div class="absolute -bottom-24 -right-12 md:right-0 bg-white p-4 shadow-md flex items-center space-x-4 border border-gray-100 rounded-lg">
-                <div class="w-10 h-10 rounded-full bg-primary-container border-2 border-white flex items-center justify-center text-on-primary-container font-bold text-xs">
-                    500+
+            <div class="flex items-center gap-4 pt-4 border-t border-white/15">
+                <div class="flex -space-x-2">
+                    <div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-xs font-bold text-white border-2 border-on-surface">✓</div>
+                    <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-xs font-bold text-white border-2 border-on-surface">★</div>
+                    <div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-xs font-bold text-primary border-2 border-on-surface">✦</div>
                 </div>
-                <p class="font-medium text-sm leading-tight text-on-surface pr-2">Dipercaya 500+<br>pelanggan di Indonesia</p>
+                <div class="text-xs text-white/80">
+                    <p class="font-bold text-white">500+ Pelanggan Puas</p>
+                    <p class="text-white/60">Terpasang di seluruh wilayah Indonesia</p>
+                </div>
             </div>
-        </div>
-
-        <div class="md:w-[45%] relative z-0 mt-16 md:mt-0">
-            <div class="relative rounded-xl overflow-hidden shadow-md aspect-[4/5] bg-surface-container">
-                <div class="absolute inset-0 bg-gradient-to-t from-on-surface/40 to-transparent"></div>
-            </div>
-            <div class="absolute -top-6 -right-6 w-24 h-24 bg-primary-container rounded-full blur-2xl opacity-60"></div>
         </div>
     </div>
 </section>

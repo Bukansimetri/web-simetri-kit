@@ -12,6 +12,9 @@ class FaqController extends Controller
     {
         $faqItems = FaqItem::query()->orderBy('order')->get();
 
-        return view('pages.faq', ['faqItems' => $faqItems]);
+        return view('pages.faq', [
+            'faqItems' => $faqItems,
+            'categories' => $faqItems->pluck('category')->filter()->unique()->values(),
+        ]);
     }
 }

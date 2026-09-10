@@ -12,8 +12,9 @@ use Illuminate\Support\Str;
  * (public/mockup-html/produk_suoer_luminous_azure, produk_detail_suoer_header_aligned).
  * Dipertahankan untuk kebutuhan demo/dev saja — CRUD admin (AMC-207,
  * 003-produk-crud-admin) adalah sumber data utama pasca go-live (lihat
- * Assumptions di spec.md fitur tsb). `images` sengaja dikosongkan di sini;
- * gambar diupload lewat panel admin.
+ * Assumptions di spec.md fitur tsb). `images` memakai aset demo statis di
+ * public/images/mockup/ (Product::imageUrls() mengenali prefix `images/`);
+ * gambar produksi diupload lewat panel admin.
  */
 class ProductSeeder extends Seeder
 {
@@ -22,6 +23,7 @@ class ProductSeeder extends Seeder
         $products = [
             [
                 'name' => 'SUOER Mono X-Pro 550W',
+                'image' => 'images/mockup/produk-2.jpg',
                 'category_name' => 'Residensial',
                 'short_description' => 'Panel surya monocrystalline berkinerja tinggi yang dirancang khusus untuk estetika atap rumah modern dengan efisiensi konversi maksimal.',
                 'description' => 'Maksimalkan potensi energi matahari dengan panel surya monokristalin efisiensi tinggi. Dirancang untuk memberikan performa optimal bahkan dalam kondisi cahaya rendah, panel ini menawarkan keandalan dan durabilitas untuk kebutuhan energi masa depan Anda.',
@@ -42,6 +44,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'name' => 'SUOER Smart Inverter 5kW',
+                'image' => 'images/mockup/produk-3.jpg',
                 'category_name' => 'Komersial & Industri',
                 'short_description' => 'Inverter pintar dengan monitoring real-time via aplikasi, cocok untuk instalasi rumah menengah hingga bisnis kecil.',
                 'description' => 'Inverter hybrid 5kW dengan efisiensi konversi tinggi dan konektivitas WiFi bawaan untuk monitoring produksi energi secara real-time.',
@@ -60,6 +63,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'name' => 'SUOER Pro-Industrial 600W',
+                'image' => 'images/mockup/produk-4.jpg',
                 'category_name' => 'Komersial & Industri',
                 'short_description' => 'Panel surya kapasitas besar untuk kebutuhan instalasi komersial dan industri skala menengah.',
                 'description' => 'Dirancang untuk instalasi atap komersial dan industri dengan kebutuhan daya besar, menawarkan output tinggi per unit panel.',
@@ -76,6 +80,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'name' => 'SUOER Aqua-Solar System',
+                'image' => 'images/mockup/produk-5.jpg',
                 'category_name' => 'Pompa Air',
                 'short_description' => 'Sistem pompa air tenaga surya lengkap untuk irigasi dan kebutuhan air bersih tanpa jaringan listrik PLN.',
                 'description' => 'Paket lengkap pompa air tenaga surya — panel, controller, dan pompa submersible — untuk kebutuhan irigasi pertanian atau suplai air bersih di area tanpa listrik PLN.',
@@ -92,6 +97,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'name' => 'SUOER PowerBank Home 10kWh',
+                'image' => 'images/mockup/produk-6.jpg',
                 'category_name' => 'Residensial',
                 'short_description' => 'Baterai penyimpanan energi rumah tangga untuk cadangan listrik saat pemadaman atau malam hari.',
                 'description' => 'Sistem baterai lithium 10kWh yang menyimpan kelebihan energi surya di siang hari untuk dipakai malam hari atau saat pemadaman listrik.',
@@ -108,6 +114,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'name' => 'Mounting Kit Standar',
+                'image' => 'images/mockup/produk-7.jpg',
                 'category_name' => 'Residensial',
                 'short_description' => 'Kit pemasangan panel surya universal untuk atap genteng maupun metal, tahan korosi.',
                 'description' => 'Kit mounting alumunium anti-karat yang kompatibel dengan mayoritas jenis atap rumah di Indonesia, dilengkapi panduan pemasangan lengkap.',
@@ -124,6 +131,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'name' => 'SUOER Turnkey Commercial Package',
+                'image' => 'images/mockup/produk-8.jpg',
                 'category_name' => 'Komersial & Industri',
                 'short_description' => 'Sistem energi surya terintegrasi penuh untuk kebutuhan industri. Termasuk panel efisiensi tinggi, inverter sentral, dan instalasi standar EPC.',
                 'description' => 'Paket turnkey lengkap dari desain, pengadaan, hingga instalasi (EPC) untuk kebutuhan energi surya skala industri/komersial besar.',
@@ -160,7 +168,7 @@ class ProductSeeder extends Seeder
                     'description' => $product['description'],
                     'price' => $product['price'],
                     'strikethrough_price' => $product['strikethrough_price'],
-                    'images' => [],
+                    'images' => [$product['image']],
                     'specs' => $specs,
                     'features' => $product['features'],
                     'order' => $order,

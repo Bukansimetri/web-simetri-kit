@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
+    <script>document.documentElement.classList.add('js');</script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -14,8 +15,10 @@
 
     @include('layouts.partials.og-meta')
 
-    {{-- Material Symbols dipakai sebagai icon set di seluruh mockup — bukan bagian dari
-         sistem font kurasi (FR-004), jadi tetap dimuat lewat Google Fonts langsung. --}}
+    {{-- Font heading/body (Manrope, Be Vietnam Pro, dst.) di-bundle saat build lewat
+         laravel-vite-plugin/fonts (lihat vite.config.js) dan otomatis di-preload oleh
+         @vite. Material Symbols dipakai sebagai icon set, dimuat langsung. --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 
     @if ($brand->favicon_path)

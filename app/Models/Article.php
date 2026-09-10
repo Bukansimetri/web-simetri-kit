@@ -41,6 +41,16 @@ class Article extends Model
         return 'slug';
     }
 
+    /**
+     * Estimasi waktu baca dalam menit (~200 kata/menit), minimal 1.
+     */
+    public function readingTimeMinutes(): int
+    {
+        $words = str_word_count(strip_tags((string) $this->content));
+
+        return max(1, (int) ceil($words / 200));
+    }
+
     public function articleCategory(): BelongsTo
     {
         return $this->belongsTo(ArticleCategory::class);

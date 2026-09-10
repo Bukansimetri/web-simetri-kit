@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Public;
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\Product;
+use App\Models\Testimonial;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -18,9 +19,17 @@ class HomeController extends Controller
 
         $banners = Banner::live()->get();
 
+        $testimonials = Testimonial::query()
+            ->where('is_active', true)
+            ->orderBy('order')
+            ->orderBy('id')
+            ->take(3)
+            ->get();
+
         return view('pages.home', [
             'products' => $products,
             'banners' => $banners,
+            'testimonials' => $testimonials,
         ]);
     }
 }

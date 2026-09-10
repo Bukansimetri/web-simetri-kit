@@ -1,20 +1,20 @@
 @props(['job'])
 
-<div class="bg-white border border-outline-variant/20 rounded-lg p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 hover:shadow-md transition-shadow">
+<div class="bg-white rounded-lg p-6 border border-surface-container-low flex flex-col md:flex-row md:items-center justify-between gap-4 hover:shadow-md transition-shadow">
     <div>
-        <h3 class="font-headline-lg text-headline-lg text-lg text-primary mb-1">{{ $job->title }}</h3>
-        <div class="flex flex-wrap gap-4 text-sm text-on-surface-variant">
-            <span class="flex items-center gap-1">
-                <span class="material-symbols-outlined text-base">location_on</span> {{ $job->location }}
-            </span>
-            <span class="flex items-center gap-1">
-                <span class="material-symbols-outlined text-base">work</span> {{ str($job->employment_type)->replace('-', ' ')->title() }}
+        <div class="flex flex-wrap items-center gap-3 mb-2">
+            <h3 class="font-headline-lg text-lg text-on-surface">{{ $job->title }}</h3>
+            <span class="bg-surface-container-high text-on-surface text-xs px-2 py-1 rounded-md font-label-bold text-label-bold">
+                {{ \App\Models\JobOpening::EMPLOYMENT_TYPES[$job->employment_type] ?? \Illuminate\Support\Str::of($job->employment_type)->replace('-', ' ')->title() }}
             </span>
         </div>
-        <p class="font-body-sm text-body-sm text-on-surface-variant mt-3 max-w-2xl">{{ $job->description }}</p>
+        <p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-2 mb-3">
+            <span class="material-symbols-outlined text-sm">location_on</span> {{ $job->location }}
+        </p>
+        <p class="font-body-sm text-body-sm text-on-surface-variant max-w-2xl line-clamp-2">{{ $job->description }}</p>
     </div>
 
-    <a href="{{ url('/kontak') }}" class="shrink-0 bg-primary-container text-white font-label-bold text-label-bold px-6 py-3 rounded-lg text-center hover:shadow-md transition-all">
+    <a href="{{ url('/kontak') }}" class="shrink-0 border border-primary-container text-primary-container px-5 py-2.5 rounded-lg font-label-bold text-label-bold text-center hover:bg-primary-container hover:text-white transition-colors">
         Lamar Sekarang
     </a>
 </div>

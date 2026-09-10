@@ -84,7 +84,9 @@ class Product extends Model
     public function imageUrls(): array
     {
         return collect($this->images ?? [])
-            ->map(fn (string $path) => Storage::disk('public')->url($path))
+            ->map(fn (string $path) => str_starts_with($path, 'images/')
+                ? asset($path)              // aset demo statis (public/images/…) dari seeder
+                : Storage::disk('public')->url($path))
             ->all();
     }
 }
