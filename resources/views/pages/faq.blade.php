@@ -139,3 +139,7 @@
         button-icon="forum"
     />
 @endsection
+
+@push('head')
+    <x-seo.json-ld :schema="$schema" />
+@endpush
