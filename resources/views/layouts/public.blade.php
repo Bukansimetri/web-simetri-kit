@@ -11,9 +11,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title', $appName)</title>
-    <meta name="description" content="@yield('meta_description', 'Solusi panel surya untuk rumah, bisnis, dan industri.')">
+    <meta name="description" content="@yield('meta_description', $brand->meta_description ?: 'Solusi panel surya untuk rumah, bisnis, dan industri.')">
+    <link rel="canonical" href="{{ url()->current() }}">
 
     @include('layouts.partials.og-meta')
+    @include('layouts.partials.schema-organization')
 
     {{-- Font heading/body (Manrope, Be Vietnam Pro, dst.) di-bundle saat build lewat
          laravel-vite-plugin/fonts (lihat vite.config.js) dan otomatis di-preload oleh
