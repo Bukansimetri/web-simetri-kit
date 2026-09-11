@@ -140,9 +140,9 @@ Laravel web app, single project. Source at repository root: `app/`, `database/`,
 
 **Purpose**: Regresi penuh + validasi manual sebelum PR.
 
-- [ ] T045 Run `php artisan test --compact` (seluruh suite) — pastikan tidak ada regresi di modul lain
-- [ ] T046 Run `vendor/bin/pint --format agent` (full pass, bukan `--dirty`) untuk memastikan seluruh file yang disentuh konsisten
-- [ ] T047 Jalankan `quickstart.md` end-to-end secara manual: fallback global (§1), override per konten (§2), structured data via Google Rich Results Test (§3) — catat hasil di PR description
+- [x] T045 Run `php artisan test --compact` (seluruh suite) — pastikan tidak ada regresi di modul lain
+- [x] T046 Run `vendor/bin/pint --format agent` (full pass, bukan `--dirty`) untuk memastikan seluruh file yang disentuh konsisten
+- [x] T047 Jalankan `quickstart.md` end-to-end secara manual: fallback global (§1), override per konten (§2), structured data via Google Rich Results Test (§3) — catat hasil di PR description
 
 ---
 
