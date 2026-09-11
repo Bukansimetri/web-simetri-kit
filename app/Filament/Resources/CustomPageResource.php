@@ -4,7 +4,11 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CustomPageResource\Pages;
 use App\Models\CustomPage;
+use App\Support\ImageUploads;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
@@ -51,6 +55,30 @@ class CustomPageResource extends Resource
                     ->label('Isi Halaman')
                     ->required()
                     ->columnSpanFull(),
+                Section::make('SEO')
+                    ->collapsed()
+                    ->description('Kosongkan untuk pakai default otomatis dari data halaman.')
+                    ->columnSpanFull()
+                    ->schema([
+                        TextInput::make('meta_title')
+                            ->label('Judul Pencarian')
+                            ->maxLength(255)
+                            ->live()
+                            ->hint(fn (Get $get) => strlen($get('meta_title') ?? '').'/60 karakter disarankan'),
+                        Textarea::make('meta_description')
+                            ->label('Deskripsi Pencarian')
+                            ->maxLength(500)
+                            ->rows(3)
+                            ->live()
+                            ->hint(fn (Get $get) => strlen($get('meta_description') ?? '').'/160 karakter disarankan'),
+                        FileUpload::make('meta_image_path')
+                            ->label('Gambar SEO / Share Sosial')
+                            ->image()
+                            ->disk('public')
+                            ->directory('seo')
+                            ->saveUploadedFileUsing(fn ($file) => ImageUploads::storeAsWebp($file, 'seo', maxWidth: 1200))
+                            ->helperText('Opsional. Rekomendasi 1200×630px. Kosongkan untuk pakai gambar OG default situs.'),
+                    ]),
             ]);
     }
 

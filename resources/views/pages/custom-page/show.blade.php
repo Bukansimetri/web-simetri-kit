@@ -2,11 +2,12 @@
 
 @php
     $appName = app(\App\Settings\BrandSettings::class)->app_name ?: config('app.name');
-    $plain = trim(preg_replace('/\s+/', ' ', strip_tags($customPage->content)));
 @endphp
 
 @section('title', $customPage->title.' — '.$appName)
-@section('meta_description', Str::limit($plain, 160))
+@section('meta_description', $customPage->seoDescription())
+@section('og_title', $customPage->seoTitle())
+@section('og_image', $customPage->seoImageUrl() ?? app(\App\Settings\BrandSettings::class)->ogImageUrl())
 
 @section('content')
     <article class="pt-32 pb-24 px-6 max-w-3xl mx-auto">

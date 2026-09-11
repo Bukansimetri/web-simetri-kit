@@ -214,4 +214,33 @@ class ArticleResourceTest extends TestCase
         $this->get('/artikel/'.$slug)->assertNotFound();
         $this->get('/artikel')->assertOk()->assertDontSee($article->title, escape: false);
     }
+
+    public function test_admin_can_fill_seo_fields_and_they_are_stored(): void
+    {
+        Storage::fake('public');
+        $user = User::factory()->create();
+        $category = ArticleCategory::factory()->create();
+
+        Livewire::actingAs($user)
+            ->test(CreateArticle::class)
+            ->fillForm([
+                'title' => 'Artikel dengan SEO',
+                'article_category_id' => $category->id,
+                'excerpt' => 'Ringkasan singkat.',
+                'content' => '<p>Isi lengkap artikel.</p>',
+                'redaksi' => 'Tim Redaksi SUOER',
+                'publish_status' => 'now',
+                'meta_title' => 'Judul SEO Kustom',
+                'meta_description' => 'Deskripsi SEO kustom.',
+                'meta_image_path' => UploadedFile::fake()->image('seo.jpg'),
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $article = Article::where('title', 'Artikel dengan SEO')->first();
+
+        $this->assertSame('Judul SEO Kustom', $article->meta_title);
+        $this->assertSame('Deskripsi SEO kustom.', $article->meta_description);
+        $this->assertStringEndsWith('.webp', $article->meta_image_path);
+    }
 }

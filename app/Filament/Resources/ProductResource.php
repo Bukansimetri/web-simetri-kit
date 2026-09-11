@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Models\Category;
 use App\Models\Product;
+use App\Support\ImageUploads;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
@@ -147,6 +148,29 @@ class ProductResource extends Resource
                             ->addActionLabel('Tambah Fitur')
                             ->defaultItems(0)
                             ->reorderable(),
+                    ]),
+                Section::make('SEO')
+                    ->collapsed()
+                    ->description('Kosongkan untuk pakai default otomatis dari data produk.')
+                    ->schema([
+                        TextInput::make('meta_title')
+                            ->label('Judul Pencarian')
+                            ->maxLength(255)
+                            ->live()
+                            ->hint(fn (Get $get) => strlen($get('meta_title') ?? '').'/60 karakter disarankan'),
+                        Textarea::make('meta_description')
+                            ->label('Deskripsi Pencarian')
+                            ->maxLength(500)
+                            ->rows(3)
+                            ->live()
+                            ->hint(fn (Get $get) => strlen($get('meta_description') ?? '').'/160 karakter disarankan'),
+                        FileUpload::make('meta_image_path')
+                            ->label('Gambar SEO / Share Sosial')
+                            ->image()
+                            ->disk('public')
+                            ->directory('seo')
+                            ->saveUploadedFileUsing(fn ($file) => ImageUploads::storeAsWebp($file, 'seo', maxWidth: 1200))
+                            ->helperText('Opsional. Rekomendasi 1200×630px. Kosongkan untuk pakai gambar galeri produk.'),
                     ]),
             ]);
     }

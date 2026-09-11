@@ -197,4 +197,32 @@ class ProductResourceTest extends TestCase
         $this->get('/produk/'.$slug)->assertNotFound();
         $this->get('/produk')->assertOk()->assertDontSee($product->name, escape: false);
     }
+
+    public function test_admin_can_fill_seo_fields_and_they_are_stored(): void
+    {
+        Storage::fake('public');
+        $user = User::factory()->create();
+        $category = Category::factory()->create();
+
+        Livewire::actingAs($user)
+            ->test(CreateProduct::class)
+            ->fillForm([
+                'name' => 'Produk dengan SEO',
+                'category_id' => $category->id,
+                'short_description' => 'x',
+                'description' => 'x',
+                'price' => 1000,
+                'meta_title' => 'Judul SEO Kustom',
+                'meta_description' => 'Deskripsi SEO kustom.',
+                'meta_image_path' => UploadedFile::fake()->image('seo.jpg'),
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $product = Product::where('name', 'Produk dengan SEO')->first();
+
+        $this->assertSame('Judul SEO Kustom', $product->meta_title);
+        $this->assertSame('Deskripsi SEO kustom.', $product->meta_description);
+        $this->assertStringEndsWith('.webp', $product->meta_image_path);
+    }
 }

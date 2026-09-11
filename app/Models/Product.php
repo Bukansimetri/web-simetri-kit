@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Concerns\HasSeoMetadata;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 class Product extends Model
 {
     use HasFactory;
+    use HasSeoMetadata;
 
     /**
      * Default kosong untuk kolom json — supaya form Filament yang belum
@@ -39,6 +41,9 @@ class Product extends Model
         'specs',
         'features',
         'order',
+        'meta_title',
+        'meta_description',
+        'meta_image_path',
     ];
 
     /**
@@ -88,5 +93,23 @@ class Product extends Model
                 ? asset($path)              // aset demo statis (public/images/…) dari seeder
                 : Storage::disk('public')->url($path))
             ->all();
+    }
+
+    /**
+     * @see HasSeoMetadata
+     */
+    protected function seoTitleFallback(): string
+    {
+        return $this->name;
+    }
+
+    protected function seoDescriptionFallback(): ?string
+    {
+        return $this->short_description;
+    }
+
+    protected function seoImageFallbackUrl(): ?string
+    {
+        return $this->coverImageUrl();
     }
 }
