@@ -29,6 +29,7 @@
                             @if ($hasPhoto)
                                 <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($testimonial->photo_path) }}"
                                      alt="{{ $testimonial->name }}"
+                                     loading="lazy" decoding="async"
                                      class="w-12 h-12 rounded-full object-cover shrink-0">
                             @else
                                 <span class="w-12 h-12 rounded-full bg-surface-container-high text-primary flex items-center justify-center font-headline-lg text-lg shrink-0">

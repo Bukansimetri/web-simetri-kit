@@ -30,7 +30,7 @@ Laravel web app, single project. Source di root repo: `app/`, `resources/`, `tes
 
 **Purpose**: Tidak ada init project — aplikasi Laravel yang sudah ada. Baseline check sebelum menyentuh apa pun.
 
-- [ ] T001 Confirm baseline hijau: `php artisan test --compact --filter='HomePageTest|HomeBannerTest|ProductPageTest|ArticlePageTest|PortfolioPageTest|FaqPageTest|AboutPageTest|ContactPageTest|CalculatorLeadTest'` (seluruh halaman & controller yang akan disentuh fitur ini)
+- [x] T001 Confirm baseline hijau: `php artisan test --compact --filter='HomePageTest|HomeBannerTest|ProductPageTest|ArticlePageTest|PortfolioPageTest|FaqPageTest|AboutPageTest|ContactPageTest|CalculatorLeadTest'` (seluruh halaman & controller yang akan disentuh fitur ini)
 
 ---
 
@@ -48,23 +48,23 @@ Laravel web app, single project. Source di root repo: `app/`, `resources/`, `tes
 
 ### Tests for User Story 1 ⚠️ (write first, ensure they FAIL)
 
-- [ ] T002 [P] [US1] Create `tests/Feature/Public/LazyLoadingTest.php` via `php artisan make:test --phpunit Public/LazyLoadingTest` — untuk tiap halaman representatif (Beranda dengan/tanpa banner aktif, `/produk`, `/produk/{slug}`, `/artikel`, `/artikel/{slug}`, `/portfolio`, `/portfolio/{slug}`, `/tentang-kami`), seed minimal data lewat factory supaya komponen bergambar (product-card/article-card/testimonials/client-logos/team-members) benar-benar render, lalu assert via `substr_count($response->getContent(), 'loading="lazy" decoding="async"')` sama dengan jumlah gambar "Lazy" yang diharapkan per halaman (research.md §2); assert gambar hero/cover (dicari lewat substring unik seperti `alt_text` banner atau `asset('images/mockup/...')` hero) TIDAK diikuti `loading="lazy"` dalam tag `<img>` yang sama (ekstrak tag lewat `preg_match` pada substring unik tsb ± beberapa karakter); test terpisah: nonaktifkan JS tidak relevan untuk PHPUnit (server-rendered), cukup pastikan atribut `loading="lazy"` adalah HTML attribute biasa (bukan dalam blok `x-show`/`@if` yang butuh JS) — cukup dibuktikan lewat assertSee di atas karena server-rendered HTML sudah lengkap tanpa JS (FR-004 otomatis terpenuhi selama atribut ada di markup awal, bukan disuntik JS)
+- [x] T002 [P] [US1] Create `tests/Feature/Public/LazyLoadingTest.php` via `php artisan make:test --phpunit Public/LazyLoadingTest` — untuk tiap halaman representatif (Beranda dengan/tanpa banner aktif, `/produk`, `/produk/{slug}`, `/artikel`, `/artikel/{slug}`, `/portfolio`, `/portfolio/{slug}`, `/tentang-kami`), seed minimal data lewat factory supaya komponen bergambar (product-card/article-card/testimonials/client-logos/team-members) benar-benar render, lalu assert via `substr_count($response->getContent(), 'loading="lazy" decoding="async"')` sama dengan jumlah gambar "Lazy" yang diharapkan per halaman (research.md §2); assert gambar hero/cover (dicari lewat substring unik seperti `alt_text` banner atau `asset('images/mockup/...')` hero) TIDAK diikuti `loading="lazy"` dalam tag `<img>` yang sama (ekstrak tag lewat `preg_match` pada substring unik tsb ± beberapa karakter); test terpisah: nonaktifkan JS tidak relevan untuk PHPUnit (server-rendered), cukup pastikan atribut `loading="lazy"` adalah HTML attribute biasa (bukan dalam blok `x-show`/`@if` yang butuh JS) — cukup dibuktikan lewat assertSee di atas karena server-rendered HTML sudah lengkap tanpa JS (FR-004 otomatis terpenuhi selama atribut ada di markup awal, bukan disuntik JS)
 
 ### Implementation for User Story 1
 
-- [ ] T003 [P] [US1] Update `resources/views/components/sections/product-card.blade.php` baris 6: tambah `loading="lazy" decoding="async"` ke tag `<img>`
-- [ ] T004 [P] [US1] Update `resources/views/components/sections/testimonials.blade.php` baris 30: tambah `loading="lazy" decoding="async"`
-- [ ] T005 [P] [US1] Update `resources/views/components/sections/client-logos.blade.php`: refactor dari string HTML manual (`$img = '<img ...>'; {!! $img !!}`) jadi tag Blade biasa `<img src="{{ ... }}" alt="{{ ... }}" loading="lazy" decoding="async" class="h-10 md:h-12 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity">` (hapus variabel `$img`/`{!! !!}`, pindahkan langsung ke dalam `@if ($logo->link_url)`/`@else`)
-- [ ] T006 [P] [US1] Update `resources/views/components/sections/article-card.blade.php` baris 6: tambah `loading="lazy" decoding="async"`
-- [ ] T007 [P] [US1] Update `resources/views/components/sections/team-members.blade.php` baris 18: tambah `loading="lazy" decoding="async"`
-- [ ] T008 [P] [US1] Update `resources/views/components/sections/banner-carousel.blade.php`: pada branch banner tunggal (baris 15/19) TIDAK diubah (eager, posisi hero); pada branch carousel multi-banner (baris 43/47, di dalam `@foreach ($visible as $i => $banner)`), tambah `loading="lazy" decoding="async"` HANYA saat `$i > 0` (mis. `@if ($i > 0) loading="lazy" decoding="async" @endif` di dalam tag `<img>`, atau duplikasi blok `@if($i === 0) ... @else ... @endif`)
-- [ ] T009 [P] [US1] Update `resources/views/pages/home.blade.php`: baris 49 (gambar section "Produk Kami") dan baris 109 (avatar testimoni) — tambah `loading="lazy" decoding="async"` ke keduanya
-- [ ] T010 [P] [US1] Update `resources/views/pages/artikel/index.blade.php` baris 41 (gambar artikel unggulan): tambah `loading="lazy" decoding="async"`
-- [ ] T011 [P] [US1] Update `resources/views/pages/tentang-kami.blade.php`: baris 34 (hero bespoke) TIDAK diubah (eager); baris 52 dan 126 — tambah `loading="lazy" decoding="async"` ke keduanya
-- [ ] T012 [P] [US1] Update `resources/views/pages/artikel/show.blade.php` baris 32 (gambar sampul artikel, bukan hero): tambah `loading="lazy" decoding="async"`
-- [ ] T013 [P] [US1] Update `resources/views/pages/portfolio/index.blade.php` baris 45 (thumbnail kartu proyek): tambah `loading="lazy" decoding="async"`
-- [ ] T014 [P] [US1] Update `resources/views/pages/portfolio/show.blade.php`: baris 25 (gambar sampul utama) TIDAK diubah (eager); baris 31 (thumbnail galeri tambahan, di dalam loop) — tambah `loading="lazy" decoding="async"`
-- [ ] T015 [US1] Run `vendor/bin/pint --dirty --format agent`, then `php artisan test --compact --filter='LazyLoadingTest'` and fix until T002 passes; also re-run T001's filter to confirm no regression
+- [x] T003 [P] [US1] Update `resources/views/components/sections/product-card.blade.php` baris 6: tambah `loading="lazy" decoding="async"` ke tag `<img>`
+- [x] T004 [P] [US1] Update `resources/views/components/sections/testimonials.blade.php` baris 30: tambah `loading="lazy" decoding="async"`
+- [x] T005 [P] [US1] Update `resources/views/components/sections/client-logos.blade.php`: refactor dari string HTML manual (`$img = '<img ...>'; {!! $img !!}`) jadi tag Blade biasa `<img src="{{ ... }}" alt="{{ ... }}" loading="lazy" decoding="async" class="h-10 md:h-12 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity">` (hapus variabel `$img`/`{!! !!}`, pindahkan langsung ke dalam `@if ($logo->link_url)`/`@else`)
+- [x] T006 [P] [US1] Update `resources/views/components/sections/article-card.blade.php` baris 6: tambah `loading="lazy" decoding="async"`
+- [x] T007 [P] [US1] Update `resources/views/components/sections/team-members.blade.php` baris 18: tambah `loading="lazy" decoding="async"`
+- [x] T008 [P] [US1] Update `resources/views/components/sections/banner-carousel.blade.php`: pada branch banner tunggal (baris 15/19) TIDAK diubah (eager, posisi hero); pada branch carousel multi-banner (baris 43/47, di dalam `@foreach ($visible as $i => $banner)`), tambah `loading="lazy" decoding="async"` HANYA saat `$i > 0` (mis. `@if ($i > 0) loading="lazy" decoding="async" @endif` di dalam tag `<img>`, atau duplikasi blok `@if($i === 0) ... @else ... @endif`)
+- [x] T009 [P] [US1] Update `resources/views/pages/home.blade.php`: baris 49 (gambar section "Produk Kami") dan baris 109 (avatar testimoni) — tambah `loading="lazy" decoding="async"` ke keduanya
+- [x] T010 [P] [US1] Update `resources/views/pages/artikel/index.blade.php` baris 41 (gambar artikel unggulan): tambah `loading="lazy" decoding="async"`
+- [x] T011 [P] [US1] Update `resources/views/pages/tentang-kami.blade.php`: baris 34 (hero bespoke) TIDAK diubah (eager); baris 52 dan 126 — tambah `loading="lazy" decoding="async"` ke keduanya
+- [x] T012 [P] [US1] Update `resources/views/pages/artikel/show.blade.php` baris 32 (gambar sampul artikel, bukan hero): tambah `loading="lazy" decoding="async"`
+- [x] T013 [P] [US1] Update `resources/views/pages/portfolio/index.blade.php` baris 45 (thumbnail kartu proyek): tambah `loading="lazy" decoding="async"`
+- [x] T014 [P] [US1] Update `resources/views/pages/portfolio/show.blade.php`: baris 25 (gambar sampul utama) TIDAK diubah (eager); baris 31 (thumbnail galeri tambahan, di dalam loop) — tambah `loading="lazy" decoding="async"`
+- [x] T015 [US1] Run `vendor/bin/pint --dirty --format agent`, then `php artisan test --compact --filter='LazyLoadingTest'` and fix until T002 passes; also re-run T001's filter to confirm no regression
 
 **Checkpoint**: Seluruh gambar publik konsisten eager (hero) atau lazy (selebihnya) sesuai research.md §2 — US1 selesai dan independen
 

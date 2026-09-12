@@ -46,7 +46,7 @@
                             <div class="absolute top-3 right-3 z-10 bg-primary-container text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm">Terpopuler</div>
                         @endif
                         <div class="{{ $featured ? 'h-56' : 'h-52' }} overflow-hidden">
-                            <img src="{{ $cover }}" alt="{{ $product->name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <img src="{{ $cover }}" alt="{{ $product->name }}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         </div>
                         <div class="p-8 flex-1 flex flex-col justify-between">
                             <div>
@@ -106,7 +106,7 @@
                         <div class="flex items-center gap-4 pt-4 border-t {{ $highlight ? 'border-outline-variant/30' : 'border-gray-100' }}">
                             @php $hasPhoto = $testimonial->photo_path && \Illuminate\Support\Facades\Storage::disk('public')->exists($testimonial->photo_path); @endphp
                             @if ($hasPhoto)
-                                <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($testimonial->photo_path) }}" alt="{{ $testimonial->name }}" class="w-12 h-12 rounded-full object-cover shadow-sm shrink-0">
+                                <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($testimonial->photo_path) }}" alt="{{ $testimonial->name }}" loading="lazy" decoding="async" class="w-12 h-12 rounded-full object-cover shadow-sm shrink-0">
                             @else
                                 <div class="w-12 h-12 rounded-full {{ $i === 2 ? 'bg-secondary' : 'bg-primary-container' }} text-white flex items-center justify-center font-bold text-base shadow-sm shrink-0">
                                     {{ \Illuminate\Support\Str::of($testimonial->name)->explode(' ')->map(fn ($w) => \Illuminate\Support\Str::substr($w, 0, 1))->take(2)->implode('') }}

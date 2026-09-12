@@ -3,7 +3,7 @@
 <a href="{{ url('/artikel/'.$article->slug) }}" class="bg-white border border-outline-variant/20 rounded-lg overflow-hidden hover:-translate-y-1 hover:shadow-md transition-all duration-300 flex flex-col h-full">
     <div class="aspect-video w-full bg-surface-container overflow-hidden">
         @if ($article->image_path)
-            <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($article->image_path) }}" alt="{{ $article->title }}" class="w-full h-full object-cover">
+            <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($article->image_path) }}" alt="{{ $article->title }}" loading="lazy" decoding="async" class="w-full h-full object-cover">
         @else
             <div data-article-image-placeholder class="w-full h-full flex items-center justify-center text-outline">
                 <span class="material-symbols-outlined text-4xl">image</span>
