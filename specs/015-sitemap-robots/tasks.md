@@ -92,9 +92,9 @@ Laravel web app, single project. Source di root repo: `app/`, `resources/`, `rou
 
 **Purpose**: Regresi penuh + validasi manual sebelum PR.
 
-- [ ] T013 Run `php artisan test --compact` (seluruh suite) — pastikan tidak ada regresi di modul lain
-- [ ] T014 Run `vendor/bin/pint --format agent` (full pass, bukan `--dirty`)
-- [ ] T015 Jalankan `quickstart.md` end-to-end secara manual (§1-4) — catat hasil di PR description
+- [x] T013 Run `php artisan test --compact` (seluruh suite) — pastikan tidak ada regresi di modul lain
+- [x] T014 Run `vendor/bin/pint --format agent` (full pass, bukan `--dirty`)
+- [x] T015 Jalankan `quickstart.md` end-to-end secara manual (§1-4) — catat hasil di PR description
 
 ---
 
