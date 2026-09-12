@@ -76,13 +76,13 @@ Laravel web app, single project. Source di root repo: `app/`, `resources/`, `rou
 
 ### Tests for User Story 2 ⚠️ (write first, ensure they FAIL)
 
-- [ ] T009 [P] [US2] Create `tests/Feature/Public/RobotsTxtTest.php` via `php artisan make:test --phpunit Public/RobotsTxtTest` covering (FR-010, FR-011): response 200 & `Content-Type` mengandung `text/plain`; assertSee `'User-agent: *'` dan `'Disallow:'` (tidak berubah dari isi lama); assertSee `'Sitemap: '.url('/sitemap.xml')` persis
+- [x] T009 [P] [US2] Create `tests/Feature/Public/RobotsTxtTest.php` via `php artisan make:test --phpunit Public/RobotsTxtTest` covering (FR-010, FR-011): response 200 & `Content-Type` mengandung `text/plain`; assertSee `'User-agent: *'` dan `'Disallow:'` (tidak berubah dari isi lama); assertSee `'Sitemap: '.url('/sitemap.xml')` persis
 
 ### Implementation for User Story 2
 
-- [ ] T010 [US2] Implementasikan `SitemapController::robots()`: return `response("User-agent: *\nDisallow:\n\nSitemap: ".url('/sitemap.xml')."\n")->header('Content-Type', 'text/plain; charset=UTF-8')` (isi `User-agent`/`Disallow` identik dengan `public/robots.txt` lama — FR-011)
-- [ ] T011 [US2] **Hapus** `public/robots.txt` (file statis) — WAJIB, lihat research.md §2: selama file ini ada, web server menyajikannya langsung dan route `/robots.txt` tidak pernah tereksekusi
-- [ ] T012 [US2] Run `vendor/bin/pint --dirty --format agent`, then `php artisan test --compact --filter='RobotsTxtTest'` and fix until T009 passes
+- [x] T010 [US2] Implementasikan `SitemapController::robots()`: return `response("User-agent: *\nDisallow:\n\nSitemap: ".url('/sitemap.xml')."\n")->header('Content-Type', 'text/plain; charset=UTF-8')` (isi `User-agent`/`Disallow` identik dengan `public/robots.txt` lama — FR-011)
+- [x] T011 [US2] **Hapus** `public/robots.txt` (file statis) — WAJIB, lihat research.md §2: selama file ini ada, web server menyajikannya langsung dan route `/robots.txt` tidak pernah tereksekusi
+- [x] T012 [US2] Run `vendor/bin/pint --dirty --format agent`, then `php artisan test --compact --filter='RobotsTxtTest'` and fix until T009 passes
 
 **Checkpoint**: `/robots.txt` menunjuk ke `/sitemap.xml` — US2 selesai, kedua user story lengkap
 
