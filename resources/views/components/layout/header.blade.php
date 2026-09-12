@@ -40,7 +40,7 @@
             @foreach ($navLinks as $link)
                 <a href="{{ $link['href'] }}"
                    @class([
-                       'text-sm font-medium transition-colors relative',
+                       'text-sm font-medium transition-colors relative whitespace-nowrap',
                        "after:content-[''] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-0.5 after:bg-primary-container" => $link['active'],
                    ])
                    :class="scrolled

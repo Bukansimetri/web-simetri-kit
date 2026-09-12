@@ -60,6 +60,8 @@ class BrandSettings extends Settings
 
     public ?string $contact_notification_email;
 
+    public ?string $meta_description;
+
     public bool $career_module_enabled;
 
     public static function group(): string

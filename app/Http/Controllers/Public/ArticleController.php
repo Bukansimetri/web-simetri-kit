@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Public;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Support\Seo\JsonLd;
 use Illuminate\View\View;
 
 class ArticleController extends Controller
@@ -41,6 +42,10 @@ class ArticleController extends Controller
             ->take(3)
             ->get();
 
-        return view('pages.artikel.show', ['article' => $article, 'related' => $related]);
+        return view('pages.artikel.show', [
+            'article' => $article,
+            'related' => $related,
+            'schema' => JsonLd::article($article),
+        ]);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Public;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Support\Seo\JsonLd;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -32,6 +33,7 @@ class ProductController extends Controller
         return view('pages.produk.show', [
             'product' => $product,
             'relatedProducts' => $relatedProducts,
+            'schema' => JsonLd::product($product),
         ]);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
 use App\Models\FaqItem;
+use App\Support\Seo\JsonLd;
 use Illuminate\View\View;
 
 class FaqController extends Controller
@@ -15,6 +16,7 @@ class FaqController extends Controller
         return view('pages.faq', [
             'faqItems' => $faqItems,
             'categories' => $faqItems->pluck('category')->filter()->unique()->values(),
+            'schema' => JsonLd::faqPage($faqItems),
         ]);
     }
 }

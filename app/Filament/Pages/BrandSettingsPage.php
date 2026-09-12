@@ -7,6 +7,7 @@ use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -48,6 +49,7 @@ class BrandSettingsPage extends Page implements HasForms
             'font_heading' => $settings->font_heading ?: BrandSettings::DEFAULT_FONT_HEADING,
             'font_body' => $settings->font_body ?: BrandSettings::DEFAULT_FONT_BODY,
             'og_image_path' => $settings->og_image_path,
+            'meta_description' => $settings->meta_description,
             'whatsapp_number' => $settings->whatsapp_number,
             'contact_notification_email' => $settings->contact_notification_email,
             'career_module_enabled' => $settings->career_module_enabled,
@@ -101,6 +103,15 @@ class BrandSettingsPage extends Page implements HasForms
                             ->directory('branding')
                             ->helperText('Dipakai sebagai gambar preview saat link situs dibagikan. Default: gambar bawaan Luminous Azure.'),
                     ]),
+                Section::make('SEO')
+                    ->description('Default deskripsi pencarian & share untuk halaman yang belum punya pengaturan SEO sendiri.')
+                    ->schema([
+                        Textarea::make('meta_description')
+                            ->label('Deskripsi Default Situs')
+                            ->maxLength(500)
+                            ->rows(3)
+                            ->helperText('Dipakai bila suatu halaman/konten belum punya deskripsi SEO sendiri. Disarankan ≤160 karakter.'),
+                    ]),
                 Section::make('Kontak & Notifikasi')
                     ->description('Dipakai oleh form Kontak (AMC-216) — kosongkan bila belum ingin mengaktifkan salah satu.')
                     ->schema([
@@ -139,6 +150,7 @@ class BrandSettingsPage extends Page implements HasForms
         $settings->font_heading = $data['font_heading'] ?? null;
         $settings->font_body = $data['font_body'] ?? null;
         $settings->og_image_path = $data['og_image_path'] ?? null;
+        $settings->meta_description = $data['meta_description'] ?? null;
         $settings->whatsapp_number = $data['whatsapp_number'] ?? null;
         $settings->contact_notification_email = $data['contact_notification_email'] ?? null;
         $settings->career_module_enabled = $data['career_module_enabled'] ?? true;
