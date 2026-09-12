@@ -30,7 +30,7 @@ Laravel web app, single project. Source di root repo: `app/`, `resources/`, `rou
 
 **Purpose**: Tidak ada init project — aplikasi Laravel yang sudah ada. Baseline check sebelum menyentuh apa pun.
 
-- [ ] T001 Confirm baseline hijau: `php artisan test --compact --filter='ArticlePageTest|PortfolioPageTest|CareerModuleToggleTest|ProductPageTest'` (modul yang query-nya akan disalin ke sitemap)
+- [x] T001 Confirm baseline hijau: `php artisan test --compact --filter='ArticlePageTest|PortfolioPageTest|CareerModuleToggleTest|ProductPageTest'` (modul yang query-nya akan disalin ke sitemap)
 
 ---
 
@@ -40,9 +40,9 @@ Laravel web app, single project. Source di root repo: `app/`, `resources/`, `rou
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T002 Create `app/Http/Controllers/Public/SitemapController.php` dengan 2 method kosong (placeholder) yang akan diisi tiap fase story: `public function xml(): \Illuminate\Http\Response { abort(501); }` dan `public function robots(): \Illuminate\Http\Response { abort(501); }`
-- [ ] T003 Tambah 2 route baru di `routes/web.php` (dekat route publik lain, sebelum route admin): `Route::get('/sitemap.xml', [SitemapController::class, 'xml'])->name('sitemap');` dan `Route::get('/robots.txt', [SitemapController::class, 'robots'])->name('robots');` — tambah `use App\Http\Controllers\Public\SitemapController;` bila belum ada
-- [ ] T004 Verifikasi via `php artisan route:list --path=sitemap` dan `php artisan route:list --path=robots` — kedua route terdaftar mengarah ke `SitemapController`
+- [x] T002 Create `app/Http/Controllers/Public/SitemapController.php` dengan 2 method kosong (placeholder) yang akan diisi tiap fase story: `public function xml(): \Illuminate\Http\Response { abort(501); }` dan `public function robots(): \Illuminate\Http\Response { abort(501); }`
+- [x] T003 Tambah 2 route baru di `routes/web.php` (dekat route publik lain, sebelum route admin): `Route::get('/sitemap.xml', [SitemapController::class, 'xml'])->name('sitemap');` dan `Route::get('/robots.txt', [SitemapController::class, 'robots'])->name('robots');` — tambah `use App\Http\Controllers\Public\SitemapController;` bila belum ada
+- [x] T004 Verifikasi via `php artisan route:list --path=sitemap` dan `php artisan route:list --path=robots` — kedua route terdaftar mengarah ke `SitemapController`
 
 **Checkpoint**: Route + controller kosong siap — user story bisa mulai
 
@@ -56,13 +56,13 @@ Laravel web app, single project. Source di root repo: `app/`, `resources/`, `rou
 
 ### Tests for User Story 1 ⚠️ (write first, ensure they FAIL)
 
-- [ ] T005 [P] [US1] Create `tests/Feature/Public/SitemapTest.php` via `php artisan make:test --phpunit Public/SitemapTest` covering (FR-002 s/d FR-009, FR-012, Edge Cases): response 200 & `Content-Type` mengandung `application/xml`; assertSee 7 URL statis (`url('/')`, `url('/tentang-kami')`, `url('/kontak')`, `url('/faq')`, `url('/artikel')`, `url('/produk')`, `url('/portfolio')`); dengan `career_module_enabled = true` → assertSee `url('/karir')`, dengan `false` → assertDontSee; buat 1 Produk → assertSee `url('/produk/'.$slug)`; buat Artikel published → assertSee URL-nya, buat Artikel draft (`published_at` null) & terjadwal (`published_at` masa depan) → assertDontSee URL keduanya; buat CustomPage → assertSee URL-nya; buat PortfolioProject aktif → assertSee, buat yang `is_active=false` → assertDontSee; test terpisah "semua loc bisa diakses": generate sitemap, ekstrak semua `<loc>` via regex/DOMDocument, GET tiap satu → assertOk() untuk semuanya (SC-001); test "situs kosong tetap 200": tanpa seed apa pun (kosongkan semua tabel konten) → `/sitemap.xml` tetap `assertOk()` dan tetap memuat 7 URL statis (Edge Cases)
+- [x] T005 [P] [US1] Create `tests/Feature/Public/SitemapTest.php` via `php artisan make:test --phpunit Public/SitemapTest` covering (FR-002 s/d FR-009, FR-012, Edge Cases): response 200 & `Content-Type` mengandung `application/xml`; assertSee 7 URL statis (`url('/')`, `url('/tentang-kami')`, `url('/kontak')`, `url('/faq')`, `url('/artikel')`, `url('/produk')`, `url('/portfolio')`); dengan `career_module_enabled = true` → assertSee `url('/karir')`, dengan `false` → assertDontSee; buat 1 Produk → assertSee `url('/produk/'.$slug)`; buat Artikel published → assertSee URL-nya, buat Artikel draft (`published_at` null) & terjadwal (`published_at` masa depan) → assertDontSee URL keduanya; buat CustomPage → assertSee URL-nya; buat PortfolioProject aktif → assertSee, buat yang `is_active=false` → assertDontSee; test terpisah "semua loc bisa diakses": generate sitemap, ekstrak semua `<loc>` via regex/DOMDocument, GET tiap satu → assertOk() untuk semuanya (SC-001); test "situs kosong tetap 200": tanpa seed apa pun (kosongkan semua tabel konten) → `/sitemap.xml` tetap `assertOk()` dan tetap memuat 7 URL statis (Edge Cases)
 
 ### Implementation for User Story 1
 
-- [ ] T006 [US1] Implementasikan `SitemapController::xml()` sesuai data-model.md § Daftar sumber: kumpulkan array `$staticUrls` (7 URL tetap, tanpa `lastmod`), tambah `/karir` bila `app(\App\Settings\BrandSettings::class)->career_module_enabled`; query `Product::all()`, `Article::whereNotNull('published_at')->where('published_at','<=',now())->get()`, `CustomPage::all()`, `PortfolioProject::where('is_active', true)->get()` — masing-masing dipetakan ke `['loc' => url(...), 'lastmod' => $item->updated_at]`; return `response()->view('sitemap', ['staticUrls' => ..., 'items' => ...])->header('Content-Type', 'application/xml; charset=UTF-8')`
-- [ ] T007 [US1] Create `resources/views/sitemap.blade.php` (TIDAK `@extends('layouts.public')`) — XML manual: `<?xml version="1.0" encoding="UTF-8"?>` lalu `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`, loop `$staticUrls` dan `$items` masing-masing jadi `<url><loc>{{ $entry['loc'] }}</loc>@if($entry['lastmod'] ?? null)<lastmod>{{ $entry['lastmod']->toAtomString() }}</lastmod>@endif</url>`, tutup `</urlset>` — pastikan `{{ }}` (bukan `{!! !!}`) dipakai supaya karakter spesial ter-escape otomatis (Edge Cases)
-- [ ] T008 [US1] Run `vendor/bin/pint --dirty --format agent`, then `php artisan test --compact --filter='SitemapTest'` and fix until T005 passes; also re-run T001's filter to confirm no regression
+- [x] T006 [US1] Implementasikan `SitemapController::xml()` sesuai data-model.md § Daftar sumber: kumpulkan array `$staticUrls` (7 URL tetap, tanpa `lastmod`), tambah `/karir` bila `app(\App\Settings\BrandSettings::class)->career_module_enabled`; query `Product::all()`, `Article::whereNotNull('published_at')->where('published_at','<=',now())->get()`, `CustomPage::all()`, `PortfolioProject::where('is_active', true)->get()` — masing-masing dipetakan ke `['loc' => url(...), 'lastmod' => $item->updated_at]`; return `response()->view('sitemap', ['staticUrls' => ..., 'items' => ...])->header('Content-Type', 'application/xml; charset=UTF-8')`
+- [x] T007 [US1] Create `resources/views/sitemap.blade.php` (TIDAK `@extends('layouts.public')`) — XML manual: `<?xml version="1.0" encoding="UTF-8"?>` lalu `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`, loop `$staticUrls` dan `$items` masing-masing jadi `<url><loc>{{ $entry['loc'] }}</loc>@if($entry['lastmod'] ?? null)<lastmod>{{ $entry['lastmod']->toAtomString() }}</lastmod>@endif</url>`, tutup `</urlset>` — pastikan `{{ }}` (bukan `{!! !!}`) dipakai supaya karakter spesial ter-escape otomatis (Edge Cases)
+- [x] T008 [US1] Run `vendor/bin/pint --dirty --format agent`, then `php artisan test --compact --filter='SitemapTest'` and fix until T005 passes; also re-run T001's filter to confirm no regression
 
 **Checkpoint**: `/sitemap.xml` lengkap dan akurat — US1 selesai dan independen (bisa dites/dirilis tanpa US2)
 
