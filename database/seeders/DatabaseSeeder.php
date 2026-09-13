@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(JobOpeningSeeder::class);
         $this->call(FaqItemSeeder::class);
         $this->call(TestimonialSeeder::class);
+        $this->call(MenuSeeder::class);
 
         // User::factory(10)->create();
 
