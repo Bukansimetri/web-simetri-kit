@@ -26,6 +26,28 @@ class PublicPageCachingTest extends TestCase
         parent::tearDown();
     }
 
+    /**
+     * Regresi: phpunit.xml memakai CACHE_STORE=array untuk seluruh test
+     * lain di file ini, yang TIDAK pernah benar-benar serialize/unserialize
+     * (array store menyimpan objek apa adanya di memori) — jadi tidak bisa
+     * menangkap bug nyata di store `database` (dipakai produksi/lokal, lihat
+     * config/cache.php). Test ini SENGAJA memaksa driver `database` supaya
+     * round-trip serialize()/unserialize() sungguhan teruji, termasuk
+     * `serializable_classes` allowlist (config/cache.php) yang WAJIB
+     * mencakup tiap model yang dibungkus cache — kalau tidak, Laravel diam-
+     * diam mengembalikan `__PHP_Incomplete_Class` dan halaman 500.
+     */
+    public function test_home_page_survives_real_database_cache_serialization_round_trip(): void
+    {
+        config(['cache.default' => 'database']);
+
+        $category = Category::factory()->create();
+        Product::factory()->create(['category_id' => $category->id, 'name' => 'Produk Uji Serialisasi']);
+
+        $this->get('/')->assertOk()->assertSee('Produk Uji Serialisasi', escape: false);
+        $this->get('/')->assertOk()->assertSee('Produk Uji Serialisasi', escape: false);
+    }
+
     public function test_home_page_serves_stale_data_within_ttl_then_fresh_after_expiry(): void
     {
         $category = Category::factory()->create();
