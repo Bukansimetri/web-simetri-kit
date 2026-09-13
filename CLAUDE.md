@@ -1,7 +1,7 @@
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,
 shell commands, and other important information, read the current plan:
-specs/019-demo-content-seeder/plan.md
+specs/020-client-versioning-strategy/plan.md
 <!-- SPECKIT END -->
 
 ===
