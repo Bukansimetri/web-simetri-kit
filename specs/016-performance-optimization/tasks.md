@@ -122,9 +122,9 @@ Laravel web app, single project. Source di root repo: `app/`, `resources/`, `tes
 
 **Purpose**: Regresi penuh + validasi manual sebelum PR.
 
-- [ ] T028 Run `php artisan test --compact` (seluruh suite) — pastikan tidak ada regresi di modul lain
-- [ ] T029 Run `vendor/bin/pint --format agent` (full pass, bukan `--dirty`)
-- [ ] T030 Jalankan `quickstart.md` end-to-end secara manual (§1-3), termasuk pengukuran Lighthouse pada `/`, `/produk`, `/artikel` (§4) — catat hasil skor sebelum/sesudah di PR description
+- [x] T028 Run `php artisan test --compact` (seluruh suite) — pastikan tidak ada regresi di modul lain
+- [x] T029 Run `vendor/bin/pint --format agent` (full pass, bukan `--dirty`)
+- [x] T030 Jalankan `quickstart.md` end-to-end secara manual (§1-3), termasuk pengukuran Lighthouse pada `/`, `/produk`, `/artikel` (§4) — catat hasil skor sebelum/sesudah di PR description
 
 ---
 
