@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\DemoSeedRecord;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -15,11 +16,19 @@ use Illuminate\Support\Str;
  * Assumptions di spec.md fitur tsb). `images` memakai aset demo statis di
  * public/images/mockup/ (Product::imageUrls() mengenali prefix `images/`);
  * gambar produksi diupload lewat panel admin.
+ *
+ * Dipanggil HANYA lewat `demo:seed` (AMC-229, spec 019-demo-content-seeder)
+ * — tidak lagi lewat DatabaseSeeder/app:setup-client (FR-003). Dilewati bila
+ * sudah pernah di-seed sebelumnya (research.md #4).
  */
 class ProductSeeder extends Seeder
 {
     public function run(): void
     {
+        if (DemoSeedRecord::alreadySeeded(Product::class)) {
+            return;
+        }
+
         $products = [
             [
                 'name' => 'SUOER Mono X-Pro 550W',
@@ -159,7 +168,7 @@ class ProductSeeder extends Seeder
                 ->values()
                 ->all();
 
-            Product::query()->updateOrCreate(
+            $seededProduct = Product::query()->updateOrCreate(
                 ['slug' => Str::slug($product['name'])],
                 [
                     'name' => $product['name'],
@@ -174,6 +183,8 @@ class ProductSeeder extends Seeder
                     'order' => $order,
                 ]
             );
+
+            DemoSeedRecord::recordFor($seededProduct);
         }
     }
 }

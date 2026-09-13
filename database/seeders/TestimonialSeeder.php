@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\DemoSeedRecord;
 use App\Models\Testimonial;
 use Illuminate\Database\Seeder;
 
@@ -9,11 +10,19 @@ use Illuminate\Database\Seeder;
  * Testimoni contoh diambil dari mockup home-page (public/mockup-master).
  * Untuk demo/dev — sumber data utama adalah CRUD admin (AMC-210). Foto sengaja
  * dikosongkan (section publik menampilkan inisial sebagai fallback).
+ *
+ * Dipanggil HANYA lewat `demo:seed` (AMC-229, spec 019-demo-content-seeder)
+ * — tidak lagi lewat DatabaseSeeder/app:setup-client (FR-003). Dilewati bila
+ * sudah pernah di-seed sebelumnya (research.md #4).
  */
 class TestimonialSeeder extends Seeder
 {
     public function run(): void
     {
+        if (DemoSeedRecord::alreadySeeded(Testimonial::class)) {
+            return;
+        }
+
         $testimonials = [
             [
                 'name' => 'Bambang Suryono',
@@ -36,7 +45,7 @@ class TestimonialSeeder extends Seeder
         ];
 
         foreach ($testimonials as $order => $testimonial) {
-            Testimonial::query()->updateOrCreate(
+            $seededTestimonial = Testimonial::query()->updateOrCreate(
                 ['name' => $testimonial['name']],
                 [
                     'attribution' => $testimonial['attribution'],
@@ -47,6 +56,8 @@ class TestimonialSeeder extends Seeder
                     'is_active' => true,
                 ]
             );
+
+            DemoSeedRecord::recordFor($seededTestimonial);
         }
     }
 }
