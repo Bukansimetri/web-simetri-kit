@@ -103,16 +103,16 @@ Laravel web app, single project. Source di root repo: `app/`, `resources/`, `tes
 
 ### Tests for User Story 3 ⚠️ (write first, ensure they FAIL)
 
-- [ ] T025 [P] [US3] Create `tests/Feature/Public/NonBlockingIconFontTest.php` via `php artisan make:test --phpunit Public/NonBlockingIconFontTest` covering (FR-009/FR-010): buka `/` → assertSee `media="print"` dan `onload="this.media='all'"` pada tag `<link>` yang mengarah ke `fonts.googleapis.com/css2?family=Material+Symbols`; assertSee `<noscript>` yang berisi `<link rel="stylesheet"` ke URL sama (fallback); assertSee minimal satu penanda ikon (`material-symbols-outlined`) tetap ada di markup (bukti tidak ada regresi struktur HTML ikon)
+- [x] T025 [P] [US3] Create `tests/Feature/Public/NonBlockingIconFontTest.php` via `php artisan make:test --phpunit Public/NonBlockingIconFontTest` covering (FR-009/FR-010): buka `/` → assertSee `media="print"` dan `onload="this.media='all'"` pada tag `<link>` yang mengarah ke `fonts.googleapis.com/css2?family=Material+Symbols`; assertSee `<noscript>` yang berisi `<link rel="stylesheet"` ke URL sama (fallback); assertSee minimal satu penanda ikon (`material-symbols-outlined`) tetap ada di markup (bukti tidak ada regresi struktur HTML ikon)
 
 ### Implementation for User Story 3
 
-- [ ] T026 [US3] Update `resources/views/layouts/public.blade.php`: ganti `<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">` menjadi:
+- [x] T026 [US3] Update `resources/views/layouts/public.blade.php`: ganti `<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">` menjadi:
       ```html
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" media="print" onload="this.media='all'">
       <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"></noscript>
       ```
-- [ ] T027 [US3] Run `vendor/bin/pint --dirty --format agent`, then `php artisan test --compact --filter='NonBlockingIconFontTest'` and fix until T025 passes
+- [x] T027 [US3] Run `vendor/bin/pint --dirty --format agent`, then `php artisan test --compact --filter='NonBlockingIconFontTest'` and fix until T025 passes
 
 **Checkpoint**: Font ikon non-blocking, nol regresi visual — ketiga user story lengkap dan independen
 
