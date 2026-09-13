@@ -29,6 +29,19 @@ class CustomPage extends Model
     }
 
     /**
+     * Kontrak "internal linkable" untuk Menu Builder (spec 017-menu-builder).
+     */
+    public function getPublicUrl(): ?string
+    {
+        return route('halaman.show', $this);
+    }
+
+    public function getMenuLabelAttribute(): string
+    {
+        return $this->title;
+    }
+
+    /**
      * @see HasSeoMetadata
      */
     protected function seoTitleFallback(): string
