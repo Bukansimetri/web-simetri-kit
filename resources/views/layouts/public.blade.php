@@ -19,9 +19,12 @@
 
     {{-- Font heading/body (Manrope, Be Vietnam Pro, dst.) di-bundle saat build lewat
          laravel-vite-plugin/fonts (lihat vite.config.js) dan otomatis di-preload oleh
-         @vite. Material Symbols dipakai sebagai icon set, dimuat langsung. --}}
+         @vite. Material Symbols (icon set) dimuat non-blocking (AMC-225 FR-009) —
+         media="print" + onload swap supaya tidak menghalangi render konten utama;
+         <noscript> fallback untuk pengunjung tanpa JavaScript. --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"></noscript>
 
     @if ($brand->favicon_path)
         <link rel="icon" href="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($brand->favicon_path) }}">

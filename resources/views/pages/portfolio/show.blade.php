@@ -28,7 +28,7 @@
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                         @foreach (array_slice($images, 1) as $url)
                             <div class="aspect-video bg-surface-container rounded-lg overflow-hidden">
-                                <img src="{{ $url }}" alt="{{ $project->title }}" class="w-full h-full object-cover">
+                                <img src="{{ $url }}" alt="{{ $project->title }}" loading="lazy" decoding="async" class="w-full h-full object-cover">
                             </div>
                         @endforeach
                     </div>

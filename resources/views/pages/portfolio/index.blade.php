@@ -42,7 +42,7 @@
             <a href="{{ route('portfolio.show', $project) }}" class="group block rounded-lg overflow-hidden bg-surface-container-low border border-surface-container-low hover:-translate-y-1 transition-transform">
                 <div class="aspect-video bg-surface-container overflow-hidden">
                     @if ($project->coverImageUrl())
-                        <img src="{{ $project->coverImageUrl() }}" alt="{{ $project->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+                        <img src="{{ $project->coverImageUrl() }}" alt="{{ $project->title }}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
                     @else
                         <div class="w-full h-full flex items-center justify-center text-outline">
                             <span class="material-symbols-outlined text-5xl">image</span>

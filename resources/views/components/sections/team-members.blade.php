@@ -17,6 +17,7 @@
                     @if ($hasPhoto)
                         <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($member->photo_path) }}"
                              alt="{{ $member->name }}"
+                             loading="lazy" decoding="async"
                              class="w-full aspect-square object-cover rounded-lg mb-4 bg-surface-container">
                     @else
                         <div class="w-full aspect-square rounded-lg mb-4 bg-surface-container-high text-primary flex items-center justify-center font-headline-lg text-4xl">
