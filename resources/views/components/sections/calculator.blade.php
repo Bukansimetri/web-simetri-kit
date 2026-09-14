@@ -1,9 +1,14 @@
 @php
     $vaOptions = ['900', '1300', '2200', '3500', '4400', '5500', '6600', '7700', '11000'];
     $areaOptions = ['Jakarta Selatan', 'Jakarta Timur', 'Jakarta Barat', 'Jakarta Utara', 'Jakarta Pusat', 'Luar Jakarta'];
+
+    // Token waktu render (terenkripsi server, tidak bisa dipalsukan client).
+    // Dipakai App\Services\SubmissionGuard untuk menolak submit yang terjadi
+    // terlalu cepat setelah halaman dibuka -- ciri skrip/bot, bukan manusia.
+    $formToken = \App\Services\SubmissionGuard::issueToken();
 @endphp
 <section id="kalkulator" class="reveal-element relative z-20 max-w-6xl mx-auto px-6 -mt-32 mb-32">
-    <div x-data="calculatorComponent()" class="bg-white p-8 md:p-12 shadow-2xl border border-gray-50/50 max-w-5xl mx-auto rounded-lg">
+    <div x-data="calculatorComponent(@js($formToken))" class="bg-white p-8 md:p-12 shadow-2xl border border-gray-50/50 max-w-5xl mx-auto rounded-lg">
         <div class="text-center mb-10">
             <h2 class="font-headline-xl text-3xl md:text-5xl font-extrabold tracking-tight mb-3 text-primary">Hitung Estimasi Penghematan</h2>
             <p class="font-medium text-base md:text-lg max-w-2xl mx-auto text-secondary">Dapatkan analisis transparan untuk potensi efisiensi energi Anda.</p>
@@ -109,6 +114,15 @@
                                 @endforeach
                             </select>
                         </div>
+                    </div>
+
+                    {{-- Honeypot anti-bot: disembunyikan dari mata & dari urutan tab, jadi
+                         tidak pernah terisi manusia. Bot pengisi-otomatis cenderung mengisinya,
+                         dan submit yang field ini terisi akan ditolak diam-diam di server.
+                         JANGAN dihapus atau diberi label yang terlihat pengunjung. --}}
+                    <div aria-hidden="true" class="absolute w-px h-px overflow-hidden -left-[9999px] top-auto">
+                        <label>Website</label>
+                        <input type="text" x-model="honeypot" tabindex="-1" autocomplete="off">
                     </div>
 
                     <p x-show="error" x-cloak x-text="error" class="text-sm text-error font-medium mt-4"></p>

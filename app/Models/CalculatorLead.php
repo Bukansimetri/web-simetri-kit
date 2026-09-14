@@ -50,6 +50,7 @@ class CalculatorLead extends Model
     protected $fillable = [
         'name',
         'phone',
+        'phone_normalized',
         'email',
         'area',
         'category',
@@ -89,6 +90,27 @@ class CalculatorLead extends Model
         'annual_kwh' => 'decimal:1',
         'followed_up_at' => 'datetime',
     ];
+
+    /**
+     * Normalkan nomor telepon jadi kunci yang stabil: hanya digit, selalu
+     * berawalan kode negara 62. "0812-3456-7890", "+62 812 3456 7890", dan
+     * "6281234567890" semuanya menghasilkan "6281234567890" — dipakai untuk
+     * mengenali lead dari orang yang sama walau format inputnya beda.
+     */
+    public static function normalizePhone(string $phone): string
+    {
+        $digits = preg_replace('/[^0-9]/', '', $phone) ?? '';
+
+        if (str_starts_with($digits, '62')) {
+            return $digits;
+        }
+
+        if (str_starts_with($digits, '0')) {
+            return '62'.substr($digits, 1);
+        }
+
+        return '62'.$digits;
+    }
 
     public function followedUpBy(): BelongsTo
     {

@@ -7,8 +7,14 @@
  * dan yang dikirim lewat email — tidak ada lagi hitungan duplikat di client
  * yang bisa berbeda dari server.
  */
-export default function calculatorComponent() {
+export default function calculatorComponent(formToken = '') {
     return {
+        // Token waktu render dari server (lihat App\Services\SubmissionGuard).
+        formToken,
+        // Honeypot anti-bot: terikat ke input tersembunyi di blade. Harus tetap
+        // kosong untuk manusia -- kalau terisi, server menolak submit diam-diam.
+        honeypot: '',
+
         category: 'residential', // 'residential' | 'industrial'
         method: 'bill', // 'bill' | 'appliance' (hanya residential)
         billInput: '',
@@ -111,6 +117,14 @@ export default function calculatorComponent() {
         },
 
         async calculate() {
+            // Guard double-klik / double-Enter: kalau satu pengiriman masih
+            // berjalan, abaikan panggilan berikutnya. Tombolnya memang sudah
+            // :disabled, tapi ini menutup celah saat event terlanjur antre
+            // sebelum Alpine sempat merender ulang atribut disabled-nya.
+            if (this.submitting) {
+                return;
+            }
+
             this.error = null;
             this.result = null;
             this.chartPoints = null;
@@ -167,6 +181,8 @@ export default function calculatorComponent() {
                         va_capacity: this.category === 'residential' ? this.vaCapacity : null,
                         appliances: method === 'appliance' ? this.buildAppliancePayload() : null,
                         utm: this.readUtmParams(),
+                        website: this.honeypot,
+                        form_token: this.formToken,
                     }),
                 });
 
