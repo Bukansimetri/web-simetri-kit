@@ -20,6 +20,8 @@
 
     <x-sections.calculator />
 
+    <x-sections.calculator-plts />
+
     <x-sections.why-choose />
 
     <x-sections.how-it-works />

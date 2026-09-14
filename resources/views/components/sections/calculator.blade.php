@@ -122,8 +122,8 @@
                 </div>
 
                 {{-- Output Side --}}
-                <div class="md:w-1/2 bg-surface-container-low flex flex-col justify-center border border-primary/10 rounded-lg">
-                    <div class="w-full h-full p-6 flex flex-col gap-6">
+                <div class="md:w-1/2 bg-surface-container-low flex flex-col justify-center border border-primary/10 rounded-lg relative overflow-hidden">
+                    <div class="w-full h-full p-6 flex flex-col gap-6 transition-all duration-300" :class="result ? '' : 'blur-sm pointer-events-none select-none'">
                         <div class="flex justify-between items-center">
                             <h3 class="font-headline-lg text-sm text-primary">Proyeksi Hemat vs Investasi</h3>
                             <div class="flex gap-3">
@@ -170,6 +170,15 @@
                                 <p class="font-headline-lg text-lg font-bold text-primary" x-text="result ? result.annualKwh + ' kWh' : '—'"></p>
                             </div>
                         </div>
+                    </div>
+
+                    <div x-show="!result" x-cloak x-transition.opacity
+                         class="absolute inset-0 flex flex-col items-center justify-center text-center gap-3 p-6 bg-white/40">
+                        <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary text-2xl">lock</span>
+                        </div>
+                        <p class="font-headline-lg text-sm font-bold text-primary max-w-[220px]">Lengkapi data Anda untuk melihat hasil analisis</p>
+                        <p class="text-xs text-secondary max-w-[220px]">Isi Nama &amp; Nomor WhatsApp di samping, lalu klik "Dapatkan Hasil Analisis".</p>
                     </div>
                 </div>
             </div>
