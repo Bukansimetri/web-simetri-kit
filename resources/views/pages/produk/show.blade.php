@@ -1,7 +1,9 @@
 @extends('layouts.public')
 
 @section('title', $product->name.' — '.(app(\App\Settings\BrandSettings::class)->app_name ?: config('app.name')))
-@section('meta_description', $product->short_description)
+@section('meta_description', $product->seoDescription())
+@section('og_title', $product->seoTitle())
+@section('og_image', $product->seoImageUrl() ?? app(\App\Settings\BrandSettings::class)->ogImageUrl())
 
 @section('content')
     <section class="px-margin-mobile md:px-margin-desktop pt-32 pb-12 max-w-[1280px] mx-auto">
@@ -127,3 +129,7 @@
         </section>
     @endif
 @endsection
+
+@push('head')
+    <x-seo.json-ld :schema="$schema" />
+@endpush

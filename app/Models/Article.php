@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
+use App\Concerns\HasSeoMetadata;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Tags\HasTags;
 
 class Article extends Model
 {
     use HasFactory;
+    use HasSeoMetadata;
     use HasTags;
 
     /**
@@ -24,6 +27,9 @@ class Article extends Model
         'image_path',
         'article_category_id',
         'published_at',
+        'meta_title',
+        'meta_description',
+        'meta_image_path',
     ];
 
     /**
@@ -74,5 +80,23 @@ class Article extends Model
     public function isPublished(): bool
     {
         return $this->published_at !== null && ! $this->published_at->isFuture();
+    }
+
+    /**
+     * @see HasSeoMetadata
+     */
+    protected function seoTitleFallback(): string
+    {
+        return $this->title;
+    }
+
+    protected function seoDescriptionFallback(): ?string
+    {
+        return $this->excerpt;
+    }
+
+    protected function seoImageFallbackUrl(): ?string
+    {
+        return $this->image_path ? Storage::disk('public')->url($this->image_path) : null;
     }
 }

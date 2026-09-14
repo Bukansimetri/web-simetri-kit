@@ -10,7 +10,13 @@ use App\Http\Controllers\Public\FaqController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\PortfolioController;
 use App\Http\Controllers\Public\ProductController;
+use App\Http\Controllers\Public\SitemapController;
 use Illuminate\Support\Facades\Route;
+
+// Sitemap & robots.txt (spec 015-sitemap-robots) — robots.txt dinamis
+// menggantikan public/robots.txt statis (lihat research.md §2).
+Route::get('/sitemap.xml', [SitemapController::class, 'xml'])->name('sitemap');
+Route::get('/robots.txt', [SitemapController::class, 'robots'])->name('robots');
 
 // Halaman publik company profile (spec 002-theme-branding-system,
 // contracts/public-routes.md).

@@ -49,7 +49,7 @@
         <div class="flex flex-col md:flex-row gap-16 md:gap-24 items-center">
             <div class="w-full md:w-[40%] relative">
                 <div class="overflow-hidden shadow-lg aspect-square rounded-lg">
-                    <img src="{{ asset('images/mockup/tentang-kami-2.jpg') }}" alt="Panel surya berkualitas tinggi memantulkan langit" class="w-full h-full object-cover">
+                    <img src="{{ asset('images/mockup/tentang-kami-2.jpg') }}" alt="Panel surya berkualitas tinggi memantulkan langit" loading="lazy" decoding="async" class="w-full h-full object-cover">
                 </div>
                 <div class="absolute -bottom-6 -right-6 md:-right-12 bg-white p-6 shadow-lg -rotate-3 max-w-[220px] border border-gray-100 rounded-lg">
                     <p class="font-semibold text-sm text-primary text-center">Bagian dari Sinar Mas Elektrindo</p>
@@ -123,7 +123,7 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-stretch">
             <div class="md:col-span-3 relative rounded-lg overflow-hidden shadow-md min-h-[400px] flex flex-col justify-end p-8 md:p-12 group">
-                <img src="{{ asset('images/mockup/tentang-kami-3.jpg') }}" alt="Ekonomi Hijau & Lapangan Kerja" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                <img src="{{ asset('images/mockup/tentang-kami-3.jpg') }}" alt="Ekonomi Hijau & Lapangan Kerja" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                 <div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/90 via-inverse-surface/50 to-transparent"></div>
                 <div class="relative z-10">
                     <div class="w-12 h-12 bg-primary-container text-white flex items-center justify-center mb-4 rounded-lg shadow-md">

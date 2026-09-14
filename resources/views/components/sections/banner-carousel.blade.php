@@ -41,11 +41,11 @@
                     @if ($banner->link_url)
                         <a href="{{ $banner->link_url }}" class="block">
                             <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($banner->image_path) }}"
-                                 alt="{{ $banner->alt_text }}" class="w-full h-[45vh] md:h-[60vh] object-cover">
+                                 alt="{{ $banner->alt_text }}" @if ($i > 0) loading="lazy" decoding="async" @endif class="w-full h-[45vh] md:h-[60vh] object-cover">
                         </a>
                     @else
                         <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($banner->image_path) }}"
-                             alt="{{ $banner->alt_text }}" class="w-full h-[45vh] md:h-[60vh] object-cover">
+                             alt="{{ $banner->alt_text }}" @if ($i > 0) loading="lazy" decoding="async" @endif class="w-full h-[45vh] md:h-[60vh] object-cover">
                     @endif
                 </div>
             @endforeach

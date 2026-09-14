@@ -38,7 +38,7 @@
                     <div class="flex flex-col lg:flex-row">
                         <div class="lg:w-3/5 h-64 lg:h-auto relative overflow-hidden bg-surface-container">
                             @if ($featured->image_path)
-                                <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($featured->image_path) }}" alt="{{ $featured->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($featured->image_path) }}" alt="{{ $featured->title }}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                             @else
                                 <div class="w-full h-full flex items-center justify-center text-outline"><span class="material-symbols-outlined text-6xl">article</span></div>
                             @endif

@@ -1,7 +1,9 @@
 @extends('layouts.public')
 
 @section('title', $article->title.' — '.(app(\App\Settings\BrandSettings::class)->app_name ?: config('app.name')))
-@section('meta_description', $article->excerpt)
+@section('meta_description', $article->seoDescription())
+@section('og_title', $article->seoTitle())
+@section('og_image', $article->seoImageUrl() ?? app(\App\Settings\BrandSettings::class)->ogImageUrl())
 
 @section('content')
     <article class="pt-40 pb-16 px-6 max-w-3xl mx-auto">
@@ -27,7 +29,7 @@
 
         <div class="aspect-video w-full bg-surface-container rounded-lg mb-10 overflow-hidden">
             @if ($article->image_path)
-                <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($article->image_path) }}" alt="{{ $article->title }}" class="w-full h-full object-cover">
+                <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($article->image_path) }}" alt="{{ $article->title }}" loading="lazy" decoding="async" class="w-full h-full object-cover">
             @else
                 <div data-article-image-placeholder class="w-full h-full flex items-center justify-center text-outline">
                     <span class="material-symbols-outlined text-6xl">image</span>
@@ -65,3 +67,7 @@
         buttonLabel="Hubungi via WhatsApp"
     />
 @endsection
+
+@push('head')
+    <x-seo.json-ld :schema="$schema" />
+@endpush

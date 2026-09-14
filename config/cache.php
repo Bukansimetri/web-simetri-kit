@@ -1,5 +1,17 @@
 <?php
 
+use App\Models\Article;
+use App\Models\ArticleCategory;
+use App\Models\Banner;
+use App\Models\Category;
+use App\Models\ClientLogo;
+use App\Models\FaqItem;
+use App\Models\PortfolioCategory;
+use App\Models\PortfolioProject;
+use App\Models\Product;
+use App\Models\TeamMember;
+use App\Models\Testimonial;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 return [
@@ -129,8 +141,28 @@ return [
     | storage. By default, no PHP classes will be unserialized from your
     | cache to prevent gadget chain attacks if your APP_KEY is leaked.
     |
+    | Diisi allowlist eksplisit (AMC-225) — bukan `true` (izinkan semua) —
+    | supaya perlindungan gadget-chain tetap berlaku untuk kelas lain di
+    | luar daftar ini. Hanya model/collection yang benar-benar dibungkus
+    | `CachesPublicPages` (app/Concerns/CachesPublicPages.php) yang perlu
+    | ada di sini.
+    |
     */
 
-    'serializable_classes' => false,
+    'serializable_classes' => [
+        Illuminate\Database\Eloquent\Collection::class,
+        Collection::class,
+        Product::class,
+        Category::class,
+        Article::class,
+        ArticleCategory::class,
+        PortfolioProject::class,
+        PortfolioCategory::class,
+        Banner::class,
+        Testimonial::class,
+        ClientLogo::class,
+        TeamMember::class,
+        FaqItem::class,
+    ],
 
 ];

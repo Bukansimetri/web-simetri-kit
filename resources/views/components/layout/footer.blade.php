@@ -16,6 +16,24 @@
             ['label' => 'FAQ', 'href' => url('/faq')],
         ])),
     ];
+
+    // Kolom tambahan yang dikelola admin lewat Menu Builder (spec
+    // 017-menu-builder). Item induk (punya sub-item) jadi judul kolom;
+    // item tanpa sub-item dikelompokkan ke kolom "Lainnya".
+    foreach (\App\Models\MenuItem::treeForLocation('footer') as $item) {
+        if (! empty($item['children'])) {
+            // href null (tanpa tautan / target terhapus, FR-011) tetap
+            // tampil sebagai label, diarahkan ke '#' alih-alih disembunyikan.
+            $footerColumns[$item['label']] = array_map(
+                fn (array $child) => ['label' => $child['label'], 'href' => $child['href'] ?? '#'],
+                $item['children']
+            );
+
+            continue;
+        }
+
+        $footerColumns['Lainnya'][] = ['label' => $item['label'], 'href' => $item['href'] ?? '#'];
+    }
 @endphp
 <footer class="reveal-element bg-on-background pt-20 pb-10 px-6 border-t border-primary/40">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">

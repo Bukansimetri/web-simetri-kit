@@ -42,8 +42,9 @@ Referensi awal dikembangkan dari [`superduper-filament-starter-kit`](https://git
 ### Deployment & Client Setup Tooling
 - Artisan command `app:setup-client` untuk generate `.env`, set nama app, generate key, clear cache
 - Seeder dummy content demo (services, team, testimonials, portfolio) untuk showcase ke calon klien
-- Strategi git/versioning lintas klien (template repo + upstream remote atau composer package private)
-- Dokumentasi deployment lengkap (requirement server, langkah deploy, checklist go-live)
+- [Strategi git/versioning lintas klien](docs/versioning-strategi-klien.md) — git clone + upstream remote
+- [Panduan deployment](docs/deployment.md) — requirement server, langkah deploy VPS & shared hosting cPanel
+- [Checklist setup Google Analytics](docs/checklist-ga4-setup.md) dan [checklist go-live](docs/checklist-go-live.md)
 
 ## Tech Stack
 

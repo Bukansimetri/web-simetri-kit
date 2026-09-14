@@ -2,12 +2,13 @@
 
 @php
     $appName = app(\App\Settings\BrandSettings::class)->app_name ?: config('app.name');
-    $plain = trim(preg_replace('/\s+/', ' ', strip_tags($project->description)));
     $images = $project->imageUrls();
 @endphp
 
 @section('title', $project->title.' — '.$appName)
-@section('meta_description', Str::limit($plain, 160))
+@section('meta_description', $project->seoDescription())
+@section('og_title', $project->seoTitle())
+@section('og_image', $project->seoImageUrl() ?? app(\App\Settings\BrandSettings::class)->ogImageUrl())
 
 @section('content')
     <article class="pt-32 pb-24 px-6 max-w-4xl mx-auto">
@@ -27,7 +28,7 @@
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                         @foreach (array_slice($images, 1) as $url)
                             <div class="aspect-video bg-surface-container rounded-lg overflow-hidden">
-                                <img src="{{ $url }}" alt="{{ $project->title }}" class="w-full h-full object-cover">
+                                <img src="{{ $url }}" alt="{{ $project->title }}" loading="lazy" decoding="async" class="w-full h-full object-cover">
                             </div>
                         @endforeach
                     </div>

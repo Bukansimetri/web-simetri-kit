@@ -8,6 +8,8 @@ use App\Filament\Resources\CustomPageResource\Pages\ListCustomPages;
 use App\Models\CustomPage;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -123,5 +125,28 @@ class CustomPageResourceTest extends TestCase
 
         $this->assertDatabaseMissing('custom_pages', ['id' => $page->id]);
         $this->get('/halaman/hapus-saya')->assertNotFound();
+    }
+
+    public function test_admin_can_fill_seo_fields_and_they_are_stored(): void
+    {
+        Storage::fake('public');
+
+        Livewire::actingAs(User::factory()->create())
+            ->test(CreateCustomPage::class)
+            ->fillForm([
+                'title' => 'Halaman dengan SEO',
+                'content' => '<p>Isi halaman.</p>',
+                'meta_title' => 'Judul SEO Kustom',
+                'meta_description' => 'Deskripsi SEO kustom.',
+                'meta_image_path' => UploadedFile::fake()->image('seo.jpg'),
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $page = CustomPage::where('title', 'Halaman dengan SEO')->first();
+
+        $this->assertSame('Judul SEO Kustom', $page->meta_title);
+        $this->assertSame('Deskripsi SEO kustom.', $page->meta_description);
+        $this->assertStringEndsWith('.webp', $page->meta_image_path);
     }
 }

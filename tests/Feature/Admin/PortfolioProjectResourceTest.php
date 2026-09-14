@@ -167,4 +167,30 @@ class PortfolioProjectResourceTest extends TestCase
 
         $this->assertDatabaseMissing('portfolio_projects', ['id' => $project->id]);
     }
+
+    public function test_admin_can_fill_seo_fields_and_they_are_stored(): void
+    {
+        Storage::fake('public');
+        $category = PortfolioCategory::factory()->create();
+
+        Livewire::actingAs(User::factory()->create())
+            ->test(CreatePortfolioProject::class)
+            ->fillForm([
+                'title' => 'Proyek dengan SEO',
+                'portfolio_category_id' => $category->id,
+                'description' => '<p>Instalasi rapi.</p>',
+                'images' => [UploadedFile::fake()->image('a.jpg', 800, 600)],
+                'meta_title' => 'Judul SEO Kustom',
+                'meta_description' => 'Deskripsi SEO kustom.',
+                'meta_image_path' => UploadedFile::fake()->image('seo.jpg'),
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $project = PortfolioProject::where('title', 'Proyek dengan SEO')->first();
+
+        $this->assertSame('Judul SEO Kustom', $project->meta_title);
+        $this->assertSame('Deskripsi SEO kustom.', $project->meta_description);
+        $this->assertStringEndsWith('.webp', $project->meta_image_path);
+    }
 }

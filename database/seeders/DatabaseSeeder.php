@@ -17,12 +17,16 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RoleSeeder::class);
         $this->call(CategorySeeder::class);
-        $this->call(ProductSeeder::class);
         $this->call(ArticleCategorySeeder::class);
         $this->call(ArticleSeeder::class);
         $this->call(JobOpeningSeeder::class);
         $this->call(FaqItemSeeder::class);
-        $this->call(TestimonialSeeder::class);
+        $this->call(MenuSeeder::class);
+
+        // Konten demo (Layanan/Produk, Tim, Testimoni, Portfolio) SENGAJA
+        // tidak dipanggil di sini — lihat `php artisan demo:seed` (AMC-229,
+        // spec 019-demo-content-seeder). Standar deployment kit ini
+        // melarang konten demo otomatis ikut ter-seed di instalasi produksi.
 
         // User::factory(10)->create();
 
