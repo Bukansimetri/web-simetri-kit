@@ -1,14 +1,11 @@
 /**
- * Kalkulator Estimasi Hemat Home page (FR-006). Perhitungan berjalan di sisi
- * client; setelah "Dapatkan Hasil Analisis" ditekan, data lead (nama/WA/email/
- * area + ringkasan estimasi) dikirim ke `POST /kalkulator/lead` untuk disimpan
- * sebagai ContactSubmission agar tim sales bisa menindaklanjuti.
- *
- * Estimasi memakai asumsi sederhana (bukan perhitungan teknik presisi):
- * - Tarif listrik rata-rata Rp 1.500/kWh
- * - Panel surya menutup ~70% konsumsi bulanan
- * - Investasi awal diasumsikan proporsional terhadap tagihan/pemakaian
- * - Eskalasi tarif listrik 3%/tahun dipakai untuk proyeksi 25 tahun
+ * Kalkulator Estimasi Hemat Home page (FR-006). Perhitungan berjalan
+ * SEPENUHNYA DI SERVER (App\Services\SavingsEstimator) — komponen ini hanya
+ * mengumpulkan input mentah (tagihan/peralatan) dan menggambar ulang hasil +
+ * grafik dari response `POST /kalkulator/lead`. Ini disengaja: supaya angka
+ * yang ditampilkan di layar selalu identik dengan yang tersimpan di database
+ * dan yang dikirim lewat email — tidak ada lagi hitungan duplikat di client
+ * yang bisa berbeda dari server.
  */
 export default function calculatorComponent() {
     return {
@@ -29,120 +26,94 @@ export default function calculatorComponent() {
         submitting: false,
         submitted: false,
         result: null,
+        chartPoints: null, // titik-titik dari server, dipakai untuk menggambar grafik
+        whatsappUrl: null,
 
         get effectiveMethod() {
             return this.category === 'industrial' ? 'bill' : this.method;
         },
 
+        // Grafik digambar dari `chartPoints` (balikan server), bukan dihitung
+        // ulang di sini, supaya bentuknya selalu konsisten dengan angka hasil.
         get chartPath() {
-            if (!this.result) {
+            const points = this.scaledChartPoints();
+
+            if (!points.length) {
                 return 'M 0 140 Q 100 130, 200 100 T 400 20';
             }
 
-            const peak = 130 - Math.min(this.result.progressRatio * 110, 110);
+            let d = `M ${points[0].x} ${points[0].y}`;
 
-            return `M 0 140 Q 100 ${Math.round(140 - this.result.progressRatio * 20)}, 200 ${Math.round(140 - this.result.progressRatio * 60)} T 400 ${Math.round(peak)}`;
+            for (let i = 0; i < points.length - 1; i++) {
+                const p0 = points[i];
+                const p1 = points[i + 1];
+                const midX = (p0.x + p1.x) / 2;
+                const midY = (p0.y + p1.y) / 2;
+                d += ` Q ${p0.x} ${p0.y}, ${midX} ${midY}`;
+            }
+
+            const last = points[points.length - 1];
+            d += ` L ${last.x} ${last.y}`;
+
+            return d;
         },
 
         get chartFillPath() {
             return `${this.chartPath} L 400 150 L 0 150 Z`;
         },
 
+        // Konversi titik {year, cumulative_savings} dari server ke koordinat
+        // SVG (viewBox 0 0 400 150), diberi titik awal tahun-0 di pojok kiri
+        // bawah supaya kurva mulai dari nol.
+        scaledChartPoints() {
+            if (!this.chartPoints || !this.chartPoints.length) {
+                return [];
+            }
+
+            const investment = this.result?.estimatedInvestment || 1;
+            const maxYear = this.chartPoints[this.chartPoints.length - 1].year;
+            const toXY = ({ year, cumulative_savings: cumulative }) => {
+                const ratio = Math.min(cumulative / (investment * 3), 1);
+
+                return {
+                    x: Math.round((year / maxYear) * 400),
+                    y: Math.round(140 - ratio * 120),
+                };
+            };
+
+            return [{ year: 0, cumulative_savings: 0 }, ...this.chartPoints].map(toXY);
+        },
+
         resetResult() {
             this.result = null;
+            this.chartPoints = null;
             this.error = null;
             this.submitted = false;
         },
 
-        compute() {
-            const TARIFF_PER_KWH = 1500;
-            const SOLAR_COVERAGE = 0.7;
-            const ESCALATION = 1.03;
-
-            let monthlyBill;
-
-            if (this.effectiveMethod === 'bill') {
-                const bill = this.parseRupiah(this.billInput);
-
-                if (!bill || bill <= 0) {
-                    this.error = 'Masukkan tagihan listrik bulanan yang valid (lebih dari 0).';
-
-                    return null;
-                }
-
-                monthlyBill = bill;
-            } else {
-                const totalWatt = this.appliances.reduce((sum, item) => sum + item.watt * item.qty, 0);
-
-                if (totalWatt <= 0) {
-                    this.error = 'Pilih minimal satu peralatan dengan jumlah lebih dari 0.';
-
-                    return null;
-                }
-
-                const monthlyKwh = (totalWatt / 1000) * 6 * 30;
-                monthlyBill = monthlyKwh * TARIFF_PER_KWH;
-            }
-
-            const annualSavingsYear1 = monthlyBill * 12 * SOLAR_COVERAGE;
-            const estimatedInvestment = annualSavingsYear1 * 6.8;
-
-            let cumulative = 0;
-            let breakevenYear = null;
-
-            for (let year = 1; year <= 25; year++) {
-                cumulative += annualSavingsYear1 * ESCALATION ** (year - 1);
-
-                if (breakevenYear === null && cumulative >= estimatedInvestment) {
-                    breakevenYear = year;
-                }
-            }
-
-            const annualKwh = (monthlyBill / TARIFF_PER_KWH) * 12 * SOLAR_COVERAGE;
-
-            return {
-                savingsYear1: Math.round(annualSavingsYear1),
-                totalSavings25Years: Math.round(cumulative),
-                breakevenYears: breakevenYear ?? 25,
-                annualKwh: Math.round(annualKwh * 10) / 10,
-                progressRatio: Math.min(cumulative / (estimatedInvestment * 3), 1),
-            };
+        buildAppliancePayload() {
+            return this.appliances
+                .filter((item) => item.qty > 0)
+                .map((item) => ({ key: item.key, qty: item.qty }));
         },
 
-        buildSummary() {
-            const r = this.result;
-            const lines = [
-                `Kategori: ${this.category === 'industrial' ? 'Industrial / Komersial' : 'Residential'}`,
-                `Metode: ${this.effectiveMethod === 'bill' ? 'Berdasarkan Tagihan' : 'Berdasarkan Peralatan'}`,
-            ];
+        readUtmParams() {
+            const params = new URLSearchParams(window.location.search);
+            const utm = {};
 
-            if (this.effectiveMethod === 'bill') {
-                lines.push(`Tagihan bulanan: Rp ${this.parseRupiah(this.billInput).toLocaleString('id-ID')}`);
-                if (this.category === 'residential') {
-                    lines.push(`Kapasitas PLN: ${this.vaCapacity} VA`);
+            ['utm_source', 'utm_medium', 'utm_campaign'].forEach((k) => {
+                if (params.get(k)) {
+                    utm[k.replace('utm_', '')] = params.get(k);
                 }
-            } else {
-                const picked = this.appliances.filter((a) => a.qty > 0).map((a) => `${a.label} x${a.qty}`);
-                lines.push(`Peralatan: ${picked.join(', ')}`);
-            }
+            });
 
-            lines.push(
-                '',
-                `Estimasi hemat tahun 1: ${this.formatRupiah(r.savingsYear1)}`,
-                `Total hemat 25 tahun: ${this.formatRupiah(r.totalSavings25Years)}`,
-                `Breakeven: ${r.breakevenYears} tahun`,
-                `Produksi surya tahunan: ${r.annualKwh} kWh`,
-                '',
-                `Area: ${this.lead.area}`,
-                this.lead.email ? `Email: ${this.lead.email}` : null,
-            );
-
-            return lines.filter((l) => l !== null).join('\n');
+            return Object.keys(utm).length ? utm : null;
         },
 
         async calculate() {
             this.error = null;
             this.result = null;
+            this.chartPoints = null;
             this.submitted = false;
 
             if (!this.lead.name.trim()) {
@@ -157,18 +128,24 @@ export default function calculatorComponent() {
                 return;
             }
 
-            const computed = this.compute();
+            const method = this.effectiveMethod;
 
-            if (!computed) {
+            if (method === 'bill' && this.parseRupiah(this.billInput) <= 0) {
+                this.error = 'Masukkan tagihan listrik bulanan yang valid (lebih dari 0).';
+
                 return;
             }
 
-            this.result = computed;
+            if (method === 'appliance' && this.buildAppliancePayload().length === 0) {
+                this.error = 'Pilih minimal satu peralatan dengan jumlah lebih dari 0.';
 
-            await this.submitLead();
+                return;
+            }
+
+            await this.submitLead(method);
         },
 
-        async submitLead() {
+        async submitLead(method) {
             this.submitting = true;
 
             try {
@@ -185,19 +162,28 @@ export default function calculatorComponent() {
                         email: this.lead.email || null,
                         area: this.lead.area,
                         category: this.category,
-                        summary: this.buildSummary(),
+                        method,
+                        monthly_bill: method === 'bill' ? this.parseRupiah(this.billInput) : null,
+                        va_capacity: this.category === 'residential' ? this.vaCapacity : null,
+                        appliances: method === 'appliance' ? this.buildAppliancePayload() : null,
+                        utm: this.readUtmParams(),
                     }),
                 });
 
-                if (res.ok) {
-                    this.submitted = true;
-                    const body = await res.json();
+                const body = await res.json();
 
-                    if (body.whatsapp_url) {
-                        this.whatsappUrl = body.whatsapp_url;
-                    }
+                if (res.ok) {
+                    this.result = {
+                        savingsYear1: body.result.savings_year1,
+                        totalSavings25Years: body.result.total_savings_25y,
+                        estimatedInvestment: body.result.estimated_investment,
+                        breakevenYears: Math.round(body.result.breakeven_years),
+                        annualKwh: body.result.annual_kwh,
+                    };
+                    this.chartPoints = body.chart.points;
+                    this.whatsappUrl = body.whatsapp_url ?? null;
+                    this.submitted = true;
                 } else if (res.status === 422) {
-                    const body = await res.json();
                     this.error = Object.values(body.errors ?? {})[0]?.[0] ?? body.message;
                 } else {
                     this.error = 'Gagal mengirim data. Silakan coba lagi.';

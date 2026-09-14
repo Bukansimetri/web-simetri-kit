@@ -20,7 +20,9 @@
 
     <x-sections.calculator />
 
-    <x-sections.calculator-plts />
+    {{-- Kalkulator Detail Sistem PLTS -- disembunyikan sementara atas permintaan klien
+         (14 Sep 2026). Aktifkan kembali dengan menghapus comment di bawah. --}}
+    {{-- <x-sections.calculator-plts /> --}}
 
     <x-sections.why-choose />
 
