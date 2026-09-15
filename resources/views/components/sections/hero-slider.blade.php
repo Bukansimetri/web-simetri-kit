@@ -23,7 +23,7 @@
         @foreach ($visible as $i => $banner)
             <div
                 class="absolute inset-0 transition-opacity duration-500 motion-reduce:transition-none {{ $i === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none' }}"
-                x-bind:class="active === {{ $i }} ? 'opacity-100' : 'opacity-0 pointer-events-none'"
+                x-bind:class="{ 'opacity-100': active === {{ $i }}, 'opacity-0 pointer-events-none': active !== {{ $i }} }"
                 x-bind:aria-hidden="active === {{ $i }} ? 'false' : 'true'"
                 x-bind:inert="active !== {{ $i }}"
                 @if ($i !== 0) aria-hidden="true" inert @endif
@@ -61,8 +61,8 @@
                         x-on:click="go({{ $i }})"
                         x-bind:aria-selected="active === {{ $i }} ? 'true' : 'false'"
                         aria-label="Slide {{ $i + 1 }}"
-                        class="w-2.5 h-2.5 rounded-full transition-colors bg-white/50"
-                        x-bind:class="active === {{ $i }} ? 'bg-white' : 'bg-white/50'"
+                        class="w-2.5 h-2.5 rounded-full transition-colors"
+                        x-bind:class="{ 'bg-white': active === {{ $i }}, 'bg-white/50': active !== {{ $i }} }"
                     ></button>
                 @endforeach
             </div>
