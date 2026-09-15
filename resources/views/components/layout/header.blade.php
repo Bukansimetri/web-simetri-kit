@@ -1,6 +1,9 @@
 @php
     $brand = app(\App\Settings\BrandSettings::class);
     $appName = $brand->app_name ?: config('app.name');
+    $logoUrl = filled($brand->logo_path) && \Illuminate\Support\Facades\Storage::disk('public')->exists($brand->logo_path)
+        ? \Illuminate\Support\Facades\Storage::disk('public')->url($brand->logo_path)
+        : null;
 
     // Beranda: header transparan menumpuk di atas hero gelap, jadi solid saat
     // di-scroll. Halaman lain: header putih permanen dengan border bawah.
@@ -45,8 +48,12 @@
     <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-3 items-center">
         <a href="{{ url('/') }}"
            :class="scrolled ? 'text-primary' : '{{ $overHero ? 'text-white' : 'text-primary' }}'"
-           class="font-headline-lg text-headline-lg font-extrabold tracking-tight transition-colors">
-            {{ $appName }}
+           class="font-headline-lg text-headline-lg font-extrabold tracking-tight transition-colors flex items-center gap-2">
+            @if ($logoUrl)
+                <img src="{{ $logoUrl }}" alt="{{ $appName }}" class="h-9 w-auto object-contain">
+            @else
+                {{ $appName }}
+            @endif
         </a>
 
         <nav class="hidden md:flex justify-center gap-8">

@@ -1,6 +1,9 @@
 @php
     $brand = app(\App\Settings\BrandSettings::class);
     $appName = $brand->app_name ?: config('app.name');
+    $logoUrl = filled($brand->logo_path) && \Illuminate\Support\Facades\Storage::disk('public')->exists($brand->logo_path)
+        ? \Illuminate\Support\Facades\Storage::disk('public')->url($brand->logo_path)
+        : null;
 
     $footerColumns = [
         'Solusi' => [
@@ -38,8 +41,14 @@
 <footer class="reveal-element bg-on-background pt-20 pb-10 px-6 border-t border-primary/40">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
         <div>
-            <div class="font-headline-lg text-headline-lg font-extrabold text-3xl text-primary-container mb-6 tracking-tight">
-                {{ $appName }}
+            <div class="mb-6">
+                @if ($logoUrl)
+                    <img src="{{ $logoUrl }}" alt="{{ $appName }}" class="h-10 w-auto object-contain">
+                @else
+                    <div class="font-headline-lg text-headline-lg font-extrabold text-3xl text-primary-container tracking-tight">
+                        {{ $appName }}
+                    </div>
+                @endif
             </div>
             <p class="text-white/60 text-sm leading-relaxed">
                 Menginspirasi masa depan berkelanjutan melalui inovasi tenaga surya yang elegan dan presisi tinggi untuk masyarakat Indonesia.
