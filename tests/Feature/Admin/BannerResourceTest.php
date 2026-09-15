@@ -268,6 +268,27 @@ class BannerResourceTest extends TestCase
     }
 
     /**
+     * Reorder drag-and-drop Filament memakai mass-update lewat query
+     * builder, bukan Eloquent save() per baris, jadi event `saved` MODEL
+     * tidak ikut terpicu — ListBanners::reorderTable() membuang cache
+     * secara eksplisit untuk menutup celah ini (FR-018).
+     */
+    public function test_reordering_banners_invalidates_home_cache(): void
+    {
+        $first = Banner::factory()->create(['order' => 1]);
+        $second = Banner::factory()->create(['order' => 2]);
+        Cache::put('public-page:home', 'stale-value', 300);
+
+        Livewire::actingAs(User::factory()->create())
+            ->test(ListBanners::class)
+            ->call('reorderTable', [$second->id, $first->id]);
+
+        $this->assertFalse(Cache::has('public-page:home'));
+        $this->assertSame(1, $second->fresh()->order);
+        $this->assertSame(2, $first->fresh()->order);
+    }
+
+    /**
      * T040: `overlay_style` dan `text_position` hanya menerima nilai enum.
      */
     public function test_invalid_overlay_style_is_rejected(): void
