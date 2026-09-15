@@ -14,7 +14,7 @@ Referensi awal dikembangkan dari [`superduper-filament-starter-kit`](https://git
 - **Client Logos** — logo strip perusahaan partner/klien
 - **Career/Lowongan Kerja** — opsional, toggle aktif per klien
 - **Blog/Artikel** — kategori, tag, featured image, draft/publish
-- **Banner Management** — gambar, link, urutan, periode tayang
+- **Banner Hero Slider** — slide hero penuh (badge, judul, subjudul, dua CTA, trust bar), preset lapisan & posisi teks, slider manual tanpa auto-rotate untuk >=2 slide, urutan, periode tayang
 - **Menu Builder** — navigasi navbar/footer dinamis, multi-lokasi
 - **Contact Us** — form + notifikasi email/WA + resource di admin panel
 - **Custom Page** — halaman statis (About Us, TnC, Privacy Policy) dengan rich text editor + slug

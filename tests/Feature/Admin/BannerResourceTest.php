@@ -9,6 +9,7 @@ use App\Models\Banner;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -174,5 +175,149 @@ class BannerResourceTest extends TestCase
             ->callTableAction('delete', $banner);
 
         $this->assertDatabaseMissing('banners', ['id' => $banner->id]);
+    }
+
+    /**
+     * T016: label CTA diisi tanpa alamat MUST ditolak, dan sebaliknya (FR-003).
+     */
+    public function test_cta_label_without_url_is_rejected(): void
+    {
+        Storage::fake('public');
+
+        Livewire::actingAs(User::factory()->create())
+            ->test(CreateBanner::class)
+            ->fillForm([
+                'title' => 'Banner CTA',
+                'image_path' => UploadedFile::fake()->image('b.jpg', 400, 200),
+                'alt_text' => 'x',
+                'cta_primary_label' => 'Konsultasi',
+                'cta_primary_url' => '',
+            ])
+            ->call('create')
+            ->assertHasFormErrors(['cta_primary_url']);
+    }
+
+    public function test_cta_url_without_label_is_rejected(): void
+    {
+        Storage::fake('public');
+
+        Livewire::actingAs(User::factory()->create())
+            ->test(CreateBanner::class)
+            ->fillForm([
+                'title' => 'Banner CTA',
+                'image_path' => UploadedFile::fake()->image('b.jpg', 400, 200),
+                'alt_text' => 'x',
+                'cta_secondary_label' => '',
+                'cta_secondary_url' => '/kontak',
+            ])
+            ->call('create')
+            ->assertHasFormErrors(['cta_secondary_label']);
+    }
+
+    public function test_cta_pair_fully_filled_is_accepted(): void
+    {
+        Storage::fake('public');
+
+        Livewire::actingAs(User::factory()->create())
+            ->test(CreateBanner::class)
+            ->fillForm([
+                'title' => 'Banner CTA Lengkap',
+                'image_path' => UploadedFile::fake()->image('b.jpg', 400, 200),
+                'alt_text' => 'x',
+                'cta_primary_label' => 'Konsultasi Gratis',
+                'cta_primary_url' => '/kontak',
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $this->assertDatabaseHas('banners', ['cta_primary_label' => 'Konsultasi Gratis', 'cta_primary_url' => '/kontak']);
+    }
+
+    /**
+     * T017: cache `public-page:home` MUST terbuang setelah banner disimpan
+     * dan setelah dihapus (FR-018).
+     */
+    public function test_saving_banner_invalidates_home_cache(): void
+    {
+        Storage::fake('public');
+        Cache::put('public-page:home', 'stale-value', 300);
+
+        Livewire::actingAs(User::factory()->create())
+            ->test(CreateBanner::class)
+            ->fillForm([
+                'title' => 'Banner Cache',
+                'image_path' => UploadedFile::fake()->image('b.jpg', 400, 200),
+                'alt_text' => 'x',
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $this->assertFalse(Cache::has('public-page:home'));
+    }
+
+    public function test_deleting_banner_invalidates_home_cache(): void
+    {
+        $banner = Banner::factory()->create();
+        Cache::put('public-page:home', 'stale-value', 300);
+
+        Livewire::actingAs(User::factory()->create())
+            ->test(ListBanners::class)
+            ->callTableAction('delete', $banner);
+
+        $this->assertFalse(Cache::has('public-page:home'));
+    }
+
+    /**
+     * T040: `overlay_style` dan `text_position` hanya menerima nilai enum.
+     */
+    public function test_invalid_overlay_style_is_rejected(): void
+    {
+        Storage::fake('public');
+
+        Livewire::actingAs(User::factory()->create())
+            ->test(CreateBanner::class)
+            ->fillForm([
+                'title' => 'Banner Preset',
+                'image_path' => UploadedFile::fake()->image('b.jpg', 400, 200),
+                'alt_text' => 'x',
+                'overlay_style' => 'ungu',
+            ])
+            ->call('create')
+            ->assertHasFormErrors(['overlay_style']);
+    }
+
+    public function test_invalid_text_position_is_rejected(): void
+    {
+        Storage::fake('public');
+
+        Livewire::actingAs(User::factory()->create())
+            ->test(CreateBanner::class)
+            ->fillForm([
+                'title' => 'Banner Preset',
+                'image_path' => UploadedFile::fake()->image('b.jpg', 400, 200),
+                'alt_text' => 'x',
+                'text_position' => 'atas',
+            ])
+            ->call('create')
+            ->assertHasFormErrors(['text_position']);
+    }
+
+    public function test_valid_preset_values_are_accepted(): void
+    {
+        Storage::fake('public');
+
+        Livewire::actingAs(User::factory()->create())
+            ->test(CreateBanner::class)
+            ->fillForm([
+                'title' => 'Banner Preset Valid',
+                'image_path' => UploadedFile::fake()->image('b.jpg', 400, 200),
+                'alt_text' => 'x',
+                'overlay_style' => 'light',
+                'text_position' => 'center',
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $this->assertDatabaseHas('banners', ['overlay_style' => 'light', 'text_position' => 'center']);
     }
 }

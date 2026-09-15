@@ -8,6 +8,14 @@
 
 **Input**: User description: "AMC-214: Modul Banner Management — CRUD admin (Filament Resource) untuk banner promosi: judul (internal), gambar banner, URL tautan (opsional), teks alt, urutan tampil, periode tayang (tanggal mulai & selesai, opsional), toggle aktif. Banner hanya tampil di halaman publik bila aktif DAN berada dalam periode tayang (atau periode kosong = selalu). Gambar di-resize + konversi WebP (pola ImageUploads::storeAsWebp maxWidth seperti modul Portfolio 010 & Team 011). Pola CRUD identik modul konten lain (Testimonials 008, Client Logos 009). Section otomatis tidak dirender bila tidak ada banner yang memenuhi syarat tayang. Menutup sebagian Epic 3 (AMC-192)."
 
+> **Catatan (2026-09-14)**: Modul ini diperluas oleh fitur
+> [022-banner-hero-slider](../022-banner-hero-slider/spec.md). Banner kini
+> membawa konten slide hero penuh (badge, judul, subjudul, dua CTA, trust
+> bar, preset tampilan), auto-rotate carousel yang dijelaskan di klarifikasi
+> di bawah **tidak lagi berlaku** — slider kini manual tanpa perpindahan
+> otomatis (FR-011 fitur 022). Dokumen ini dipertahankan sebagai catatan
+> sejarah keputusan awal; rujuk spec 022 untuk perilaku yang berlaku saat ini.
+
 ## Clarifications
 
 ### Session 2026-09-10

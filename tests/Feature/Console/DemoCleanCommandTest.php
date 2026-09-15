@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Console;
 
+use App\Models\Banner;
 use App\Models\DemoSeedRecord;
 use App\Models\PortfolioCategory;
 use App\Models\PortfolioProject;
@@ -21,6 +22,7 @@ class DemoCleanCommandTest extends TestCase
 
         $this->artisan('demo:clean')->assertExitCode(0);
 
+        $this->assertSame(0, Banner::count());
         $this->assertSame(0, Product::count());
         $this->assertSame(0, TeamMember::count());
         $this->assertSame(0, Testimonial::count());

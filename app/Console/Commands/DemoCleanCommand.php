@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Banner;
 use App\Models\DemoSeedRecord;
 use App\Models\PortfolioCategory;
 use App\Models\PortfolioProject;
@@ -15,11 +16,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 #[Signature('demo:clean')]
-#[Description('Menghapus seluruh konten demo (Layanan, Tim, Testimoni, Portfolio) tanpa menyentuh data yang ditambahkan admin')]
+#[Description('Menghapus seluruh konten demo (Banner, Layanan, Tim, Testimoni, Portfolio) tanpa menyentuh data yang ditambahkan admin')]
 class DemoCleanCommand extends Command
 {
     public function handle(): int
     {
+        // Banner tidak punya dependensi ke entitas demo lain, jadi aman
+        // dibersihkan di langkah mana pun (022-banner-hero-slider).
+        $this->deleteTrackedRecords(Banner::class, 'Banner');
+
         // Urutan anak → induk (data-model.md §Urutan operasi) supaya tidak
         // melanggar foreign key dan tidak meninggalkan referensi rusak.
         $this->deleteTrackedRecords(PortfolioProject::class, 'Proyek Portfolio');

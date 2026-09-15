@@ -18,6 +18,7 @@ class DemoContentSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            BannerSeeder::class,
             PortfolioDemoSeeder::class,
             ProductSeeder::class,
             TeamMemberSeeder::class,

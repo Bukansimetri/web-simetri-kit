@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\BannerOverlayStyle;
+use App\Enums\BannerTextPosition;
 use App\Models\Banner;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,6 +23,16 @@ class BannerFactory extends Factory
             'ends_at' => null,
             'order' => 0,
             'is_active' => true,
+            'badge_text' => null,
+            'heading' => null,
+            'subheading' => null,
+            'cta_primary_label' => null,
+            'cta_primary_url' => null,
+            'cta_secondary_label' => null,
+            'cta_secondary_url' => null,
+            'trust_html' => null,
+            'overlay_style' => BannerOverlayStyle::Dark,
+            'text_position' => BannerTextPosition::Left,
         ];
     }
 
@@ -42,6 +54,24 @@ class BannerFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'starts_at' => today()->subDays(10),
             'ends_at' => today()->subDay(),
+        ]);
+    }
+
+    /**
+     * Slide hero lengkap: badge, judul, subjudul, kedua CTA, dan trust bar,
+     * untuk dipakai test yang menguji render konten penuh (US1/US2/US4).
+     */
+    public function withContent(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'badge_text' => 'Solar Panel Terpercaya',
+            'heading' => fake()->sentence(6),
+            'subheading' => fake()->paragraph(2),
+            'cta_primary_label' => 'Konsultasi Gratis',
+            'cta_primary_url' => '/kontak',
+            'cta_secondary_label' => 'Pelajari Cara Kerja',
+            'cta_secondary_url' => '/#kalkulator',
+            'trust_html' => '<p><strong>500+ Pelanggan Puas</strong></p>',
         ]);
     }
 }

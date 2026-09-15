@@ -67,6 +67,12 @@ php artisan migrate --force
 sudo chown -R www-data:www-data /var/www/client-acme/storage /var/www/client-acme/bootstrap/cache
 ```
 
+> **Banner Hero Slider**: `php artisan migrate --force` di atas juga
+> menjalankan migration `add_hero_fields_to_banners_table`, yang otomatis
+> mengisi banner ber-urutan terkecil dengan konten hero contoh **hanya
+> bila** kolom judulnya masih kosong — aman dijalankan di basis data klien
+> yang sudah berisi banner lama. Tidak ada langkah manual tambahan.
+
 ### 4. Konfigurasi web server
 
 Arahkan document root **Nginx/Apache ke folder `public/`** proyek (BUKAN ke root proyek). Contoh virtual host Nginx minimal:

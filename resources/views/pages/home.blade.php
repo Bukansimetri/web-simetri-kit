@@ -11,9 +11,18 @@
     ];
 @endphp
 
+@php
+    // Perlu duplikasi filter berkas hilang milik x-sections.hero-slider di
+    // sini (bukan hanya di dalamnya) supaya beranda tahu kapan harus jatuh
+    // ke hero bawaan -- lihat contracts/public-render.md §1.
+    $liveBanners = $banners->filter(
+        fn ($b) => $b->image_path && \Illuminate\Support\Facades\Storage::disk('public')->exists($b->image_path)
+    );
+@endphp
+
 @section('content')
-    @if ($banners->isNotEmpty())
-        <x-sections.banner-carousel :banners="$banners" />
+    @if ($liveBanners->isNotEmpty())
+        <x-sections.hero-slider :banners="$liveBanners" />
     @else
         <x-sections.hero />
     @endif

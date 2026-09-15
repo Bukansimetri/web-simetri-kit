@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Console;
 
+use App\Models\Banner;
 use App\Models\DemoSeedRecord;
 use App\Models\PortfolioCategory;
 use App\Models\PortfolioProject;
@@ -15,17 +16,18 @@ class DemoSeedCommandTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_seeds_all_five_entities_and_records_manifest(): void
+    public function test_seeds_every_demo_entity_and_records_manifest(): void
     {
         $this->artisan('demo:seed')->assertExitCode(0);
 
+        $this->assertGreaterThan(0, Banner::count());
         $this->assertGreaterThan(0, Product::count());
         $this->assertGreaterThan(0, TeamMember::count());
         $this->assertGreaterThan(0, Testimonial::count());
         $this->assertGreaterThan(0, PortfolioCategory::count());
         $this->assertGreaterThan(0, PortfolioProject::count());
 
-        $expected = Product::count() + TeamMember::count() + Testimonial::count()
+        $expected = Banner::count() + Product::count() + TeamMember::count() + Testimonial::count()
             + PortfolioCategory::count() + PortfolioProject::count();
 
         $this->assertSame($expected, DemoSeedRecord::count());
@@ -36,6 +38,7 @@ class DemoSeedCommandTest extends TestCase
         $this->artisan('demo:seed')->assertExitCode(0);
 
         $countsAfterFirstRun = [
+            Banner::count(),
             Product::count(),
             TeamMember::count(),
             Testimonial::count(),
@@ -47,6 +50,7 @@ class DemoSeedCommandTest extends TestCase
         $this->artisan('demo:seed')->assertExitCode(0);
 
         $this->assertSame($countsAfterFirstRun, [
+            Banner::count(),
             Product::count(),
             TeamMember::count(),
             Testimonial::count(),

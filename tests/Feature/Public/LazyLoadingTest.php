@@ -179,4 +179,29 @@ class LazyLoadingTest extends TestCase
         $this->assertLazy($this->imgTagContaining($content, 'Anggota Tim Unik'));
         $this->assertLazy($this->imgTagContaining($content, 'Klien Unik Sekali'));
     }
+
+    /**
+     * T031: pada slider hero (>=2 banner), slide pertama TANPA loading="lazy"
+     * dan ber-fetchpriority="high"; slide berikutnya loading="lazy" (FR-019, research.md R9).
+     */
+    public function test_hero_slider_first_slide_is_eager_with_high_priority_others_are_lazy(): void
+    {
+        Storage::fake('public');
+
+        $first = Banner::factory()->create(['alt_text' => 'Slide Prioritas Tinggi Unik', 'order' => 1]);
+        Storage::disk('public')->put($first->image_path, 'fake-bytes');
+        $second = Banner::factory()->create(['alt_text' => 'Slide Kedua Tertunda Unik', 'order' => 2]);
+        Storage::disk('public')->put($second->image_path, 'fake-bytes');
+
+        $content = $this->get('/')->assertOk()->getContent();
+
+        $firstTag = $this->imgTagContaining($content, 'Slide Prioritas Tinggi Unik');
+        $secondTag = $this->imgTagContaining($content, 'Slide Kedua Tertunda Unik');
+
+        $this->assertNotNull($firstTag);
+        $this->assertStringContainsString('fetchpriority="high"', $firstTag);
+        $this->assertStringNotContainsString('loading="lazy"', $firstTag);
+
+        $this->assertLazy($secondTag);
+    }
 }

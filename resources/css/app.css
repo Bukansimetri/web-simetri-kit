@@ -209,3 +209,52 @@ body {
 [x-cloak] {
     display: none !important;
 }
+
+/*
+ * Penanda "bisa diklik" pada slider hero (banner hero slider, research.md
+ * R7): animasi nudge singkat pada ikon panah, dipicu sekali oleh
+ * IntersectionObserver di resources/js/hero-slider.js lewat class
+ * `.hero-slider-nudge` pada wadah <section>, lalu class tsb dibuang
+ * setelah beberapa siklus sehingga animasi tidak pernah terulang (FR-012).
+ * Ikon petunjuk geser di layar kecil memakai animasi yang sama selama
+ * petunjuknya tampil.
+ */
+@keyframes hero-slider-nudge-prev {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-4px);
+    }
+}
+
+@keyframes hero-slider-nudge-next {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(4px);
+    }
+}
+
+.hero-slider-nudge .hero-slider-arrow--prev .material-symbols-outlined {
+    animation: hero-slider-nudge-prev 1.5s ease-in-out 2;
+}
+
+.hero-slider-nudge .hero-slider-arrow--next .material-symbols-outlined {
+    animation: hero-slider-nudge-next 1.5s ease-in-out 2;
+}
+
+.hero-slider-swipe-icon {
+    animation: hero-slider-nudge-next 1.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-slider-nudge .hero-slider-arrow--prev .material-symbols-outlined,
+    .hero-slider-nudge .hero-slider-arrow--next .material-symbols-outlined,
+    .hero-slider-swipe-icon {
+        animation: none !important;
+    }
+}
