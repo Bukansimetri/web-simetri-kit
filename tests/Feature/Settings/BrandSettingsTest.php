@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Settings\BrandSettings;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class BrandSettingsTest extends TestCase
@@ -36,7 +37,10 @@ class BrandSettingsTest extends TestCase
     public function test_admin_panel_falls_back_to_default_branding_when_unconfigured(): void
     {
         config(['app.env' => 'local']);
+        Role::create(['name' => 'super_admin']);
+
         $user = User::factory()->create();
+        $user->assignRole('super_admin');
 
         $response = $this->actingAs($user)->get('/admin');
 
