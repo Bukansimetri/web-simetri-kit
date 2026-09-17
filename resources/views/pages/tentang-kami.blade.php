@@ -2,26 +2,11 @@
 
 @php
     $appName = app(\App\Settings\BrandSettings::class)->app_name ?: config('app.name');
+    $about = app(\App\Settings\AboutPageSettings::class);
 
-    $missions = [
-        ['title' => 'Solusi Premium & Teruji', 'description' => 'Menyediakan panel surya dan inverter berkualitas terbaik yang telah teruji secara global untuk performa maksimal di iklim tropis.'],
-        ['title' => 'Pemasangan Presisi', 'description' => 'Menjamin instalasi yang aman, rapi, dan efisien oleh tim teknisi bersertifikat yang memahami standar kelistrikan nasional.'],
-        ['title' => 'Dukungan Purna Jual', 'description' => 'Memberikan ketenangan pikiran melalui pemeliharaan responsif dan garansi performa jangka panjang yang dapat diandalkan.'],
-        ['title' => 'Edukasi Berkelanjutan', 'description' => 'Meningkatkan kesadaran masyarakat tentang manfaat dan pentingnya beralih ke energi bersih.'],
-        ['title' => 'Inovasi Teknologi', 'description' => 'Terus mengadopsi teknologi terbaru dalam penyimpanan dan manajemen energi untuk efisiensi yang lebih baik.'],
-    ];
-
-    $values = [
-        ['icon' => 'savings', 'title' => 'Efisien & Terjangkau', 'description' => 'Menghadirkan solusi energi yang menekan biaya operasional jangka panjang.'],
-        ['icon' => 'school', 'title' => 'Edukasi Masyarakat', 'description' => 'Memberikan pemahaman mendalam tentang transisi energi terbarukan.'],
-        ['icon' => 'handshake', 'title' => 'Kolaborasi & Infrastruktur', 'description' => 'Membangun ekosistem bersama mitra strategis untuk jangkauan luas.'],
-    ];
-
-    $trust = [
-        ['icon' => 'group', 'value' => '5.000+', 'label' => 'Pelanggan Puas'],
-        ['icon' => 'solar_power', 'value' => '10+ MW', 'label' => 'Total Kapasitas Terpasang'],
-        ['icon' => 'calendar_month', 'value' => '15+ Tahun', 'label' => 'Pengalaman Industri'],
-    ];
+    $missions = $about->misiItems();
+    $values = $about->nilaiItems();
+    $trust = $about->trustItems();
 @endphp
 
 @section('title', 'Tentang Kami — '.$appName)
@@ -31,7 +16,7 @@
     {{-- Page Hero --}}
     <section class="relative pt-32 pb-16 h-[50vh] min-h-[400px] w-full flex items-end overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <img src="{{ asset('images/mockup/produk-1.jpg') }}" alt="Solar array modern di atap gedung komersial" class="w-full h-full object-cover">
+            <img src="{{ $about->heroImageUrl() }}" alt="Solar array modern di atap gedung komersial" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/90 via-inverse-surface/40 to-transparent"></div>
         </div>
         <div class="relative z-10 w-full px-6 max-w-7xl mx-auto pb-8">
@@ -40,7 +25,7 @@
                 <span class="mx-2 text-white/40">/</span> Tentang Kami
             </p>
             <h1 class="font-headline-xl text-4xl md:text-6xl font-extrabold text-white max-w-4xl leading-tight tracking-tight">Mengenal {{ $appName }} Lebih Dekat</h1>
-            <p class="mt-4 text-lg md:text-xl text-white/90 max-w-2xl leading-relaxed">Menghadirkan solusi energi surya inovatif dan berkelanjutan untuk masa depan Indonesia yang lebih cerah.</p>
+            <p class="mt-4 text-lg md:text-xl text-white/90 max-w-2xl leading-relaxed">{{ $about->hero_subtitle }}</p>
         </div>
     </section>
 
@@ -49,22 +34,22 @@
         <div class="flex flex-col md:flex-row gap-16 md:gap-24 items-center">
             <div class="w-full md:w-[40%] relative">
                 <div class="overflow-hidden shadow-lg aspect-square rounded-lg">
-                    <img src="{{ asset('images/mockup/tentang-kami-2.jpg') }}" alt="Panel surya berkualitas tinggi memantulkan langit" loading="lazy" decoding="async" class="w-full h-full object-cover">
+                    <img src="{{ $about->siapaKamiImageUrl() }}" alt="Panel surya berkualitas tinggi memantulkan langit" loading="lazy" decoding="async" class="w-full h-full object-cover">
                 </div>
                 <div class="absolute -bottom-6 -right-6 md:-right-12 bg-white p-6 shadow-lg -rotate-3 max-w-[220px] border border-gray-100 rounded-lg">
-                    <p class="font-semibold text-sm text-primary text-center">Bagian dari Sinar Mas Elektrindo</p>
+                    <p class="font-semibold text-sm text-primary text-center">{{ $about->siapa_kami_badge_text }}</p>
                 </div>
             </div>
             <div class="w-full md:w-[60%]">
-                <span class="text-sm font-bold text-secondary uppercase tracking-widest block mb-4">Tentang Kami</span>
-                <h2 class="font-headline-lg text-3xl md:text-4xl font-extrabold text-primary leading-tight tracking-tight mb-6">Menghadirkan Energi Surya Andal & Terpercaya untuk Indonesia</h2>
-                <p class="text-lg text-on-surface-variant mb-8 leading-relaxed">
-                    Sebagai bagian dari <strong>PT Sinar Mas Elektrindo</strong>, {{ $appName }} hadir membawa komitmen kuat dalam menghadirkan solusi energi surya yang inovatif, efisien, dan andal. Kami memadukan kekuatan infrastruktur global dengan pemahaman mendalam tentang kebutuhan lokal Indonesia.
-                </p>
+                <span class="text-sm font-bold text-secondary uppercase tracking-widest block mb-4">{{ $about->siapa_kami_eyebrow }}</span>
+                <h2 class="font-headline-lg text-3xl md:text-4xl font-extrabold text-primary leading-tight tracking-tight mb-6">{{ $about->siapa_kami_heading }}</h2>
+                <div class="text-lg text-on-surface-variant mb-8 leading-relaxed [&_p]:mb-0">
+                    {!! $about->sanitizedSiapaKamiBody($appName) !!}
+                </div>
                 <div class="pl-8 border-l-4 border-secondary">
-                    <p class="font-headline-lg text-2xl md:text-3xl font-bold text-primary leading-snug">
-                        &ldquo;Misi kami bukan sekadar menjual panel, tetapi menjadi <span class="text-secondary">mitra transformasi energi</span> yang memberdayakan masyarakat dan bisnis menuju masa depan yang lebih hijau.&rdquo;
-                    </p>
+                    <div class="font-headline-lg text-2xl md:text-3xl font-bold text-primary leading-snug [&_p]:mb-0">
+                        &ldquo;{!! $about->sanitizedSiapaKamiQuote() !!}&rdquo;
+                    </div>
                 </div>
             </div>
         </div>
@@ -74,20 +59,20 @@
     <section class="reveal-element py-32 px-6 bg-white relative overflow-hidden">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[300px] md:text-[400px] text-surface-container-high/50 font-serif leading-none select-none z-0">&rdquo;</div>
         <div class="relative z-10 max-w-4xl mx-auto text-center">
-            <p class="text-sm font-bold text-outline uppercase tracking-[0.3em] mb-4">Visi Kami</p>
+            <p class="text-sm font-bold text-outline uppercase tracking-[0.3em] mb-4">{{ $about->visi_eyebrow }}</p>
             <h2 class="text-2xl md:text-4xl font-extrabold text-primary mb-4 leading-tight tracking-tight">
-                Menjadi pelopor energi surya di Asia Tenggara yang paling dipercaya, mendorong masa depan di mana setiap bangunan mandiri energi dan berkelanjutan.
+                {{ $about->visi_heading }}
             </h2>
-            <p class="text-secondary font-medium text-base md:text-lg max-w-2xl mx-auto leading-relaxed">Membangun ekosistem tenaga surya yang terintegrasi, transparan, dan dapat diakses oleh seluruh lapisan masyarakat.</p>
+            <p class="text-secondary font-medium text-base md:text-lg max-w-2xl mx-auto leading-relaxed">{{ $about->visi_subtext }}</p>
         </div>
     </section>
 
     {{-- Misi --}}
     <section class="reveal-element py-24 px-6 max-w-7xl mx-auto">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-sm font-bold text-secondary uppercase tracking-widest block mb-4">Misi</span>
-            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-3 text-primary">Bagaimana Kami Mewujudkannya</h2>
-            <p class="text-secondary text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">Langkah konkret kami dalam menghadirkan ekosistem energi surya terpadu, presisi, dan berkelanjutan untuk Indonesia.</p>
+            <span class="text-sm font-bold text-secondary uppercase tracking-widest block mb-4">{{ $about->misi_eyebrow }}</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-3 text-primary">{{ $about->misi_heading }}</h2>
+            <p class="text-secondary text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">{{ $about->misi_subtext }}</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-24">
             <div class="md:col-span-3 space-y-10">
@@ -118,19 +103,19 @@
     {{-- Nilai (Bento Grid) --}}
     <section class="reveal-element py-24 px-6 max-w-7xl mx-auto mb-12">
         <div class="mb-12 text-center">
-            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-3 text-primary">Nilai-Nilai Kami</h2>
-            <p class="text-secondary text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">Fondasi dan komitmen kami dalam melayani pelanggan dan menjaga kelestarian bumi.</p>
+            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-3 text-primary">{{ $about->nilai_heading }}</h2>
+            <p class="text-secondary text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">{{ $about->nilai_subtext }}</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-stretch">
             <div class="md:col-span-3 relative rounded-lg overflow-hidden shadow-md min-h-[400px] flex flex-col justify-end p-8 md:p-12 group">
-                <img src="{{ asset('images/mockup/tentang-kami-3.jpg') }}" alt="Ekonomi Hijau & Lapangan Kerja" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                <img src="{{ $about->nilaiFeaturedImageUrl() }}" alt="{{ $about->nilai_featured_title }}" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                 <div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/90 via-inverse-surface/50 to-transparent"></div>
                 <div class="relative z-10">
                     <div class="w-12 h-12 bg-primary-container text-white flex items-center justify-center mb-4 rounded-lg shadow-md">
-                        <span class="material-symbols-outlined text-2xl">eco</span>
+                        <span class="material-symbols-outlined text-2xl">{{ $about->nilai_featured_icon }}</span>
                     </div>
-                    <h3 class="font-headline-lg text-2xl md:text-3xl font-bold text-white mb-3 leading-snug">Ekonomi Hijau &amp; Lapangan Kerja</h3>
-                    <p class="text-white/90 text-sm md:text-base max-w-xl leading-relaxed">Kami tidak hanya membangun infrastruktur energi, tetapi juga menggerakkan roda ekonomi hijau dengan menciptakan lapangan kerja baru bagi tenaga kerja lokal.</p>
+                    <h3 class="font-headline-lg text-2xl md:text-3xl font-bold text-white mb-3 leading-snug">{{ $about->nilai_featured_title }}</h3>
+                    <p class="text-white/90 text-sm md:text-base max-w-xl leading-relaxed">{{ $about->nilai_featured_description }}</p>
                 </div>
             </div>
             <div class="md:col-span-2 flex flex-col gap-6 justify-between">
