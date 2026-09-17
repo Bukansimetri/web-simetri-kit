@@ -4,18 +4,22 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ContactSubmissionResource\Pages;
 use App\Models\ContactSubmission;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class ContactSubmissionResource extends Resource
 {
@@ -43,6 +47,18 @@ class ContactSubmissionResource extends Resource
         ];
     }
 
+    /**
+     * @return array<string, string>
+     */
+    private static function statusColors(): array
+    {
+        return [
+            ContactSubmission::STATUS_NEW => 'danger',
+            ContactSubmission::STATUS_CONTACTED => 'warning',
+            ContactSubmission::STATUS_CLOSED => 'success',
+        ];
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -55,12 +71,19 @@ class ContactSubmissionResource extends Resource
                         Placeholder::make('phone')
                             ->label('No. HP/WhatsApp')
                             ->content(fn (ContactSubmission $record) => $record->phone),
+                        Placeholder::make('email')
+                            ->label('Email')
+                            ->content(fn (ContactSubmission $record) => $record->email ?: '-'),
+                        Placeholder::make('area')
+                            ->label('Area')
+                            ->content(fn (ContactSubmission $record) => $record->area ?: '-'),
                         Placeholder::make('topic')
                             ->label('Topik')
                             ->content(fn (ContactSubmission $record) => $record->topic ?: '-'),
                         Placeholder::make('message')
                             ->label('Pesan')
-                            ->content(fn (ContactSubmission $record) => $record->message),
+                            ->content(fn (ContactSubmission $record) => $record->message)
+                            ->columnSpanFull(),
                         Placeholder::make('created_at')
                             ->label('Waktu Masuk')
                             ->content(fn (ContactSubmission $record) => $record->created_at->translatedFormat('d F Y H:i')),
@@ -82,12 +105,21 @@ class ContactSubmissionResource extends Resource
                     ->label('Nama')
                     ->searchable(),
                 TextColumn::make('phone')
-                    ->label('No. HP/WhatsApp'),
+                    ->label('No. HP/WhatsApp')
+                    ->searchable(),
+                TextColumn::make('email')
+                    ->label('Email')
+                    ->searchable()
+                    ->toggleable(),
+                TextColumn::make('area')
+                    ->label('Area')
+                    ->toggleable(),
                 TextColumn::make('topic')
                     ->label('Topik'),
                 TextColumn::make('status')
                     ->label('Status')
                     ->formatStateUsing(fn (string $state) => self::statusOptions()[$state] ?? $state)
+                    ->color(fn (string $state) => self::statusColors()[$state] ?? 'gray')
                     ->badge(),
                 TextColumn::make('created_at')
                     ->label('Waktu Masuk')
@@ -98,8 +130,29 @@ class ContactSubmissionResource extends Resource
                 SelectFilter::make('status')
                     ->label('Status')
                     ->options(self::statusOptions()),
+                Filter::make('belum_dihubungi')
+                    ->label('Belum Dihubungi')
+                    ->query(fn (Builder $query) => $query->where('status', ContactSubmission::STATUS_NEW))
+                    ->toggle(),
+                Filter::make('created_at')
+                    ->form([
+                        DatePicker::make('dari')->native(false),
+                        DatePicker::make('sampai')->native(false),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when($data['dari'] ?? null, fn (Builder $q, $date) => $q->whereDate('created_at', '>=', $date))
+                            ->when($data['sampai'] ?? null, fn (Builder $q, $date) => $q->whereDate('created_at', '<=', $date));
+                    }),
             ])
             ->actions([
+                Action::make('tandai_dihubungi')
+                    ->label('Tandai Sudah Dihubungi')
+                    ->icon('heroicon-o-check-circle')
+                    ->color('success')
+                    ->visible(fn (ContactSubmission $record) => $record->status === ContactSubmission::STATUS_NEW)
+                    ->requiresConfirmation()
+                    ->action(fn (ContactSubmission $record) => $record->update(['status' => ContactSubmission::STATUS_CONTACTED])),
                 EditAction::make(),
                 DeleteAction::make(),
             ])
@@ -116,5 +169,15 @@ class ContactSubmissionResource extends Resource
             'index' => Pages\ListContactSubmissions::route('/'),
             'edit' => Pages\EditContactSubmission::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return strval(static::getModel()::where('status', ContactSubmission::STATUS_NEW)->count()) ?: null;
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'danger';
     }
 }

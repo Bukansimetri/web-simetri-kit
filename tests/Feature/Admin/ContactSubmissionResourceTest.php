@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Admin;
 
+use App\Filament\Resources\ContactSubmissionResource;
 use App\Filament\Resources\ContactSubmissionResource\Pages\EditContactSubmission;
 use App\Filament\Resources\ContactSubmissionResource\Pages\ListContactSubmissions;
 use App\Models\ContactSubmission;
@@ -68,5 +69,25 @@ class ContactSubmissionResourceTest extends TestCase
             ->callTableAction('delete', $submission);
 
         $this->assertDatabaseMissing('contact_submissions', ['id' => $submission->id]);
+    }
+
+    public function test_admin_can_mark_submission_as_contacted_via_quick_action(): void
+    {
+        $user = User::factory()->create();
+        $submission = ContactSubmission::factory()->create(['status' => ContactSubmission::STATUS_NEW]);
+
+        Livewire::actingAs($user)
+            ->test(ListContactSubmissions::class)
+            ->callTableAction('tandai_dihubungi', $submission);
+
+        $this->assertSame(ContactSubmission::STATUS_CONTACTED, $submission->fresh()->status);
+    }
+
+    public function test_navigation_badge_shows_count_of_new_submissions(): void
+    {
+        ContactSubmission::factory()->count(2)->create(['status' => ContactSubmission::STATUS_NEW]);
+        ContactSubmission::factory()->create(['status' => ContactSubmission::STATUS_CLOSED]);
+
+        $this->assertSame('2', ContactSubmissionResource::getNavigationBadge());
     }
 }

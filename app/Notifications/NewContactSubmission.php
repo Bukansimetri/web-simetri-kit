@@ -2,7 +2,9 @@
 
 namespace App\Notifications;
 
+use App\Filament\Resources\ContactSubmissionResource;
 use App\Models\ContactSubmission;
+use App\Settings\BrandSettings;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -30,13 +32,27 @@ class NewContactSubmission extends Notification implements ShouldQueue
 
     public function toMail(object $notifiable): MailMessage
     {
-        return (new MailMessage)
-            ->subject('Pesan Baru dari Form Kontak')
-            ->greeting('Ada pesan baru masuk dari form Kontak:')
-            ->line('Nama: '.$this->submission->name)
-            ->line('No. HP/WhatsApp: '.$this->submission->phone)
-            ->line('Topik: '.($this->submission->topic ?: '-'))
-            ->line('Pesan: '.$this->submission->message)
-            ->line('Waktu masuk: '.$this->submission->created_at->translatedFormat('d F Y H:i'));
+        $submission = $this->submission;
+        $brandName = app(BrandSettings::class)->app_name ?: config('app.name');
+
+        $message = (new MailMessage)
+            ->subject("Pesan baru dari form Kontak: {$submission->name}")
+            ->greeting('✉️ Ada pesan baru masuk dari form Kontak — mohon follow up dalam 1×24 jam.')
+            ->line("**Nama:** {$submission->name}")
+            ->line("**No. HP/WhatsApp:** {$submission->phone}")
+            ->line('**Email:** '.($submission->email ?: '-'))
+            ->line('**Area:** '.($submission->area ?: '-'))
+            ->line('**Topik:** '.($submission->topic ?: '-'))
+            ->line('**Pesan:** '.$submission->message)
+            ->line('Waktu masuk: '.$submission->created_at->translatedFormat('d F Y H:i'))
+            ->action('Buka di CMS ('.$brandName.')', ContactSubmissionResource::getUrl('edit', ['record' => $submission]));
+
+        $waUrl = app(BrandSettings::class)->whatsappUrl("Halo {$submission->name}, terima kasih sudah menghubungi {$brandName} lewat form kontak. Boleh saya bantu?");
+
+        if ($waUrl) {
+            $message->line('Chat langsung: '.$waUrl);
+        }
+
+        return $message;
     }
 }

@@ -12,7 +12,9 @@ use App\Models\Product;
 use App\Models\TeamMember;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class PublicPageCachingTest extends TestCase
@@ -182,19 +184,25 @@ class PublicPageCachingTest extends TestCase
 
     public function test_kontak_form_submission_is_never_cached(): void
     {
+        Mail::fake();
+
         $first = $this->postJson('/kontak', [
             'nama' => 'Budi Santoso',
             'phone' => '081234567890',
+            'email' => 'budi@example.com',
             'kebutuhan' => 'umum',
             'pesan' => 'Pesan pertama.',
+            'form_token' => Crypt::encryptString((string) now()->subSeconds(10)->timestamp),
         ]);
         $first->assertCreated();
 
         $second = $this->postJson('/kontak', [
             'nama' => 'Siti Aminah',
             'phone' => '081298765432',
+            'email' => 'siti@example.com',
             'kebutuhan' => 'umum',
             'pesan' => 'Pesan kedua.',
+            'form_token' => Crypt::encryptString((string) now()->subSeconds(10)->timestamp),
         ]);
         $second->assertCreated();
 

@@ -31,11 +31,14 @@
                 whatsappUrl: null,
                 serverError: null,
                 errors: {},
-                form: { nama: '', phone: '', kebutuhan: '', pesan: '' },
+                form: { nama: '', phone: '', email: '', kebutuhan: '', pesan: '' },
+                honeypot: '',
+                formToken: @js($formToken),
                 validate() {
                     this.errors = {};
                     if (! this.form.nama.trim()) this.errors.nama = 'Nama lengkap wajib diisi.';
                     if (! /^[0-9+\-\s]{8,15}$/.test(this.form.phone.trim())) this.errors.phone = 'Nomor HP/WhatsApp tidak valid.';
+                    if (! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.form.email.trim())) this.errors.email = 'Email tidak valid.';
                     if (! this.form.pesan.trim()) this.errors.pesan = 'Pesan tidak boleh kosong.';
                     return Object.keys(this.errors).length === 0;
                 },
@@ -54,13 +57,16 @@
                             headers: {
                                 'Content-Type': 'application/json',
                                 'Accept': 'application/json',
-                                'X-CSRF-TOKEN': document.querySelector('meta[name=\"csrf-token\"]').content,
+                                'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content,
                             },
                             body: JSON.stringify({
                                 nama: this.form.nama,
                                 phone: this.form.phone,
+                                email: this.form.email,
                                 kebutuhan: this.form.kebutuhan,
                                 pesan: this.form.pesan,
+                                website: this.honeypot,
+                                form_token: this.formToken,
                             }),
                         });
 
@@ -70,8 +76,15 @@
                             this.errors = {
                                 nama: data.errors?.nama?.[0],
                                 phone: data.errors?.phone?.[0],
+                                email: data.errors?.email?.[0],
                                 pesan: data.errors?.pesan?.[0],
                             };
+
+                            return;
+                        }
+
+                        if (response.status === 429) {
+                            this.serverError = data.message ?? 'Terlalu banyak percobaan. Silakan coba lagi nanti.';
 
                             return;
                         }
@@ -138,6 +151,16 @@
                 </div>
 
                 <div>
+                    <label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="email">Email</label>
+                    <input
+                        id="email" name="email" type="email" x-model="form.email"
+                        placeholder="nama@email.com"
+                        class="w-full bg-surface-container border border-transparent rounded-lg px-6 py-4 focus:border-primary-container focus:ring-0"
+                    >
+                    <p x-show="errors.email" x-cloak x-text="errors.email" class="text-sm text-error mt-1"></p>
+                </div>
+
+                <div>
                     <label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="kebutuhan">Topik Kebutuhan</label>
                     <select id="kebutuhan" name="kebutuhan" x-model="form.kebutuhan" class="w-full bg-surface-container border border-transparent rounded-lg px-6 py-4">
                         <option value="">Pilih topik</option>
@@ -156,6 +179,15 @@
                         class="w-full bg-surface-container border border-transparent rounded-3xl px-6 py-4 resize-none focus:border-primary-container focus:ring-0"
                     ></textarea>
                     <p x-show="errors.pesan" x-cloak x-text="errors.pesan" class="text-sm text-error mt-1"></p>
+                </div>
+
+                {{-- Honeypot anti-bot: disembunyikan dari mata & dari urutan tab, jadi
+                     tidak pernah terisi manusia. Bot pengisi-otomatis cenderung mengisinya,
+                     dan submit yang field ini terisi akan ditolak diam-diam di server.
+                     JANGAN dihapus atau diberi label yang terlihat pengunjung. --}}
+                <div aria-hidden="true" class="absolute w-px h-px overflow-hidden -left-[9999px] top-auto">
+                    <label>Website</label>
+                    <input type="text" x-model="honeypot" tabindex="-1" autocomplete="off">
                 </div>
 
                 <button
