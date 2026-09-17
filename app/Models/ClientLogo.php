@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class ClientLogo extends Model
 {
@@ -29,5 +30,11 @@ class ClientLogo extends Model
             'order' => 'integer',
             'is_active' => 'boolean',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::saved(fn () => Cache::forget('public-page:tentang-kami'));
+        static::deleted(fn () => Cache::forget('public-page:tentang-kami'));
     }
 }
