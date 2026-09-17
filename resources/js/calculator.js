@@ -213,6 +213,13 @@ export default function calculatorComponent(formToken = '', appliances = []) {
             return cleaned ? parseInt(cleaned, 10) : 0;
         },
 
+        // Format input tagihan pakai titik ribuan sambil diketik (mis. "2500000" -> "2.500.000").
+        formatBillInput() {
+            const digits = this.parseRupiah(this.billInput);
+            this.billInput = digits ? digits.toLocaleString('id-ID') : '';
+            this.resetResult();
+        },
+
         formatRupiah(value) {
             return 'Rp ' + Math.round(value).toLocaleString('id-ID');
         },

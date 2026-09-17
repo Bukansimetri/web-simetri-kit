@@ -60,7 +60,7 @@
                             <label class="block text-sm font-bold text-primary/70" x-text="category === 'industrial' ? 'Tagihan Listrik Bulanan Pabrik/Gudang (Rp)' : 'Tagihan Listrik Bulanan (Rp)'"></label>
                             <div class="relative">
                                 <span class="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-gray-400">Rp</span>
-                                <input type="text" x-model="billInput" @input="resetResult()" placeholder="2.500.000"
+                                <input type="text" inputmode="numeric" x-model="billInput" @input="formatBillInput()" placeholder="2.500.000"
                                        class="w-full pl-12 pr-4 py-4 bg-surface-container-low border border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-lg font-semibold rounded-lg">
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                     {{-- Input: By Appliance --}}
                     <div x-show="effectiveMethod === 'appliance'" class="space-y-4">
                         <p class="text-sm text-primary/70">Pilih jumlah peralatan listrik di rumah Anda:</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-56 overflow-y-auto pr-2">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <template x-for="item in appliances" :key="item.key">
                                 <div class="flex items-center justify-between bg-surface-container-low p-3 border border-transparent rounded-lg h-20">
                                     <div class="flex items-center gap-3">
