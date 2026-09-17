@@ -80,7 +80,8 @@ class ProductResource extends Resource
                             ->reorderable()
                             ->appendFiles()
                             ->disk('public')
-                            ->directory('products'),
+                            ->directory('products')
+                            ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/webp']),
                     ]),
                 Section::make('Deskripsi')
                     ->schema([
@@ -169,6 +170,7 @@ class ProductResource extends Resource
                             ->image()
                             ->disk('public')
                             ->directory('seo')
+                            ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/webp'])
                             ->saveUploadedFileUsing(fn ($file) => ImageUploads::storeAsWebp($file, 'seo', maxWidth: 1200))
                             ->helperText('Opsional. Rekomendasi 1200×630px. Kosongkan untuk pakai gambar galeri produk.'),
                     ]),

@@ -79,6 +79,7 @@ class ArticleResource extends Resource
                             ->disk('public')
                             ->directory('articles')
                             ->helperText('Rekomendasi dimensi: 1200×630px (opsional, tidak ada validasi ukuran). Gambar otomatis dikonversi ke format WebP.')
+                            ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/webp'])
                             ->saveUploadedFileUsing(fn ($file) => ImageUploads::storeAsWebp($file, 'articles')),
                     ]),
                 Section::make('Konten')
@@ -145,6 +146,7 @@ class ArticleResource extends Resource
                             ->image()
                             ->disk('public')
                             ->directory('seo')
+                            ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/webp'])
                             ->saveUploadedFileUsing(fn ($file) => ImageUploads::storeAsWebp($file, 'seo', maxWidth: 1200))
                             ->helperText('Opsional. Rekomendasi 1200×630px. Kosongkan untuk pakai gambar sampul artikel.'),
                     ]),

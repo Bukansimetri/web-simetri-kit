@@ -87,6 +87,7 @@ class PortfolioProjectResource extends Resource
                             ->disk('public')
                             ->directory('portfolio')
                             ->helperText('Rekomendasi 1200×900px (rasio bebas). Gambar besar otomatis dikecilkan ke lebar 1200px & dikonversi ke WebP. Gambar pertama = sampul.')
+                            ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/webp'])
                             ->saveUploadedFileUsing(fn ($file) => ImageUploads::storeAsWebp($file, 'portfolio', maxWidth: 1200)),
                     ]),
                 Section::make('Deskripsi')
@@ -137,6 +138,7 @@ class PortfolioProjectResource extends Resource
                             ->image()
                             ->disk('public')
                             ->directory('seo')
+                            ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/webp'])
                             ->saveUploadedFileUsing(fn ($file) => ImageUploads::storeAsWebp($file, 'seo', maxWidth: 1200))
                             ->helperText('Opsional. Rekomendasi 1200×630px. Kosongkan untuk pakai gambar galeri proyek.'),
                     ]),

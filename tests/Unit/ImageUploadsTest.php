@@ -58,4 +58,16 @@ class ImageUploadsTest extends TestCase
 
         $this->assertSame([1600, 900], $this->storedDimensions($path));
     }
+
+    public function test_throws_friendly_error_for_unsupported_or_invalid_image(): void
+    {
+        Storage::fake('public');
+
+        $file = UploadedFile::fake()->create('photo.avif', 10, 'image/avif');
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('File yang diupload bukan gambar yang didukung. Gunakan format JPG, PNG, atau WebP (AVIF belum didukung server ini).');
+
+        ImageUploads::storeAsWebp($file, 'about-page');
+    }
 }

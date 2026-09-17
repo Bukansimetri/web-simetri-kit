@@ -25,10 +25,13 @@ class ImageUploads
     {
         $contents = file_get_contents($file->getRealPath());
 
-        $image = imagecreatefromstring($contents);
+        // `@` diperlukan supaya warning GD untuk format yang tidak didukung
+        // build ini (mis. AVIF) tidak dikonversi Laravel jadi ErrorException
+        // sebelum sempat dicek lewat `$image === false` di bawah.
+        $image = @imagecreatefromstring($contents);
 
         if ($image === false) {
-            throw new \RuntimeException('File yang diupload bukan gambar yang valid.');
+            throw new \RuntimeException('File yang diupload bukan gambar yang didukung. Gunakan format JPG, PNG, atau WebP (AVIF belum didukung server ini).');
         }
 
         // Pertahankan transparansi untuk PNG/GIF supaya tidak berubah jadi

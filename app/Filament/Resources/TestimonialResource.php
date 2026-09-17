@@ -58,6 +58,7 @@ class TestimonialResource extends Resource
                     ->image()
                     ->disk('public')
                     ->directory('testimonials')
+                    ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/webp'])
                     ->saveUploadedFileUsing(fn ($file) => ImageUploads::storeAsWebp($file, 'testimonials')),
                 TextInput::make('order')
                     ->label('Urutan Tampil')
