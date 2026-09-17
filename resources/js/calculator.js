@@ -7,7 +7,7 @@
  * dan yang dikirim lewat email — tidak ada lagi hitungan duplikat di client
  * yang bisa berbeda dari server.
  */
-export default function calculatorComponent(formToken = '') {
+export default function calculatorComponent(formToken = '', appliances = []) {
     return {
         // Token waktu render dari server (lihat App\Services\SubmissionGuard).
         formToken,
@@ -19,14 +19,10 @@ export default function calculatorComponent(formToken = '') {
         method: 'bill', // 'bill' | 'appliance' (hanya residential)
         billInput: '',
         vaCapacity: '2200',
-        appliances: [
-            { key: 'tv', label: 'TV', icon: 'tv', watt: 100, qty: 0 },
-            { key: 'kulkas', label: 'Kulkas', icon: 'kitchen', watt: 200, qty: 0 },
-            { key: 'ac', label: 'AC', icon: 'ac_unit', watt: 1000, qty: 0 },
-            { key: 'pompa', label: 'Pompa Air', icon: 'water_drop', watt: 250, qty: 0 },
-            { key: 'pemanas', label: 'Pemanas Air', icon: 'hot_tub', watt: 1500, qty: 0 },
-            { key: 'kompor', label: 'Kompor Listrik', icon: 'cooking', watt: 2000, qty: 0 },
-        ],
+        // Katalog peralatan dikirim server (App\Models\ElectricityAppliance,
+        // dikelola admin di CMS). Watt di sini cuma untuk tampilan -- watt
+        // final selalu divalidasi ulang di server saat submit.
+        appliances,
         lead: { name: '', phone: '', email: '', area: 'Jakarta Selatan' },
         error: null,
         submitting: false,

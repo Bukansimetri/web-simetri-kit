@@ -6,9 +6,16 @@
     // Dipakai App\Services\SubmissionGuard untuk menolak submit yang terjadi
     // terlalu cepat setelah halaman dibuka -- ciri skrip/bot, bukan manusia.
     $formToken = \App\Services\SubmissionGuard::issueToken();
+
+    // Katalog peralatan listrik dikelola admin di CMS (App\Models\
+    // ElectricityAppliance) — watt final tetap divalidasi ulang di server
+    // saat submit (App\Services\SavingsEstimator), daftar ini hanya untuk UI.
+    $appliances = \App\Models\ElectricityAppliance::activeCatalog()
+        ->map(fn ($item) => ['key' => $item->slug, 'label' => $item->name, 'icon' => $item->icon, 'watt' => $item->watt, 'qty' => 0])
+        ->values();
 @endphp
 <section id="kalkulator" class="reveal-element relative z-20 max-w-6xl mx-auto px-6 -mt-32 mb-32">
-    <div x-data="calculatorComponent(@js($formToken))" class="bg-white p-8 md:p-12 shadow-2xl border border-gray-50/50 max-w-5xl mx-auto rounded-lg">
+    <div x-data="calculatorComponent(@js($formToken), @js($appliances))" class="bg-white p-8 md:p-12 shadow-2xl border border-gray-50/50 max-w-5xl mx-auto rounded-lg">
         <div class="text-center mb-10">
             <h2 class="font-headline-xl text-3xl md:text-5xl font-extrabold tracking-tight mb-3 text-primary">Hitung Estimasi Penghematan</h2>
             <p class="font-medium text-base md:text-lg max-w-2xl mx-auto text-secondary">Dapatkan analisis transparan untuk potensi efisiensi energi Anda.</p>

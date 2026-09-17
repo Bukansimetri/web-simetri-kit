@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\ElectricityAppliance;
 use App\Settings\CalculatorSettings;
 use InvalidArgumentException;
 
@@ -15,27 +16,12 @@ use InvalidArgumentException;
  *  - Grafik yang ditampilkan ke pengunjung dijamin sama dengan angka yang
  *    tersimpan & dikirim lewat email (server jadi satu-satunya sumber
  *    kebenaran; frontend cuma menggambar ulang titik-titik dari sini).
- *  - Watt tiap peralatan diambil dari katalog server (bukan dari input
- *    client), supaya nilainya tidak bisa dipalsukan.
+ *  - Watt tiap peralatan diambil dari katalog server (App\Models\
+ *    ElectricityAppliance, dikelola admin di CMS), bukan dari input client,
+ *    supaya nilainya tidak bisa dipalsukan.
  */
 class SavingsEstimator
 {
-    /**
-     * Katalog peralatan & watt-nya. Diselaraskan dengan daftar yang
-     * sebelumnya ada di resources/js/calculator.js — client hanya boleh
-     * mengirim `key` + `qty`, watt selalu diambil dari sini.
-     *
-     * @var array<string, array{label: string, watt: int}>
-     */
-    public const APPLIANCE_CATALOG = [
-        'tv' => ['label' => 'TV', 'watt' => 100],
-        'kulkas' => ['label' => 'Kulkas', 'watt' => 200],
-        'ac' => ['label' => 'AC', 'watt' => 1000],
-        'pompa' => ['label' => 'Pompa Air', 'watt' => 250],
-        'pemanas' => ['label' => 'Pemanas Air', 'watt' => 1500],
-        'kompor' => ['label' => 'Kompor Listrik', 'watt' => 2000],
-    ];
-
     public const METHOD_BILL = 'bill';
 
     public const METHOD_APPLIANCE = 'appliance';
@@ -132,22 +118,23 @@ class SavingsEstimator
      */
     private function normalizeAppliances(array $appliances): array
     {
+        $catalog = ElectricityAppliance::activeCatalog()->keyBy('slug');
         $normalized = [];
 
         foreach ($appliances as $item) {
             $key = $item['key'] ?? null;
             $qty = (int) ($item['qty'] ?? 0);
 
-            if ($qty <= 0 || ! isset(self::APPLIANCE_CATALOG[$key])) {
+            if ($qty <= 0 || ! $catalog->has($key)) {
                 continue;
             }
 
-            $catalog = self::APPLIANCE_CATALOG[$key];
+            $appliance = $catalog->get($key);
 
             $normalized[] = [
                 'key' => $key,
-                'label' => $catalog['label'],
-                'watt' => $catalog['watt'],
+                'label' => $appliance->name,
+                'watt' => $appliance->watt,
                 'qty' => $qty,
             ];
         }

@@ -21,6 +21,8 @@ class MaterialSymbolsIcons
         'eco', 'forest', 'recycling', 'public', 'home', 'apartment',
         'factory', 'engineering', 'construction', 'handyman', 'school', 'volunteer_activism',
         'calendar_month', 'location_on', 'phone_in_talk', 'mail',
+        'tv', 'kitchen', 'ac_unit', 'water_drop', 'hot_tub', 'cooking', 'blender',
+        'microwave', 'iron', 'local_laundry_service', 'computer', 'router', 'lightbulb',
     ];
 
     /**
