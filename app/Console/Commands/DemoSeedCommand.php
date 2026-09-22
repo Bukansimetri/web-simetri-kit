@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\DemoSeedRecord;
+use App\Models\MenuItem;
 use App\Models\PortfolioCategory;
 use App\Models\Product;
 use App\Models\TeamMember;
@@ -27,6 +28,7 @@ class DemoSeedCommand extends Command
         Product::class => 'Layanan',
         TeamMember::class => 'Tim',
         Testimonial::class => 'Testimoni',
+        MenuItem::class => 'Menu Builder',
     ];
 
     public function handle(): int

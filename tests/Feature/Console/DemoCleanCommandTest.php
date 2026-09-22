@@ -4,6 +4,7 @@ namespace Tests\Feature\Console;
 
 use App\Models\Banner;
 use App\Models\DemoSeedRecord;
+use App\Models\MenuItem;
 use App\Models\PortfolioCategory;
 use App\Models\PortfolioProject;
 use App\Models\Product;
@@ -28,6 +29,7 @@ class DemoCleanCommandTest extends TestCase
         $this->assertSame(0, Testimonial::count());
         $this->assertSame(0, PortfolioCategory::count());
         $this->assertSame(0, PortfolioProject::count());
+        $this->assertSame(0, MenuItem::count());
         $this->assertSame(0, DemoSeedRecord::count());
     }
 

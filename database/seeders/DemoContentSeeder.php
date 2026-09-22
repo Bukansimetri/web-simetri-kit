@@ -23,6 +23,7 @@ class DemoContentSeeder extends Seeder
             ProductSeeder::class,
             TeamMemberSeeder::class,
             TestimonialSeeder::class,
+            MenuItemDemoSeeder::class,
         ]);
     }
 }

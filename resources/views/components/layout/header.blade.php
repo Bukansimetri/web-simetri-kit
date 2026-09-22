@@ -9,28 +9,31 @@
     // di-scroll. Halaman lain: header putih permanen dengan border bawah.
     $overHero = request()->routeIs('home');
 
-    $navLinks = array_filter([
-        ['label' => 'Beranda', 'href' => url('/'), 'active' => request()->routeIs('home')],
-        ['label' => 'Tentang Kami', 'href' => url('/tentang-kami'), 'active' => request()->routeIs('tentang-kami')],
-        ['label' => 'Produk', 'href' => url('/produk'), 'active' => request()->routeIs('produk.*')],
-        ['label' => 'Artikel', 'href' => url('/artikel'), 'active' => request()->routeIs('artikel.*')],
-        $brand->career_module_enabled
-            ? ['label' => 'Karir', 'href' => url('/karir'), 'active' => request()->routeIs('karir')]
-            : null,
-        ['label' => 'Kontak', 'href' => url('/kontak'), 'active' => request()->routeIs('kontak')],
-    ]);
+    // Menu Builder (spec 017-menu-builder) adalah sumber utama navbar. Menu
+    // statis di bawah hanya dipakai sebagai fallback bila admin belum
+    // mengisi item apa pun di lokasi 'navbar-utama'.
+    $builderNavItems = \App\Models\MenuItem::treeForLocation('navbar-utama');
 
-    // Item menu tambahan yang dikelola admin lewat Menu Builder (spec
-    // 017-menu-builder), ditambahkan setelah nav inti tanpa mengubah kode.
-    foreach (\App\Models\MenuItem::treeForLocation('navbar-utama') as $item) {
-        // href null = tanpa tautan atau tautan internal yang targetnya sudah
-        // terhapus (FR-011) — tetap tampil sebagai label, arahkan ke '#'
-        // alih-alih menghilangkannya dari navbar.
-        $navLinks[] = [
+    if ($builderNavItems->isNotEmpty()) {
+        $navLinks = $builderNavItems->map(fn (array $item) => [
             'label' => $item['label'],
+            // href null = tanpa tautan atau tautan internal yang targetnya
+            // sudah terhapus (FR-011) — tetap tampil sebagai label, arahkan
+            // ke '#' alih-alih menghilangkannya dari navbar.
             'href' => $item['href'] ?? '#',
             'active' => $item['href'] !== null && request()->url() === $item['href'],
-        ];
+        ])->all();
+    } else {
+        $navLinks = array_filter([
+            ['label' => 'Beranda', 'href' => url('/'), 'active' => request()->routeIs('home')],
+            ['label' => 'Tentang Kami', 'href' => url('/tentang-kami'), 'active' => request()->routeIs('tentang-kami')],
+            ['label' => 'Produk', 'href' => url('/produk'), 'active' => request()->routeIs('produk.*')],
+            ['label' => 'Artikel', 'href' => url('/artikel'), 'active' => request()->routeIs('artikel.*')],
+            $brand->career_module_enabled
+                ? ['label' => 'Karir', 'href' => url('/karir'), 'active' => request()->routeIs('karir')]
+                : null,
+            ['label' => 'Kontak', 'href' => url('/kontak'), 'active' => request()->routeIs('kontak')],
+        ]);
     }
 
     $socials = [

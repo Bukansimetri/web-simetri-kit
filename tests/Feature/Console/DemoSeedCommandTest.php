@@ -4,6 +4,7 @@ namespace Tests\Feature\Console;
 
 use App\Models\Banner;
 use App\Models\DemoSeedRecord;
+use App\Models\MenuItem;
 use App\Models\PortfolioCategory;
 use App\Models\PortfolioProject;
 use App\Models\Product;
@@ -26,9 +27,10 @@ class DemoSeedCommandTest extends TestCase
         $this->assertGreaterThan(0, Testimonial::count());
         $this->assertGreaterThan(0, PortfolioCategory::count());
         $this->assertGreaterThan(0, PortfolioProject::count());
+        $this->assertGreaterThan(0, MenuItem::count());
 
         $expected = Banner::count() + Product::count() + TeamMember::count() + Testimonial::count()
-            + PortfolioCategory::count() + PortfolioProject::count();
+            + PortfolioCategory::count() + PortfolioProject::count() + MenuItem::count();
 
         $this->assertSame($expected, DemoSeedRecord::count());
     }
@@ -44,6 +46,7 @@ class DemoSeedCommandTest extends TestCase
             Testimonial::count(),
             PortfolioCategory::count(),
             PortfolioProject::count(),
+            MenuItem::count(),
             DemoSeedRecord::count(),
         ];
 
@@ -56,6 +59,7 @@ class DemoSeedCommandTest extends TestCase
             Testimonial::count(),
             PortfolioCategory::count(),
             PortfolioProject::count(),
+            MenuItem::count(),
             DemoSeedRecord::count(),
         ]);
     }

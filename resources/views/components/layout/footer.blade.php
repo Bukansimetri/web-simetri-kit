@@ -5,37 +5,45 @@
         ? \Illuminate\Support\Facades\Storage::disk('public')->url($brand->logo_path)
         : null;
 
-    $footerColumns = [
-        'Solusi' => [
-            ['label' => 'Panel Residensial', 'href' => url('/produk')],
-            ['label' => 'B2B & Industri', 'href' => url('/produk')],
-            ['label' => 'Pompa Air Surya', 'href' => url('/produk')],
-            ['label' => 'Net Metering PLN', 'href' => url('/produk')],
-        ],
-        'Perusahaan' => array_values(array_filter([
-            ['label' => 'Tentang Kami', 'href' => url('/tentang-kami')],
-            ['label' => 'Blog & Artikel', 'href' => url('/artikel')],
-            $brand->career_module_enabled ? ['label' => 'Karir', 'href' => url('/karir')] : null,
-            ['label' => 'FAQ', 'href' => url('/faq')],
-        ])),
-    ];
+    // Menu Builder (spec 017-menu-builder) adalah sumber utama kolom footer.
+    // Item induk (punya sub-item) jadi judul kolom; item tanpa sub-item
+    // dikelompokkan ke kolom "Lainnya". Kolom statis di bawah hanya dipakai
+    // sebagai fallback bila admin belum mengisi item apa pun di lokasi
+    // 'footer'.
+    $builderFooterItems = \App\Models\MenuItem::treeForLocation('footer');
 
-    // Kolom tambahan yang dikelola admin lewat Menu Builder (spec
-    // 017-menu-builder). Item induk (punya sub-item) jadi judul kolom;
-    // item tanpa sub-item dikelompokkan ke kolom "Lainnya".
-    foreach (\App\Models\MenuItem::treeForLocation('footer') as $item) {
-        if (! empty($item['children'])) {
-            // href null (tanpa tautan / target terhapus, FR-011) tetap
-            // tampil sebagai label, diarahkan ke '#' alih-alih disembunyikan.
-            $footerColumns[$item['label']] = array_map(
-                fn (array $child) => ['label' => $child['label'], 'href' => $child['href'] ?? '#'],
-                $item['children']
-            );
+    if ($builderFooterItems->isNotEmpty()) {
+        $footerColumns = [];
 
-            continue;
+        foreach ($builderFooterItems as $item) {
+            if (! empty($item['children'])) {
+                // href null (tanpa tautan / target terhapus, FR-011) tetap
+                // tampil sebagai label, diarahkan ke '#' alih-alih disembunyikan.
+                $footerColumns[$item['label']] = array_map(
+                    fn (array $child) => ['label' => $child['label'], 'href' => $child['href'] ?? '#'],
+                    $item['children']
+                );
+
+                continue;
+            }
+
+            $footerColumns['Lainnya'][] = ['label' => $item['label'], 'href' => $item['href'] ?? '#'];
         }
-
-        $footerColumns['Lainnya'][] = ['label' => $item['label'], 'href' => $item['href'] ?? '#'];
+    } else {
+        $footerColumns = [
+            'Solusi' => [
+                ['label' => 'Panel Residensial', 'href' => url('/produk')],
+                ['label' => 'B2B & Industri', 'href' => url('/produk')],
+                ['label' => 'Pompa Air Surya', 'href' => url('/produk')],
+                ['label' => 'Net Metering PLN', 'href' => url('/produk')],
+            ],
+            'Perusahaan' => array_values(array_filter([
+                ['label' => 'Tentang Kami', 'href' => url('/tentang-kami')],
+                ['label' => 'Blog & Artikel', 'href' => url('/artikel')],
+                $brand->career_module_enabled ? ['label' => 'Karir', 'href' => url('/karir')] : null,
+                ['label' => 'FAQ', 'href' => url('/faq')],
+            ])),
+        ];
     }
 @endphp
 <footer class="reveal-element bg-on-background pt-20 pb-10 px-6 border-t border-primary/40">

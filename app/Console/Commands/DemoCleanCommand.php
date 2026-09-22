@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Banner;
 use App\Models\DemoSeedRecord;
+use App\Models\MenuItem;
 use App\Models\PortfolioCategory;
 use App\Models\PortfolioProject;
 use App\Models\Product;
@@ -32,6 +33,7 @@ class DemoCleanCommand extends Command
         $this->deleteTrackedRecords(TeamMember::class, 'Tim');
         $this->deleteTrackedRecords(Product::class, 'Layanan');
         $this->deletePortfolioCategoriesIfUnused();
+        $this->deleteTrackedRecords(MenuItem::class, 'Menu Builder');
 
         $this->components->info('Pembersihan konten demo selesai.');
 
