@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\MaintenanceMode;
 use App\Http\Middleware\SetApplicationTimezone;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -18,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // `web` ini (FR-005, spec 023-site-settings).
         $middleware->web(append: [
             SetApplicationTimezone::class,
+            MaintenanceMode::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

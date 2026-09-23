@@ -49,6 +49,16 @@ class AdminPanelProvider extends PanelProvider
                     '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap">'
                 ),
             )
+            ->renderHook(
+                PanelsRenderHook::BODY_START,
+                fn () => app(SiteSettings::class)->maintenance_mode
+                    ? new HtmlString(
+                        '<div style="background:#b91c1c;color:#fff;text-align:center;padding:8px 16px;font-size:14px;font-weight:600;">'
+                        .'Mode Pemeliharaan aktif — pengunjung publik melihat halaman pemeliharaan.'
+                        .'</div>'
+                    )
+                    : null,
+            )
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([])

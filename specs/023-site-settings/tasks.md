@@ -258,15 +258,15 @@ Monolit Laravel di root repositori: `app/`, `database/`, `resources/`, `tests/`.
 
 ### Tests for User Story 7
 
-- [ ] T092 [P] [US7] Tulis test di `tests/Feature/Public/MaintenanceModeTest.php` — pengunjung anonim menerima halaman pemeliharaan dengan status yang menyatakan kondisi sementara, panel admin tetap dapat diakses, pengguna terautentikasi tetap melihat isi situs, dan situs normal kembali setelah sakelar dimatikan (contracts §7, FR-011 sampai FR-013)
+- [X] T092 [P] [US7] Tulis test di `tests/Feature/Public/MaintenanceModeTest.php` — pengunjung anonim menerima halaman pemeliharaan dengan status yang menyatakan kondisi sementara, panel admin tetap dapat diakses, pengguna terautentikasi tetap melihat isi situs, dan situs normal kembali setelah sakelar dimatikan (contracts §7, FR-011 sampai FR-013)
 
 ### Implementation for User Story 7
 
-- [ ] T093 [US7] Buat `App\Http\Middleware\MaintenanceMode` di `app/Http/Middleware/MaintenanceMode.php` yang membaca `SiteSettings`, mengembalikan halaman pemeliharaan dengan status sementara, dan melewatkan pengguna terautentikasi (FR-011, FR-012, FR-013, research.md R5)
-- [ ] T094 [US7] Daftarkan middleware pada grup rute publik saja di `bootstrap/app.php`, tanpa menyentuh rute panel admin (FR-013)
-- [ ] T095 [US7] Buat `resources/views/maintenance.blade.php` memuat identitas situs dan pesan pemeliharaan (FR-011)
-- [ ] T096 [US7] Tambahkan penanda jelas pada panel admin selama mode pemeliharaan aktif (FR-014)
-- [ ] T097 [US7] Jalankan test US7 dan pastikan seluruhnya hijau
+- [X] T093 [US7] Buat `App\Http\Middleware\MaintenanceMode` di `app/Http/Middleware/MaintenanceMode.php` yang membaca `SiteSettings`, mengembalikan halaman pemeliharaan dengan status sementara, dan melewatkan pengguna terautentikasi (FR-011, FR-012, FR-013, research.md R5)
+- [X] T094 [US7] Daftarkan middleware pada grup rute publik saja di `bootstrap/app.php`, tanpa menyentuh rute panel admin (FR-013)
+- [X] T095 [US7] Buat `resources/views/maintenance.blade.php` memuat identitas situs dan pesan pemeliharaan (FR-011)
+- [X] T096 [US7] Tambahkan penanda jelas pada panel admin selama mode pemeliharaan aktif (FR-014)
+- [X] T097 [US7] Jalankan test US7 dan pastikan seluruhnya hijau
 
 **Checkpoint**: Situs dapat ditutup dan dibuka sepenuhnya dari panel.
 
