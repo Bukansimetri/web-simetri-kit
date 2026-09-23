@@ -231,20 +231,20 @@ Monolit Laravel di root repositori: `app/`, `database/`, `resources/`, `tests/`.
 
 ### Tests for User Story 6
 
-- [ ] T081 [P] [US6] Tulis test di `tests/Feature/Public/CookieConsentBannerTest.php` — bilah tampil saat persetujuan aktif, memuat tombol terima dan tolak serta tautan pengaturan kategori, dan tidak tampil beserta tautan footernya saat persetujuan dimatikan (contracts/consent-gating-contract.md §2 dan §3, FR-051, FR-057, FR-073, FR-074, FR-075)
-- [ ] T082 [P] [US6] Tulis test di `tests/Feature/Public/ConsentGatedScriptTest.php` — slot bertanda analitik atau pemasaran dirender dalam bentuk yang tidak dieksekusi peramban, sementara slot bertanda `none` dirender sebagai skrip biasa (contracts/consent-gating-contract.md §5, FR-054)
-- [ ] T083 [P] [US6] Tulis test di `tests/Feature/Public/CookieConsentFooterLinkTest.php` — tautan pengaturan cookie hadir di footer sebaris tautan legal hanya saat persetujuan diaktifkan (contracts §3, FR-056, FR-075)
+- [X] T081 [P] [US6] Tulis test di `tests/Feature/Public/CookieConsentBannerTest.php` — bilah tampil saat persetujuan aktif, memuat tombol terima dan tolak serta tautan pengaturan kategori, dan tidak tampil beserta tautan footernya saat persetujuan dimatikan (contracts/consent-gating-contract.md §2 dan §3, FR-051, FR-057, FR-073, FR-074, FR-075)
+- [X] T082 [P] [US6] Tulis test di `tests/Feature/Public/ConsentGatedScriptTest.php` — slot bertanda analitik atau pemasaran dirender dalam bentuk yang tidak dieksekusi peramban, sementara slot bertanda `none` dirender sebagai skrip biasa (contracts/consent-gating-contract.md §5, FR-054)
+- [X] T083 [P] [US6] Tulis test di `tests/Feature/Public/CookieConsentFooterLinkTest.php` — tautan pengaturan cookie hadir di footer sebaris tautan legal hanya saat persetujuan diaktifkan (contracts §3, FR-056, FR-075)
 
 ### Implementation for User Story 6
 
-- [ ] T084 [US6] Tambahkan penandaan kategori persetujuan per slot pada `app/Filament/Pages/ScriptSettingsPage.php` dengan pilihan `none`, `analytics`, dan `marketing` (FR-053)
-- [ ] T085 [US6] Ubah titik pemuatan slot di `resources/views/layouts/public.blade.php` agar slot berkategori dirender dalam bentuk yang tidak dieksekusi peramban sampai kategorinya disetujui (FR-054, research.md R8)
-- [ ] T086 [US6] Buat `resources/views/components/layout/cookie-consent.blade.php` — bilah non-blokir dengan tombol terima dan tolak berpenonjolan setara serta tautan pengaturan kategori (FR-073, FR-074)
-- [ ] T087 [US6] Terapkan penyimpanan keputusan pada perangkat pengunjung memakai Alpine.js yang sudah dipakai project ini, tanpa dependensi baru; perlakukan penyimpanan yang tidak tersedia atau kosong sebagai belum memilih (FR-055, FR-058, contracts/consent-gating-contract.md §6)
-- [ ] T088 [US6] Aktifkan slot yang disetujui tanpa memuat ulang halaman, dan pastikan kegagalan skrip tidak menghalangi isi halaman tampil maupun dinavigasi (FR-049, contracts/consent-gating-contract.md §5)
-- [ ] T089 [US6] Tambahkan tautan pengaturan cookie di `resources/views/components/layout/footer.blade.php` sebaris tautan legal, hanya dirender saat persetujuan diaktifkan (FR-056, FR-075)
-- [ ] T090 [US6] Pastikan kategori yang diperlukan agar situs berfungsi selalu aktif dan tidak dapat dimatikan pengunjung (FR-052)
-- [ ] T091 [US6] Jalankan test US6 dan pastikan seluruhnya hijau
+- [X] T084 [US6] Tambahkan penandaan kategori persetujuan per slot pada `app/Filament/Pages/ScriptSettingsPage.php` dengan pilihan `none`, `analytics`, dan `marketing` (FR-053)
+- [X] T085 [US6] Ubah titik pemuatan slot di `resources/views/layouts/public.blade.php` agar slot berkategori dirender dalam bentuk yang tidak dieksekusi peramban sampai kategorinya disetujui (FR-054, research.md R8)
+- [X] T086 [US6] Buat `resources/views/components/layout/cookie-consent.blade.php` — bilah non-blokir dengan tombol terima dan tolak berpenonjolan setara serta tautan pengaturan kategori (FR-073, FR-074)
+- [X] T087 [US6] Terapkan penyimpanan keputusan pada perangkat pengunjung memakai Alpine.js yang sudah dipakai project ini, tanpa dependensi baru; perlakukan penyimpanan yang tidak tersedia atau kosong sebagai belum memilih (FR-055, FR-058, contracts/consent-gating-contract.md §6)
+- [X] T088 [US6] Aktifkan slot yang disetujui tanpa memuat ulang halaman, dan pastikan kegagalan skrip tidak menghalangi isi halaman tampil maupun dinavigasi (FR-049, contracts/consent-gating-contract.md §5)
+- [X] T089 [US6] Tambahkan tautan pengaturan cookie di `resources/views/components/layout/footer.blade.php` sebaris tautan legal, hanya dirender saat persetujuan diaktifkan (FR-056, FR-075)
+- [X] T090 [US6] Pastikan kategori yang diperlukan agar situs berfungsi selalu aktif dan tidak dapat dimatikan pengunjung (FR-052)
+- [X] T091 [US6] Jalankan test US6 dan pastikan seluruhnya hijau
 
 **Checkpoint**: Pelacakan berjalan hanya setelah pengunjung menyetujuinya.
 

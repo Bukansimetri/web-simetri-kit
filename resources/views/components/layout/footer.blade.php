@@ -1,6 +1,7 @@
 @php
     $site = app(\App\Settings\SiteSettings::class);
     $appearance = app(\App\Settings\AppearanceSettings::class);
+    $script = app(\App\Settings\ScriptSettings::class);
     $appName = $site->site_name ?: config('app.name');
     $logoUrl = filled($appearance->logo_path) && \Illuminate\Support\Facades\Storage::disk('public')->exists($appearance->logo_path)
         ? \Illuminate\Support\Facades\Storage::disk('public')->url($appearance->logo_path)
@@ -105,6 +106,9 @@
             <a class="hover:text-white transition-colors" href="{{ $site->terms_url ?: url('/halaman/syarat-ketentuan') }}">Syarat &amp; Ketentuan</a>
             @if ($site->cookie_policy_url)
                 <a class="hover:text-white transition-colors" href="{{ $site->cookie_policy_url }}">Kebijakan Cookie</a>
+            @endif
+            @if ($script->cookie_consent_enabled)
+                <a class="hover:text-white transition-colors" href="#" onclick="window.dispatchEvent(new CustomEvent('open-cookie-preferences')); return false;">Pengaturan Cookie</a>
             @endif
         </div>
     </div>

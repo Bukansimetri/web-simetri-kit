@@ -18,12 +18,14 @@
          mentah, TIDAK di-escape dengan sengaja. Pengaman fitur ini adalah
          pembatasan peran super_admin pada ScriptSettingsPage (FR-045), bukan
          penyaringan isi di sini — jangan ubah {!! !!} ini menjadi {{ }},
-         itu akan mematikan seluruh fitur pemasangan skrip pihak ketiga. --}}
+         itu akan mematikan seluruh fitur pemasangan skrip pihak ketiga.
+         Kategori selain "none" dibungkus <x-layout.gated-script> agar tidak
+         dieksekusi sebelum pengunjung menyetujui (FR-054). --}}
     @if ($script->head_scripts)
-        {!! $script->head_scripts !!}
+        <x-layout.gated-script :category="$script->head_scripts_consent">{!! $script->head_scripts !!}</x-layout.gated-script>
     @endif
     @if ($script->custom_css)
-        <style>{!! $script->custom_css !!}</style>
+        <x-layout.gated-script :category="$script->custom_css_consent"><style>{!! $script->custom_css !!}</style></x-layout.gated-script>
     @endif
 
     <title>@yield('title', \App\Support\Seo\PageTitle::forStatic('home', $site->tagline ?: ''))</title>
@@ -59,7 +61,7 @@
     {{-- Slot skrip awal body (FR-041) — sama seperti slot head di atas,
          sengaja tidak di-escape; lihat catatan FR-044/FR-045 di <head>. --}}
     @if ($script->body_start_scripts)
-        {!! $script->body_start_scripts !!}
+        <x-layout.gated-script :category="$script->body_start_scripts_consent">{!! $script->body_start_scripts !!}</x-layout.gated-script>
     @endif
 
     <x-layout.header />
@@ -71,7 +73,11 @@
     <x-layout.footer />
 
     @if ($script->footer_scripts)
-        {!! $script->footer_scripts !!}
+        <x-layout.gated-script :category="$script->footer_scripts_consent">{!! $script->footer_scripts !!}</x-layout.gated-script>
+    @endif
+
+    @if ($script->cookie_consent_enabled)
+        <x-layout.cookie-consent :message="$script->cookie_banner_message" />
     @endif
 
     @stack('scripts')
@@ -79,10 +85,10 @@
     {{-- Slot skrip akhir body dan JS khusus (FR-041, FR-043) — sengaja tidak
          di-escape; lihat catatan FR-044/FR-045 di <head>. --}}
     @if ($script->body_end_scripts)
-        {!! $script->body_end_scripts !!}
+        <x-layout.gated-script :category="$script->body_end_scripts_consent">{!! $script->body_end_scripts !!}</x-layout.gated-script>
     @endif
     @if ($script->custom_js)
-        <script>{!! $script->custom_js !!}</script>
+        <x-layout.gated-script :category="$script->custom_js_consent"><script>{!! $script->custom_js !!}</script></x-layout.gated-script>
     @endif
 </body>
 </html>
