@@ -125,17 +125,17 @@ Monolit Laravel di root repositori: `app/`, `database/`, `resources/`, `tests/`.
 
 ### Tests for User Story 2
 
-- [ ] T041 [P] [US2] Tulis test di `tests/Feature/Public/SocialProfileLinksTest.php` — ikon platform terisi menuju URL-nya, ikon platform kosong tidak dirender, seluruh kelompok ikon hilang bila tidak ada URL terisi, dan tidak ada ikon bertautan kosong tersisa (contracts §2, FR-019, FR-020, SC-005)
-- [ ] T042 [P] [US2] Tulis test di `tests/Feature/Settings/SocialSettingsValidationTest.php` — URL profil yang bukan alamat web sah ditolak dengan pesan yang menyebut platformnya (FR-021)
+- [X] T041 [P] [US2] Tulis test di `tests/Feature/Public/SocialProfileLinksTest.php` — ikon platform terisi menuju URL-nya, ikon platform kosong tidak dirender, seluruh kelompok ikon hilang bila tidak ada URL terisi, dan tidak ada ikon bertautan kosong tersisa (contracts §2, FR-019, FR-020, SC-005)
+- [X] T042 [P] [US2] Tulis test di `tests/Feature/Settings/SocialSettingsValidationTest.php` — URL profil yang bukan alamat web sah ditolak dengan pesan yang menyebut platformnya (FR-021)
 
 ### Implementation for User Story 2
 
-- [ ] T043 [US2] Ganti larik `$socials` yang ditulis mati dengan `href => '#'` di `resources/views/components/layout/header.blade.php` agar memakai URL dari `SocialSettings`, dan sembunyikan ikon yang URL-nya kosong (FR-019, FR-020)
-- [ ] T044 [US2] Sembunyikan seluruh kelompok ikon sosial di `resources/views/components/layout/header.blade.php` bila tidak ada satu pun URL terisi, tanpa menyisakan ruang kosong (FR-020)
-- [ ] T045 [US2] Tambahkan ikon untuk platform yang belum punya lambang di header — LinkedIn, Pinterest, dan TikTok — di `resources/views/components/layout/header.blade.php` (spec.md US2 skenario 5)
-- [ ] T046 [US2] Tambahkan validasi URL per platform pada `app/Filament/Pages/SocialSettingsPage.php` dengan pesan yang menyebut platformnya (FR-021)
-- [ ] T047 [US2] Sambungkan daftar profil terisi sebagai `sameAs` pada `app/Support/Seo/JsonLd.php` (FR-032, contracts §1)
-- [ ] T048 [US2] Jalankan test US2 dan pastikan seluruhnya hijau
+- [X] T043 [US2] Ganti larik `$socials` yang ditulis mati dengan `href => '#'` di `resources/views/components/layout/header.blade.php` agar memakai URL dari `SocialSettings`, dan sembunyikan ikon yang URL-nya kosong (FR-019, FR-020)
+- [X] T044 [US2] Sembunyikan seluruh kelompok ikon sosial di `resources/views/components/layout/header.blade.php` bila tidak ada satu pun URL terisi, tanpa menyisakan ruang kosong (FR-020)
+- [X] T045 [US2] Tambahkan ikon untuk platform yang belum punya lambang di header — LinkedIn, Pinterest, dan TikTok — di `resources/views/components/layout/header.blade.php` (spec.md US2 skenario 5)
+- [X] T046 [US2] Tambahkan validasi URL per platform pada `app/Filament/Pages/SocialSettingsPage.php` dengan pesan yang menyebut platformnya (FR-021)
+- [X] T047 [US2] Sambungkan daftar profil terisi sebagai `sameAs` pada `app/Support/Seo/JsonLd.php` (FR-032, contracts §1)
+- [X] T048 [US2] Jalankan test US2 dan pastikan seluruhnya hijau
 
 **Checkpoint**: Tidak ada lagi ikon sosial bertautan mati di situs.
 

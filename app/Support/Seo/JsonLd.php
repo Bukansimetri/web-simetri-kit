@@ -7,6 +7,7 @@ use App\Models\FaqItem;
 use App\Models\Product;
 use App\Settings\AppearanceSettings;
 use App\Settings\SiteSettings;
+use App\Settings\SocialSettings;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,7 +24,7 @@ class JsonLd
      *
      * @return array<string, mixed>
      */
-    public static function organization(SiteSettings $site, AppearanceSettings $appearance): array
+    public static function organization(SiteSettings $site, AppearanceSettings $appearance, SocialSettings $social): array
     {
         $schema = [
             '@context' => 'https://schema.org',
@@ -34,6 +35,15 @@ class JsonLd
 
         if (filled($appearance->logo_path)) {
             $schema['logo'] = Storage::disk('public')->url($appearance->logo_path);
+        }
+
+        // Daftar profil sosial terisi (FR-032) — dibuang total bila kosong
+        // alih-alih menyertakan larik kosong yang tidak berguna bagi mesin
+        // pencari.
+        $sameAs = $social->filledProfileUrls();
+
+        if (filled($sameAs)) {
+            $schema['sameAs'] = $sameAs;
         }
 
         return $schema;
