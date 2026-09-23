@@ -25,7 +25,9 @@ class AboutPageSettingsPage extends Page implements HasForms
 
     protected static ?string $navigationIcon = 'heroicon-o-information-circle';
 
-    protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $navigationGroup = 'Konten Halaman';
+
+    protected static ?int $navigationSort = 6;
 
     protected static ?string $navigationLabel = 'Halaman Tentang Kami';
 

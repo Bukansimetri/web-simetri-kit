@@ -20,7 +20,9 @@ class SocialSettingsPage extends Page implements HasForms
 
     protected static ?string $navigationIcon = 'heroicon-o-share';
 
-    protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $navigationGroup = 'Pengaturan Situs';
+
+    protected static ?int $navigationSort = 4;
 
     protected static ?string $navigationLabel = 'Media Sosial';
 

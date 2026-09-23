@@ -26,6 +26,8 @@ class ElectricityApplianceResource extends Resource
 
     protected static ?string $navigationGroup = 'Katalog';
 
+    protected static ?int $navigationSort = 3;
+
     protected static ?string $navigationLabel = 'Peralatan Listrik';
 
     protected static ?string $modelLabel = 'Peralatan Listrik';

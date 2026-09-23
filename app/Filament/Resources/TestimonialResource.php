@@ -28,6 +28,10 @@ class TestimonialResource extends Resource
 
     protected static ?string $navigationLabel = 'Testimoni';
 
+    protected static ?string $navigationGroup = 'Konten Halaman';
+
+    protected static ?int $navigationSort = 3;
+
     protected static ?string $modelLabel = 'Testimoni';
 
     public static function form(Form $form): Form

@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CalculatorLeadResource\Pages;
 use App\Models\CalculatorLead;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Section;
@@ -39,7 +40,9 @@ class CalculatorLeadResource extends Resource
 
     protected static ?string $modelLabel = 'Lead Kalkulator';
 
-    protected static ?string $navigationGroup = 'Katalog';
+    protected static ?string $navigationGroup = 'Prospek & Pesan';
+
+    protected static ?int $navigationSort = 1;
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -229,9 +232,9 @@ class CalculatorLeadResource extends Resource
                     ->toggle(),
                 Filter::make('created_at')
                     ->form([
-                        \Filament\Forms\Components\DatePicker::make('dari')
+                        DatePicker::make('dari')
                             ->native(false),
-                        \Filament\Forms\Components\DatePicker::make('sampai')
+                        DatePicker::make('sampai')
                             ->native(false),
                     ])
                     ->query(function (Builder $query, array $data): Builder {

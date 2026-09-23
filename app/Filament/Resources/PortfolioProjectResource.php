@@ -31,13 +31,15 @@ class PortfolioProjectResource extends Resource
 {
     protected static ?string $model = PortfolioProject::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-briefcase';
+    protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
 
     protected static ?string $navigationLabel = 'Portfolio';
 
     protected static ?string $modelLabel = 'Proyek Portfolio';
 
     protected static ?string $navigationGroup = 'Portfolio';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {

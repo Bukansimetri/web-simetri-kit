@@ -15,9 +15,11 @@ class CalculatorSettingsPage extends Page implements HasForms
 {
     use InteractsWithForms;
 
-    protected static ?string $navigationIcon = 'heroicon-o-calculator';
+    protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
 
-    protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $navigationGroup = 'Pengaturan Situs';
+
+    protected static ?int $navigationSort = 6;
 
     protected static ?string $navigationLabel = 'Kalkulator Estimasi';
 
