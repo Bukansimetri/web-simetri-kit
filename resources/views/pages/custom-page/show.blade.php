@@ -4,7 +4,7 @@
     $appName = app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name');
 @endphp
 
-@section('title', $customPage->title.' — '.$appName)
+@section('title', \App\Support\Seo\PageTitle::forContent('halaman', $customPage->meta_title, $customPage->title))
 @section('meta_description', $customPage->seoDescription())
 @section('og_title', $customPage->seoTitle())
 @section('og_image', $customPage->seoImageUrl() ?? app(\App\Settings\SocialSettings::class)->ogImageUrl())

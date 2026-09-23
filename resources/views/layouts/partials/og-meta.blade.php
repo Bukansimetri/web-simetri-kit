@@ -12,6 +12,9 @@
 <meta property="og:image" content="@yield('og_image', $social->ogImageUrl())">
 
 <meta name="twitter:card" content="summary_large_image">
+@if ($seo->twitter_handle)
+    <meta name="twitter:site" content="{{ $seo->twitter_handle }}">
+@endif
 <meta name="twitter:title" content="@yield('og_title', $appName)">
 <meta name="twitter:description" content="@yield('meta_description', $seo->default_meta_description ?: 'Solusi panel surya untuk rumah, bisnis, dan industri.')">
 <meta name="twitter:image" content="@yield('og_image', $social->ogImageUrl())">

@@ -17,7 +17,7 @@
     ];
 @endphp
 
-@section('title', 'Karir — '.$appName)
+@section('title', \App\Support\Seo\PageTitle::forStatic('karir', 'Karir'))
 @section('meta_description', 'Bergabunglah dengan tim '.$appName.' dan jadi bagian dari transisi energi bersih Indonesia.')
 
 @section('content')

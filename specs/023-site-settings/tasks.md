@@ -177,21 +177,21 @@ Monolit Laravel di root repositori: `app/`, `database/`, `resources/`, `tests/`.
 
 ### Tests for User Story 4
 
-- [ ] T061 [P] [US4] Tulis test di `tests/Unit/PageTitleTest.php` — penggantian penanda `{page_title}`, `{site_name}`, `{separator}`; penanda tak dikenal dibuang; pemisah menggantung dan spasi ganda dirapikan (FR-027)
-- [ ] T062 [P] [US4] Tulis test di `tests/Feature/Public/SeoTitleFormatTest.php` — pola default dipakai halaman tanpa pola sendiri, pola per jenis halaman menang atasnya, dan judul SEO per konten menang atas keduanya (contracts §1, FR-025, FR-026, FR-028)
-- [ ] T063 [P] [US4] Tulis test di `tests/Feature/Public/SeoIndexingControlTest.php` — mematikan izin pengindeksan dan izin ikut tautan tercermin pada pernyataan halaman (contracts §1, FR-030)
-- [ ] T064 [P] [US4] Tulis test di `tests/Feature/Public/SeoVerificationTagTest.php` — penanda verifikasi hadir untuk tiap mesin pencari yang kodenya diisi dan tidak hadir bila kosong (contracts §1, FR-034)
-- [ ] T065 [P] [US4] Tulis test di `tests/Feature/Public/SeoHeadExtrasTest.php` — kata kunci, kanonik default, `twitter:site`, dan meta tambahan hadir sesuai pengaturan (contracts §1, FR-029, FR-031, FR-033)
+- [X] T061 [P] [US4] Tulis test di `tests/Unit/PageTitleTest.php` — penggantian penanda `{page_title}`, `{site_name}`, `{separator}`; penanda tak dikenal dibuang; pemisah menggantung dan spasi ganda dirapikan (FR-027)
+- [X] T062 [P] [US4] Tulis test di `tests/Feature/Public/SeoTitleFormatTest.php` — pola default dipakai halaman tanpa pola sendiri, pola per jenis halaman menang atasnya, dan judul SEO per konten menang atas keduanya (contracts §1, FR-025, FR-026, FR-028)
+- [X] T063 [P] [US4] Tulis test di `tests/Feature/Public/SeoIndexingControlTest.php` — mematikan izin pengindeksan dan izin ikut tautan tercermin pada pernyataan halaman (contracts §1, FR-030)
+- [X] T064 [P] [US4] Tulis test di `tests/Feature/Public/SeoVerificationTagTest.php` — penanda verifikasi hadir untuk tiap mesin pencari yang kodenya diisi dan tidak hadir bila kosong (contracts §1, FR-034)
+- [X] T065 [P] [US4] Tulis test di `tests/Feature/Public/SeoHeadExtrasTest.php` — kata kunci, kanonik default, `twitter:site`, dan meta tambahan hadir sesuai pengaturan (contracts §1, FR-029, FR-031, FR-033)
 
 ### Implementation for User Story 4
 
-- [ ] T066 [US4] Buat `App\Support\Seo\PageTitle` di `app/Support/Seo/PageTitle.php` — menyusun judul dari pola, mengganti penanda yang dikenali, membuang penanda tak dikenal, lalu merapikan pemisah dan spasi (FR-025, FR-027, research.md R9)
-- [ ] T067 [US4] Sambungkan `PageTitle` ke `resources/views/layouts/public.blade.php` sebagai lapisan default di bawah `meta_title` per konten dari `app/Concerns/HasSeoMetadata.php`, tanpa mengubah perilaku SEO per konten (FR-028)
-- [ ] T068 [US4] Tambahkan pengaturan pola judul per jenis halaman pada `app/Filament/Pages/SeoSettingsPage.php`, dibatasi 12 jenis halaman yang benar-benar punya alamat publik sesuai data-model.md §3 (FR-026, research.md R0)
-- [ ] T069 [US4] Buat `resources/views/layouts/partials/head-extra.blade.php` memuat pernyataan pengindeksan, kode verifikasi keempat mesin pencari, dan meta tambahan bebas (FR-030, FR-033, FR-034)
-- [ ] T070 [US4] Sertakan `head-extra` pada `resources/views/layouts/public.blade.php` dan pindahkan sumber deskripsi, kanonik, serta kata kunci ke `SeoSettings` (FR-029)
-- [ ] T071 [US4] Perbarui `resources/views/layouts/partials/og-meta.blade.php` agar memakai `twitter_handle` dari `SeoSettings` dan gambar berbagi default dari `SocialSettings` (FR-031, FR-024)
-- [ ] T072 [US4] Jalankan test US4 dan pastikan seluruhnya hijau
+- [X] T066 [US4] Buat `App\Support\Seo\PageTitle` di `app/Support/Seo/PageTitle.php` — menyusun judul dari pola, mengganti penanda yang dikenali, membuang penanda tak dikenal, lalu merapikan pemisah dan spasi (FR-025, FR-027, research.md R9)
+- [X] T067 [US4] Sambungkan `PageTitle` ke `resources/views/layouts/public.blade.php` sebagai lapisan default di bawah `meta_title` per konten dari `app/Concerns/HasSeoMetadata.php`, tanpa mengubah perilaku SEO per konten (FR-028)
+- [X] T068 [US4] Tambahkan pengaturan pola judul per jenis halaman pada `app/Filament/Pages/SeoSettingsPage.php`, dibatasi 12 jenis halaman yang benar-benar punya alamat publik sesuai data-model.md §3 (FR-026, research.md R0)
+- [X] T069 [US4] Buat `resources/views/layouts/partials/head-extra.blade.php` memuat pernyataan pengindeksan, kode verifikasi keempat mesin pencari, dan meta tambahan bebas (FR-030, FR-033, FR-034)
+- [X] T070 [US4] Sertakan `head-extra` pada `resources/views/layouts/public.blade.php` dan pindahkan sumber deskripsi, kanonik, serta kata kunci ke `SeoSettings` (FR-029)
+- [X] T071 [US4] Perbarui `resources/views/layouts/partials/og-meta.blade.php` agar memakai `twitter_handle` dari `SeoSettings` dan gambar berbagi default dari `SocialSettings` (FR-031, FR-024)
+- [X] T072 [US4] Jalankan test US4 dan pastikan seluruhnya hijau
 
 **Checkpoint**: SEO dapat disesuaikan per klien tanpa merusak fondasi spec 014.
 

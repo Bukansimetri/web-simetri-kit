@@ -4,7 +4,7 @@
     $appName = app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name');
 @endphp
 
-@section('title', 'Portfolio — '.$appName)
+@section('title', \App\Support\Seo\PageTitle::forStatic('portfolio_index', 'Portfolio'))
 @section('meta_description', 'Proyek dan instalasi energi surya yang telah dikerjakan '.$appName.'.')
 
 @section('content')

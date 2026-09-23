@@ -26,12 +26,16 @@
         <style>{!! $script->custom_css !!}</style>
     @endif
 
-    <title>@yield('title', $appName)</title>
+    <title>@yield('title', \App\Support\Seo\PageTitle::forStatic('home', $site->tagline ?: ''))</title>
     <meta name="description" content="@yield('meta_description', $seo->default_meta_description ?: 'Solusi panel surya untuk rumah, bisnis, dan industri.')">
-    <link rel="canonical" href="{{ url()->current() }}">
+    @if ($seo->meta_keywords)
+        <meta name="keywords" content="{{ implode(', ', $seo->meta_keywords) }}">
+    @endif
+    <link rel="canonical" href="{{ $seo->default_canonical_url ?: url()->current() }}">
 
     @include('layouts.partials.og-meta')
     @include('layouts.partials.schema-organization')
+    @include('layouts.partials.head-extra')
 
     {{-- Font heading/body (Manrope, Be Vietnam Pro, dst.) di-bundle saat build lewat
          laravel-vite-plugin/fonts (lihat vite.config.js) dan otomatis di-preload oleh

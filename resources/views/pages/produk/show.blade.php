@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', $product->name.' — '.(app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name')))
+@section('title', \App\Support\Seo\PageTitle::forContent('produk_show', $product->meta_title, $product->name))
 @section('meta_description', $product->seoDescription())
 @section('og_title', $product->seoTitle())
 @section('og_image', $product->seoImageUrl() ?? app(\App\Settings\SocialSettings::class)->ogImageUrl())

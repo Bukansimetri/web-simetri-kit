@@ -1,6 +1,10 @@
 @extends('layouts.public')
 
-@section('title', ($site = app(\App\Settings\SiteSettings::class))->site_name ?: config('app.name'))
+@php
+    $site = app(\App\Settings\SiteSettings::class);
+@endphp
+
+@section('title', \App\Support\Seo\PageTitle::forStatic('home', $site->tagline ?: ''))
 @section('meta_description', 'Solusi panel surya untuk rumah, bisnis, dan industri — hitung estimasi hemat listrik Anda.')
 
 @php

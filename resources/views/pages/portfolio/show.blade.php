@@ -5,7 +5,7 @@
     $images = $project->imageUrls();
 @endphp
 
-@section('title', $project->title.' — '.$appName)
+@section('title', \App\Support\Seo\PageTitle::forContent('portfolio_show', $project->meta_title, $project->title))
 @section('meta_description', $project->seoDescription())
 @section('og_title', $project->seoTitle())
 @section('og_image', $project->seoImageUrl() ?? app(\App\Settings\SocialSettings::class)->ogImageUrl())

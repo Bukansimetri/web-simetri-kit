@@ -9,7 +9,7 @@
     $trust = $about->trustItems();
 @endphp
 
-@section('title', 'Tentang Kami — '.$appName)
+@section('title', \App\Support\Seo\PageTitle::forStatic('tentang_kami', 'Tentang Kami'))
 @section('meta_description', 'Mengenal '.$appName.' lebih dekat — visi, misi, dan nilai-nilai kami dalam menghadirkan solusi energi surya.')
 
 @section('content')

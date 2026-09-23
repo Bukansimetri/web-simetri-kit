@@ -5,7 +5,7 @@
     $appName = $site->site_name ?: config('app.name');
 @endphp
 
-@section('title', 'Kontak — '.$appName)
+@section('title', \App\Support\Seo\PageTitle::forStatic('kontak', 'Kontak'))
 @section('meta_description', 'Hubungi tim '.$appName.' untuk konsultasi gratis kebutuhan panel surya Anda.')
 
 @section('content')
