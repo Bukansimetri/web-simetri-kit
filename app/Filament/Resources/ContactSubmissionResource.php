@@ -31,7 +31,9 @@ class ContactSubmissionResource extends Resource
 
     protected static ?string $modelLabel = 'Pesan Kontak';
 
-    protected static ?string $navigationGroup = 'Katalog';
+    protected static ?string $navigationGroup = 'Prospek & Pesan';
+
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $recordTitleAttribute = 'name';
 

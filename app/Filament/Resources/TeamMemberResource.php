@@ -27,6 +27,10 @@ class TeamMemberResource extends Resource
 
     protected static ?string $navigationLabel = 'Tim';
 
+    protected static ?string $navigationGroup = 'Konten Halaman';
+
+    protected static ?int $navigationSort = 4;
+
     protected static ?string $modelLabel = 'Anggota Tim';
 
     public static function form(Form $form): Form

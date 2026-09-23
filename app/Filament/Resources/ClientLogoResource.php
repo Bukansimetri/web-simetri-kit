@@ -26,6 +26,10 @@ class ClientLogoResource extends Resource
 
     protected static ?string $navigationLabel = 'Logo Klien';
 
+    protected static ?string $navigationGroup = 'Konten Halaman';
+
+    protected static ?int $navigationSort = 5;
+
     protected static ?string $modelLabel = 'Logo Klien';
 
     public static function form(Form $form): Form

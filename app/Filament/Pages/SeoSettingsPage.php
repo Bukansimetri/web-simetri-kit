@@ -39,7 +39,9 @@ class SeoSettingsPage extends Page implements HasForms
 
     protected static ?string $navigationIcon = 'heroicon-o-magnifying-glass';
 
-    protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $navigationGroup = 'Pengaturan Situs';
+
+    protected static ?int $navigationSort = 3;
 
     protected static ?string $navigationLabel = 'SEO';
 

@@ -20,7 +20,9 @@ class AppearanceSettingsPage extends Page implements HasForms
 
     protected static ?string $navigationIcon = 'heroicon-o-swatch';
 
-    protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $navigationGroup = 'Pengaturan Situs';
+
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $navigationLabel = 'Tampilan';
 

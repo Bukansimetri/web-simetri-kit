@@ -6,7 +6,7 @@ return [
      * Dashboard Page
      */
     'dedicated_dashboard' => true,
-    'dashboard_icon' => 'heroicon-m-chart-bar',
+    'dashboard_icon' => 'heroicon-o-chart-bar',
 
     /**
      * Widgets

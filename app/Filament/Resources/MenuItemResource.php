@@ -22,11 +22,13 @@ class MenuItemResource extends Resource
 {
     protected static ?string $model = MenuItem::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-link';
 
     protected static ?string $navigationLabel = 'Item Menu';
 
     protected static ?string $navigationGroup = 'Menu Builder';
+
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $modelLabel = 'Item Menu';
 

@@ -27,7 +27,9 @@ class ScriptSettingsPage extends Page implements HasForms
 
     protected static ?string $navigationIcon = 'heroicon-o-code-bracket';
 
-    protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $navigationGroup = 'Pengaturan Situs';
+
+    protected static ?int $navigationSort = 5;
 
     protected static ?string $navigationLabel = 'Scripts & Analytics';
 
