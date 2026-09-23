@@ -280,13 +280,13 @@ Monolit Laravel di root repositori: `app/`, `database/`, `resources/`, `tests/`.
 
 ### Tests for User Story 8
 
-- [ ] T098 [P] [US8] Tulis test di `tests/Feature/Public/CustomErrorPageTest.php` — alamat tidak ada menampilkan pesan dari pengaturan, pesan bawaan tampil saat pengaturan kosong, halaman memuat identitas situs dan jalan kembali, serta tidak membocorkan rincian teknis (contracts §8, FR-015 sampai FR-017)
+- [X] T098 [P] [US8] Tulis test di `tests/Feature/Public/CustomErrorPageTest.php` — alamat tidak ada menampilkan pesan dari pengaturan, pesan bawaan tampil saat pengaturan kosong, halaman memuat identitas situs dan jalan kembali, serta tidak membocorkan rincian teknis (contracts §8, FR-015 sampai FR-017)
 
 ### Implementation for User Story 8
 
-- [ ] T099 [P] [US8] Buat `resources/views/errors/404.blade.php` memakai layout publik dan pesan dari `SiteSettings` dengan fallback bawaan (FR-015, FR-016)
-- [ ] T100 [P] [US8] Buat `resources/views/errors/500.blade.php` yang tahan gagal — tetap tampil dengan pesan bawaan bila pengaturan tidak dapat dibaca (FR-017, research.md R6)
-- [ ] T101 [US8] Jalankan test US8 dan pastikan seluruhnya hijau
+- [X] T099 [P] [US8] Buat `resources/views/errors/404.blade.php` memakai layout publik dan pesan dari `SiteSettings` dengan fallback bawaan (FR-015, FR-016)
+- [X] T100 [P] [US8] Buat `resources/views/errors/500.blade.php` yang tahan gagal — tetap tampil dengan pesan bawaan bila pengaturan tidak dapat dibaca (FR-017, research.md R6)
+- [X] T101 [US8] Jalankan test US8 dan pastikan seluruhnya hijau
 
 **Checkpoint**: Halaman kesalahan tidak lagi memakai tampilan bawaan framework.
 
