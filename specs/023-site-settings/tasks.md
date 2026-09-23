@@ -205,17 +205,17 @@ Monolit Laravel di root repositori: `app/`, `database/`, `resources/`, `tests/`.
 
 ### Tests for User Story 5
 
-- [ ] T073 [P] [US5] Tulis test di `tests/Feature/Public/RobotsTxtSettingsTest.php` — isi sesuai yang disimpan, penanda `{site_url}` tergantikan alamat aktif, dan aturan bawaan aman tersaji saat isi dikosongkan (contracts §5, FR-035, FR-036, FR-037)
-- [ ] T074 [P] [US5] Tulis test di `tests/Feature/Public/SitemapSettingsTest.php` — jenis konten yang sakelarnya mati tidak tercantum sementara jenis lain tetap ada, peta situs menyatakan tidak tersedia saat dimatikan, dan tiap entri mencantumkan frekuensi serta prioritas default (contracts §6, FR-038, FR-039)
-- [ ] T075 [P] [US5] Tulis test di `tests/Feature/Public/RobotsSitemapConsistencyTest.php` — baris `Sitemap:` tidak tersaji saat peta situs dimatikan meski admin menuliskannya (contracts §5, FR-040)
+- [X] T073 [P] [US5] Tulis test di `tests/Feature/Public/RobotsTxtSettingsTest.php` — isi sesuai yang disimpan, penanda `{site_url}` tergantikan alamat aktif, dan aturan bawaan aman tersaji saat isi dikosongkan (contracts §5, FR-035, FR-036, FR-037)
+- [X] T074 [P] [US5] Tulis test di `tests/Feature/Public/SitemapSettingsTest.php` — jenis konten yang sakelarnya mati tidak tercantum sementara jenis lain tetap ada, peta situs menyatakan tidak tersedia saat dimatikan, dan tiap entri mencantumkan frekuensi serta prioritas default (contracts §6, FR-038, FR-039)
+- [X] T075 [P] [US5] Tulis test di `tests/Feature/Public/RobotsSitemapConsistencyTest.php` — baris `Sitemap:` tidak tersaji saat peta situs dimatikan meski admin menuliskannya (contracts §5, FR-040)
 
 ### Implementation for User Story 5
 
-- [ ] T076 [US5] Ubah `SitemapController::robots()` di `app/Http/Controllers/Public/SitemapController.php` agar membaca isi dari `SeoSettings`, mengganti penanda `{site_url}`, dan jatuh ke aturan bawaan aman saat kosong (FR-035, FR-036, FR-037)
-- [ ] T077 [US5] Ubah `SitemapController::xml()` di `app/Http/Controllers/Public/SitemapController.php` agar menyaring jenis konten sesuai sakelar dan mengembalikan penolakan saat peta situs dimatikan (FR-038)
-- [ ] T078 [US5] Tambahkan frekuensi perubahan dan prioritas default pada tiap entri di `resources/views/sitemap.blade.php` (FR-039)
-- [ ] T079 [US5] Jaga keselarasan aturan perayapan, peta situs, dan kontrol pengindeksan sehingga tidak saling bertentangan maupun menunjuk berkas yang tidak tersedia (FR-040, research.md R10)
-- [ ] T080 [US5] Jalankan test US5 dan pastikan seluruhnya hijau
+- [X] T076 [US5] Ubah `SitemapController::robots()` di `app/Http/Controllers/Public/SitemapController.php` agar membaca isi dari `SeoSettings`, mengganti penanda `{site_url}`, dan jatuh ke aturan bawaan aman saat kosong (FR-035, FR-036, FR-037)
+- [X] T077 [US5] Ubah `SitemapController::xml()` di `app/Http/Controllers/Public/SitemapController.php` agar menyaring jenis konten sesuai sakelar dan mengembalikan penolakan saat peta situs dimatikan (FR-038)
+- [X] T078 [US5] Tambahkan frekuensi perubahan dan prioritas default pada tiap entri di `resources/views/sitemap.blade.php` (FR-039)
+- [X] T079 [US5] Jaga keselarasan aturan perayapan, peta situs, dan kontrol pengindeksan sehingga tidak saling bertentangan maupun menunjuk berkas yang tidak tersedia (FR-040, research.md R10)
+- [X] T080 [US5] Jalankan test US5 dan pastikan seluruhnya hijau
 
 **Checkpoint**: Klien dapat mengatur perayapan sendiri tanpa meminta rilis baru.
 
