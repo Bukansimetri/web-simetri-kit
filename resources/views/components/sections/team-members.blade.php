@@ -4,7 +4,7 @@
     <section class="py-24 px-6 max-w-7xl mx-auto">
         <div class="mb-16 text-center">
             <span class="text-sm font-bold text-secondary uppercase tracking-widest block mb-4">Tim Kami</span>
-            <h2 class="font-headline-lg text-headline-lg md:text-5xl text-primary">Orang di balik {{ app(\App\Settings\BrandSettings::class)->app_name ?: config('app.name') }}</h2>
+            <h2 class="font-headline-lg text-headline-lg md:text-5xl text-primary">Orang di balik {{ app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name') }}</h2>
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">

@@ -3,7 +3,7 @@
 namespace Tests\Feature\Public;
 
 use App\Models\JobOpening;
-use App\Settings\BrandSettings;
+use App\Settings\SiteSettings;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -19,7 +19,7 @@ class CareerModuleToggleTest extends TestCase
 
     public function test_career_page_404s_and_footer_link_hidden_when_module_disabled(): void
     {
-        $settings = app(BrandSettings::class);
+        $settings = app(SiteSettings::class);
         $settings->career_module_enabled = false;
         $settings->save();
 
@@ -31,7 +31,7 @@ class CareerModuleToggleTest extends TestCase
     {
         $job = JobOpening::factory()->create(['title' => 'Lowongan Tetap Ada', 'is_active' => true]);
 
-        $settings = app(BrandSettings::class);
+        $settings = app(SiteSettings::class);
         $settings->career_module_enabled = false;
         $settings->save();
 

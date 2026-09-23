@@ -2,7 +2,8 @@
 
 namespace App\Providers\Filament;
 
-use App\Settings\BrandSettings;
+use App\Settings\AppearanceSettings;
+use App\Settings\SiteSettings;
 use BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalyticsPlugin;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\Authenticate;
@@ -35,11 +36,11 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->brandName(fn () => app(BrandSettings::class)->app_name ?: config('app.name'))
-            ->brandLogo(fn () => static::brandAssetUrl(app(BrandSettings::class)->logo_path))
-            ->favicon(fn () => static::brandAssetUrl(app(BrandSettings::class)->favicon_path))
+            ->brandName(fn () => app(SiteSettings::class)->site_name ?: config('app.name'))
+            ->brandLogo(fn () => static::brandAssetUrl(app(AppearanceSettings::class)->logo_path))
+            ->favicon(fn () => static::brandAssetUrl(app(AppearanceSettings::class)->favicon_path))
             ->colors(fn () => [
-                'primary' => app(BrandSettings::class)->primary_color ?: Color::Amber,
+                'primary' => app(AppearanceSettings::class)->primary_color ?: Color::Amber,
             ])
             ->darkMode(true)
             ->renderHook(

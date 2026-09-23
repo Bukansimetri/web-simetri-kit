@@ -4,7 +4,7 @@ namespace App\Notifications;
 
 use App\Filament\Resources\CalculatorLeadResource;
 use App\Models\CalculatorLead;
-use App\Settings\BrandSettings;
+use App\Settings\SiteSettings;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -35,7 +35,7 @@ class NewCalculatorLead extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         $lead = $this->lead;
-        $brandName = app(BrandSettings::class)->app_name ?: config('app.name');
+        $brandName = app(SiteSettings::class)->site_name ?: config('app.name');
         $categoryLabel = $lead->category === 'industrial' ? 'Industrial / Komersial' : 'Residential';
         $savings = number_format($lead->savings_year1, 0, ',', '.');
         $areaLabel = filled($lead->area) ? $lead->area : '-';
@@ -55,7 +55,7 @@ class NewCalculatorLead extends Notification implements ShouldQueue
             ->line('Waktu masuk: '.$lead->created_at->translatedFormat('d F Y H:i'))
             ->action('Buka di CMS ('.$brandName.')', CalculatorLeadResource::getUrl('edit', ['record' => $lead]));
 
-        $waUrl = app(BrandSettings::class)->whatsappUrl("Halo {$lead->name}, terima kasih sudah menghitung estimasi hemat di {$brandName}. Boleh saya bantu jadwalkan survei lokasi gratis?");
+        $waUrl = app(SiteSettings::class)->whatsappUrl("Halo {$lead->name}, terima kasih sudah menghitung estimasi hemat di {$brandName}. Boleh saya bantu jadwalkan survei lokasi gratis?");
 
         if ($waUrl) {
             $message->line('Chat langsung: '.$waUrl);

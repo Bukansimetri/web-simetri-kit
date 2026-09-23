@@ -6,7 +6,7 @@ use App\Mail\CalculatorLeadThankYou;
 use App\Models\CalculatorLead;
 use App\Notifications\NewCalculatorLead;
 use App\Services\SubmissionGuard;
-use App\Settings\BrandSettings;
+use App\Settings\SiteSettings;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Support\Facades\Cache;
@@ -130,7 +130,7 @@ class CalculatorLeadTest extends TestCase
     public function test_admin_notification_is_sent_when_configured(): void
     {
         Notification::fake();
-        $settings = app(BrandSettings::class);
+        $settings = app(SiteSettings::class);
         $settings->contact_notification_email = 'sales@example.test';
         $settings->save();
 
@@ -198,7 +198,7 @@ class CalculatorLeadTest extends TestCase
     public function test_resubmit_from_same_phone_updates_existing_lead(): void
     {
         Notification::fake();
-        $settings = app(BrandSettings::class);
+        $settings = app(SiteSettings::class);
         $settings->contact_notification_email = 'sales@example.test';
         $settings->save();
 

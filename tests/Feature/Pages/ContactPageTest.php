@@ -6,7 +6,7 @@ use App\Mail\ContactSubmissionThankYou;
 use App\Models\ContactSubmission;
 use App\Notifications\NewContactSubmission;
 use App\Services\SubmissionGuard;
-use App\Settings\BrandSettings;
+use App\Settings\SiteSettings;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Support\Facades\Cache;
@@ -104,7 +104,7 @@ class ContactPageTest extends TestCase
     {
         Mail::fake();
 
-        $settings = app(BrandSettings::class);
+        $settings = app(SiteSettings::class);
         $settings->whatsapp_number = '6281234567890';
         $settings->save();
 
@@ -143,7 +143,7 @@ class ContactPageTest extends TestCase
         Mail::fake();
         Notification::fake();
 
-        $settings = app(BrandSettings::class);
+        $settings = app(SiteSettings::class);
         $settings->contact_notification_email = 'admin@example.com';
         $settings->save();
 

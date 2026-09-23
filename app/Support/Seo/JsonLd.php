@@ -5,7 +5,8 @@ namespace App\Support\Seo;
 use App\Models\Article;
 use App\Models\FaqItem;
 use App\Models\Product;
-use App\Settings\BrandSettings;
+use App\Settings\AppearanceSettings;
+use App\Settings\SiteSettings;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,17 +23,17 @@ class JsonLd
      *
      * @return array<string, mixed>
      */
-    public static function organization(BrandSettings $brand): array
+    public static function organization(SiteSettings $site, AppearanceSettings $appearance): array
     {
         $schema = [
             '@context' => 'https://schema.org',
             '@type' => 'Organization',
-            'name' => $brand->app_name ?: config('app.name'),
+            'name' => $site->site_name ?: config('app.name'),
             'url' => url('/'),
         ];
 
-        if (filled($brand->logo_path)) {
-            $schema['logo'] = Storage::disk('public')->url($brand->logo_path);
+        if (filled($appearance->logo_path)) {
+            $schema['logo'] = Storage::disk('public')->url($appearance->logo_path);
         }
 
         return $schema;
@@ -84,7 +85,7 @@ class JsonLd
             'datePublished' => $article->published_at?->toIso8601String(),
             'author' => [
                 '@type' => 'Organization',
-                'name' => $article->redaksi ?: (app(BrandSettings::class)->app_name ?: config('app.name')),
+                'name' => $article->redaksi ?: (app(SiteSettings::class)->site_name ?: config('app.name')),
             ],
         ];
     }

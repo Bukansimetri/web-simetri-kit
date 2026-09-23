@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\DemoSeedRecord;
 use App\Models\MenuItem;
 use App\Models\MenuLocation;
-use App\Settings\BrandSettings;
+use App\Settings\SiteSettings;
 use Illuminate\Database\Seeder;
 
 /**
@@ -28,7 +28,7 @@ class MenuItemDemoSeeder extends Seeder
             return;
         }
 
-        $careerEnabled = app(BrandSettings::class)->career_module_enabled;
+        $careerEnabled = app(SiteSettings::class)->career_module_enabled;
 
         $navbar = MenuLocation::firstOrCreate(
             ['slug' => 'navbar-utama'],

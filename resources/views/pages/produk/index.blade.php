@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', 'Katalog Produk — '.(app(\App\Settings\BrandSettings::class)->app_name ?: config('app.name')))
+@section('title', 'Katalog Produk — '.(app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name')))
 @section('meta_description', 'Temukan panel surya dan inverter yang tepat untuk proyek Anda, dari skala rumah tangga hingga industri besar.')
 
 @section('content')

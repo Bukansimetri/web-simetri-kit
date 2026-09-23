@@ -1,8 +1,9 @@
 @php
-    $brand = app(\App\Settings\BrandSettings::class);
-    $appName = $brand->app_name ?: config('app.name');
-    $logoUrl = filled($brand->logo_path) && \Illuminate\Support\Facades\Storage::disk('public')->exists($brand->logo_path)
-        ? \Illuminate\Support\Facades\Storage::disk('public')->url($brand->logo_path)
+    $site = app(\App\Settings\SiteSettings::class);
+    $appearance = app(\App\Settings\AppearanceSettings::class);
+    $appName = $site->site_name ?: config('app.name');
+    $logoUrl = filled($appearance->logo_path) && \Illuminate\Support\Facades\Storage::disk('public')->exists($appearance->logo_path)
+        ? \Illuminate\Support\Facades\Storage::disk('public')->url($appearance->logo_path)
         : null;
 
     // Beranda: header transparan menumpuk di atas hero gelap, jadi solid saat
@@ -29,7 +30,7 @@
             ['label' => 'Tentang Kami', 'href' => url('/tentang-kami'), 'active' => request()->routeIs('tentang-kami')],
             ['label' => 'Produk', 'href' => url('/produk'), 'active' => request()->routeIs('produk.*')],
             ['label' => 'Artikel', 'href' => url('/artikel'), 'active' => request()->routeIs('artikel.*')],
-            $brand->career_module_enabled
+            $site->career_module_enabled
                 ? ['label' => 'Karir', 'href' => url('/karir'), 'active' => request()->routeIs('karir')]
                 : null,
             ['label' => 'Kontak', 'href' => url('/kontak'), 'active' => request()->routeIs('kontak')],

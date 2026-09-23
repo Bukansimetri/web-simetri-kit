@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Public;
 
-use App\Settings\BrandSettings;
+use App\Settings\SocialSettings;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
@@ -66,8 +66,8 @@ class SeoGlobalMetaTest extends TestCase
         Storage::fake('public');
         Storage::disk('public')->put('branding/custom-og.jpg', 'fake-bytes');
 
-        $settings = app(BrandSettings::class);
-        $settings->og_image_path = 'branding/custom-og.jpg';
+        $settings = app(SocialSettings::class);
+        $settings->default_share_image_path = 'branding/custom-og.jpg';
         $settings->save();
 
         $response = $this->get('/');
@@ -81,6 +81,6 @@ class SeoGlobalMetaTest extends TestCase
         $response = $this->get('/');
 
         $response->assertOk();
-        $response->assertSee(asset(BrandSettings::DEFAULT_OG_IMAGE_PATH), escape: false);
+        $response->assertSee(asset(SocialSettings::DEFAULT_SHARE_IMAGE_PATH), escape: false);
     }
 }

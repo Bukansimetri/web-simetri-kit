@@ -4,7 +4,7 @@ namespace App\Notifications;
 
 use App\Filament\Resources\ContactSubmissionResource;
 use App\Models\ContactSubmission;
-use App\Settings\BrandSettings;
+use App\Settings\SiteSettings;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -33,7 +33,7 @@ class NewContactSubmission extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         $submission = $this->submission;
-        $brandName = app(BrandSettings::class)->app_name ?: config('app.name');
+        $brandName = app(SiteSettings::class)->site_name ?: config('app.name');
 
         $message = (new MailMessage)
             ->subject("Pesan baru dari form Kontak: {$submission->name}")
@@ -47,7 +47,7 @@ class NewContactSubmission extends Notification implements ShouldQueue
             ->line('Waktu masuk: '.$submission->created_at->translatedFormat('d F Y H:i'))
             ->action('Buka di CMS ('.$brandName.')', ContactSubmissionResource::getUrl('edit', ['record' => $submission]));
 
-        $waUrl = app(BrandSettings::class)->whatsappUrl("Halo {$submission->name}, terima kasih sudah menghubungi {$brandName} lewat form kontak. Boleh saya bantu?");
+        $waUrl = app(SiteSettings::class)->whatsappUrl("Halo {$submission->name}, terima kasih sudah menghubungi {$brandName} lewat form kontak. Boleh saya bantu?");
 
         if ($waUrl) {
             $message->line('Chat langsung: '.$waUrl);

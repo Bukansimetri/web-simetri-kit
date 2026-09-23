@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @php
-    $appName = app(\App\Settings\BrandSettings::class)->app_name ?: config('app.name');
+    $appName = app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name');
 @endphp
 
 @section('title', 'Kontak — '.$appName)
@@ -227,7 +227,7 @@
                     <h3 class="text-sm text-primary-fixed-dim uppercase tracking-wider mb-4 flex items-center gap-3">
                         <span class="material-symbols-outlined">forum</span> Hubungi Langsung
                     </h3>
-                    <a href="{{ app(\App\Settings\BrandSettings::class)->whatsappUrl('Halo, saya ingin konsultasi tentang solusi tenaga surya SUOER.') ?: '#' }}" class="inline-flex items-center gap-4 group">
+                    <a href="{{ app(\App\Settings\SiteSettings::class)->whatsappUrl('Halo, saya ingin konsultasi tentang solusi tenaga surya SUOER.') ?: '#' }}" class="inline-flex items-center gap-4 group">
                         <div class="w-14 h-14 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center group-hover:-translate-y-1 transition-transform shrink-0">
                             <span class="material-symbols-outlined text-2xl">chat</span>
                         </div>

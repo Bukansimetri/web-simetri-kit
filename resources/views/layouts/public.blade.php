@@ -1,6 +1,9 @@
 @php
-    $brand = app(\App\Settings\BrandSettings::class);
-    $appName = $brand->app_name ?: config('app.name');
+    $site = app(\App\Settings\SiteSettings::class);
+    $appearance = app(\App\Settings\AppearanceSettings::class);
+    $seo = app(\App\Settings\SeoSettings::class);
+    $social = app(\App\Settings\SocialSettings::class);
+    $appName = $site->site_name ?: config('app.name');
 @endphp
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
@@ -11,7 +14,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title', $appName)</title>
-    <meta name="description" content="@yield('meta_description', $brand->meta_description ?: 'Solusi panel surya untuk rumah, bisnis, dan industri.')">
+    <meta name="description" content="@yield('meta_description', $seo->default_meta_description ?: 'Solusi panel surya untuk rumah, bisnis, dan industri.')">
     <link rel="canonical" href="{{ url()->current() }}">
 
     @include('layouts.partials.og-meta')
@@ -26,8 +29,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"></noscript>
 
-    @if ($brand->favicon_path)
-        <link rel="icon" href="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($brand->favicon_path) }}">
+    @if ($appearance->favicon_path)
+        <link rel="icon" href="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($appearance->favicon_path) }}">
     @endif
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])

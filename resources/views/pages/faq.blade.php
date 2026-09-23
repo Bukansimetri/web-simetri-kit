@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @php
-    $appName = app(\App\Settings\BrandSettings::class)->app_name ?: config('app.name');
+    $appName = app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name');
 @endphp
 
 @section('title', 'FAQ — '.$appName)

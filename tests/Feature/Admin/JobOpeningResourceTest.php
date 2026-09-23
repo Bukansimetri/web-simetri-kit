@@ -7,7 +7,7 @@ use App\Filament\Resources\JobOpeningResource\Pages\EditJobOpening;
 use App\Filament\Resources\JobOpeningResource\Pages\ListJobOpenings;
 use App\Models\JobOpening;
 use App\Models\User;
-use App\Settings\BrandSettings;
+use App\Settings\SiteSettings;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -101,7 +101,7 @@ class JobOpeningResourceTest extends TestCase
 
     public function test_admin_crud_remains_accessible_when_career_module_disabled(): void
     {
-        $settings = app(BrandSettings::class);
+        $settings = app(SiteSettings::class);
         $settings->career_module_enabled = false;
         $settings->save();
 

@@ -7,7 +7,7 @@ use App\Models\Article;
 use App\Models\CustomPage;
 use App\Models\PortfolioProject;
 use App\Models\Product;
-use App\Settings\BrandSettings;
+use App\Settings\SiteSettings;
 use Illuminate\Http\Response;
 
 class SitemapController extends Controller
@@ -29,7 +29,7 @@ class SitemapController extends Controller
             ['loc' => url('/portfolio'), 'lastmod' => null],
         ];
 
-        if (app(BrandSettings::class)->career_module_enabled) {
+        if (app(SiteSettings::class)->career_module_enabled) {
             $staticUrls[] = ['loc' => url('/karir'), 'lastmod' => null];
         }
 

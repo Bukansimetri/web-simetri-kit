@@ -1,9 +1,9 @@
 @extends('layouts.public')
 
-@section('title', $article->title.' — '.(app(\App\Settings\BrandSettings::class)->app_name ?: config('app.name')))
+@section('title', $article->title.' — '.(app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name')))
 @section('meta_description', $article->seoDescription())
 @section('og_title', $article->seoTitle())
-@section('og_image', $article->seoImageUrl() ?? app(\App\Settings\BrandSettings::class)->ogImageUrl())
+@section('og_image', $article->seoImageUrl() ?? app(\App\Settings\SocialSettings::class)->ogImageUrl())
 
 @section('content')
     <article class="pt-40 pb-16 px-6 max-w-3xl mx-auto">

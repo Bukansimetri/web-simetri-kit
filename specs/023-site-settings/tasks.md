@@ -27,8 +27,8 @@ Monolit Laravel di root repositori: `app/`, `database/`, `resources/`, `tests/`.
 
 **Purpose**: Menetapkan garis dasar agar Phase 2 dapat dibuktikan tidak mengubah perilaku apa pun.
 
-- [ ] T001 Verifikasi berada di branch `023-site-settings` dan `php artisan test --compact` hijau seluruhnya sebagai garis dasar sebelum perubahan apa pun
-- [ ] T002 Simpan cuplikan keluaran halaman publik sebagai pembanding regresi Phase 2: jalankan server lokal lalu simpan hasil `curl` halaman `/`, `/produk`, `/artikel`, `/kontak` ke berkas sementara di luar repositori (lihat quickstart.md Tahap 0)
+- [X] T001 Verifikasi berada di branch `023-site-settings` dan `php artisan test --compact` hijau seluruhnya sebagai garis dasar sebelum perubahan apa pun
+- [X] T002 Simpan cuplikan keluaran halaman publik sebagai pembanding regresi Phase 2: jalankan server lokal lalu simpan hasil `curl` halaman `/`, `/produk`, `/artikel`, `/kontak` ke berkas sementara di luar repositori (lihat quickstart.md Tahap 0)
 
 **Checkpoint**: Garis dasar hijau dan cuplikan pembanding tersimpan.
 
@@ -44,45 +44,45 @@ Monolit Laravel di root repositori: `app/`, `database/`, `resources/`, `tests/`.
 
 ### Kelas settings
 
-- [ ] T003 [P] Buat `App\Settings\SiteSettings` di `app/Settings/SiteSettings.php` — grup `site`, 19 properti sesuai data-model.md §1, termasuk pemindahan metode `whatsappUrl(string $message): ?string` dari `BrandSettings`
-- [ ] T004 [P] Buat `App\Settings\AppearanceSettings` di `app/Settings/AppearanceSettings.php` — grup `appearance`, 6 properti sesuai data-model.md §2, termasuk pemindahan konstanta `DEFAULT_PRIMARY_COLOR`, `DEFAULT_SECONDARY_COLOR`, `DEFAULT_FONT_HEADING`, `DEFAULT_FONT_BODY`, dan `FONT_OPTIONS`
-- [ ] T005 [P] Buat `App\Settings\SeoSettings` di `app/Settings/SeoSettings.php` — grup `seo`, 22 properti sesuai data-model.md §3
-- [ ] T006 [P] Buat `App\Settings\ScriptSettings` di `app/Settings/ScriptSettings.php` — grup `script`, 14 properti sesuai data-model.md §4
-- [ ] T007 [P] Buat `App\Settings\SocialSettings` di `app/Settings/SocialSettings.php` — grup `social`, 10 properti sesuai data-model.md §5, termasuk pemindahan metode `ogImageUrl(): string` dari `BrandSettings`
+- [X] T003 [P] Buat `App\Settings\SiteSettings` di `app/Settings/SiteSettings.php` — grup `site`, 19 properti sesuai data-model.md §1, termasuk pemindahan metode `whatsappUrl(string $message): ?string` dari `BrandSettings`
+- [X] T004 [P] Buat `App\Settings\AppearanceSettings` di `app/Settings/AppearanceSettings.php` — grup `appearance`, 6 properti sesuai data-model.md §2, termasuk pemindahan konstanta `DEFAULT_PRIMARY_COLOR`, `DEFAULT_SECONDARY_COLOR`, `DEFAULT_FONT_HEADING`, `DEFAULT_FONT_BODY`, dan `FONT_OPTIONS`
+- [X] T005 [P] Buat `App\Settings\SeoSettings` di `app/Settings/SeoSettings.php` — grup `seo`, 22 properti sesuai data-model.md §3
+- [X] T006 [P] Buat `App\Settings\ScriptSettings` di `app/Settings/ScriptSettings.php` — grup `script`, 14 properti sesuai data-model.md §4
+- [X] T007 [P] Buat `App\Settings\SocialSettings` di `app/Settings/SocialSettings.php` — grup `social`, 10 properti sesuai data-model.md §5, termasuk pemindahan metode `ogImageUrl(): string` dari `BrandSettings`
 
 ### Settings migration
 
-- [ ] T008 Buat settings migration di `database/settings/` yang menambahkan seluruh properti **baru** untuk kelima grup beserta nilai bawaannya sesuai kolom "Bawaan" pada data-model.md — kecuali 12 properti yang akan dipindahkan pada T009
-- [ ] T009 Buat settings migration di `database/settings/` yang memindahkan 12 properti `brand.*` ke tujuan barunya memakai `$this->migrator->rename()` sesuai tabel peta perpindahan research.md R2; bungkus tiap pemindahan dengan pemeriksaan keberadaan agar migration tetap idempoten pada basis data yang sudah sebagian berpindah
-- [ ] T010 Tulis test di `tests/Feature/Settings/BrandSettingsMigrationTest.php` yang membuktikan setiap nilai `brand.*` yang terisi berpindah utuh tanpa berubah isinya, dan grup `brand` tidak lagi menyimpan properti apa pun setelah migrasi (contracts/settings-application-contract.md §11, FR-068, FR-063)
+- [X] T008 Buat settings migration di `database/settings/` yang menambahkan seluruh properti **baru** untuk kelima grup beserta nilai bawaannya sesuai kolom "Bawaan" pada data-model.md — kecuali 12 properti yang akan dipindahkan pada T009
+- [X] T009 Buat settings migration di `database/settings/` yang memindahkan 12 properti `brand.*` ke tujuan barunya memakai `$this->migrator->rename()` sesuai tabel peta perpindahan research.md R2; bungkus tiap pemindahan dengan pemeriksaan keberadaan agar migration tetap idempoten pada basis data yang sudah sebagian berpindah
+- [X] T010 Tulis test di `tests/Feature/Settings/BrandSettingsMigrationTest.php` yang membuktikan setiap nilai `brand.*` yang terisi berpindah utuh tanpa berubah isinya, dan grup `brand` tidak lagi menyimpan properti apa pun setelah migrasi (contracts/settings-application-contract.md §11, FR-068, FR-063)
 
 ### Pemindahan rujukan (40 berkas)
 
-- [ ] T011 [P] Pindahkan rujukan pada controller publik ke kelas settings baru: `app/Http/Controllers/Public/CalculatorController.php`, `app/Http/Controllers/Public/CareerController.php`, `app/Http/Controllers/Public/ContactController.php`, `app/Http/Controllers/Public/SitemapController.php`
-- [ ] T012 [P] Pindahkan rujukan pada mail dan notification: `app/Mail/CalculatorLeadThankYou.php`, `app/Mail/ContactSubmissionThankYou.php`, `app/Notifications/NewCalculatorLead.php`, `app/Notifications/NewContactSubmission.php`
-- [ ] T013 [P] Pindahkan branding panel admin ke `AppearanceSettings` dan `SiteSettings` di `app/Providers/Filament/AdminPanelProvider.php`, termasuk helper `brandAssetUrl()`
-- [ ] T014 [P] Pindahkan sumber data Organization ke `SiteSettings` dan `SocialSettings` di `app/Support/Seo/JsonLd.php` (FR-032 — tanpa menambah properti baru, data perusahaan tidak boleh punya dua tempat pengisian)
-- [ ] T015 [P] Pindahkan rujukan pada layout dan partial: `resources/views/layouts/public.blade.php`, `resources/views/layouts/partials/og-meta.blade.php`, `resources/views/layouts/partials/theme-vars.blade.php`
-- [ ] T016 [P] Pindahkan rujukan pada komponen layout dan section: `resources/views/components/layout/header.blade.php`, `resources/views/components/layout/footer.blade.php`, `resources/views/components/sections/cta-band.blade.php`, `resources/views/components/sections/team-members.blade.php`
-- [ ] T017 [P] Pindahkan rujukan pada view halaman: `resources/views/pages/home.blade.php`, `faq.blade.php`, `karir.blade.php`, `kontak.blade.php`, `tentang-kami.blade.php`, `artikel/index.blade.php`, `artikel/show.blade.php`, `produk/index.blade.php`, `produk/show.blade.php`, `portfolio/index.blade.php`, `portfolio/show.blade.php`, `custom-page/show.blade.php`
-- [ ] T018 [P] Pindahkan rujukan pada `database/seeders/MenuItemDemoSeeder.php` dan perbarui komentar perujuk `BrandSettings` di `resources/css/app.css`
-- [ ] T019 Perbarui test lama yang merujuk `BrandSettings` ke kelas settings baru tanpa mengubah maksud pengujiannya: `tests/Feature/Admin/JobOpeningResourceTest.php`, `tests/Feature/Pages/ContactPageTest.php`, `tests/Feature/Public/CalculatorLeadTest.php`, `tests/Feature/Public/CareerModuleToggleTest.php`, `tests/Feature/Public/SeoGlobalMetaTest.php`, `tests/Feature/Public/SitemapTest.php`, `tests/Feature/Settings/OgMetaTagTest.php`
-- [ ] T020 Ganti `tests/Feature/Settings/BrandSettingsTest.php` menjadi test untuk halaman pengaturan baru yang setara cakupannya; jangan hapus pertanggungan uji yang sudah ada tanpa penggantinya
+- [X] T011 [P] Pindahkan rujukan pada controller publik ke kelas settings baru: `app/Http/Controllers/Public/CalculatorController.php`, `app/Http/Controllers/Public/CareerController.php`, `app/Http/Controllers/Public/ContactController.php`, `app/Http/Controllers/Public/SitemapController.php`
+- [X] T012 [P] Pindahkan rujukan pada mail dan notification: `app/Mail/CalculatorLeadThankYou.php`, `app/Mail/ContactSubmissionThankYou.php`, `app/Notifications/NewCalculatorLead.php`, `app/Notifications/NewContactSubmission.php`
+- [X] T013 [P] Pindahkan branding panel admin ke `AppearanceSettings` dan `SiteSettings` di `app/Providers/Filament/AdminPanelProvider.php`, termasuk helper `brandAssetUrl()`
+- [X] T014 [P] Pindahkan sumber data Organization ke `SiteSettings` dan `SocialSettings` di `app/Support/Seo/JsonLd.php` (FR-032 — tanpa menambah properti baru, data perusahaan tidak boleh punya dua tempat pengisian)
+- [X] T015 [P] Pindahkan rujukan pada layout dan partial: `resources/views/layouts/public.blade.php`, `resources/views/layouts/partials/og-meta.blade.php`, `resources/views/layouts/partials/theme-vars.blade.php`
+- [X] T016 [P] Pindahkan rujukan pada komponen layout dan section: `resources/views/components/layout/header.blade.php`, `resources/views/components/layout/footer.blade.php`, `resources/views/components/sections/cta-band.blade.php`, `resources/views/components/sections/team-members.blade.php`
+- [X] T017 [P] Pindahkan rujukan pada view halaman: `resources/views/pages/home.blade.php`, `faq.blade.php`, `karir.blade.php`, `kontak.blade.php`, `tentang-kami.blade.php`, `artikel/index.blade.php`, `artikel/show.blade.php`, `produk/index.blade.php`, `produk/show.blade.php`, `portfolio/index.blade.php`, `portfolio/show.blade.php`, `custom-page/show.blade.php`
+- [X] T018 [P] Pindahkan rujukan pada `database/seeders/MenuItemDemoSeeder.php` dan perbarui komentar perujuk `BrandSettings` di `resources/css/app.css`
+- [X] T019 Perbarui test lama yang merujuk `BrandSettings` ke kelas settings baru tanpa mengubah maksud pengujiannya: `tests/Feature/Admin/JobOpeningResourceTest.php`, `tests/Feature/Pages/ContactPageTest.php`, `tests/Feature/Public/CalculatorLeadTest.php`, `tests/Feature/Public/CareerModuleToggleTest.php`, `tests/Feature/Public/SeoGlobalMetaTest.php`, `tests/Feature/Public/SitemapTest.php`, `tests/Feature/Settings/OgMetaTagTest.php`
+- [X] T020 Ganti `tests/Feature/Settings/BrandSettingsTest.php` menjadi test untuk halaman pengaturan baru yang setara cakupannya; jangan hapus pertanggungan uji yang sudah ada tanpa penggantinya
 
 ### Pembubaran dan halaman admin
 
-- [ ] T021 Hapus `app/Settings/BrandSettings.php` dan `app/Filament/Pages/BrandSettingsPage.php` beserta view `resources/views/filament/pages/brand-settings-page.blade.php` setelah T011 sampai T020 selesai; pastikan tidak ada kelas pembaca lama yang disisakan (FR-063, FR-064)
-- [ ] T022 [P] Buat `app/Filament/Pages/SiteSettingsPage.php` dengan navigation group `Settings`, memuat seluruh properti `SiteSettings` termasuk setelan operasional (FR-070, FR-072)
-- [ ] T023 [P] Buat `app/Filament/Pages/AppearanceSettingsPage.php` memuat warna, font, logo, dan favicon (FR-070, FR-071)
-- [ ] T024 [P] Buat `app/Filament/Pages/SeoSettingsPage.php` dengan section bertab sesuai kelompok pada data-model.md §3 (FR-070)
-- [ ] T025 [P] Buat `app/Filament/Pages/SocialSettingsPage.php` memuat profil, tombol berbagi, dan gambar berbagi default (FR-070)
-- [ ] T026 Buat `app/Filament/Pages/ScriptSettingsPage.php` dengan `canAccess()` dan `shouldRegisterNavigation()` yang memeriksa peran `super_admin`, mengikuti pola `app/Providers/Filament/AdminPanelProvider.php:84` (FR-045, research.md R3) — pembatasan dipasang bersamaan dengan pembuatan halaman, tidak ditunda
-- [ ] T027 Tulis test di `tests/Feature/Settings/SettingsPagesAccessTest.php` yang membuktikan kelima halaman dapat dibuka super admin, tiap halaman dapat disimpan sendiri tanpa mengubah nilai halaman lain, halaman Scripts & Analytics tidak terlihat bagi admin biasa, dan membuka alamatnya langsung ditolak (contracts §10, FR-070, FR-045)
+- [X] T021 Hapus `app/Settings/BrandSettings.php` dan `app/Filament/Pages/BrandSettingsPage.php` beserta view `resources/views/filament/pages/brand-settings-page.blade.php` setelah T011 sampai T020 selesai; pastikan tidak ada kelas pembaca lama yang disisakan (FR-063, FR-064)
+- [X] T022 [P] Buat `app/Filament/Pages/SiteSettingsPage.php` dengan navigation group `Settings`, memuat seluruh properti `SiteSettings` termasuk setelan operasional (FR-070, FR-072)
+- [X] T023 [P] Buat `app/Filament/Pages/AppearanceSettingsPage.php` memuat warna, font, logo, dan favicon (FR-070, FR-071)
+- [X] T024 [P] Buat `app/Filament/Pages/SeoSettingsPage.php` dengan section bertab sesuai kelompok pada data-model.md §3 (FR-070)
+- [X] T025 [P] Buat `app/Filament/Pages/SocialSettingsPage.php` memuat profil, tombol berbagi, dan gambar berbagi default (FR-070)
+- [X] T026 Buat `app/Filament/Pages/ScriptSettingsPage.php` dengan `canAccess()` dan `shouldRegisterNavigation()` yang memeriksa peran `super_admin`, mengikuti pola `app/Providers/Filament/AdminPanelProvider.php:84` (FR-045, research.md R3) — pembatasan dipasang bersamaan dengan pembuatan halaman, tidak ditunda
+- [X] T027 Tulis test di `tests/Feature/Settings/SettingsPagesAccessTest.php` yang membuktikan kelima halaman dapat dibuka super admin, tiap halaman dapat disimpan sendiri tanpa mengubah nilai halaman lain, halaman Scripts & Analytics tidak terlihat bagi admin biasa, dan membuka alamatnya langsung ditolak (contracts §10, FR-070, FR-045)
 
 ### Pembuktian tanpa perubahan
 
-- [ ] T028 Jalankan `php artisan migrate` lalu bandingkan keluaran halaman publik dengan cuplikan T002 — tidak boleh ada selisih (FR-069, SC-011, quickstart.md Tahap 0)
-- [ ] T029 Jalankan `vendor/bin/pint --dirty --format agent` dan `php artisan test --compact`; seluruh test harus hijau tanpa pengecualian sebelum melanjutkan ke Phase 3
+- [X] T028 Jalankan `php artisan migrate` lalu bandingkan keluaran halaman publik dengan cuplikan T002 — tidak boleh ada selisih (FR-069, SC-011, quickstart.md Tahap 0)
+- [X] T029 Jalankan `vendor/bin/pint --dirty --format agent` dan `php artisan test --compact`; seluruh test harus hijau tanpa pengecualian sebelum melanjutkan ke Phase 3
 
 **Checkpoint**: Fondasi siap. Situs tidak berubah sedikit pun, `BrandSettings` sudah tiada, lima halaman pengaturan tersedia. User story dapat dimulai.
 

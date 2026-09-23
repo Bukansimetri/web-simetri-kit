@@ -2,35 +2,37 @@
 
 namespace Tests\Feature\Settings;
 
-use App\Filament\Pages\BrandSettingsPage;
+use App\Filament\Pages\AppearanceSettingsPage;
 use App\Models\User;
-use App\Settings\BrandSettings;
+use App\Settings\AppearanceSettings;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
-class BrandSettingsTest extends TestCase
+/**
+ * Cakupan setara tests/Feature/Settings/BrandSettingsTest.php sebelum
+ * Brand Settings dibubarkan (spec 023-site-settings FR-063, FR-070).
+ */
+class AppearanceSettingsTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_admin_can_save_brand_name_and_primary_color(): void
+    public function test_admin_can_save_primary_color(): void
     {
         config(['app.env' => 'local']);
         $user = User::factory()->create();
 
         Livewire::actingAs($user)
-            ->test(BrandSettingsPage::class)
+            ->test(AppearanceSettingsPage::class)
             ->fillForm([
-                'app_name' => 'Klien Baru',
                 'primary_color' => '#112233',
             ])
             ->call('save')
             ->assertHasNoFormErrors();
 
-        $settings = app(BrandSettings::class);
+        $settings = app(AppearanceSettings::class);
 
-        $this->assertSame('Klien Baru', $settings->app_name);
         $this->assertSame('#112233', $settings->primary_color);
     }
 
@@ -54,10 +56,10 @@ class BrandSettingsTest extends TestCase
         $user = User::factory()->create();
 
         Livewire::actingAs($user)
-            ->test(BrandSettingsPage::class)
-            ->assertSet('data.secondary_color', BrandSettings::DEFAULT_SECONDARY_COLOR)
-            ->assertSet('data.font_heading', BrandSettings::DEFAULT_FONT_HEADING)
-            ->assertSet('data.font_body', BrandSettings::DEFAULT_FONT_BODY);
+            ->test(AppearanceSettingsPage::class)
+            ->assertSet('data.secondary_color', AppearanceSettings::DEFAULT_SECONDARY_COLOR)
+            ->assertSet('data.font_heading', AppearanceSettings::DEFAULT_FONT_HEADING)
+            ->assertSet('data.font_body', AppearanceSettings::DEFAULT_FONT_BODY);
     }
 
     public function test_admin_can_save_secondary_color_and_fonts(): void
@@ -66,7 +68,7 @@ class BrandSettingsTest extends TestCase
         $user = User::factory()->create();
 
         Livewire::actingAs($user)
-            ->test(BrandSettingsPage::class)
+            ->test(AppearanceSettingsPage::class)
             ->fillForm([
                 'secondary_color' => '#ab12cd',
                 'font_heading' => 'Inter',
@@ -75,7 +77,7 @@ class BrandSettingsTest extends TestCase
             ->call('save')
             ->assertHasNoFormErrors();
 
-        $settings = app(BrandSettings::class);
+        $settings = app(AppearanceSettings::class);
 
         $this->assertSame('#ab12cd', $settings->secondary_color);
         $this->assertSame('Inter', $settings->font_heading);
@@ -88,14 +90,14 @@ class BrandSettingsTest extends TestCase
         $user = User::factory()->create();
 
         Livewire::actingAs($user)
-            ->test(BrandSettingsPage::class)
+            ->test(AppearanceSettingsPage::class)
             ->fillForm([
                 'font_heading' => 'Comic Sans MS',
             ])
             ->call('save')
             ->assertHasFormErrors(['font_heading']);
 
-        $this->assertNull(app(BrandSettings::class)->font_heading);
+        $this->assertNull(app(AppearanceSettings::class)->font_heading);
     }
 
     public function test_theme_settings_fall_back_to_default_when_cleared(): void
@@ -103,13 +105,13 @@ class BrandSettingsTest extends TestCase
         config(['app.env' => 'local']);
         $user = User::factory()->create();
 
-        $settings = app(BrandSettings::class);
+        $settings = app(AppearanceSettings::class);
         $settings->secondary_color = '#ab12cd';
         $settings->font_heading = 'Inter';
         $settings->save();
 
         Livewire::actingAs($user)
-            ->test(BrandSettingsPage::class)
+            ->test(AppearanceSettingsPage::class)
             ->fillForm([
                 'secondary_color' => null,
                 'font_heading' => null,
@@ -117,8 +119,8 @@ class BrandSettingsTest extends TestCase
             ->call('save')
             ->assertHasNoFormErrors();
 
-        app()->forgetInstance(BrandSettings::class);
-        $settings = app(BrandSettings::class);
+        app()->forgetInstance(AppearanceSettings::class);
+        $settings = app(AppearanceSettings::class);
 
         $this->assertNull($settings->secondary_color);
         $this->assertNull($settings->font_heading);

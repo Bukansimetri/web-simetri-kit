@@ -3,7 +3,7 @@
 namespace App\Mail;
 
 use App\Models\ContactSubmission;
-use App\Settings\BrandSettings;
+use App\Settings\SiteSettings;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -23,8 +23,8 @@ class ContactSubmissionThankYou extends Mailable implements ShouldQueue
 
     public function build(): self
     {
-        $brand = app(BrandSettings::class);
-        $brandName = $brand->app_name ?: config('app.name');
+        $brand = app(SiteSettings::class);
+        $brandName = $brand->site_name ?: config('app.name');
 
         return $this
             ->subject("Pesan Anda telah kami terima — {$brandName}")

@@ -1,14 +1,14 @@
 @extends('layouts.public')
 
 @php
-    $appName = app(\App\Settings\BrandSettings::class)->app_name ?: config('app.name');
+    $appName = app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name');
     $images = $project->imageUrls();
 @endphp
 
 @section('title', $project->title.' — '.$appName)
 @section('meta_description', $project->seoDescription())
 @section('og_title', $project->seoTitle())
-@section('og_image', $project->seoImageUrl() ?? app(\App\Settings\BrandSettings::class)->ogImageUrl())
+@section('og_image', $project->seoImageUrl() ?? app(\App\Settings\SocialSettings::class)->ogImageUrl())
 
 @section('content')
     <article class="pt-32 pb-24 px-6 max-w-4xl mx-auto">

@@ -8,7 +8,7 @@
  * (warna sekunder, font heading, font body — FR-002/FR-003/FR-004).
  * Nilai sesungguhnya di-echo ulang per-request oleh
  * resources/views/layouts/partials/theme-vars.blade.php berdasarkan
- * App\Settings\BrandSettings; deklarasi di sini murni fallback kalau
+ * App\Settings\AppearanceSettings; deklarasi di sini murni fallback kalau
  * partial tsb tidak dimuat (mis. preview komponen di luar layout publik).
  */
 :root {
