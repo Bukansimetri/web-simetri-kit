@@ -314,12 +314,12 @@ Monolit Laravel di root repositori: `app/`, `database/`, `resources/`, `tests/`.
 
 ## Phase 12: Polish & Cross-Cutting Concerns
 
-- [ ] T106 Telusuri seluruh halaman pengaturan dan pastikan tidak ada dua field yang mengatur nilai yang sama (FR-064, SC-012)
-- [ ] T107 [P] Perbarui dokumentasi deployment dan checklist go-live spec 021 agar memuat kelima halaman pengaturan baru — Deployment Standards konstitusi menganggap modul tak terdokumentasi sebagai belum selesai (plan.md Constitution Check)
-- [ ] T108 [P] Perbarui `database/seeders/` bila ada nilai bawaan pengaturan yang perlu di-seed untuk instalasi baru, tanpa memasukkan konten demo ke `DatabaseSeeder` (Deployment Standards)
-- [ ] T109 Periksa waktu muat halaman publik dengan seluruh pengaturan terisi wajar dan bandingkan dengan garis dasar T002 (SC-009)
-- [ ] T110 Jalankan seluruh langkah verifikasi manual pada [quickstart.md](./quickstart.md) dari Tahap 0 sampai Tahap 3
-- [ ] T111 Jalankan `vendor/bin/pint --dirty --format agent` lalu `php artisan test --compact` dan pastikan seluruh test hijau
+- [X] T106 Telusuri seluruh halaman pengaturan dan pastikan tidak ada dua field yang mengatur nilai yang sama (FR-064, SC-012)
+- [X] T107 [P] Perbarui dokumentasi deployment dan checklist go-live spec 021 agar memuat kelima halaman pengaturan baru — Deployment Standards konstitusi menganggap modul tak terdokumentasi sebagai belum selesai (plan.md Constitution Check)
+- [X] T108 [P] Perbarui `database/seeders/` bila ada nilai bawaan pengaturan yang perlu di-seed untuk instalasi baru, tanpa memasukkan konten demo ke `DatabaseSeeder` (Deployment Standards)
+- [X] T109 Periksa waktu muat halaman publik dengan seluruh pengaturan terisi wajar dan bandingkan dengan garis dasar T002 (SC-009)
+- [X] T110 Jalankan seluruh langkah verifikasi manual pada [quickstart.md](./quickstart.md) dari Tahap 0 sampai Tahap 3
+- [X] T111 Jalankan `vendor/bin/pint --dirty --format agent` lalu `php artisan test --compact` dan pastikan seluruh test hijau
 
 ---
 
