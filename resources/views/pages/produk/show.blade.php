@@ -57,6 +57,8 @@
                         <span class="material-symbols-outlined">forum</span> Konsultasi Sekarang
                     </a>
                 </div>
+
+                <x-layout.social-share :title="$product->name" :url="url()->current()" />
             </div>
         </div>
     </section>

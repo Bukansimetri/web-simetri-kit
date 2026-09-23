@@ -300,13 +300,13 @@ Monolit Laravel di root repositori: `app/`, `database/`, `resources/`, `tests/`.
 
 ### Tests for User Story 9
 
-- [ ] T102 [P] [US9] Tulis test di `tests/Feature/Public/SocialShareButtonsTest.php` — hanya platform terpilih yang dirender pada artikel dan produk, tiap tombol membawa alamat konten yang sedang dibuka, dan tidak ada tombol dirender saat sakelar dimatikan (contracts §9, FR-022, FR-023)
+- [X] T102 [P] [US9] Tulis test di `tests/Feature/Public/SocialShareButtonsTest.php` — hanya platform terpilih yang dirender pada artikel dan produk, tiap tombol membawa alamat konten yang sedang dibuka, dan tidak ada tombol dirender saat sakelar dimatikan (contracts §9, FR-022, FR-023)
 
 ### Implementation for User Story 9
 
-- [ ] T103 [US9] Buat `resources/views/components/layout/social-share.blade.php` yang menerima judul dan alamat konten lalu merender hanya platform terpilih dari `SocialSettings` (FR-022, FR-023, research.md R13)
-- [ ] T104 [US9] Pasang komponen berbagi pada `resources/views/pages/artikel/show.blade.php` dan `resources/views/pages/produk/show.blade.php` (FR-023)
-- [ ] T105 [US9] Jalankan test US9 dan pastikan seluruhnya hijau
+- [X] T103 [US9] Buat `resources/views/components/layout/social-share.blade.php` yang menerima judul dan alamat konten lalu merender hanya platform terpilih dari `SocialSettings` (FR-022, FR-023, research.md R13)
+- [X] T104 [US9] Pasang komponen berbagi pada `resources/views/pages/artikel/show.blade.php` dan `resources/views/pages/produk/show.blade.php` (FR-023)
+- [X] T105 [US9] Jalankan test US9 dan pastikan seluruhnya hijau
 
 **Checkpoint**: Seluruh sembilan user story selesai dan dapat diuji mandiri.
 

@@ -27,6 +27,10 @@
             @endif
         </div>
 
+        <div class="mb-10">
+            <x-layout.social-share :title="$article->title" :url="url()->current()" />
+        </div>
+
         <div class="aspect-video w-full bg-surface-container rounded-lg mb-10 overflow-hidden">
             @if ($article->image_path)
                 <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($article->image_path) }}" alt="{{ $article->title }}" loading="lazy" decoding="async" class="w-full h-full object-cover">
