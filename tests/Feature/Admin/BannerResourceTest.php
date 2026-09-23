@@ -341,4 +341,38 @@ class BannerResourceTest extends TestCase
 
         $this->assertDatabaseHas('banners', ['overlay_style' => 'light', 'text_position' => 'center']);
     }
+
+    public function test_image_up_to_10mb_is_accepted(): void
+    {
+        Storage::fake('public');
+
+        Livewire::actingAs(User::factory()->create())
+            ->test(CreateBanner::class)
+            ->fillForm([
+                'title' => 'Banner Gambar Besar',
+                'image_path' => UploadedFile::fake()->image('besar.jpg', 800, 300)->size(9 * 1024),
+                'alt_text' => 'x',
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $this->assertDatabaseHas('banners', ['title' => 'Banner Gambar Besar']);
+    }
+
+    public function test_image_over_10mb_is_rejected(): void
+    {
+        Storage::fake('public');
+
+        Livewire::actingAs(User::factory()->create())
+            ->test(CreateBanner::class)
+            ->fillForm([
+                'title' => 'Banner Gambar Terlalu Besar',
+                'image_path' => UploadedFile::fake()->image('terlalu-besar.jpg', 800, 300)->size(11 * 1024),
+                'alt_text' => 'x',
+            ])
+            ->call('create')
+            ->assertHasFormErrors(['image_path']);
+
+        $this->assertDatabaseMissing('banners', ['title' => 'Banner Gambar Terlalu Besar']);
+    }
 }

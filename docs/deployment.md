@@ -21,8 +21,11 @@ Berlaku untuk kedua jenis hosting:
 | Web server | Apache (dengan `mod_rewrite` aktif) atau Nginx |
 | Composer | Versi terbaru (untuk instalasi dependency PHP) |
 | Node.js + npm | Untuk build asset frontend (`npm run build`) |
+| Batas upload PHP | `upload_max_filesize` ≥ `10M`, `post_max_size` ≥ `12M`, `memory_limit` ≥ `256M` (lihat `php.ini`) |
 
 > **Penting soal `gd`**: ekstensi ini sering terlewat di panduan Laravel generik, padahal **wajib** untuk kit ini — dipakai `App\Support\ImageUploads` untuk mengonversi setiap gambar yang diupload (produk, portfolio, banner, tim, dll.) ke format WebP. ❌ **Jangan lanjutkan deploy** bila `gd` tidak aktif — upload gambar akan gagal di seluruh modul konten.
+
+> **Penting soal batas upload**: beberapa form admin (mis. Banner) mengizinkan upload gambar hingga 10MB di level aplikasi (Filament), tapi PHP sendiri menolak lebih dulu bila `upload_max_filesize`/`post_max_size` di `php.ini` lebih kecil dari itu — defaultnya sering `2M`/`8M`. `memory_limit` juga perlu dinaikkan karena `App\Support\ImageUploads` mendekode gambar ke bitmap mentah di memori sebelum dikonversi ke WebP, yang bisa jauh lebih besar dari ukuran file aslinya untuk foto beresolusi tinggi. Di shared hosting cPanel, ini biasanya diatur lewat menu **MultiPHP INI Editor**, bukan file `php.ini` langsung.
 
 ## Deploy ke VPS
 

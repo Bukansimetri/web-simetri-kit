@@ -91,12 +91,13 @@ class BannerResource extends Resource
                             ->maxLength(255),
                         FileUpload::make('image_path')
                             ->label('Gambar Banner')
-                            ->helperText('Wajib. Rekomendasi 1600×600px. Gambar besar otomatis dikecilkan ke lebar 1600px & dikonversi ke WebP.')
+                            ->helperText('Wajib. Maks 10MB. Rekomendasi 1600×600px. Gambar besar otomatis dikecilkan ke lebar 1600px & dikonversi ke WebP.')
                             ->image()
                             ->required()
                             ->disk('public')
                             ->directory('banners')
                             ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/webp'])
+                            ->maxSize(10240)
                             ->saveUploadedFileUsing(fn ($file) => ImageUploads::storeAsWebp($file, 'banners', maxWidth: 1600)),
                         TextInput::make('alt_text')
                             ->label('Teks Alt')
