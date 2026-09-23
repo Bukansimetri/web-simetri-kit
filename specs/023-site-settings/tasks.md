@@ -149,21 +149,21 @@ Monolit Laravel di root repositori: `app/`, `database/`, `resources/`, `tests/`.
 
 ### Tests for User Story 3
 
-- [ ] T049 [P] [US3] Tulis test di `tests/Feature/Public/ScriptSlotRenderingTest.php` — isi keempat slot muncul tepat pada posisi yang dijanjikan labelnya, dimuat apa adanya sebagai kode dan tidak di-escape (contracts §4, FR-041, FR-044)
-- [ ] T050 [P] [US3] Tulis test di `tests/Feature/Public/CustomCssJsTest.php` — CSS khusus dimuat di kepala dokumen dan JS khusus dimuat sebelum badan ditutup (contracts §4, FR-042, FR-043)
-- [ ] T051 [P] [US3] Tulis test di `tests/Feature/Public/ScriptSlotEmptyStateTest.php` — slot kosong tidak meninggalkan elemen kosong pada halaman (contracts §4, FR-047)
-- [ ] T052 [P] [US3] Tulis test di `tests/Feature/Admin/ScriptSlotNotInAdminTest.php` — tidak ada satu pun isi slot yang dimuat di dalam panel admin (contracts §4, FR-046)
+- [X] T049 [P] [US3] Tulis test di `tests/Feature/Public/ScriptSlotRenderingTest.php` — isi keempat slot muncul tepat pada posisi yang dijanjikan labelnya, dimuat apa adanya sebagai kode dan tidak di-escape (contracts §4, FR-041, FR-044)
+- [X] T050 [P] [US3] Tulis test di `tests/Feature/Public/CustomCssJsTest.php` — CSS khusus dimuat di kepala dokumen dan JS khusus dimuat sebelum badan ditutup (contracts §4, FR-042, FR-043)
+- [X] T051 [P] [US3] Tulis test di `tests/Feature/Public/ScriptSlotEmptyStateTest.php` — slot kosong tidak meninggalkan elemen kosong pada halaman (contracts §4, FR-047)
+- [X] T052 [P] [US3] Tulis test di `tests/Feature/Admin/ScriptSlotNotInAdminTest.php` — tidak ada satu pun isi slot yang dimuat di dalam panel admin (contracts §4, FR-046)
 
 ### Implementation for User Story 3
 
-- [ ] T053 [US3] Tambahkan titik pemuatan keempat slot di `resources/views/layouts/public.blade.php`: di dalam `<head>`, tepat setelah `<body>` dibuka, tepat sebelum `</body>`, dan pada bagian footer (FR-041)
-- [ ] T054 [US3] Tambahkan blok gaya untuk `custom_css` di kepala dokumen dan blok skrip untuk `custom_js` sebelum badan ditutup di `resources/views/layouts/public.blade.php` (FR-042, FR-043)
-- [ ] T055 [US3] Pastikan setiap titik pemuatan hanya dirender bila slotnya terisi, sehingga tidak ada elemen kosong tersisa (FR-047)
-- [ ] T056 [US3] Beri komentar pada setiap titik pemuatan yang menyebut FR-044 dan FR-045, menjelaskan bahwa keluaran tanpa escaping adalah keputusan sadar beserta pengamannya, agar peninjau berikutnya tidak mengubahnya menjadi keluaran ter-escape dan mematikan fitur (research.md R7)
-- [ ] T057 [US3] Bangun form `app/Filament/Pages/ScriptSettingsPage.php` memakai `Textarea` bergaya monospace tanpa menambah dependensi editor kode (research.md R4)
-- [ ] T058 [US3] Tambahkan batas ukuran per slot beserta pesan yang menyebut batasnya saat terlampaui di `app/Filament/Pages/ScriptSettingsPage.php` (FR-048)
-- [ ] T059 [US3] Pastikan slot tidak pernah dimuat pada layout panel admin (FR-046)
-- [ ] T060 [US3] Jalankan test US3 dan pastikan seluruhnya hijau
+- [X] T053 [US3] Tambahkan titik pemuatan keempat slot di `resources/views/layouts/public.blade.php`: di dalam `<head>`, tepat setelah `<body>` dibuka, tepat sebelum `</body>`, dan pada bagian footer (FR-041)
+- [X] T054 [US3] Tambahkan blok gaya untuk `custom_css` di kepala dokumen dan blok skrip untuk `custom_js` sebelum badan ditutup di `resources/views/layouts/public.blade.php` (FR-042, FR-043)
+- [X] T055 [US3] Pastikan setiap titik pemuatan hanya dirender bila slotnya terisi, sehingga tidak ada elemen kosong tersisa (FR-047)
+- [X] T056 [US3] Beri komentar pada setiap titik pemuatan yang menyebut FR-044 dan FR-045, menjelaskan bahwa keluaran tanpa escaping adalah keputusan sadar beserta pengamannya, agar peninjau berikutnya tidak mengubahnya menjadi keluaran ter-escape dan mematikan fitur (research.md R7)
+- [X] T057 [US3] Bangun form `app/Filament/Pages/ScriptSettingsPage.php` memakai `Textarea` bergaya monospace tanpa menambah dependensi editor kode (research.md R4)
+- [X] T058 [US3] Tambahkan batas ukuran per slot beserta pesan yang menyebut batasnya saat terlampaui di `app/Filament/Pages/ScriptSettingsPage.php` (FR-048)
+- [X] T059 [US3] Pastikan slot tidak pernah dimuat pada layout panel admin (FR-046)
+- [X] T060 [US3] Jalankan test US3 dan pastikan seluruhnya hijau
 
 **Checkpoint**: Permintaan pemasangan pixel iklan dan Tag Manager tidak lagi memerlukan rilis kode. Tiga story P1 selesai — siap dirilis sebagai MVP.
 

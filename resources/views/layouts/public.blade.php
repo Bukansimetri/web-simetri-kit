@@ -3,6 +3,7 @@
     $appearance = app(\App\Settings\AppearanceSettings::class);
     $seo = app(\App\Settings\SeoSettings::class);
     $social = app(\App\Settings\SocialSettings::class);
+    $script = app(\App\Settings\ScriptSettings::class);
     $appName = $site->site_name ?: config('app.name');
 @endphp
 <!DOCTYPE html>
@@ -12,6 +13,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    {{-- Slot skrip kepala dokumen (FR-041) — dimuat apa adanya sebagai kode
+         mentah, TIDAK di-escape dengan sengaja. Pengaman fitur ini adalah
+         pembatasan peran super_admin pada ScriptSettingsPage (FR-045), bukan
+         penyaringan isi di sini — jangan ubah {!! !!} ini menjadi {{ }},
+         itu akan mematikan seluruh fitur pemasangan skrip pihak ketiga. --}}
+    @if ($script->head_scripts)
+        {!! $script->head_scripts !!}
+    @endif
+    @if ($script->custom_css)
+        <style>{!! $script->custom_css !!}</style>
+    @endif
 
     <title>@yield('title', $appName)</title>
     <meta name="description" content="@yield('meta_description', $seo->default_meta_description ?: 'Solusi panel surya untuk rumah, bisnis, dan industri.')">
@@ -39,6 +52,12 @@
     @stack('head')
 </head>
 <body class="font-body-md text-on-surface antialiased" style="background-color: var(--color-background);">
+    {{-- Slot skrip awal body (FR-041) — sama seperti slot head di atas,
+         sengaja tidak di-escape; lihat catatan FR-044/FR-045 di <head>. --}}
+    @if ($script->body_start_scripts)
+        {!! $script->body_start_scripts !!}
+    @endif
+
     <x-layout.header />
 
     <main>
@@ -47,6 +66,19 @@
 
     <x-layout.footer />
 
+    @if ($script->footer_scripts)
+        {!! $script->footer_scripts !!}
+    @endif
+
     @stack('scripts')
+
+    {{-- Slot skrip akhir body dan JS khusus (FR-041, FR-043) — sengaja tidak
+         di-escape; lihat catatan FR-044/FR-045 di <head>. --}}
+    @if ($script->body_end_scripts)
+        {!! $script->body_end_scripts !!}
+    @endif
+    @if ($script->custom_js)
+        <script>{!! $script->custom_js !!}</script>
+    @endif
 </body>
 </html>
