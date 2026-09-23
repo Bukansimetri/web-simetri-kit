@@ -82,18 +82,30 @@
         <div>
             <h4 class="font-bold text-white mb-6">Kontak</h4>
             <ul class="space-y-4 text-white/60 text-sm">
-                <li class="flex items-start"><span class="material-symbols-outlined text-primary-container text-lg mr-2">location_on</span> Jl. Jend. Sudirman Kav. 52-53, Jakarta Selatan 12190</li>
-                <li class="flex items-center"><span class="material-symbols-outlined text-primary-container text-lg mr-2">mail</span> hello@suoer.id</li>
-                <li class="flex items-center"><span class="material-symbols-outlined text-primary-container text-lg mr-2">call</span> (021) 555-0123</li>
+                @if ($site->company_name)
+                    <li class="text-white font-semibold">{{ $site->company_name }}</li>
+                @endif
+                @if ($site->company_address)
+                    <li class="flex items-start"><span class="material-symbols-outlined text-primary-container text-lg mr-2">location_on</span> {{ $site->company_address }}</li>
+                @endif
+                @if ($site->company_email)
+                    <li class="flex items-center"><span class="material-symbols-outlined text-primary-container text-lg mr-2">mail</span> {{ $site->company_email }}</li>
+                @endif
+                @if ($site->company_phone)
+                    <li class="flex items-center"><span class="material-symbols-outlined text-primary-container text-lg mr-2">call</span> {{ $site->company_phone }}</li>
+                @endif
             </ul>
         </div>
     </div>
 
     <div class="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/40">
-        <p>&copy; {{ now()->year }} {{ $appName }} Solar Energy. All Rights Reserved.</p>
+        <p>{{ $site->copyright_text ?: '© '.now()->year.' '.$appName.' Solar Energy. All Rights Reserved.' }}</p>
         <div class="flex gap-6">
-            <a class="hover:text-white transition-colors" href="{{ url('/halaman/kebijakan-privasi') }}">Kebijakan Privasi</a>
-            <a class="hover:text-white transition-colors" href="{{ url('/halaman/syarat-ketentuan') }}">Syarat &amp; Ketentuan</a>
+            <a class="hover:text-white transition-colors" href="{{ $site->privacy_url ?: url('/halaman/kebijakan-privasi') }}">Kebijakan Privasi</a>
+            <a class="hover:text-white transition-colors" href="{{ $site->terms_url ?: url('/halaman/syarat-ketentuan') }}">Syarat &amp; Ketentuan</a>
+            @if ($site->cookie_policy_url)
+                <a class="hover:text-white transition-colors" href="{{ $site->cookie_policy_url }}">Kebijakan Cookie</a>
+            @endif
         </div>
     </div>
 </footer>

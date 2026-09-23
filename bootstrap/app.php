@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\SetApplicationTimezone;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -12,7 +13,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Hanya memengaruhi routes/web.php (halaman publik) — panel admin
+        // Filament membangun middleware stack sendiri, tidak lewat grup
+        // `web` ini (FR-005, spec 023-site-settings).
+        $middleware->web(append: [
+            SetApplicationTimezone::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

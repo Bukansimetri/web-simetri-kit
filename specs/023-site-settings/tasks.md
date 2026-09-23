@@ -98,20 +98,20 @@ Monolit Laravel di root repositori: `app/`, `database/`, `resources/`, `tests/`.
 
 > Tulis test lebih dulu dan pastikan GAGAL sebelum implementasi.
 
-- [ ] T030 [P] [US1] Tulis test di `tests/Feature/Public/FooterCompanyInfoTest.php` — nama, email, telepon, dan alamat perusahaan tampil di blok kontak footer; tiap baris yang nilainya kosong tidak dirender tanpa menyisakan ikon atau label menggantung (contracts §3, FR-003, FR-004)
-- [ ] T031 [P] [US1] Tulis test di `tests/Feature/Public/FooterLegalSettingsTest.php` — teks hak cipta dan ketiga tautan legal memakai pengaturan, dan tautan yang alamatnya kosong tidak dirender (contracts §3, FR-007)
-- [ ] T032 [P] [US1] Tulis test di `tests/Feature/Public/NoHardcodedClientDataTest.php` — keluaran halaman publik pada instalasi bersih tidak memuat penanda data contoh klien tertentu (contracts §3, FR-009, SC-002)
-- [ ] T033 [P] [US1] Tulis test di `tests/Feature/Public/SiteIdentityTest.php` — atribut bahasa dokumen mengikuti `default_language`, dan nama situs dipakai pada judul serta `og:site_name` (contracts §1, FR-001, FR-005)
+- [X] T030 [P] [US1] Tulis test di `tests/Feature/Public/FooterCompanyInfoTest.php` — nama, email, telepon, dan alamat perusahaan tampil di blok kontak footer; tiap baris yang nilainya kosong tidak dirender tanpa menyisakan ikon atau label menggantung (contracts §3, FR-003, FR-004)
+- [X] T031 [P] [US1] Tulis test di `tests/Feature/Public/FooterLegalSettingsTest.php` — teks hak cipta dan ketiga tautan legal memakai pengaturan, dan tautan yang alamatnya kosong tidak dirender (contracts §3, FR-007)
+- [X] T032 [P] [US1] Tulis test di `tests/Feature/Public/NoHardcodedClientDataTest.php` — keluaran halaman publik pada instalasi bersih tidak memuat penanda data contoh klien tertentu (contracts §3, FR-009, SC-002)
+- [X] T033 [P] [US1] Tulis test di `tests/Feature/Public/SiteIdentityTest.php` — atribut bahasa dokumen mengikuti `default_language`, dan nama situs dipakai pada judul serta `og:site_name` (contracts §1, FR-001, FR-005)
 
 ### Implementation for User Story 1
 
-- [ ] T034 [US1] Ganti blok kontak yang ditulis mati di `resources/views/components/layout/footer.blade.php` dengan nilai dari `SiteSettings`, sembunyikan tiap baris yang kosong (FR-003, FR-004)
-- [ ] T035 [US1] Ganti teks hak cipta dan ketiga tautan legal yang ditulis mati di `resources/views/components/layout/footer.blade.php` dengan nilai dari `SiteSettings`, sembunyikan tautan yang alamatnya kosong (FR-007)
-- [ ] T036 [US1] Ganti `lang="id"` yang ditulis mati di `resources/views/layouts/public.blade.php` dengan `default_language` dari `SiteSettings` (FR-005)
-- [ ] T037 [US1] Terapkan zona waktu dari `SiteSettings` sebagai acuan tampilan tanggal pada halaman publik (FR-005)
-- [ ] T038 [US1] Tambahkan nilai bawaan yang wajar dan netral untuk seluruh properti identitas, perusahaan, dan legal sehingga instalasi baru tampil utuh tanpa data klien mana pun (FR-008, FR-009)
-- [ ] T039 [US1] Tambahkan validasi pada `SiteSettingsPage`: email berformat email, bahasa dan zona waktu dari daftar yang disediakan, serta batas panjang pada deskripsi dan pesan agar tata letak tidak rusak (spec.md Edge Cases)
-- [ ] T040 [US1] Jalankan test US1 dan pastikan seluruhnya hijau
+- [X] T034 [US1] Ganti blok kontak yang ditulis mati di `resources/views/components/layout/footer.blade.php` dengan nilai dari `SiteSettings`, sembunyikan tiap baris yang kosong (FR-003, FR-004)
+- [X] T035 [US1] Ganti teks hak cipta dan ketiga tautan legal yang ditulis mati di `resources/views/components/layout/footer.blade.php` dengan nilai dari `SiteSettings`, sembunyikan tautan yang alamatnya kosong (FR-007)
+- [X] T036 [US1] Ganti `lang="id"` yang ditulis mati di `resources/views/layouts/public.blade.php` dengan `default_language` dari `SiteSettings` (FR-005)
+- [X] T037 [US1] Terapkan zona waktu dari `SiteSettings` sebagai acuan tampilan tanggal pada halaman publik (FR-005)
+- [X] T038 [US1] Tambahkan nilai bawaan yang wajar dan netral untuk seluruh properti identitas, perusahaan, dan legal sehingga instalasi baru tampil utuh tanpa data klien mana pun (FR-008, FR-009)
+- [X] T039 [US1] Tambahkan validasi pada `SiteSettingsPage`: email berformat email, bahasa dan zona waktu dari daftar yang disediakan, serta batas panjang pada deskripsi dan pesan agar tata letak tidak rusak (spec.md Edge Cases)
+- [X] T040 [US1] Jalankan test US1 dan pastikan seluruhnya hijau
 
 **Checkpoint**: Identitas dan kontak situs sepenuhnya dapat diatur admin. Data klien lain hilang dari keluaran.
 

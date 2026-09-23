@@ -6,7 +6,7 @@
     $appName = $site->site_name ?: config('app.name');
 @endphp
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="{{ $site->default_language }}" class="scroll-smooth">
 <head>
     <script>document.documentElement.classList.add('js');</script>
     <meta charset="utf-8">
