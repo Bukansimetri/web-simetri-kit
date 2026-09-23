@@ -153,7 +153,7 @@ Seluruh keputusan di bawah diambil dari pemeriksaan kode dan paket yang benar-be
 
 **Decision**: Nilai bahasa mengisi atribut bahasa dokumen pada layout publik, dan zona waktu menjadi acuan saat menampilkan tanggal di halaman publik. Tidak ada sistem penerjemahan konten.
 
-**Rationale**: Ini batas cakupan yang sudah dinyatakan eksplisit di Assumptions spec. Mengubah `config('app.locale')` saat runtime tidak menerjemahkan konten apa pun karena seluruh teks situs ditulis langsung dalam bahasa Indonesia.
+**Rationale**: Ini batas cakupan yang sudah dinyatakan eksplisit di Assumptions spec. Mengubah nilai locale aplikasi saat runtime tidak menerjemahkan konten apa pun karena seluruh teks situs ditulis langsung dalam bahasa Indonesia.
 
 ---
 
