@@ -1,10 +1,11 @@
 @extends('layouts.public')
 
 @php
-    $appName = app(\App\Settings\BrandSettings::class)->app_name ?: config('app.name');
+    $site = app(\App\Settings\SiteSettings::class);
+    $appName = $site->site_name ?: config('app.name');
 @endphp
 
-@section('title', 'Kontak — '.$appName)
+@section('title', \App\Support\Seo\PageTitle::forStatic('kontak', 'Kontak'))
 @section('meta_description', 'Hubungi tim '.$appName.' untuk konsultasi gratis kebutuhan panel surya Anda.')
 
 @section('content')
@@ -211,23 +212,27 @@
         <div class="w-full lg:w-2/5 bg-primary rounded-lg p-8 md:p-12 text-white relative overflow-hidden shadow-2xl">
             <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>
             <div class="relative z-10 space-y-10">
-                <div>
-                    <h3 class="text-sm text-primary-fixed-dim uppercase tracking-wider mb-4 flex items-center gap-3">
-                        <span class="material-symbols-outlined">location_on</span> Kantor Pusat
-                    </h3>
-                    <p class="text-white/90 leading-relaxed">Jl. Jend. Sudirman Kav. 52-53<br>Senayan, Kebayoran Baru<br>Jakarta Selatan 12190</p>
-                </div>
-                <div>
-                    <h3 class="text-sm text-primary-fixed-dim uppercase tracking-wider mb-4 flex items-center gap-3">
-                        <span class="material-symbols-outlined">mail</span> Email
-                    </h3>
-                    <a href="mailto:hello@suoer.id" class="text-white/90 hover:text-white transition-colors">hello@suoer.id</a>
-                </div>
+                @if ($site->company_address)
+                    <div>
+                        <h3 class="text-sm text-primary-fixed-dim uppercase tracking-wider mb-4 flex items-center gap-3">
+                            <span class="material-symbols-outlined">location_on</span> Kantor Pusat
+                        </h3>
+                        <p class="text-white/90 leading-relaxed">{{ $site->company_address }}</p>
+                    </div>
+                @endif
+                @if ($site->company_email)
+                    <div>
+                        <h3 class="text-sm text-primary-fixed-dim uppercase tracking-wider mb-4 flex items-center gap-3">
+                            <span class="material-symbols-outlined">mail</span> Email
+                        </h3>
+                        <a href="mailto:{{ $site->company_email }}" class="text-white/90 hover:text-white transition-colors">{{ $site->company_email }}</a>
+                    </div>
+                @endif
                 <div>
                     <h3 class="text-sm text-primary-fixed-dim uppercase tracking-wider mb-4 flex items-center gap-3">
                         <span class="material-symbols-outlined">forum</span> Hubungi Langsung
                     </h3>
-                    <a href="{{ app(\App\Settings\BrandSettings::class)->whatsappUrl('Halo, saya ingin konsultasi tentang solusi tenaga surya SUOER.') ?: '#' }}" class="inline-flex items-center gap-4 group">
+                    <a href="{{ $site->whatsappUrl('Halo, saya ingin konsultasi tentang solusi tenaga surya SUOER.') ?: '#' }}" class="inline-flex items-center gap-4 group">
                         <div class="w-14 h-14 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center group-hover:-translate-y-1 transition-transform shrink-0">
                             <span class="material-symbols-outlined text-2xl">chat</span>
                         </div>

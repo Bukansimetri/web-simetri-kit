@@ -7,8 +7,8 @@
 ])
 
 @php
-    $brand = app(\App\Settings\BrandSettings::class);
-    $href = $buttonHref ?: ($brand->whatsappUrl('Halo, saya ingin konsultasi tentang solusi tenaga surya SUOER.') ?: url('/kontak'));
+    $site = app(\App\Settings\SiteSettings::class);
+    $href = $buttonHref ?: ($site->whatsappUrl('Halo, saya ingin konsultasi tentang solusi tenaga surya SUOER.') ?: url('/kontak'));
 @endphp
 
 <section class="reveal-element py-24 px-6 bg-primary text-center">

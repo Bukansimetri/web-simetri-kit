@@ -1,10 +1,10 @@
 @extends('layouts.public')
 
 @php
-    $appName = app(\App\Settings\BrandSettings::class)->app_name ?: config('app.name');
+    $appName = app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name');
 @endphp
 
-@section('title', 'Artikel & Blog — '.$appName)
+@section('title', \App\Support\Seo\PageTitle::forStatic('artikel_index', 'Artikel & Blog'))
 @section('meta_description', 'Tips, edukasi, dan berita seputar energi surya dari '.$appName.'.')
 
 @section('content')

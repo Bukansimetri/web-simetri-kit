@@ -8,7 +8,7 @@ use App\Models\CalculatorLead;
 use App\Notifications\NewCalculatorLead;
 use App\Services\SavingsEstimator;
 use App\Services\SubmissionGuard;
-use App\Settings\BrandSettings;
+use App\Settings\SiteSettings;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -157,7 +157,7 @@ class CalculatorController extends Controller
             Mail::to($lead->email)->queue(new CalculatorLeadThankYou($lead));
         }
 
-        $settings = app(BrandSettings::class);
+        $settings = app(SiteSettings::class);
 
         if (filled($settings->contact_notification_email)) {
             // Boleh diisi beberapa email dipisah koma di Settings.
@@ -184,7 +184,7 @@ class CalculatorController extends Controller
      */
     private function successResponse(CalculatorLead $lead, array $estimate): JsonResponse
     {
-        $settings = app(BrandSettings::class);
+        $settings = app(SiteSettings::class);
 
         return response()->json([
             'message' => 'Estimasi Anda telah kami terima. Tim kami akan menghubungi Anda.',
@@ -194,7 +194,7 @@ class CalculatorController extends Controller
                 sprintf(
                     "Halo, saya %s. Saya baru saja menghitung estimasi hemat via kalkulator %s.\n\nEstimasi hemat tahun 1: Rp %s\nBreakeven: %s tahun",
                     $lead->name,
-                    $settings->app_name ?: config('app.name'),
+                    $settings->site_name ?: config('app.name'),
                     number_format($estimate['result']['savings_year1'], 0, ',', '.'),
                     $estimate['result']['breakeven_years'],
                 )

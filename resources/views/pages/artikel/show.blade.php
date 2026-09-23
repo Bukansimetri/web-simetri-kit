@@ -1,9 +1,9 @@
 @extends('layouts.public')
 
-@section('title', $article->title.' — '.(app(\App\Settings\BrandSettings::class)->app_name ?: config('app.name')))
+@section('title', \App\Support\Seo\PageTitle::forContent('artikel_show', $article->meta_title, $article->title))
 @section('meta_description', $article->seoDescription())
 @section('og_title', $article->seoTitle())
-@section('og_image', $article->seoImageUrl() ?? app(\App\Settings\BrandSettings::class)->ogImageUrl())
+@section('og_image', $article->seoImageUrl() ?? app(\App\Settings\SocialSettings::class)->ogImageUrl())
 
 @section('content')
     <article class="pt-40 pb-16 px-6 max-w-3xl mx-auto">
@@ -25,6 +25,10 @@
                 <span class="w-1 h-1 rounded-full bg-outline-variant"></span>
                 <span>{{ $article->redaksi }}</span>
             @endif
+        </div>
+
+        <div class="mb-10">
+            <x-layout.social-share :title="$article->title" :url="url()->current()" />
         </div>
 
         <div class="aspect-video w-full bg-surface-container rounded-lg mb-10 overflow-hidden">

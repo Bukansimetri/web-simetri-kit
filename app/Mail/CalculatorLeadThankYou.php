@@ -3,7 +3,7 @@
 namespace App\Mail;
 
 use App\Models\CalculatorLead;
-use App\Settings\BrandSettings;
+use App\Settings\SiteSettings;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -24,8 +24,8 @@ class CalculatorLeadThankYou extends Mailable implements ShouldQueue
 
     public function build(): self
     {
-        $brand = app(BrandSettings::class);
-        $brandName = $brand->app_name ?: config('app.name');
+        $brand = app(SiteSettings::class);
+        $brandName = $brand->site_name ?: config('app.name');
 
         return $this
             ->subject("Estimasi penghematan listrik Anda — {$brandName}")

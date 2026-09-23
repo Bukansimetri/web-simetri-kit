@@ -7,7 +7,7 @@ use App\Mail\ContactSubmissionThankYou;
 use App\Models\ContactSubmission;
 use App\Notifications\NewContactSubmission;
 use App\Services\SubmissionGuard;
-use App\Settings\BrandSettings;
+use App\Settings\SiteSettings;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -96,7 +96,7 @@ class ContactController extends Controller
 
         Mail::to($submission->email)->queue(new ContactSubmissionThankYou($submission));
 
-        $settings = app(BrandSettings::class);
+        $settings = app(SiteSettings::class);
 
         if (filled($settings->contact_notification_email)) {
             // Boleh diisi beberapa email dipisah koma di Settings.

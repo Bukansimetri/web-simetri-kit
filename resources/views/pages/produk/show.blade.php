@@ -1,9 +1,9 @@
 @extends('layouts.public')
 
-@section('title', $product->name.' — '.(app(\App\Settings\BrandSettings::class)->app_name ?: config('app.name')))
+@section('title', \App\Support\Seo\PageTitle::forContent('produk_show', $product->meta_title, $product->name))
 @section('meta_description', $product->seoDescription())
 @section('og_title', $product->seoTitle())
-@section('og_image', $product->seoImageUrl() ?? app(\App\Settings\BrandSettings::class)->ogImageUrl())
+@section('og_image', $product->seoImageUrl() ?? app(\App\Settings\SocialSettings::class)->ogImageUrl())
 
 @section('content')
     <section class="px-margin-mobile md:px-margin-desktop pt-32 pb-12 max-w-[1280px] mx-auto">
@@ -57,6 +57,8 @@
                         <span class="material-symbols-outlined">forum</span> Konsultasi Sekarang
                     </a>
                 </div>
+
+                <x-layout.social-share :title="$product->name" :url="url()->current()" />
             </div>
         </div>
     </section>

@@ -8,7 +8,7 @@ use App\Models\CustomPage;
 use App\Models\PortfolioCategory;
 use App\Models\PortfolioProject;
 use App\Models\Product;
-use App\Settings\BrandSettings;
+use App\Settings\SiteSettings;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -38,7 +38,7 @@ class SitemapTest extends TestCase
 
     public function test_sitemap_includes_karir_only_when_module_enabled(): void
     {
-        $settings = app(BrandSettings::class);
+        $settings = app(SiteSettings::class);
         $settings->career_module_enabled = true;
         $settings->save();
 

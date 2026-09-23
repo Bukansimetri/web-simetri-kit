@@ -1,13 +1,13 @@
 @extends('layouts.public')
 
 @php
-    $appName = app(\App\Settings\BrandSettings::class)->app_name ?: config('app.name');
+    $appName = app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name');
 @endphp
 
-@section('title', $customPage->title.' — '.$appName)
+@section('title', \App\Support\Seo\PageTitle::forContent('halaman', $customPage->meta_title, $customPage->title))
 @section('meta_description', $customPage->seoDescription())
 @section('og_title', $customPage->seoTitle())
-@section('og_image', $customPage->seoImageUrl() ?? app(\App\Settings\BrandSettings::class)->ogImageUrl())
+@section('og_image', $customPage->seoImageUrl() ?? app(\App\Settings\SocialSettings::class)->ogImageUrl())
 
 @section('content')
     <article class="pt-32 pb-24 px-6 max-w-3xl mx-auto">

@@ -2,7 +2,8 @@
 
 namespace App\Providers\Filament;
 
-use App\Settings\BrandSettings;
+use App\Settings\AppearanceSettings;
+use App\Settings\SiteSettings;
 use BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalyticsPlugin;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\Authenticate;
@@ -35,11 +36,11 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->brandName(fn () => app(BrandSettings::class)->app_name ?: config('app.name'))
-            ->brandLogo(fn () => static::brandAssetUrl(app(BrandSettings::class)->logo_path))
-            ->favicon(fn () => static::brandAssetUrl(app(BrandSettings::class)->favicon_path))
+            ->brandName(fn () => app(SiteSettings::class)->site_name ?: config('app.name'))
+            ->brandLogo(fn () => static::brandAssetUrl(app(AppearanceSettings::class)->logo_path))
+            ->favicon(fn () => static::brandAssetUrl(app(AppearanceSettings::class)->favicon_path))
             ->colors(fn () => [
-                'primary' => app(BrandSettings::class)->primary_color ?: Color::Amber,
+                'primary' => app(AppearanceSettings::class)->primary_color ?: Color::Amber,
             ])
             ->darkMode(true)
             ->renderHook(
@@ -47,6 +48,16 @@ class AdminPanelProvider extends PanelProvider
                 fn () => new HtmlString(
                     '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap">'
                 ),
+            )
+            ->renderHook(
+                PanelsRenderHook::BODY_START,
+                fn () => app(SiteSettings::class)->maintenance_mode
+                    ? new HtmlString(
+                        '<div style="background:#b91c1c;color:#fff;text-align:center;padding:8px 16px;font-size:14px;font-weight:600;">'
+                        .'Mode Pemeliharaan aktif — pengunjung publik melihat halaman pemeliharaan.'
+                        .'</div>'
+                    )
+                    : null,
             )
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')

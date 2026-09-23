@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @php
-    $appName = app(\App\Settings\BrandSettings::class)->app_name ?: config('app.name');
+    $appName = app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name');
 
     $values = [
         ['icon' => 'lightbulb', 'title' => 'Inovasi Berkelanjutan', 'description' => 'Kami selalu mencari cara baru untuk memaksimalkan efisiensi energi surya dan meminimalkan dampak lingkungan.'],
@@ -17,7 +17,7 @@
     ];
 @endphp
 
-@section('title', 'Karir — '.$appName)
+@section('title', \App\Support\Seo\PageTitle::forStatic('karir', 'Karir'))
 @section('meta_description', 'Bergabunglah dengan tim '.$appName.' dan jadi bagian dari transisi energi bersih Indonesia.')
 
 @section('content')

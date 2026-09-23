@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @php
-    $appName = app(\App\Settings\BrandSettings::class)->app_name ?: config('app.name');
+    $appName = app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name');
     $about = app(\App\Settings\AboutPageSettings::class);
 
     $missions = $about->misiItems();
@@ -9,7 +9,7 @@
     $trust = $about->trustItems();
 @endphp
 
-@section('title', 'Tentang Kami — '.$appName)
+@section('title', \App\Support\Seo\PageTitle::forStatic('tentang_kami', 'Tentang Kami'))
 @section('meta_description', 'Mengenal '.$appName.' lebih dekat — visi, misi, dan nilai-nilai kami dalam menghadirkan solusi energi surya.')
 
 @section('content')
