@@ -109,7 +109,7 @@ class AdminPanelProvider extends PanelProvider
                     ->pluralLabel('Log Aktivitas')
                     ->navigationGroup('Sistem')
                     ->navigationIcon('heroicon-o-clock')
-                    ->navigationSort(2)
+                    ->navigationSort(3)
                     ->authorize(fn () => auth()->user()?->hasRole('super_admin') ?? false),
             ])
             ->authMiddleware([
