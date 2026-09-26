@@ -164,5 +164,4 @@ Menambah atau mengubah properti sebuah kelas Settings selalu butuh migrasi baru 
 - [Panduan tema](panduan-tema.md)
 - [Panduan deployment](deployment.md)
 - [Strategi versioning lintas klien](versioning-strategi-klien.md)
-- [Checklist setup Google Analytics](checklist-ga4-setup.md)
 - [Checklist go-live](checklist-go-live.md)

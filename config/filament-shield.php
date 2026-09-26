@@ -74,13 +74,6 @@ return [
 
         'widgets' => [
             'AccountWidget', 'FilamentInfoWidget',
-            // Widget Google Analytics: Shield memanggil getHeading() tiap widget untuk
-            // label permission, dan itu melakukan query ke API GA — memicu error 500
-            // di halaman edit Role saat GA belum dikonfigurasi (lihat Dashboard.php).
-            'ActiveUsersOneDayWidget', 'ActiveUsersSevenDayWidget', 'ActiveUsersTwentyEightDayWidget',
-            'MostVisitedPagesWidget', 'PageViewsWidget', 'SessionsByCountryWidget',
-            'SessionsByDeviceWidget', 'SessionsDurationWidget', 'SessionsWidget',
-            'TopReferrersListWidget', 'VisitorsWidget',
         ],
 
         'resources' => [],

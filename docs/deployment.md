@@ -146,7 +146,6 @@ sudo certbot --nginx -d domainklien.com
 Certbot mendaftarkan auto-renewal otomatis (via systemd timer/cron bawaan) — verifikasi dengan `sudo certbot renew --dry-run`. **Sertifikat Let's Encrypt berlaku 90 hari** dan wajib diperbarui otomatis; jangan andalkan pemasangan manual sekali saja.
 
 ### Selesai — lanjutkan ke:
-- [`docs/checklist-ga4-setup.md`](checklist-ga4-setup.md)
 - [`docs/checklist-go-live.md`](checklist-go-live.md)
 
 ---
@@ -235,5 +234,4 @@ Shared hosting **tidak mendukung proses persisten** (tidak ada Supervisor/system
 cPanel modern umumnya menyediakan **AutoSSL** (Let's Encrypt) otomatis. Buka cPanel → **"SSL/TLS Status"**, pastikan AutoSSL aktif untuk domain klien — sertifikat akan terbit dan diperbarui otomatis tanpa konfigurasi tambahan. Bila AutoSSL tidak tersedia, hubungi provider hosting untuk mengaktifkannya atau pasang manual lewat menu "SSL/TLS".
 
 ### Selesai — lanjutkan ke:
-- [`docs/checklist-ga4-setup.md`](checklist-ga4-setup.md)
 - [`docs/checklist-go-live.md`](checklist-go-live.md)
