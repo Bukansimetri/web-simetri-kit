@@ -12,12 +12,6 @@ Jalankan checklist ini sebagai gerbang terakhir sebelum menyerahkan instalasi ke
 - [ ] **Backup database terjadwal aktif** — Ada mekanisme backup berkala (mis. cron `mysqldump` di VPS, atau fitur backup otomatis cPanel) yang sudah dikonfirmasi berjalan, bukan hanya direncanakan.
 - [ ] **Site Settings sudah diisi milik klien** — Kelima halaman pengaturan (Pengaturan Umum, Tampilan, SEO, Media Sosial, Scripts & Analytics — menu Settings di panel admin) sudah diisi dengan data klien, bukan lagi nilai bawaan kosong. Minimal: nama situs, informasi perusahaan (email/telepon/alamat), dan logo. ❌ Footer dan halaman Kontak akan tampil kosong/tidak lengkap bila bagian ini dilewati — periksa langsung di halaman publik, bukan hanya di form admin.
 
-## Boleh ditunda dengan catatan (bukan blocker)
-
-- [ ] **Status setup GA4** (lihat `docs/checklist-ga4-setup.md`) — Tandai salah satu:
-  - [ ] Sudah selesai, dashboard menampilkan data
-  - [ ] Ditunda — alasan: _______________, target selesai: _______________
-
 ## Setelah seluruh butir Blocker bercentang
 
 Situs siap diserahkan ke klien sebagai produksi resmi. Dokumentasikan tanggal go-live dan siapa yang menjalankan checklist ini untuk instalasi klien tsb.

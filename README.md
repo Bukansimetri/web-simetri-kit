@@ -26,7 +26,6 @@ Referensi awal dikembangkan dari [`superduper-filament-starter-kit`](https://git
 - Dark/light mode switching + halaman profile admin (Filament Breezy)
 - Activity log & audit trail admin (spatie/laravel-activitylog + filament-logger)
 - Media manager berbasis folder (tomatophp/filament-media-manager)
-- Widget Google Analytics di dashboard admin
 
 ### Theme & Branding System
 - Settings-driven theme (warna, font, logo) via Spatie Settings
@@ -44,7 +43,7 @@ Referensi awal dikembangkan dari [`superduper-filament-starter-kit`](https://git
 - Seeder dummy content demo (services, team, testimonials, portfolio) untuk showcase ke calon klien
 - [Strategi git/versioning lintas klien](docs/versioning-strategi-klien.md) — git clone + upstream remote
 - [Panduan deployment](docs/deployment.md) — requirement server, langkah deploy VPS & shared hosting cPanel
-- [Checklist setup Google Analytics](docs/checklist-ga4-setup.md) dan [checklist go-live](docs/checklist-go-live.md)
+- [Checklist go-live](docs/checklist-go-live.md)
 
 ## Dokumentasi Developer
 

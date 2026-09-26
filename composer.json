@@ -7,7 +7,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.3",
-        "bezhansalleh/filament-google-analytics": "^2.1",
         "bezhansalleh/filament-shield": "^3.9",
         "filament/filament": "^3.2",
         "jeffgreco13/filament-breezy": "^2.2",

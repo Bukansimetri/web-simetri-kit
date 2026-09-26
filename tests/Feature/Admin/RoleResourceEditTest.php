@@ -9,18 +9,16 @@ use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 /**
- * Halaman edit Role (Filament Shield) tidak boleh error saat Google
- * Analytics belum dikonfigurasi: Shield memanggil getHeading() tiap widget
- * untuk label permission, dan widget GA melakukan query ke API-nya.
+ * Halaman edit Role (Filament Shield) harus terbuka: Shield membangun
+ * daftar permission widget dengan memanggil getHeading() tiap widget, jadi
+ * widget yang melakukan query eksternal di getHeading() akan merusak halaman.
  */
 class RoleResourceEditTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_role_edit_page_loads_when_analytics_is_not_configured(): void
+    public function test_role_edit_page_loads_for_super_admin(): void
     {
-        config(['analytics.property_id' => null]);
-
         $role = Role::create(['name' => 'super_admin']);
         foreach (['view_any_role', 'view_role', 'update_role'] as $permission) {
             Permission::create(['name' => $permission, 'guard_name' => 'web']);
