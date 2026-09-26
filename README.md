@@ -46,12 +46,20 @@ Referensi awal dikembangkan dari [`superduper-filament-starter-kit`](https://git
 - [Panduan deployment](docs/deployment.md) — requirement server, langkah deploy VPS & shared hosting cPanel
 - [Checklist setup Google Analytics](docs/checklist-ga4-setup.md) dan [checklist go-live](docs/checklist-go-live.md)
 
+## Dokumentasi Developer
+
+Untuk developer yang mengerjakan atau meng-clone kit ini untuk klien baru:
+
+- [Arsitektur project](docs/arsitektur.md) — lapisan, peta direktori, alur data dari admin ke halaman publik, daftar modul, dan konvensi
+- [Panduan menambah section](docs/panduan-section.md) — langkah menambah section baru di halaman publik, lengkap dengan contoh
+- [Panduan tema](docs/panduan-tema.md) — kustomisasi tema lewat panel admin dan cara memperluasnya lewat kode
+
 ## Tech Stack
 
-- **Backend**: Laravel 11
-- **Admin Panel**: Filament v3 + Filament Shield, Filament Breezy
+- **Backend**: Laravel 13
+- **Admin Panel**: Filament v3.3 + Filament Shield, Filament Breezy
 - **Package pendukung**: Spatie Media Library, Spatie Settings, Spatie Tags, Spatie Activity Log
-- **Frontend**: Tailwind CSS (dengan CSS variable-based theming)
+- **Frontend**: Tailwind CSS v4 (dengan CSS variable-based theming), Vite
 
 ## Roadmap (Epics)
 
