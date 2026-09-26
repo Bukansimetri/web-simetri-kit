@@ -1,7 +1,7 @@
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,
 shell commands, and other important information, read the current plan:
-specs/025-technical-docs/plan.md
+specs/027-leads-dashboard/plan.md
 <!-- SPECKIT END -->
 
 ===

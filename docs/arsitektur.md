@@ -80,12 +80,13 @@ Alur untuk tema: admin mengubah halaman **Tampilan** → `app/Settings/Appearanc
 |---|---|---|
 | `app/Filament/Resources/` | Resource admin (CRUD) per modul konten | `app/Filament/Resources/TestimonialResource.php` |
 | `app/Filament/Pages/` | Halaman admin khusus: pengaturan situs dan Dashboard | `app/Filament/Pages/AppearanceSettingsPage.php` |
+| `app/Filament/Widgets/` | Widget dashboard panel admin (kartu, tabel, grafik) | `app/Filament/Widgets/LeadStatsOverview.php` |
 | `app/Providers/Filament/` | Konfigurasi panel admin: plugin, urutan grup navigasi | `app/Providers/Filament/AdminPanelProvider.php` |
 | `app/Settings/` | Kelas Spatie Settings (pengaturan situs) | `app/Settings/SiteSettings.php` |
 | `app/Models/` | Model Eloquent modul konten | `app/Models/Product.php` |
 | `app/Http/Controllers/Public/` | Controller halaman publik, satu per halaman | `app/Http/Controllers/Public/HomeController.php` |
 | `app/Concerns/` | Trait bersama (cache halaman, SEO) | `app/Concerns/CachesPublicPages.php` |
-| `app/Services/` | Logika bisnis yang bukan milik satu model | `app/Services/SavingsEstimator.php` |
+| `app/Services/` | Logika bisnis yang bukan milik satu model | `app/Services/SavingsEstimator.php`, `app/Services/LeadDashboardMetrics.php` |
 | `app/Support/` | Helper kecil (gambar, sanitasi HTML, SEO) | `app/Support/ImageUploads.php` |
 | `app/Enums/` | Enum untuk pilihan tetap | `app/Enums/BannerOverlayStyle.php` |
 | `app/Mail/`, `app/Notifications/` | Email terima kasih dan notifikasi admin (kontak, kalkulator) | `app/Notifications/NewContactSubmission.php` |
