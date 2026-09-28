@@ -161,6 +161,7 @@ Menambah atau mengubah properti sebuah kelas Settings selalu butuh migrasi baru 
 
 ## Dokumen terkait
 
+- [Manual operator panel admin](manual-operator.md) (untuk operator klien, bukan developer)
 - [Panduan menambah section](panduan-section.md)
 - [Panduan tema](panduan-tema.md)
 - [Panduan deployment](deployment.md)

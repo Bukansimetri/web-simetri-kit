@@ -31,6 +31,7 @@ class TechnicalDocsPathsTest extends TestCase
             'arsitektur' => ['docs/arsitektur.md'],
             'panduan-section' => ['docs/panduan-section.md'],
             'panduan-tema' => ['docs/panduan-tema.md'],
+            'manual-operator' => ['docs/manual-operator.md'],
         ];
     }
 

@@ -44,6 +44,7 @@ Referensi awal dikembangkan dari [`superduper-filament-starter-kit`](https://git
 - [Strategi git/versioning lintas klien](docs/versioning-strategi-klien.md) — git clone + upstream remote
 - [Panduan deployment](docs/deployment.md) — requirement server, langkah deploy VPS & shared hosting cPanel
 - [Checklist go-live](docs/checklist-go-live.md)
+- [Manual operator panel admin](docs/manual-operator.md) — untuk operator/admin klien: login, mengelola konten, prospek, dan pengaturan situs
 
 ## Dokumentasi Developer
 
