@@ -7,6 +7,8 @@ use App\Models\ElectricityAppliance;
 use App\Models\User;
 use Filament\Tables\Actions\EditAction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -98,6 +100,37 @@ class ElectricityApplianceResourceTest extends TestCase
             ->callTableAction('delete', $appliance);
 
         $this->assertDatabaseMissing('electricity_appliances', ['id' => $appliance->id]);
+    }
+
+    public function test_admin_can_upload_custom_icon_image(): void
+    {
+        Storage::fake('public');
+
+        Livewire::actingAs(User::factory()->create())
+            ->test(ManageElectricityAppliances::class)
+            ->mountAction('create')
+            ->setActionData([
+                'name' => 'Dispenser',
+                'slug' => 'dispenser',
+                'icon' => 'water_drop',
+                'icon_image' => UploadedFile::fake()->image('dispenser.jpg', 300, 300),
+                'watt' => 80,
+            ])
+            ->callMountedAction()
+            ->assertHasNoActionErrors();
+
+        $appliance = ElectricityAppliance::where('slug', 'dispenser')->firstOrFail();
+
+        $this->assertNotNull($appliance->icon_image);
+        $this->assertNotNull($appliance->iconImageUrl());
+        Storage::disk('public')->assertExists($appliance->icon_image);
+    }
+
+    public function test_appliance_without_icon_image_has_no_icon_image_url(): void
+    {
+        $appliance = ElectricityAppliance::factory()->create(['icon_image' => null]);
+
+        $this->assertNull($appliance->iconImageUrl());
     }
 
     public function test_inactive_appliance_is_excluded_from_active_catalog(): void

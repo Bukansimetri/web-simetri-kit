@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Katalog peralatan listrik rumah tangga yang dipakai kalkulator "Berdasarkan
@@ -27,6 +28,7 @@ class ElectricityAppliance extends Model
         'slug',
         'name',
         'icon',
+        'icon_image',
         'watt',
         'order',
         'is_active',
@@ -48,6 +50,15 @@ class ElectricityAppliance extends Model
     {
         static::saved(fn () => Cache::forget(self::CACHE_KEY));
         static::deleted(fn () => Cache::forget(self::CACHE_KEY));
+    }
+
+    /**
+     * URL publik gambar ikon custom, atau null bila admin belum upload —
+     * frontend & tabel admin fallback ke `icon` (Material Symbols) saat null.
+     */
+    public function iconImageUrl(): ?string
+    {
+        return $this->icon_image ? Storage::disk('public')->url($this->icon_image) : null;
     }
 
     public function scopeActive(Builder $query): Builder

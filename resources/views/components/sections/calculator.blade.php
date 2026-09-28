@@ -11,7 +11,7 @@
     // ElectricityAppliance) — watt final tetap divalidasi ulang di server
     // saat submit (App\Services\SavingsEstimator), daftar ini hanya untuk UI.
     $appliances = \App\Models\ElectricityAppliance::activeCatalog()
-        ->map(fn ($item) => ['key' => $item->slug, 'label' => $item->name, 'icon' => $item->icon, 'watt' => $item->watt, 'qty' => 0])
+        ->map(fn ($item) => ['key' => $item->slug, 'label' => $item->name, 'icon' => $item->icon, 'iconImage' => $item->iconImageUrl(), 'watt' => $item->watt, 'qty' => 0])
         ->values();
 @endphp
 <section id="kalkulator" class="reveal-element relative z-20 max-w-6xl mx-auto px-6 -mt-32 mb-32">
@@ -81,8 +81,13 @@
                             <template x-for="item in appliances" :key="item.key">
                                 <div class="flex items-center justify-between bg-surface-container-low p-3 border border-transparent rounded-lg h-20">
                                     <div class="flex items-center gap-3">
-                                        <div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-primary shadow-sm">
-                                            <span class="material-symbols-outlined" x-text="item.icon"></span>
+                                        <div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-primary shadow-sm overflow-hidden">
+                                            <template x-if="item.iconImage">
+                                                <img :src="item.iconImage" alt="" class="w-6 h-6 object-contain">
+                                            </template>
+                                            <template x-if="!item.iconImage">
+                                                <span class="material-symbols-outlined" x-text="item.icon"></span>
+                                            </template>
                                         </div>
                                         <div class="flex flex-col">
                                             <span class="font-bold text-sm text-on-surface" x-text="item.label"></span>
