@@ -1,7 +1,7 @@
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,
 shell commands, and other important information, read the current plan:
-specs/028-operator-manual/plan.md
+specs/029-why-choose-admin/plan.md
 <!-- SPECKIT END -->
 
 ===

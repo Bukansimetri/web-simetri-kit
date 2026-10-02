@@ -92,16 +92,21 @@
         </section>
 
         {{-- Newsletter --}}
+        @php
+            $indexCta = \App\Support\PageContent\PageContent::cta(\App\Enums\CtaPlacement::ArticleIndex);
+        @endphp
         <section class="reveal-element px-6 py-12 mt-12">
             <div class="max-w-4xl mx-auto bg-surface-container p-8 md:p-12 text-center relative overflow-hidden rounded-lg">
                 <div class="absolute -top-24 -right-24 w-64 h-64 bg-primary-fixed rounded-full blur-3xl opacity-50 pointer-events-none"></div>
                 <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-tertiary-fixed rounded-full blur-3xl opacity-50 pointer-events-none"></div>
                 <div class="relative z-10">
                     <span class="material-symbols-outlined text-5xl text-primary mb-4">forum</span>
-                    <h2 class="font-headline-lg text-2xl md:text-3xl mb-4 text-primary">Punya pertanyaan seputar energi surya?</h2>
-                    <p class="font-body-md text-body-md text-on-surface-variant mb-8 max-w-xl mx-auto">Tim kami siap membantu — dari pemilihan produk hingga estimasi penghematan untuk rumah atau bisnis Anda.</p>
+                    <h2 class="font-headline-lg text-2xl md:text-3xl mb-4 text-primary">{{ \App\Support\PageContent\PageContent::multiline($indexCta->title) }}</h2>
+                    @if (filled($indexCta->body))
+                        <p class="font-body-md text-body-md text-on-surface-variant mb-8 max-w-xl mx-auto">{{ $indexCta->body }}</p>
+                    @endif
                     <a href="{{ url('/kontak') }}" class="btn-fill inline-flex items-center gap-2 bg-primary-container text-white px-8 py-4 rounded-lg font-label-bold text-label-bold hover:scale-105 transition-transform">
-                        Konsultasi Gratis <span class="material-symbols-outlined">arrow_forward</span>
+                        {{ $indexCta->primary_label }} <span class="material-symbols-outlined">arrow_forward</span>
                     </a>
                 </div>
             </div>

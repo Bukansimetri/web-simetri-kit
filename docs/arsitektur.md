@@ -64,7 +64,8 @@ Alur untuk tema: admin mengubah halaman **Tampilan** → `app/Settings/Appearanc
 - Cache hanya dipakai controller publik. Panel admin tidak pernah membaca dari cache ini, jadi admin selalu melihat data terbaru.
 - **Invalidasi** ada dua pola, dan tidak semua modul memakainya:
   - Hook `saved`/`deleted` di model, contoh `app/Models/Banner.php` (menghapus `public-page:home`).
-  - Menghapus key saat halaman pengaturan disimpan, contoh `app/Filament/Pages/AboutPageSettingsPage.php` (menghapus `public-page:tentang-kami`).
+  - Menghapus key saat halaman pengaturan disimpan lewat `Cache::forget(...)` di `save()` (belum ada halaman pengaturan yang memakainya saat ini).
+  - Konten section, blok halaman, dan CTA (`app/Support/PageContent/PageContent.php`) tidak di-cache: dibaca langsung di Blade, jadi perubahan admin langsung tampil.
 - Modul tanpa invalidasi (produk, artikel, portfolio, FAQ) mengandalkan TTL: perubahan admin bisa butuh sampai 5 menit untuk tampil di halaman publik.
 - Data kalkulator punya cache sendiri di `app/Models/ElectricityAppliance.php` (key `electricity-appliances:active`, dihapus otomatis saat data berubah).
 
@@ -129,7 +130,7 @@ Modul pendukung di panel admin: Pengguna (`app/Filament/Resources/UserResource.p
 
 ## Pengaturan situs
 
-Pengaturan situs adalah data tunggal per instalasi (bukan daftar item). Tiap kelas di `app/Settings/` punya satu halaman admin di grup **Pengaturan Situs** (kecuali Halaman Tentang Kami yang berada di grup Konten Halaman).
+Pengaturan situs adalah data tunggal per instalasi (bukan daftar item). Tiap kelas di `app/Settings/` punya satu halaman admin di grup **Pengaturan Situs**.
 
 | Kelas | Halaman admin (label menu) | Dipakai di |
 |---|---|---|
@@ -139,14 +140,13 @@ Pengaturan situs adalah data tunggal per instalasi (bukan daftar item). Tiap kel
 | `app/Settings/SocialSettings.php` | `app/Filament/Pages/SocialSettingsPage.php` (Media Sosial) | `resources/views/components/layout/header.blade.php`, `resources/views/components/layout/social-share.blade.php`, `resources/views/layouts/partials/og-meta.blade.php`, `app/Support/Seo/JsonLd.php` |
 | `app/Settings/ScriptSettings.php` | `app/Filament/Pages/ScriptSettingsPage.php` (Scripts & Analytics) | `resources/views/layouts/public.blade.php`, `resources/views/components/layout/gated-script.blade.php` |
 | `app/Settings/CalculatorSettings.php` | `app/Filament/Pages/CalculatorSettingsPage.php` (Kalkulator Estimasi) | `app/Services/SavingsEstimator.php` |
-| `app/Settings/AboutPageSettings.php` | `app/Filament/Pages/AboutPageSettingsPage.php` (Halaman Tentang Kami) | `resources/views/pages/tentang-kami.blade.php` |
 
 Menambah atau mengubah properti sebuah kelas Settings selalu butuh migrasi baru di `database/settings/` (mengikuti pola file di folder tersebut), lalu `php artisan migrate`.
 
 ## Konvensi
 
 - **Bahasa**: label, judul, dan pesan di panel admin memakai Bahasa Indonesia. Nama route publik juga Indonesia (`produk.index`, `tentang-kami`, `kontak`), dan custom page ada di bawah prefix `/halaman/` supaya tidak bentrok dengan route statis (`routes/web.php`).
-- **Grup navigasi admin**: didefinisikan berurutan di `app/Providers/Filament/AdminPanelProvider.php`: Konten Halaman, Katalog, Prospek & Pesan, Blog, Portfolio, Karir, Menu Builder, Pengaturan Situs, Sistem. Resource baru harus masuk ke salah satu grup ini lewat `$navigationGroup`, bukan membuat grup baru tanpa alasan. Tes struktur navigasi ada di `tests/Feature/Admin/NavigationStructureTest.php`.
+- **Grup navigasi admin**: didefinisikan berurutan di `app/Providers/Filament/AdminPanelProvider.php`: Beranda, Tentang Kami, Konten Halaman, Katalog, Prospek & Pesan, Blog, Portfolio, Karir, Menu Builder, Pengaturan Situs, Sistem. Resource baru harus masuk ke salah satu grup ini lewat `$navigationGroup`, bukan membuat grup baru tanpa alasan. Menu konten disusun per halaman (Beranda, Tentang Kami, Karir); menu section memakai label pendek karena grupnya sudah memberi konteks, dan grup serta urutannya diatur di `app/Enums/PageSection.php`. Tes struktur navigasi ada di `tests/Feature/Admin/NavigationStructureTest.php`.
 - **Test**: setiap modul konten wajib punya feature test dasar (CRUD admin dan render publik) sebelum dianggap selesai. Gunakan PHPUnit (bukan Pest) dan factory model.
 - **Format kode**: jalankan `vendor/bin/pint --dirty --format agent` sebelum commit.
 - **White-label**: jangan menulis data klien (nama, alamat, warna, font) di view atau logika. `tests/Feature/Public/NoHardcodedClientDataTest.php` memeriksa instalasi bersih tidak menampilkan data klien tertentu.

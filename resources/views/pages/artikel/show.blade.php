@@ -65,11 +65,7 @@
         </section>
     @endif
 
-    <x-sections.cta-band
-        title="Siap beralih ke energi surya?"
-        subtitle="Konsultasi gratis dengan tim ahli kami"
-        buttonLabel="Hubungi via WhatsApp"
-    />
+    <x-sections.cta-band :placement="\App\Enums\CtaPlacement::ArticleDetail" />
 @endsection
 
 @push('head')

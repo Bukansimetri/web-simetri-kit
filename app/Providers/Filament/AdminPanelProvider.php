@@ -63,6 +63,8 @@ class AdminPanelProvider extends PanelProvider
                 // Tanpa icon di level grup — tiap resource/page di bawahnya
                 // sudah punya icon sendiri, dan Filament tidak mengizinkan
                 // keduanya sekaligus (icon grup ATAU icon item, bukan dua-duanya).
+                NavigationGroup::make('Beranda'),
+                NavigationGroup::make('Tentang Kami'),
                 NavigationGroup::make('Konten Halaman'),
                 NavigationGroup::make('Katalog'),
                 NavigationGroup::make('Prospek & Pesan'),

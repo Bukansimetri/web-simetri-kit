@@ -14,7 +14,7 @@ class MaterialSymbolsIcons
      * @var array<int, string>
      */
     public const OPTIONS = [
-        'group', 'diversity_3', 'handshake', 'support_agent', 'thumb_up', 'favorite',
+        'group', 'groups', 'diversity_3', 'handshake', 'support_agent', 'thumb_up', 'favorite',
         'star', 'verified', 'verified_user', 'workspace_premium', 'emoji_events', 'shield',
         'security', 'check_circle', 'trending_up', 'insights', 'timeline', 'payments',
         'savings', 'solar_power', 'bolt', 'wb_sunny', 'battery_charging_full', 'energy_savings_leaf',
@@ -36,6 +36,14 @@ class MaterialSymbolsIcons
         return collect(self::OPTIONS)
             ->mapWithKeys(fn (string $icon) => [$icon => self::optionLabel($icon)])
             ->all();
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    public static function keys(): array
+    {
+        return self::OPTIONS;
     }
 
     private static function optionLabel(string $icon): string
