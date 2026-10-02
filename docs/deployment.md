@@ -76,6 +76,15 @@ sudo chown -R www-data:www-data /var/www/client-acme/storage /var/www/client-acm
 > bila** kolom judulnya masih kosong — aman dijalankan di basis data klien
 > yang sudah berisi banner lama. Tidak ada langkah manual tambahan.
 
+> **Section & CTA**: `php artisan migrate --force` juga menanam isi bawaan
+> section "Mengapa Beralih", "Cara Kerja", "Mengapa Bergabung", "Proses
+> Rekrutmen", dan 9 CTA (migration `install_default_page_content`). Section
+> yang sudah punya judul dan CTA yang sudah ada tidak disentuh. Nama merek
+> di teks bawaan diambil **sekali** dari Pengaturan Umum → Nama Situs (atau
+> `APP_NAME` di `.env` bila Nama Situs kosong) saat migrasi ini berjalan, jadi
+> **pastikan Nama Situs sudah benar sebelum deploy**. Setelah itu teks
+> sepenuhnya mengikuti isian admin.
+
 ### 4. Konfigurasi web server
 
 Arahkan document root **Nginx/Apache ke folder `public/`** proyek (BUKAN ke root proyek). Contoh virtual host Nginx minimal:

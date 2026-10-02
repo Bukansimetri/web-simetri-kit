@@ -98,16 +98,21 @@
     </section>
 
     {{-- Masa Depan Energi Anda --}}
+    @php
+        $detailCta = \App\Support\PageContent\PageContent::cta(\App\Enums\CtaPlacement::ProductDetail);
+    @endphp
     <section class="reveal-element px-margin-mobile md:px-margin-desktop py-20 relative overflow-hidden">
         <div class="absolute inset-0 bg-primary/5 -z-10"></div>
         <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div class="flex flex-col gap-6">
-                <h2 class="font-headline-xl text-3xl md:text-4xl font-extrabold text-primary tracking-tight">Masa Depan Energi Anda</h2>
-                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                    Berinvestasi pada {{ Str::lower($product->name) }} bukan sekadar mengurangi tagihan listrik, tetapi juga bentuk komitmen terhadap kelestarian bumi — dirancang untuk integrasi mulus dengan arsitektur modern.
-                </p>
+                <h2 class="font-headline-xl text-3xl md:text-4xl font-extrabold text-primary tracking-tight">{{ \App\Support\PageContent\PageContent::multiline($detailCta->title) }}</h2>
+                @if (filled($detailCta->body))
+                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                        {{ \App\Support\PageContent\PageContent::withProductName($detailCta->body, $product->name) }}
+                    </p>
+                @endif
                 <a href="{{ url('/kontak') }}" class="inline-flex items-center gap-2 text-primary font-semibold hover:text-primary-container transition-colors w-fit">
-                    Konsultasi kebutuhan Anda <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                    {{ $detailCta->primary_label }} <span class="material-symbols-outlined text-lg">arrow_forward</span>
                 </a>
             </div>
             <div class="h-[300px] rounded-lg overflow-hidden bg-surface-container">

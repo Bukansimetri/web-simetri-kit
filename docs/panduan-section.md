@@ -15,9 +15,14 @@ Putuskan dulu dari mana isi section datang. Ini menentukan langkah 3 dan 6 di ba
 
 | Kondisi | Sumber data | Contoh nyata |
 |---|---|---|
-| Satu blok konten tetap, jumlah field kecil, jarang berubah (judul, teks, beberapa poin) | **Pengaturan situs** (kelas di `app/Settings/`) | `app/Settings/AboutPageSettings.php` dipakai `resources/views/pages/tentang-kami.blade.php` |
+| Satu blok konten tetap, jumlah field kecil, jarang berubah (judul, teks, beberapa poin) | **Pengaturan situs** (kelas di `app/Settings/`) | `app/Settings/CalculatorSettings.php` dipakai `app/Services/SavingsEstimator.php` |
 | Daftar item yang dikelola admin: tambah, hapus, urutkan, aktif/nonaktif, punya gambar | **Modul konten** (model + resource admin) | Testimonials, lihat [contoh modul nyata](#contoh-modul-nyata-testimonials) |
-| Teks desain yang sama untuk semua klien dan tidak berisi data klien | Langsung di Blade | `resources/views/components/sections/how-it-works.blade.php` |
+| Kartu/langkah berdesain tetap (jumlah dibatasi desain, satu item bisa ditonjolkan) + judul section | **Item section** (`SectionItem` + enum `App\Enums\PageSection` + resource turunan `App\Filament\Support\SectionItemResource`) | `resources/views/components/sections/why-choose.blade.php`, `resources/views/components/sections/how-it-works.blade.php` |
+| Satu blok tetap dengan gambar/teks kaya per halaman (Hero, Siapa Kami, Visi, Info Kontak) | **Blok halaman** (`PageBlock` + enum `App\Enums\PageBlockType` + `App\Filament\Resources\PageBlockResource`) | `resources/views/pages/tentang-kami.blade.php`, `resources/views/pages/kontak.blade.php` |
+| Teks ajakan (CTA) di penempatan tetap | **CTA** (`CallToAction` + enum `App\Enums\CtaPlacement`) | `resources/views/components/sections/cta-band.blade.php` |
+| Teks desain yang sama untuk semua klien dan tidak berisi data klien | Langsung di Blade | Label kecil seperti "Dipercaya oleh" di `resources/views/components/sections/client-logos.blade.php` |
+
+**Menambah section item baru**: tambah case di `PageSection` (isi aturan `maxActiveItems`, `hasIcon`, `supportsEmphasis`, `hasSubtitle`, `stepNumber`), tambah nilai bawaan di `App\Support\PageContent\DefaultPageContent`, buat resource yang extends `App\Filament\Support\SectionItemResource`, lalu baca datanya di Blade dengan `PageContent::section(...)`. **Menambah penempatan CTA**: tambah case di `CtaPlacement` dan nilai bawaannya, lalu baca dengan `PageContent::cta(...)`. Teks dari database dirender apa adanya (`{{ }}`), dan judul lewat `PageContent::multiline()` untuk pindah baris. Nama merek di nilai bawaan ditulis `{app_name}` dan diisi Nama Situs sekali saat instalasi, tidak pernah saat render. Konten bawaan untuk instalasi yang sudah berjalan ditanam lewat migrasi yang memanggil `PageContentInstaller` (bukan seeder).
 
 Data klien (nama, alamat, angka, foto) tidak boleh ditulis langsung di Blade. `tests/Feature/Public/NoHardcodedClientDataTest.php` menjaga hal ini.
 
@@ -32,7 +37,7 @@ Data klien (nama, alamat, angka, foto) tidak boleh ditulis langsung di Blade. `t
 5. **Tangani empty state.** Bungkus isi section dengan `@if ($items->isNotEmpty()) ... @endif` (atau sejenisnya) supaya section hilang, bukan error atau kosong menggantung, saat data belum diisi. Untuk item bergambar, cek juga file gambar benar-benar ada di disk `public`, seperti `resources/views/components/sections/client-logos.blade.php`.
 6. **Cache.** Hanya data yang dikembalikan closure `rememberPublicPage` di controller yang di-cache 5 menit. Aturannya:
    - Data dari **Settings yang dibaca langsung di Blade** tidak ikut di-cache, jadi tidak perlu invalidasi.
-   - Data dari **query di controller** yang di-cache perlu dihapus saat berubah: tambahkan hook `saved`/`deleted` di model yang menghapus key halaman (contoh `app/Models/Banner.php`), atau `Cache::forget(...)` di dalam `save()` halaman pengaturan (contoh `app/Filament/Pages/AboutPageSettingsPage.php`). Jika key halaman dipakai bersama (misal Home dan Tentang Kami menampilkan data yang sama), hapus semua key yang terpengaruh.
+   - Data dari **query di controller** yang di-cache perlu dihapus saat berubah: tambahkan hook `saved`/`deleted` di model yang menghapus key halaman (contoh `app/Models/Banner.php`), atau `Cache::forget(...)` di dalam `save()` halaman pengaturan (belum ada contoh di project saat ini). Jika key halaman dipakai bersama (misal Home dan Tentang Kami menampilkan data yang sama), hapus semua key yang terpengaruh.
 7. **Tulis test** (wajib untuk modul, Principle IV): satu test render publik (section tampil saat data ada, tidak tampil saat kosong) dan, untuk modul konten atau field pengaturan baru, satu test admin. Tempatkan di `tests/Feature/Pages/` (render halaman) dan `tests/Feature/Admin/` atau `tests/Feature/Settings/` (admin).
 8. **Rapikan dan build.** Jalankan `vendor/bin/pint --dirty --format agent`, jalankan test yang terkait dengan `php artisan test --compact --filter=NamaTest`, lalu `npm run build` bila ada perubahan class Tailwind atau CSS.
 
@@ -47,7 +52,7 @@ $this->migrator->add('site.sertifikasi_heading', null);
 $this->migrator->add('site.sertifikasi_items', json_encode([]));
 ```
 
-**2. Properti di `app/Settings/SiteSettings.php`** (item disimpan sebagai JSON string, mengikuti pola `misi_items` di `app/Settings/AboutPageSettings.php`):
+**2. Properti di `app/Settings/SiteSettings.php`** (item disimpan sebagai JSON string, mengikuti pola item JSON di kelas Settings lain):
 
 ```php
 public ?string $sertifikasi_heading;
@@ -123,7 +128,7 @@ public function test_certifications_section_is_hidden_when_empty(): void
 }
 ```
 
-Tambahkan juga satu test admin yang menyimpan field baru lewat halaman pengaturan, meniru `tests/Feature/Settings/AboutPageSettingsTest.php`.
+Tambahkan juga satu test admin yang menyimpan field baru lewat halaman pengaturan, meniru `tests/Feature/Settings/SiteSettingsTest.php`.
 
 **8. Cek akhir**: ubah warna primer di admin (**Pengaturan Situs → Tampilan**) lalu buka Home. Judul dan ikon section harus ikut berubah warna. Jika tidak, ada warna atau font yang tertulis langsung di Blade.
 

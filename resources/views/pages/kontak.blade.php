@@ -3,6 +3,7 @@
 @php
     $site = app(\App\Settings\SiteSettings::class);
     $appName = $site->site_name ?: config('app.name');
+    $contactInfo = \App\Support\PageContent\PageContent::block(\App\Enums\PageBlockType::ContactInfo);
 @endphp
 
 @section('title', \App\Support\Seo\PageTitle::forStatic('kontak', 'Kontak'))
@@ -232,13 +233,15 @@
                     <h3 class="text-sm text-primary-fixed-dim uppercase tracking-wider mb-4 flex items-center gap-3">
                         <span class="material-symbols-outlined">forum</span> Hubungi Langsung
                     </h3>
-                    <a href="{{ $site->whatsappUrl('Halo, saya ingin konsultasi tentang solusi tenaga surya SUOER.') ?: '#' }}" class="inline-flex items-center gap-4 group">
+                    <a href="{{ $site->whatsappUrl(\App\Support\PageContent\PageContent::whatsappMessage()) ?: '#' }}" class="inline-flex items-center gap-4 group">
                         <div class="w-14 h-14 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center group-hover:-translate-y-1 transition-transform shrink-0">
                             <span class="material-symbols-outlined text-2xl">chat</span>
                         </div>
                         <div>
-                            <p class="font-headline-lg text-xl font-bold text-white group-hover:text-primary-fixed-dim transition-colors">Chat via WhatsApp</p>
-                            <p class="text-sm text-primary-fixed-dim mt-1">Senin - Jumat, 09:00 - 17:00 WIB</p>
+                            <p class="font-headline-lg text-xl font-bold text-white group-hover:text-primary-fixed-dim transition-colors">{{ $contactInfo->value('whatsapp_label') }}</p>
+                            @if (filled($contactInfo->value('operating_hours')))
+                                <p class="text-sm text-primary-fixed-dim mt-1">{{ $contactInfo->value('operating_hours') }}</p>
+                            @endif
                         </div>
                     </a>
                 </div>

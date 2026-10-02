@@ -132,9 +132,7 @@
     </div>
 
     <x-sections.cta-band
-        title="Masih ada pertanyaan lain?"
-        subtitle="Tim kami siap membantu menjawab kebutuhan spesifik Anda"
-        button-label="Hubungi Kami"
+        :placement="\App\Enums\CtaPlacement::Faq"
         :button-href="url('/kontak')"
         button-icon="forum"
     />

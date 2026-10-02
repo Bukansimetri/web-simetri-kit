@@ -14,12 +14,15 @@ Manual ini untuk Anda yang mengelola situs Anda lewat panel admin, tanpa perlu l
   - [Lead Kalkulator](#lead-kalkulator)
 - [Mengelola konten](#mengelola-konten)
   - [Content → Media Manager](#content--media-manager)
+  - [Beranda → Banner](#beranda--banner)
+  - [Tentang Kami → Misi, Nilai, dan Trust Strip](#tentang-kami--misi-nilai-dan-trust-strip)
+  - [Tentang Kami → Tim](#tentang-kami--tim)
+  - [Tentang Kami → Logo Klien](#tentang-kami--logo-klien)
+  - [Tentang Kami → Testimoni](#tentang-kami--testimoni)
   - [Konten Halaman → Halaman](#konten-halaman--halaman)
-  - [Konten Halaman → Banner](#konten-halaman--banner)
-  - [Konten Halaman → Testimoni](#konten-halaman--testimoni)
-  - [Konten Halaman → Tim](#konten-halaman--tim)
-  - [Konten Halaman → Logo Klien](#konten-halaman--logo-klien)
-  - [Konten Halaman → Halaman Tentang Kami](#konten-halaman--halaman-tentang-kami)
+  - [Konten Halaman → Blok Halaman](#konten-halaman--blok-halaman)
+  - [Konten Halaman → CTA](#konten-halaman--cta)
+  - [Beranda dan Karir → Section kartu dan langkah](#beranda-dan-karir--section-kartu-dan-langkah)
   - [Katalog → Produk](#katalog--produk)
   - [Katalog → Kategori Produk](#katalog--kategori-produk)
   - [Katalog → Peralatan Listrik](#katalog--peralatan-listrik)
@@ -86,14 +89,26 @@ Menu paling atas, tanpa grup:
 
 - **Media Manager** — tempat menyimpan dan mengatur gambar dan file yang Anda unggah, dikelompokkan dalam folder.
 
+**Beranda**
+
+- **Banner** — gambar besar yang tampil di bagian atas (hero) halaman depan.
+- **Mengapa Beralih** — kartu alasan di halaman depan.
+- **Cara Kerja** — langkah-langkah di halaman depan.
+
+**Tentang Kami**
+
+- **Misi** — poin misi di halaman "Tentang Kami".
+- **Nilai** — kartu nilai di halaman "Tentang Kami".
+- **Trust Strip** — angka kepercayaan di halaman "Tentang Kami".
+- **Tim** — profil anggota tim yang ditampilkan di situs.
+- **Logo Klien** — logo perusahaan klien/mitra yang ditampilkan sebagai daftar logo.
+- **Testimoni** — ulasan atau testimoni pelanggan yang ditampilkan di situs.
+
 **Konten Halaman**
 
 - **Halaman** — halaman statis tambahan di situs Anda (misal Syarat & Ketentuan, Kebijakan Privasi).
-- **Banner** — gambar besar yang tampil di bagian atas (hero) halaman depan.
-- **Testimoni** — ulasan atau testimoni pelanggan yang ditampilkan di situs.
-- **Tim** — profil anggota tim yang ditampilkan di situs.
-- **Logo Klien** — logo perusahaan klien/mitra yang ditampilkan sebagai daftar logo.
-- **Halaman Tentang Kami** — isi halaman "Tentang Kami" (visi, misi, nilai, dsb).
+- **Blok Halaman** — Hero, Siapa Kami, dan Visi di halaman "Tentang Kami", serta info kontak (jam operasional dan pesan WhatsApp) di halaman "Kontak".
+- **CTA** — teks ajakan bertindak ("Hubungi Kami" dan sejenisnya) di berbagai halaman.
 
 **Katalog**
 
@@ -119,6 +134,8 @@ Menu paling atas, tanpa grup:
 **Karir**
 
 - **Lowongan Kerja** — daftar lowongan pekerjaan yang ditampilkan di halaman karir situs.
+- **Mengapa Bergabung** — kartu alasan bergabung di halaman karir.
+- **Proses Rekrutmen** — langkah rekrutmen di halaman karir.
 
 **Menu Builder**
 
@@ -195,7 +212,7 @@ Halaman statis tambahan di situs Anda (misal Syarat & Ketentuan, Kebijakan Priva
 
 > **Perhatian:** Bila halaman ini sudah tayang dan sudah dibagikan/diindeks, mengubah **Slug** akan mengubah alamatnya — tautan lama yang sudah dibagikan (atau sudah masuk mesin pencari) tidak akan menemukan halaman ini lagi. Hindari mengubah slug halaman yang sudah lama tayang tanpa berkoordinasi dengan developer.
 
-### Konten Halaman → Banner
+### Beranda → Banner
 
 Gambar besar (hero) yang tampil di bagian atas halaman depan, bisa lebih dari satu dan tampil bergantian.
 
@@ -203,7 +220,7 @@ Gambar besar (hero) yang tampil di bagian atas halaman depan, bisa lebih dari sa
 - Kolom opsional: **Teks Badge**, **Judul Slide**, **Subjudul**, **Label Tombol Utama** dan **Alamat Tombol Utama**, **Label Tombol Sekunder** dan **Alamat Tombol Sekunder**, **Konten Trust Bar**, **Mulai Tayang**, **Selesai Tayang**, **Urutan Tampil**.
 - Toggle **Aktif** menentukan apakah banner ini ditampilkan atau disembunyikan.
 
-### Konten Halaman → Testimoni
+### Tentang Kami → Testimoni
 
 Ulasan pelanggan yang ditampilkan di situs.
 
@@ -211,7 +228,7 @@ Ulasan pelanggan yang ditampilkan di situs.
 - Kolom opsional: **Perusahaan / Jabatan**, **Foto**, **Urutan Tampil**.
 - Toggle **Aktif** menentukan apakah testimoni ini ditampilkan.
 
-### Konten Halaman → Tim
+### Tentang Kami → Tim
 
 Profil anggota tim yang ditampilkan di situs.
 
@@ -219,7 +236,7 @@ Profil anggota tim yang ditampilkan di situs.
 - Kolom opsional: **LinkedIn**, **Urutan Tampil**.
 - Toggle **Aktif** menentukan apakah profil ini ditampilkan.
 
-### Konten Halaman → Logo Klien
+### Tentang Kami → Logo Klien
 
 Logo perusahaan klien/mitra yang ditampilkan sebagai daftar logo di situs.
 
@@ -227,9 +244,55 @@ Logo perusahaan klien/mitra yang ditampilkan sebagai daftar logo di situs.
 - Kolom opsional: **URL Tautan** (bila logo diklik akan membuka alamat ini), **Urutan Tampil**.
 - Toggle **Aktif** menentukan apakah logo ini ditampilkan.
 
-### Konten Halaman → Halaman Tentang Kami
+### Tentang Kami → Misi, Nilai, dan Trust Strip
 
-Berbeda dari menu lain, ini bukan daftar data melainkan satu halaman pengaturan untuk mengisi seluruh konten halaman "Tentang Kami": gambar latar, subjudul, kutipan, pernyataan visi, daftar misi, kartu nilai, dan statistik. Setiap kolom bertipe gambar (misal **Gambar Latar**, **Gambar Kartu Besar**) dan kolom teks (misal **Subjudul**, **Judul**, **Deskripsi**) diisi langsung di halaman ini, lalu klik tombol simpan di bagian bawah/atas halaman.
+Tiga menu ini mengatur isi section di halaman "Tentang Kami". Tampilan (warna, posisi, ukuran) mengikuti desain situs dan tidak bisa diubah dari sini.
+
+| Menu | Isi | Maks item aktif |
+|---|---|---|
+| **Misi** | Poin misi (judul dan deskripsi). Tiga poin pertama tampil di kolom kiri, sisanya di kolom kanan | 5 |
+| **Nilai** | Kartu nilai berikon (judul dan deskripsi) | 3 |
+| **Trust Strip** | Angka kepercayaan: ikon, **Angka** (misal 5.000+), dan **Keterangan** | 3 |
+
+- Cara menambah, mengurutkan, mengaktifkan atau menonaktifkan item sama seperti section lain (lihat bagian Beranda dan Karir → Section kartu dan langkah di bawah).
+- **Ubah Judul Section** di menu Misi mengatur label kecil, judul, dan subjudul. Di menu Nilai, tombol yang sama juga mengatur **kartu besar bergambar** (gambar, ikon, judul, dan deskripsi). Menu Trust Strip tidak punya judul section.
+- Kolom gambar yang dikosongkan akan memakai gambar bawaan.
+
+### Konten Halaman → Blok Halaman
+
+Menu **Blok Halaman** berisi empat blok tetap (tanpa tombol tambah atau hapus). Pilih satu blok lalu ubah isinya:
+
+- **Hero** (Tentang Kami): gambar latar dan subjudul. Judul besar halaman tetap otomatis memakai Nama Situs.
+- **Siapa Kami** (Tentang Kami): gambar, teks badge, label kecil, judul, paragraf, dan kutipan. Paragraf dan kutipan boleh dicetak tebal atau miring.
+- **Visi** (Tentang Kami): label kecil, pernyataan visi, dan subteks.
+- **Info Kontak** (halaman Kontak): label tombol WhatsApp, jam operasional, dan pesan otomatis WhatsApp. Pesan ini dipakai tombol WhatsApp di halaman Kontak, CTA Beranda, dan CTA di halaman lain. Nomor WhatsApp tetap diatur di **Pengaturan Umum**.
+
+### Beranda dan Karir → Section kartu dan langkah
+
+Menu **Mengapa Beralih**, **Cara Kerja**, **Mengapa Bergabung**, dan **Proses Rekrutmen** mengatur isi section berbentuk kartu atau langkah. Tampilan (warna, posisi, kemiringan kartu) mengikuti desain situs dan tidak bisa diubah dari sini.
+
+| Menu | Tampil di | Maks item aktif | Ikon | Bisa ditonjolkan |
+|---|---|---|---|---|
+| **Mengapa Beralih** | Beranda | 3 | Ya | Ya |
+| **Cara Kerja** | Beranda | 4 | – | Ya |
+| **Mengapa Bergabung** | Karir | 3 | Ya | – |
+| **Proses Rekrutmen** | Karir | 4 | – | – |
+
+- **Ubah isi item**: klik item, lalu ubah **Judul**, **Deskripsi**, dan (bila ada) **Ikon** dari daftar.
+- **Tambah item**: klik **Buat**. Jika jumlah item aktif sudah mencapai batas, simpan item baru sebagai nonaktif, lalu nonaktifkan item lain sebelum mengaktifkannya.
+- **Aktif/nonaktif**: pakai toggle **Aktif** di daftar. Item nonaktif tidak tampil di situs tetapi tetap tersimpan.
+- **Urutan**: klik tombol urutkan di atas tabel, lalu seret baris. Urutan di daftar = urutan tampil. Nomor langkah (01, 02, …) mengikuti urutan ini secara otomatis.
+- **Tonjolkan**: centang **Tonjolkan** pada satu item (kartu biru di "Mengapa Beralih", lingkaran nomor berwarna di "Cara Kerja"). Item yang sebelumnya ditonjolkan otomatis dilepas.
+- **Judul & subjudul section**: klik **Ubah Judul Section** di atas daftar. Tekan Enter di kolom judul untuk memotong baris seperti desain.
+- Jika semua item sebuah section dinonaktifkan atau dihapus, section itu disembunyikan dari situs.
+
+### Konten Halaman → CTA
+
+Menu **CTA** berisi blok ajakan ("Hubungi Kami", "Chat via WhatsApp", dan sejenisnya) di Beranda, Produk, Detail Produk, Daftar & Detail Artikel, Tentang Kami, FAQ, dan Karir. Daftarnya tetap (9 penempatan), jadi tidak ada tombol tambah atau hapus.
+
+- Yang bisa diubah: **Judul**, **Subjudul/Paragraf**, dan **Label Tombol** (CTA Beranda juga punya **Label Tombol Form**).
+- Tujuan tombol tidak bisa diubah di sini. Tombol WhatsApp memakai nomor di **Pengaturan Umum**; bila nomor kosong, tombol mengarah ke halaman Kontak.
+- CTA **Detail Produk – Masa Depan Energi**: tulis **{produk}** di paragraf untuk menyisipkan nama produk yang sedang dibuka.
 
 ### Katalog → Produk
 
@@ -371,7 +434,7 @@ Catatan siapa mengubah apa di panel ini (misal siapa yang mengubah suatu Produk 
 
 Sebagian halaman publik disimpan sementara (di-cache) selama beberapa menit agar situs cepat diakses pengunjung. Panel admin sendiri selalu menampilkan data terbaru — jeda ini hanya berlaku untuk pengunjung situs.
 
-- **Biasanya langsung tampil**: perubahan di **Banner**, **Tim**, **Logo Klien**, dan **Halaman Tentang Kami**.
+- **Biasanya langsung tampil**: perubahan di **Banner**, **Tim**, **Logo Klien**, **Blok Halaman**, dan menu section (Beranda, Karir, Tentang Kami).
 - **Bisa terlambat hingga 5 menit**: perubahan di **Produk**, **Artikel**, **Portfolio**, dan sebagian **Testimoni** (testimoni yang tampil di halaman depan bisa lebih lambat dari testimoni di halaman Tentang Kami).
 - Menu lain (Pesan Masuk, Lead Kalkulator, Lowongan Kerja, Menu Builder, Pengaturan Situs) langsung terlihat setelah disimpan.
 
