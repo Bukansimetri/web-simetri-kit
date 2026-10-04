@@ -20,10 +20,9 @@ class LegacyMarkupEquivalenceTest extends TestCase
      */
     public static function fragments(): array
     {
-        return array_combine(
-            array_keys(LegacyMarkup::FRAGMENTS),
-            array_map(fn (string $name): array => [$name], array_keys(LegacyMarkup::FRAGMENTS)),
-        );
+        $names = array_values(array_diff(array_keys(LegacyMarkup::FRAGMENTS), LegacyMarkup::REDESIGNED));
+
+        return array_combine($names, array_map(fn (string $name): array => [$name], $names));
     }
 
     #[DataProvider('fragments')]

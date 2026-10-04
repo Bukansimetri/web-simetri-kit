@@ -43,7 +43,19 @@ class LegacyMarkup
         'tentang-kami-nilai' => ['/tentang-kami', "//section[.//div[contains(@class, 'md:col-span-3') and .//img]]"],
         'tentang-kami-trust' => ['/tentang-kami', "//section[contains(@class, 'border-y')]"],
         'kontak-info' => ['/kontak', "//div[contains(@class, 'lg:w-2/5') and contains(@class, 'bg-primary')]"],
+        'produk-hero' => ['/produk', "//section[.//h1[contains(., 'Katalog Produk')]]"],
+        'karir-hero' => ['/karir', "//section[.//h1[contains(., 'Revolusi Energi')]]"],
+        'faq-hero' => ['/faq', "//section[.//h1[contains(., 'Pertanyaan Umum')]]"],
+        'kontak-hero' => ['/kontak', "//section[.//h1[contains(., 'Rumah Hemat Energi')]]"],
     ];
+
+    /**
+     * Fragmen yang desainnya sengaja diubah (spec 030-client-design-update): tetap bisa diekstrak
+     * untuk test render, tetapi tidak lagi dibandingkan dengan fixture HTML lama.
+     *
+     * @var list<string>
+     */
+    public const REDESIGNED = ['home-why-choose', 'home-how-it-works'];
 
     public static function fixturePath(string $name): string
     {

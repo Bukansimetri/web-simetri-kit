@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Enums\BannerOverlayStyle;
 use App\Enums\BannerTextPosition;
+use App\Filament\Clusters\BannerCluster;
 use App\Filament\Resources\BannerResource\Pages;
 use App\Models\Banner;
 use App\Support\ImageUploads;
@@ -16,6 +17,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Pages\SubNavigationPosition;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
@@ -32,13 +34,19 @@ class BannerResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-photo';
 
-    protected static ?string $navigationLabel = 'Banner';
+    protected static ?string $navigationLabel = 'Slider Beranda';
 
-    protected static ?string $navigationGroup = 'Beranda';
+    protected static ?string $cluster = BannerCluster::class;
+
+    protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
     protected static ?int $navigationSort = 1;
 
     protected static ?string $modelLabel = 'Banner';
+
+    protected static ?string $pluralModelLabel = 'Slider Beranda';
+
+    protected static ?string $slug = 'slider-beranda';
 
     /**
      * @var array<string, string>

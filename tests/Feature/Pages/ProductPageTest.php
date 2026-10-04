@@ -5,6 +5,7 @@ namespace Tests\Feature\Pages;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\Support\LegacyMarkup;
 use Tests\TestCase;
 
 class ProductPageTest extends TestCase
@@ -65,5 +66,61 @@ class ProductPageTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('data-product-image-placeholder', escape: false);
+    }
+
+    public function test_index_cards_show_only_image_and_name(): void
+    {
+        $category = Category::factory()->create(['name' => 'Kategori Rahasia']);
+        $product = Product::factory()->create([
+            'name' => 'Inverter Uji',
+            'slug' => 'inverter-uji',
+            'short_description' => 'Deskripsi pendek unik',
+            'price' => 1234567,
+            'category_id' => $category->id,
+        ]);
+
+        $html = $this->get('/produk')->assertOk()->getContent();
+        $card = LegacyMarkup::extract($html, "//a[contains(@href, '/produk/inverter-uji')]");
+
+        $this->assertStringContainsString('Inverter Uji', $card);
+        $this->assertStringNotContainsString('Deskripsi pendek unik', $card);
+        $this->assertStringNotContainsString('1.234.567', $card);
+        $this->assertStringNotContainsString('Kategori Rahasia', $card);
+        $this->assertStringNotContainsString('Lihat detail', $card);
+        $this->assertStringContainsString('text-center', $card);
+        $this->get('/produk/'.$product->slug)->assertOk();
+    }
+
+    public function test_index_card_without_image_uses_placeholder_with_same_frame(): void
+    {
+        Product::factory()->create(['name' => 'Tanpa Gambar', 'images' => []]);
+
+        $this->get('/produk')
+            ->assertOk()
+            ->assertSee('data-product-image-placeholder', escape: false)
+            ->assertSee('aspect-[4/3]', escape: false);
+    }
+
+    public function test_index_category_filter_still_renders_buttons_for_each_category(): void
+    {
+        $a = Category::factory()->create(['name' => 'Panel']);
+        Product::factory()->create(['category_id' => $a->id]);
+
+        $this->get('/produk')->assertOk()->assertSee('Semua')->assertSee('Panel');
+    }
+
+    public function test_related_products_on_detail_page_keep_the_full_card(): void
+    {
+        $category = Category::factory()->create();
+        $product = Product::factory()->create(['category_id' => $category->id]);
+        Product::factory()->create([
+            'category_id' => $category->id,
+            'short_description' => 'Deskripsi terkait unik',
+        ]);
+
+        $this->get('/produk/'.$product->slug)
+            ->assertOk()
+            ->assertSee('Deskripsi terkait unik')
+            ->assertSee('Lihat detail');
     }
 }

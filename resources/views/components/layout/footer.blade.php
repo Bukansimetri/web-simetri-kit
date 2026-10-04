@@ -80,6 +80,7 @@
             </div>
         @endforeach
 
+        @if (filled($site->company_name) || filled($site->company_address) || filled($site->company_email) || filled($site->company_phone))
         <div>
             <h4 class="font-bold text-white mb-6">Kontak</h4>
             <ul class="space-y-4 text-white/60 text-sm">
@@ -97,6 +98,7 @@
                 @endif
             </ul>
         </div>
+        @endif
     </div>
 
     <div class="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/40">

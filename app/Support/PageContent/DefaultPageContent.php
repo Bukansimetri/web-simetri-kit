@@ -130,6 +130,7 @@ class DefaultPageContent
         return [
             PageBlockType::AboutHero->value => [
                 'image_path' => null,
+                'title' => 'Mengenal {app_name} Lebih Dekat',
                 'subtitle' => 'Menghadirkan solusi energi surya inovatif dan berkelanjutan untuk masa depan Indonesia yang lebih cerah.',
             ],
             PageBlockType::AboutWhoWeAre->value => [
@@ -149,6 +150,34 @@ class DefaultPageContent
                 'whatsapp_label' => 'Chat via WhatsApp',
                 'operating_hours' => 'Senin - Jumat, 09:00 - 17:00 WIB',
                 'whatsapp_message' => 'Halo, saya ingin konsultasi tentang solusi tenaga surya {app_name}.',
+            ],
+            PageBlockType::ProductsHero->value => [
+                'image_path' => null,
+                'title' => 'Katalog Produk',
+                'subtitle' => 'Temukan panel surya dan inverter yang tepat untuk proyek Anda, dari skala rumah tangga hingga industri besar.',
+            ],
+            PageBlockType::CareerHero->value => [
+                'image_path' => null,
+                'title' => 'Gabung dengan Revolusi Energi Bersama {app_name}',
+                'subtitle' => 'Kami mencari pemikir inovatif dan bersemangat untuk membangun masa depan yang berkelanjutan.',
+            ],
+            PageBlockType::ArticlesHero->value => [
+                'image_path' => null,
+                'title' => 'Wawasan & Artikel',
+                'subtitle' => 'Temukan pembaruan terkini seputar inovasi energi surya, tips efisiensi pemakaian daya, serta studi kasus instalasi di Indonesia.',
+            ],
+            PageBlockType::FaqHero->value => [
+                'title' => 'Pertanyaan Umum',
+                'subtitle' => 'Temukan jawaban cepat seputar layanan, instalasi, dan produk panel surya kami.',
+            ],
+            PageBlockType::ContactHero->value => [
+                'title' => 'Mari Wujudkan Rumah Hemat Energi',
+                'subtitle' => 'Tim kami siap membantu menjawab pertanyaan dan memberikan konsultasi gratis untuk kebutuhan energi surya Anda.',
+            ],
+            PageBlockType::PortfolioHero->value => [
+                'image_path' => null,
+                'title' => 'Portofolio Proyek',
+                'subtitle' => 'Dokumentasi instalasi sistem PLTS terpercaya dan solusi energi terbarukan {app_name} untuk hunian modern hingga kawasan industri di seluruh Indonesia.',
             ],
         ];
     }

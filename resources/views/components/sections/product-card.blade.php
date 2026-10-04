@@ -1,4 +1,19 @@
-@props(['product'])
+@props(['product', 'simple' => false])
+
+@if ($simple)
+<a href="{{ url('/produk/'.$product->slug) }}" class="group bg-white border border-outline-variant/20 rounded-xl overflow-hidden shadow-sm hover:-translate-y-1 hover:shadow-md transition-all duration-300 flex flex-col h-full">
+    <div class="aspect-[4/3] w-full bg-surface-container overflow-hidden">
+        @if ($product->coverImageUrl())
+            <img src="{{ $product->coverImageUrl() }}" alt="{{ $product->name }}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        @else
+            <div data-product-image-placeholder class="w-full h-full flex items-center justify-center text-outline">
+                <span class="material-symbols-outlined text-4xl">image</span>
+            </div>
+        @endif
+    </div>
+    <h3 class="font-headline-lg text-headline-lg text-lg text-primary-container text-center px-4 py-5 line-clamp-2">{{ $product->name }}</h3>
+</a>
+@else
 
 <div class="bg-surface-container-lowest p-6 shadow-md border border-surface-container-high rounded-lg hover:-translate-y-1 transition-transform duration-300 flex flex-col h-full">
     <div class="aspect-video w-full rounded-lg overflow-hidden mb-6 bg-surface-container">
@@ -29,3 +44,4 @@
         Lihat detail <span class="material-symbols-outlined">arrow_right_alt</span>
     </a>
 </div>
+@endif

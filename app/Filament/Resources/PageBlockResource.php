@@ -17,10 +17,12 @@ use Filament\Resources\Resource;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Isi blok halaman tetap (Hero/Siapa Kami/Visi Tentang Kami, Info Kontak). Tampilan mengikuti desain halaman.
+ * Isi blok halaman tetap (Siapa Kami/Visi Tentang Kami, Info Kontak). Tampilan mengikuti desain halaman.
+ * Banner halaman dikelola terpisah di PageBannerResource (menu Banner).
  */
 class PageBlockResource extends Resource
 {
@@ -39,6 +41,11 @@ class PageBlockResource extends Resource
     protected static ?string $pluralModelLabel = 'Blok Halaman';
 
     protected static ?string $slug = 'blok-halaman';
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->whereNotIn('block', PageBlockType::pageBannerValues());
+    }
 
     public static function canCreate(): bool
     {
@@ -76,10 +83,6 @@ class PageBlockResource extends Resource
     private static function fieldsFor(PageBlockType $type): array
     {
         return match ($type) {
-            PageBlockType::AboutHero => [
-                static::imageField('data.image_path', 'Gambar Latar', $type->imageMaxWidth() ?? 1920),
-                Textarea::make('data.subtitle')->label('Subjudul')->rows(2)->maxLength(500),
-            ],
             PageBlockType::AboutWhoWeAre => [
                 static::imageField('data.image_path', 'Gambar', $type->imageMaxWidth() ?? 1000),
                 TextInput::make('data.badge_text')->label('Teks Badge Overlay')->maxLength(120),
@@ -103,6 +106,7 @@ class PageBlockResource extends Resource
                     ->rows(2)
                     ->maxLength(300),
             ],
+            default => [],
         };
     }
 

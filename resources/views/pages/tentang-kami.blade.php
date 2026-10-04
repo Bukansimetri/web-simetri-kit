@@ -25,8 +25,10 @@
                 <a href="{{ url('/') }}" class="hover:text-primary-fixed transition-colors">Beranda</a>
                 <span class="mx-2 text-white/40">/</span> Tentang Kami
             </p>
-            <h1 class="font-headline-xl text-4xl md:text-6xl font-extrabold text-white max-w-4xl leading-tight tracking-tight">Mengenal {{ $appName }} Lebih Dekat</h1>
-            <p class="mt-4 text-lg md:text-xl text-white/90 max-w-2xl leading-relaxed">{{ $hero->value('subtitle') }}</p>
+            <h1 class="font-headline-xl text-4xl md:text-6xl font-extrabold text-white max-w-4xl leading-tight tracking-tight">{{ $hero->value('title') }}</h1>
+            @if (filled($hero->value('subtitle')))
+                <p class="mt-4 text-lg md:text-xl text-white/90 max-w-2xl leading-relaxed">{{ $hero->value('subtitle') }}</p>
+            @endif
         </div>
     </section>
 

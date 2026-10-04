@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Menanam konten bawaan secara idempoten: section yang sudah punya judul, blok, dan CTA yang sudah ada tidak disentuh.
+ * Menanam konten bawaan secara idempoten: section yang sudah punya judul, blok, dan CTA yang sudah ada tidak disentuh
+ * (blok hanya ditambah kolom baru yang belum ada).
  * Isi Tentang Kami dipindahkan dari pengaturan lama (grup `about_page`) bila ada, agar tampilan tidak berubah.
  */
 class PageContentInstaller
@@ -27,10 +28,10 @@ class PageContentInstaller
         }
 
         foreach (PageBlockType::cases() as $block) {
-            PageBlock::query()->firstOrCreate(
-                ['block' => $block->value],
-                ['data' => DefaultPageContent::forCurrentSite(self::blockData($block, $legacy))],
-            );
+            $data = DefaultPageContent::forCurrentSite(self::blockData($block, $legacy));
+            $row = PageBlock::query()->firstOrCreate(['block' => $block->value], ['data' => $data]);
+
+            self::addMissingBlockKeys($row, $data);
         }
 
         foreach (CtaPlacement::cases() as $placement) {
@@ -134,6 +135,7 @@ class PageContentInstaller
         return match ($block) {
             PageBlockType::AboutHero => [
                 'image_path' => self::keep($legacy, 'hero_image_path', $defaults['image_path']),
+                'title' => $defaults['title'],
                 'subtitle' => self::keep($legacy, 'hero_subtitle', $defaults['subtitle']),
             ],
             PageBlockType::AboutWhoWeAre => [
@@ -149,8 +151,22 @@ class PageContentInstaller
                 'heading' => self::keep($legacy, 'visi_heading', $defaults['heading']),
                 'subtext' => self::keep($legacy, 'visi_subtext', $defaults['subtext']),
             ],
-            PageBlockType::ContactInfo => $defaults,
+            default => $defaults,
         };
+    }
+
+    /**
+     * Kolom baru pada blok yang sudah tersimpan diisi nilai bawaan; nilai yang sudah ada (termasuk kosong) tidak disentuh.
+     *
+     * @param  array<string, mixed>  $defaults
+     */
+    private static function addMissingBlockKeys(PageBlock $row, array $defaults): void
+    {
+        $missing = array_diff_key($defaults, $row->data ?? []);
+
+        if ($missing !== []) {
+            $row->update(['data' => [...($row->data ?? []), ...$missing]]);
+        }
     }
 
     /**

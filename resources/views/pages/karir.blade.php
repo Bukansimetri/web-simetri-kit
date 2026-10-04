@@ -5,6 +5,7 @@
 
     $values = \App\Support\PageContent\PageContent::section(\App\Enums\PageSection::CareerValues);
     $process = \App\Support\PageContent\PageContent::section(\App\Enums\PageSection::RecruitmentProcess);
+    $hero = \App\Support\PageContent\PageContent::block(\App\Enums\PageBlockType::CareerHero);
 @endphp
 
 @section('title', \App\Support\Seo\PageTitle::forStatic('karir', 'Karir'))
@@ -12,10 +13,10 @@
 
 @section('content')
     <x-sections.page-hero
-        title="Gabung dengan Revolusi Energi Bersama {{ $appName }}"
+        :title="$hero->value('title')"
         breadcrumb="Karir"
-        subtitle="Kami mencari pemikir inovatif dan bersemangat untuk membangun masa depan yang berkelanjutan."
-        :image="asset('images/mockup/home-3.jpg')"
+        :subtitle="$hero->value('subtitle')"
+        :image="\App\Support\PageContent\PageContent::imageUrl($hero->value('image_path'), \App\Enums\PageBlockType::CareerHero->defaultImagePath())"
     />
 
     {{-- Values --}}

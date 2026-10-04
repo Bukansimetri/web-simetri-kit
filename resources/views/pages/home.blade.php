@@ -96,36 +96,29 @@
     @if ($testimonials->isNotEmpty())
         <section class="reveal-element py-24 px-6 max-w-7xl mx-auto">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="font-headline-xl text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-primary">Apa Kata Mereka Tentang SUOER?</h2>
-                <p class="text-base md:text-lg font-medium leading-relaxed text-secondary">
-                    Kisah nyata dari pemilik rumah dan pelaku bisnis yang telah menghemat biaya listrik dan beralih ke energi surya bersama kami.
-                </p>
+                <span class="text-xs font-bold text-secondary uppercase tracking-widest block mb-4">Testimoni</span>
+                <h2 class="font-headline-xl text-3xl md:text-5xl font-extrabold tracking-tight text-primary">Partner Kami</h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                @foreach ($testimonials as $i => $testimonial)
-                    @php $highlight = $i === 1; @endphp
-                    <div @class([
-                        'p-8 rounded-xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-2',
-                        'bg-surface-container-low border border-primary/30 shadow-md hover:shadow-xl' => $highlight,
-                        'bg-white border border-gray-100 shadow-sm hover:shadow-lg' => ! $highlight,
-                    ])>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+                @foreach ($testimonials as $testimonial)
+                    <div class="p-8 rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between">
                         <div>
-                            <div class="flex items-center gap-1 mb-4 text-primary-container">
+                            <div class="flex items-center gap-1 mb-4 text-primary-container" aria-label="Rating {{ $testimonial->rating ?? 5 }} dari 5">
                                 @for ($s = 1; $s <= 5; $s++)
-                                    <span class="material-symbols-outlined text-lg {{ $s <= ($testimonial->rating ?? 5) ? '' : 'text-outline-variant' }}">star</span>
+                                    <span class="material-symbols-outlined text-lg">{{ $s <= ($testimonial->rating ?? 5) ? 'star' : 'star_border' }}</span>
                                 @endfor
                             </div>
-                            <p class="text-on-surface-variant text-sm leading-relaxed mb-6 {{ $highlight ? 'font-medium' : '' }}">
+                            <p class="text-on-surface-variant text-sm leading-relaxed mb-6">
                                 &ldquo;{{ $testimonial->content }}&rdquo;
                             </p>
                         </div>
-                        <div class="flex items-center gap-4 pt-4 border-t {{ $highlight ? 'border-outline-variant/30' : 'border-gray-100' }}">
+                        <div class="flex items-center gap-4 pt-4 border-t border-gray-100">
                             @php $hasPhoto = $testimonial->photo_path && \Illuminate\Support\Facades\Storage::disk('public')->exists($testimonial->photo_path); @endphp
                             @if ($hasPhoto)
                                 <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($testimonial->photo_path) }}" alt="{{ $testimonial->name }}" loading="lazy" decoding="async" class="w-12 h-12 rounded-full object-cover shadow-sm shrink-0">
                             @else
-                                <div class="w-12 h-12 rounded-full {{ $i === 2 ? 'bg-secondary' : 'bg-primary-container' }} text-white flex items-center justify-center font-bold text-base shadow-sm shrink-0">
+                                <div class="w-12 h-12 rounded-full bg-primary-container text-white flex items-center justify-center font-bold text-base shadow-sm shrink-0">
                                     {{ \Illuminate\Support\Str::of($testimonial->name)->explode(' ')->map(fn ($w) => \Illuminate\Support\Str::substr($w, 0, 1))->take(2)->implode('') }}
                                 </div>
                             @endif

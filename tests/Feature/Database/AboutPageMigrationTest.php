@@ -118,9 +118,23 @@ class AboutPageMigrationTest extends TestCase
         PageContentInstaller::install();
 
         $this->assertSame(5, SectionItem::query()->forSection(PageSection::AboutMission)->count());
-        $this->assertSame(4, PageBlock::query()->count());
+        $this->assertSame(count(PageBlockType::cases()), PageBlock::query()->count());
         $this->assertSame($before, DB::table('settings')->where('group', 'about_page')->count());
         $this->assertGreaterThan(0, $before);
+    }
+
+    public function test_install_adds_new_hero_title_without_touching_existing_values(): void
+    {
+        PageBlock::query()->where('block', PageBlockType::AboutHero->value)->update(['data' => json_encode(['image_path' => 'about-page/hero.webp', 'subtitle' => null])]);
+
+        PageContentInstaller::install();
+
+        $data = PageBlock::query()->where('block', PageBlockType::AboutHero->value)->first()->data;
+        $siteName = app(SiteSettings::class)->site_name ?: config('app.name');
+
+        $this->assertSame("Mengenal {$siteName} Lebih Dekat", $data['title']);
+        $this->assertSame('about-page/hero.webp', $data['image_path']);
+        $this->assertNull($data['subtitle']);
     }
 
     public function test_install_never_overwrites_admin_edited_block(): void

@@ -12,6 +12,7 @@ Manual ini untuk Anda yang mengelola situs Anda lewat panel admin, tanpa perlu l
   - [Dasbor](#dasbor)
   - [Pesan Masuk](#pesan-masuk)
   - [Lead Kalkulator](#lead-kalkulator)
+  - [Langganan Newsletter](#langganan-newsletter)
 - [Mengelola konten](#mengelola-konten)
   - [Content → Media Manager](#content--media-manager)
   - [Beranda → Banner](#beranda--banner)
@@ -91,7 +92,7 @@ Menu paling atas, tanpa grup:
 
 **Beranda**
 
-- **Banner** — gambar besar yang tampil di bagian atas (hero) halaman depan.
+- **Banner** — gambar besar di bagian atas (hero) halaman. Berisi dua tab: **Slider Beranda** untuk halaman depan dan **Banner Halaman** untuk halaman lain.
 - **Mengapa Beralih** — kartu alasan di halaman depan.
 - **Cara Kerja** — langkah-langkah di halaman depan.
 
@@ -107,7 +108,7 @@ Menu paling atas, tanpa grup:
 **Konten Halaman**
 
 - **Halaman** — halaman statis tambahan di situs Anda (misal Syarat & Ketentuan, Kebijakan Privasi).
-- **Blok Halaman** — Hero, Siapa Kami, dan Visi di halaman "Tentang Kami", serta info kontak (jam operasional dan pesan WhatsApp) di halaman "Kontak".
+- **Blok Halaman** — Siapa Kami dan Visi di halaman "Tentang Kami", serta info kontak (jam operasional dan pesan WhatsApp) di halaman "Kontak".
 - **CTA** — teks ajakan bertindak ("Hubungi Kami" dan sejenisnya) di berbagai halaman.
 
 **Katalog**
@@ -120,6 +121,7 @@ Menu paling atas, tanpa grup:
 
 - **Lead Kalkulator** — calon pelanggan yang mengisi kalkulator estimasi penghematan di situs.
 - **Pesan Masuk** — pesan dari pengunjung yang mengisi form kontak di situs.
+- **Langganan Newsletter** — alamat email pengunjung yang mendaftar lewat kartu "Update Mingguan" di halaman Artikel.
 
 **Blog**
 
@@ -187,6 +189,15 @@ Calon pelanggan yang mengisi kalkulator estimasi penghematan di situs Anda.
 - Buka salah satu lead untuk melihat detail: data pelanggan, hasil hitungan kalkulator (Tagihan Efektif, Hemat Tahun 1, Total Hemat 25 Tahun, Breakeven, Produksi Surya Tahunan, Asumsi yang Berlaku Saat Itu), dan bagian **Follow-up** untuk mengubah **Status**, mencatat **Catatan Follow-up**, dan mengisi **Waktu Follow-up Terakhir**. Kolom **PIC Terakhir** terisi otomatis sesuai akun yang menandai lead ini.
 - Setelah Anda menghubungi calon pelanggan, klik tombol **Tandai Sudah Dihubungi** di daftar, atau ubah **Status** secara manual saat membuka detailnya.
 
+### Langganan Newsletter
+
+Daftar alamat email pengunjung yang mendaftar lewat kartu **Update Mingguan** di halaman Artikel situs Anda.
+
+- Daftar menampilkan **Email** dan **Tanggal Daftar**. Gunakan kolom pencarian untuk mencari satu alamat email.
+- Alamat yang sama tidak akan tercatat dua kali, meski didaftarkan berulang.
+- Pendaftar tidak bisa ditambahkan atau diubah dari panel. Untuk menghapus satu alamat, klik **Hapus** di barisnya. Untuk beberapa sekaligus, centang barisnya lalu pilih hapus massal.
+- Panel hanya menyimpan daftarnya; email tidak dikirim otomatis dari sini.
+
 ## Mengelola konten
 
 Sebagian besar menu di bawah punya pola yang sama:
@@ -214,11 +225,19 @@ Halaman statis tambahan di situs Anda (misal Syarat & Ketentuan, Kebijakan Priva
 
 ### Beranda → Banner
 
-Gambar besar (hero) yang tampil di bagian atas halaman depan, bisa lebih dari satu dan tampil bergantian.
+Menu **Banner** punya dua tab di bagian atas: **Slider Beranda** dan **Banner Halaman**.
+
+**Slider Beranda** — gambar besar (hero) yang tampil di bagian atas halaman depan, bisa lebih dari satu dan tampil bergantian.
 
 - Kolom wajib: **Judul Internal** (hanya untuk Anda, tidak tampil di situs), **Gambar Banner** (maksimal 10 MB), **Teks Alt** (deskripsi gambar untuk aksesibilitas), **Gaya Lapisan**, dan **Posisi Teks**.
 - Kolom opsional: **Teks Badge**, **Judul Slide**, **Subjudul**, **Label Tombol Utama** dan **Alamat Tombol Utama**, **Label Tombol Sekunder** dan **Alamat Tombol Sekunder**, **Konten Trust Bar**, **Mulai Tayang**, **Selesai Tayang**, **Urutan Tampil**.
 - Toggle **Aktif** menentukan apakah banner ini ditampilkan atau disembunyikan.
+
+**Banner Halaman** — banner di bagian atas halaman Produk, Tentang Kami, Karir, Artikel, Portfolio, FAQ, dan Kontak. Satu banner per halaman (tanpa tombol tambah atau hapus); tampilan banner mengikuti desain tiap halaman.
+
+- Kolom wajib: **Judul**.
+- Kolom opsional: **Subjudul** (dikosongkan = subjudul disembunyikan) dan, khusus Produk, Tentang Kami, Karir, Artikel, dan Portfolio, **Gambar Latar** (maksimal 10 MB; dikosongkan = gambar bawaan dipakai).
+- Judul banner Tentang Kami dan Karir tidak lagi ikut berubah otomatis saat Nama Situs diganti — ubah manual di sini bila perlu.
 
 ### Tentang Kami → Testimoni
 
@@ -260,9 +279,8 @@ Tiga menu ini mengatur isi section di halaman "Tentang Kami". Tampilan (warna, p
 
 ### Konten Halaman → Blok Halaman
 
-Menu **Blok Halaman** berisi empat blok tetap (tanpa tombol tambah atau hapus). Pilih satu blok lalu ubah isinya:
+Menu **Blok Halaman** berisi tiga blok tetap (tanpa tombol tambah atau hapus). Pilih satu blok lalu ubah isinya:
 
-- **Hero** (Tentang Kami): gambar latar dan subjudul. Judul besar halaman tetap otomatis memakai Nama Situs.
 - **Siapa Kami** (Tentang Kami): gambar, teks badge, label kecil, judul, paragraf, dan kutipan. Paragraf dan kutipan boleh dicetak tebal atau miring.
 - **Visi** (Tentang Kami): label kecil, pernyataan visi, dan subteks.
 - **Info Kontak** (halaman Kontak): label tombol WhatsApp, jam operasional, dan pesan otomatis WhatsApp. Pesan ini dipakai tombol WhatsApp di halaman Kontak, CTA Beranda, dan CTA di halaman lain. Nomor WhatsApp tetap diatur di **Pengaturan Umum**.
@@ -323,6 +341,7 @@ Tulisan/artikel yang ditampilkan di halaman blog situs.
 - Kolom wajib: **Judul**, **Slug**, **Kategori**, **Ringkasan**, **Isi Artikel**.
 - Kolom opsional: **Redaksi**, **Gambar Sampul**, **Status** (misal draft/terbit), **Tanggal Publish**, **Judul Pencarian**, **Deskripsi Pencarian**, **Gambar SEO / Share Sosial**.
 - Artikel dengan **Status** selain terbit tidak akan tampil di situs meski sudah disimpan.
+- Pengunjung dapat mencari artikel lewat kotak **Cari Artikel** di halaman Artikel. Pencarian mencocokkan kata kunci pada **Judul** dan **Ringkasan**, jadi tulis keduanya dengan kata yang biasa dicari pengunjung.
 
 ### Blog → Kategori Artikel
 
@@ -337,6 +356,7 @@ Proyek/portofolio yang ditampilkan di situs.
 - Kolom wajib: **Judul Proyek**, **Slug**, **Kategori**, **Urutan Tampil**, **Gambar Proyek**, **Deskripsi Proyek**.
 - Kolom opsional: **Nama Klien**, **Tanggal Selesai**, **URL Tautan Proyek**, **Judul Pencarian**, **Deskripsi Pencarian**, **Gambar SEO / Share Sosial**.
 - Toggle **Aktif** menentukan apakah proyek ini ditampilkan.
+- Kartu proyek di halaman Portfolio menampilkan ringkasan singkat yang diambil dari awal **Deskripsi Proyek** (sekitar 140 karakter), jadi tulis kalimat pembuka yang menarik.
 
 ### Portfolio → Kategori Portfolio
 

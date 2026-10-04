@@ -10,9 +10,8 @@ use App\Filament\Resources\PageBlockResource\Pages\ListPageBlocks;
 use App\Models\PageBlock;
 use App\Models\User;
 use App\Settings\AboutPageSettings;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -35,16 +34,21 @@ class PageBlockResourceTest extends TestCase
         return Livewire::actingAs($this->admin())->test(EditPageBlock::class, ['record' => $this->block($type)->getRouteKey()]);
     }
 
-    public function test_four_blocks_are_listed_and_cannot_be_created_or_deleted(): void
+    public function test_non_banner_blocks_are_listed_and_cannot_be_created_or_deleted(): void
     {
         Livewire::actingAs($this->admin())
             ->test(ListPageBlocks::class)
             ->assertOk()
-            ->assertCountTableRecords(4)
+            ->assertCanSeeTableRecords([
+                $this->block(PageBlockType::AboutWhoWeAre),
+                $this->block(PageBlockType::AboutVision),
+                $this->block(PageBlockType::ContactInfo),
+            ])
+            ->assertCountTableRecords(3)
             ->assertTableActionDoesNotExist('delete');
 
         $this->assertFalse(PageBlockResource::canCreate());
-        $this->assertFalse(PageBlockResource::canDelete($this->block(PageBlockType::AboutHero)));
+        $this->assertFalse(PageBlockResource::canDelete($this->block(PageBlockType::AboutVision)));
         $this->assertArrayNotHasKey('create', PageBlockResource::getPages());
     }
 
@@ -58,10 +62,13 @@ class PageBlockResourceTest extends TestCase
         $this->edit(PageBlockType::ContactInfo)
             ->assertFormFieldExists('data.operating_hours')
             ->assertFormFieldDoesNotExist('data.heading');
+    }
 
-        $this->edit(PageBlockType::AboutHero)
-            ->assertFormFieldExists('data.image_path')
-            ->assertFormFieldExists('data.subtitle');
+    public function test_page_banners_are_not_editable_from_page_blocks(): void
+    {
+        $this->expectException(ModelNotFoundException::class);
+
+        $this->edit(PageBlockType::AboutHero);
     }
 
     public function test_admin_can_edit_vision_and_values_are_saved(): void
@@ -95,22 +102,6 @@ class PageBlockResourceTest extends TestCase
             ->fillForm(['data' => ['eyebrow' => str_repeat('a', 61), 'heading' => str_repeat('b', 501), 'subtext' => str_repeat('c', 501)]])
             ->call('save')
             ->assertHasFormErrors(['data.eyebrow' => 'max', 'data.heading' => 'max', 'data.subtext' => 'max']);
-    }
-
-    public function test_uploaded_hero_image_is_stored_as_webp(): void
-    {
-        Storage::fake('public');
-
-        $this->edit(PageBlockType::AboutHero)
-            ->fillForm(['data' => ['image_path' => UploadedFile::fake()->image('hero.jpg', 1200, 600), 'subtitle' => 'Sub']])
-            ->call('save')
-            ->assertHasNoFormErrors();
-
-        $path = $this->block(PageBlockType::AboutHero)->data['image_path'];
-
-        $this->assertNotEmpty($path);
-        $this->assertSame('webp', pathinfo($path, PATHINFO_EXTENSION));
-        Storage::disk('public')->assertExists($path);
     }
 
     public function test_legacy_about_settings_page_is_gone_from_panel(): void
