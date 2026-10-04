@@ -2,7 +2,7 @@
 
 @if ($simple)
 <a href="{{ url('/produk/'.$product->slug) }}" class="group bg-white border border-outline-variant/20 rounded-xl overflow-hidden shadow-sm hover:-translate-y-1 hover:shadow-md transition-all duration-300 flex flex-col h-full">
-    <div class="aspect-[4/3] w-full bg-surface-container overflow-hidden">
+    <div class="aspect-video w-full bg-surface-container overflow-hidden">
         @if ($product->coverImageUrl())
             <img src="{{ $product->coverImageUrl() }}" alt="{{ $product->name }}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
         @else
