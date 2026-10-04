@@ -241,14 +241,14 @@ description: "Task list for Lanjutan Penyesuaian Website dan Kelengkapan Admin C
 
 ### Tests for User Story 5
 
-- [ ] T051 [P] [US5] Buat `tests/Feature/Public/TypographyConsistencyTest.php`: render `/`, `/tentang-kami`, `/produk`, `/produk/{slug}`, `/artikel`, `/artikel/{slug}`, `/portfolio`, `/karir`, `/faq`, `/kontak` dengan data minimal, lalu pastikan tidak ada `font-extrabold`/`font-black` di `<body>`
+- [X] T051 [P] [US5] Buat `tests/Feature/Public/TypographyConsistencyTest.php`: render `/`, `/tentang-kami`, `/produk`, `/produk/{slug}`, `/artikel`, `/artikel/{slug}`, `/portfolio`, `/karir`, `/faq`, `/kontak` dengan data minimal, lalu pastikan tidak ada `font-extrabold`/`font-black` di `<body>`
 
 ### Implementation for User Story 5
 
-- [ ] T052 [US5] Ganti `font-extrabold` dan `font-black` dengan `font-bold` di semua berkas `resources/views/pages/**` dan `resources/views/components/{sections,layout}/**` (cek dengan `grep -rn "font-extrabold\|font-black" resources/views`). Jangan mengubah `resources/views/filament/**`
-- [ ] T053 [US5] Di `resources/css/app.css`, ubah `--text-headline-lg--font-weight` dan `--text-headline-lg-mobile--font-weight` menjadi 700
-- [ ] T054 [US5] Seragamkan teks tombol CTA (tombol `btn-fill`, tombol di `components/sections/cta-band.blade.php`, CTA penutup `home.blade.php`, CTA Produk/Artikel/Karir/FAQ/Tentang Kami, tombol hero/hero-slide, tombol header "Konsultasi Gratis", tombol sidebar artikel) ke `font-bold`. Hapus `font-semibold`/`font-medium` yang bertentangan pada elemen yang sama
-- [ ] T055 [US5] Perbarui fixture `tests/Fixtures/legacy-page-content/*.html` yang terdampak dengan penggantian kelas yang sama persis (T052–T054), lalu jalankan `LegacyMarkupEquivalenceTest`. Struktur selain kelas font tidak boleh berubah
+- [X] T052 [US5] Ganti `font-extrabold` dan `font-black` dengan `font-bold` di semua berkas `resources/views/pages/**` dan `resources/views/components/{sections,layout}/**` (cek dengan `grep -rn "font-extrabold\|font-black" resources/views`). Jangan mengubah `resources/views/filament/**`
+- [X] T053 [US5] Di `resources/css/app.css`, ubah `--text-headline-lg--font-weight` dan `--text-headline-lg-mobile--font-weight` menjadi 700
+- [X] T054 [US5] Seragamkan teks tombol CTA (tombol `btn-fill`, tombol di `components/sections/cta-band.blade.php`, CTA penutup `home.blade.php`, CTA Produk/Artikel/Karir/FAQ/Tentang Kami, tombol hero/hero-slide, tombol header "Konsultasi Gratis", tombol sidebar artikel) ke `font-bold`. Hapus `font-semibold`/`font-medium` yang bertentangan pada elemen yang sama
+- [X] T055 [US5] Perbarui fixture `tests/Fixtures/legacy-page-content/*.html` yang terdampak dengan penggantian kelas yang sama persis (T052–T054), lalu jalankan `LegacyMarkupEquivalenceTest`. Struktur selain kelas font tidak boleh berubah
 
 **Checkpoint**: Tipografi seragam.
 
@@ -262,26 +262,26 @@ description: "Task list for Lanjutan Penyesuaian Website dan Kelengkapan Admin C
 
 ### Tests for User Story 6
 
-- [ ] T056 [P] [US6] Buat `tests/Feature/Pages/HomeFeaturedProductsTest.php`:
+- [X] T056 [P] [US6] Buat `tests/Feature/Pages/HomeFeaturedProductsTest.php`:
   - tanpa tanda → 3 teratas menurut `order`
   - 2 bertanda → hanya 2 itu (urut `order`)
   - produk bertanda dihapus → sisanya / fallback
   - kartu kedua tetap berbadge "Terpopuler" bila ada ≥2 produk
-- [ ] T057 [P] [US6] Perbarui `tests/Feature/Admin/ProductResourceTest.php`:
+- [X] T057 [P] [US6] Perbarui `tests/Feature/Admin/ProductResourceTest.php`:
   - toggle tersimpan
   - menandai produk keempat ditolak dengan pesan "Maksimal 3 produk dapat ditampilkan di Beranda."
   - mengedit produk yang sudah bertanda tetap bisa disimpan saat sudah ada 3
 
 ### Implementation for User Story 6
 
-- [ ] T058 [US6] Buat migrasi `php artisan make:migration add_show_on_home_to_products_table` (`show_on_home` boolean default false)
-- [ ] T059 [US6] Ubah `app/Models/Product.php`:
+- [X] T058 [US6] Buat migrasi `php artisan make:migration add_show_on_home_to_products_table` (`show_on_home` boolean default false)
+- [X] T059 [US6] Ubah `app/Models/Product.php`:
   - fillable + cast `show_on_home`
   - static `forHome(): Collection` (bertanda urut `order` limit 3, fallback 3 teratas)
   - `use FlushesPublicPageCache`
   - tambahkan juga trait pada `app/Models/Category.php`
-- [ ] T060 [US6] Ubah `app/Http/Controllers/Public/HomeController.php` agar memakai `Product::forHome()`
-- [ ] T061 [US6] Ubah `app/Filament/Resources/ProductResource.php`:
+- [X] T060 [US6] Ubah `app/Http/Controllers/Public/HomeController.php` agar memakai `Product::forHome()`
+- [X] T061 [US6] Ubah `app/Filament/Resources/ProductResource.php`:
   - `Toggle::make('show_on_home')->label('Tampilkan di Beranda')` dengan rule closure yang menolak bila `Product::where('show_on_home', true)->whereKeyNot($record?->id)->count() >= 3`
   - `IconColumn::make('show_on_home')->label('Beranda')->boolean()` di tabel
 
@@ -297,31 +297,31 @@ description: "Task list for Lanjutan Penyesuaian Website dan Kelengkapan Admin C
 
 ### Tests for User Story 7
 
-- [ ] T062 [P] [US7] Perbarui `tests/Feature/Pages/CallToActionRenderTest.php` (atau `HomePageTest.php`): tombol kedua CTA penutup Beranda `href` berakhir `/#kalkulator`, dan halaman memiliki `id="kalkulator"`
-- [ ] T063 [P] [US7] Perbarui `tests/Feature/Pages/AboutPageSectionsTest.php`, `AboutPageTestimonialsTest.php`, dan `AboutPageTeamMembersTest.php`:
+- [X] T062 [P] [US7] Perbarui `tests/Feature/Pages/CallToActionRenderTest.php` (atau `HomePageTest.php`): tombol kedua CTA penutup Beranda `href` berakhir `/#kalkulator`, dan halaman memiliki `id="kalkulator"`
+- [X] T063 [P] [US7] Perbarui `tests/Feature/Pages/AboutPageSectionsTest.php`, `AboutPageTestimonialsTest.php`, dan `AboutPageTeamMembersTest.php`:
   - kutipan kosong (null atau `<p></p>`) tidak merender blok `border-l-4`; kutipan terisi tetap tampil
   - judul testimoni "Partner Kami" dan label "Testimoni"
   - Tim Kami: `<section>` luar tanpa `max-w-7xl`, wrapper isi `max-w-7xl mx-auto`, kartu dalam `flex flex-wrap justify-center`; render dengan 1 anggota
-- [ ] T064 [P] [US7] Perbarui `tests/Feature/Pages/ProductPageTest.php`: `/produk` tidak memuat tombol kategori ("Semua" sebagai tombol filter) dan menampilkan produk semua kategori
-- [ ] T065 [P] [US7] Perbarui `tests/Feature/Public/FooterCompanyInfoTest.php` (atau buat `FooterDescriptionTest.php`):
+- [X] T064 [P] [US7] Perbarui `tests/Feature/Pages/ProductPageTest.php`: `/produk` tidak memuat tombol kategori ("Semua" sebagai tombol filter) dan menampilkan produk semua kategori
+- [X] T065 [P] [US7] Perbarui `tests/Feature/Public/FooterCompanyInfoTest.php` (atau buat `FooterDescriptionTest.php`):
   - teks bawaan tampil
   - teks dari settings menggantikan bawaan dengan baris baru menjadi `<br>`
   - HTML di-escape
   - kosong → paragraf tidak dirender
-- [ ] T066 [P] [US7] Perbarui test halaman Pengaturan Umum (cari di `tests/Feature/Settings/`): field `footer_description` ada di section "Footer" dan tersimpan
+- [X] T066 [P] [US7] Perbarui test halaman Pengaturan Umum (cari di `tests/Feature/Settings/`): field `footer_description` ada di section "Footer" dan tersimpan
 
 ### Implementation for User Story 7
 
-- [ ] T067 [P] [US7] Di `resources/views/pages/home.blade.php` CTA penutup, ganti `href="{{ url('/kontak') }}"` tombol kedua menjadi `url('/#kalkulator')`. Perbarui fixture `tests/Fixtures/legacy-page-content/home-cta.html` dengan perubahan href yang sama
-- [ ] T068 [P] [US7] Di `resources/views/pages/tentang-kami.blade.php`, bungkus blok kutipan (`pl-8 border-l-4 ...`) dengan `@if (filled(trim(strip_tags((string) $whoWeAre->value('quote')))))`
-- [ ] T069 [P] [US7] Di `resources/views/components/sections/testimonials.blade.php`, ganti judul "Apa Kata Klien Kami" menjadi "Partner Kami" (label "Testimoni" tetap). Perbarui asersi `Apa Kata Klien Kami` di test terkait
-- [ ] T070 [P] [US7] Ubah `resources/views/components/sections/team-members.blade.php`:
+- [X] T067 [P] [US7] Di `resources/views/pages/home.blade.php` CTA penutup, ganti `href="{{ url('/kontak') }}"` tombol kedua menjadi `url('/#kalkulator')`. Perbarui fixture `tests/Fixtures/legacy-page-content/home-cta.html` dengan perubahan href yang sama
+- [X] T068 [P] [US7] Di `resources/views/pages/tentang-kami.blade.php`, bungkus blok kutipan (`pl-8 border-l-4 ...`) dengan `@if (filled(trim(strip_tags((string) $whoWeAre->value('quote')))))`
+- [X] T069 [P] [US7] Di `resources/views/components/sections/testimonials.blade.php`, ganti judul "Apa Kata Klien Kami" menjadi "Partner Kami" (label "Testimoni" tetap). Perbarui asersi `Apa Kata Klien Kami` di test terkait
+- [X] T070 [P] [US7] Ubah `resources/views/components/sections/team-members.blade.php`:
   - `<section class="py-24 px-6 w-full">` (latar sama dengan section tetangga) dengan wrapper dalam `max-w-7xl mx-auto`
   - grid diganti `flex flex-wrap justify-center gap-8`, kartu lebar tetap `w-[calc(50%-1rem)] md:w-56`
-- [ ] T071 [P] [US7] Hapus blok tombol kategori dan `x-data`/`x-show` kategori di `resources/views/pages/produk/index.blade.php`; hapus `categories` dari `ProductController::index` bila tidak dipakai lagi
-- [ ] T072 [US7] Buat settings migration `database/settings/<timestamp>_add_footer_description_to_site_settings.php` yang menambah `site.footer_description` dengan teks bawaan footer sekarang; tambah `public ?string $footer_description;` di `app/Settings/SiteSettings.php`
-- [ ] T073 [US7] Tambahkan section "Footer" dengan `Textarea::make('footer_description')->label('Deskripsi Footer')->rows(3)->maxLength(500)` di `app/Filament/Pages/SiteSettingsPage.php`
-- [ ] T074 [US7] Di `resources/views/components/layout/footer.blade.php`, ganti teks deskripsi statis dengan `@if (filled($site->footer_description)) <p ...>{!! nl2br(e($site->footer_description)) !!}</p> @endif` (kelas `<p>` tetap)
+- [X] T071 [P] [US7] Hapus blok tombol kategori dan `x-data`/`x-show` kategori di `resources/views/pages/produk/index.blade.php`; hapus `categories` dari `ProductController::index` bila tidak dipakai lagi
+- [X] T072 [US7] Buat settings migration `database/settings/<timestamp>_add_footer_description_to_site_settings.php` yang menambah `site.footer_description` dengan teks bawaan footer sekarang; tambah `public ?string $footer_description;` di `app/Settings/SiteSettings.php`
+- [X] T073 [US7] Tambahkan section "Footer" dengan `Textarea::make('footer_description')->label('Deskripsi Footer')->rows(3)->maxLength(500)` di `app/Filament/Pages/SiteSettingsPage.php`
+- [X] T074 [US7] Di `resources/views/components/layout/footer.blade.php`, ganti teks deskripsi statis dengan `@if (filled($site->footer_description)) <p ...>{!! nl2br(e($site->footer_description)) !!}</p> @endif` (kelas `<p>` tetap)
 
 **Checkpoint**: Semua perbaikan kecil selesai.
 
@@ -335,15 +335,15 @@ description: "Task list for Lanjutan Penyesuaian Website dan Kelengkapan Admin C
 
 ### Tests for User Story 8
 
-- [ ] T075 [P] [US8] Perbarui `tests/Feature/Public/PublicPageCachingTest.php` dengan driver cache `array`:
+- [X] T075 [P] [US8] Perbarui `tests/Feature/Public/PublicPageCachingTest.php` dengan driver cache `array`:
   - kunjungi `/portfolio` dan `/portfolio?kategori=x`, lalu buat kategori+proyek baru; kunjungan berikut ke `/portfolio` langsung memuat pil dan proyek baru
   - pola sama untuk `/produk` (produk baru), `/artikel` (artikel baru), dan `/` (testimoni baru)
   - `incrementQuietly` view_count tidak menaikkan versi
 
 ### Implementation for User Story 8
 
-- [ ] T076 [US8] Tambahkan `use FlushesPublicPageCache` pada model publik yang belum: `app/Models/ArticleCategory.php`, `PortfolioProject.php`, `PortfolioCategory.php`, `Testimonial.php`, `TeamMember.php`, `ClientLogo.php`, `Banner.php` (Product, Category, Article, FaqItem, JobOpening sudah di story masing-masing)
-- [ ] T077 [US8] Periksa semua pemakaian `rememberPublicPage` (`grep -rn rememberPublicPage app`) dan pastikan setiap kunci memuat semua parameter request yang memengaruhi hasil
+- [X] T076 [US8] Tambahkan `use FlushesPublicPageCache` pada model publik yang belum: `app/Models/ArticleCategory.php`, `PortfolioProject.php`, `PortfolioCategory.php`, `Testimonial.php`, `TeamMember.php`, `ClientLogo.php`, `Banner.php` (Product, Category, Article, FaqItem, JobOpening sudah di story masing-masing)
+- [X] T077 [US8] Periksa semua pemakaian `rememberPublicPage` (`grep -rn rememberPublicPage app`) dan pastikan setiap kunci memuat semua parameter request yang memengaruhi hasil
 
 **Checkpoint**: Bug Portofolio teratasi untuk semua halaman.
 
@@ -351,7 +351,7 @@ description: "Task list for Lanjutan Penyesuaian Website dan Kelengkapan Admin C
 
 ## Phase 11: Polish & Cross-Cutting
 
-- [ ] T078 [P] Perbarui `docs/manual-operator.md`:
+- [X] T078 [P] Perbarui `docs/manual-operator.md`:
   - menu **FAQ** (Tempat, Kategori, Aktif, urutan)
   - **Tampilkan di Beranda** (maks 3)
   - section **Footer** di Pengaturan Umum
@@ -361,10 +361,10 @@ description: "Task list for Lanjutan Penyesuaian Website dan Kelengkapan Admin C
   - Artikel publik (Tag Populer, Muat lebih banyak)
 
   Jalankan `php artisan test --compact --filter=OperatorManualTest`
-- [ ] T079 Jalankan `vendor/bin/pint --dirty --format agent`
-- [ ] T080 Jalankan `php artisan test --compact`; perbarui tes yang memeriksa tampilan lama sesuai desain baru (jangan menghapus tes)
-- [ ] T081 Jalankan `npm run build` lalu verifikasi visual sesuai `specs/031-client-cms-gaps/quickstart.md` pada 390 px dan 1440 px dengan database sementara (pola verifikasi spec 030), termasuk "Muat lebih banyak" dengan dan tanpa JavaScript
-- [ ] T082 Bandingkan hasil dengan dokumen klien "Fitur yang belum ada untuk merubah tampilan pada website" per item ❌/⚠️ dan catat penyimpangan (SC-001)
+- [X] T079 Jalankan `vendor/bin/pint --dirty --format agent`
+- [X] T080 Jalankan `php artisan test --compact`; perbarui tes yang memeriksa tampilan lama sesuai desain baru (jangan menghapus tes)
+- [X] T081 Jalankan `npm run build` lalu verifikasi visual sesuai `specs/031-client-cms-gaps/quickstart.md` pada 390 px dan 1440 px dengan database sementara (pola verifikasi spec 030), termasuk "Muat lebih banyak" dengan dan tanpa JavaScript
+- [X] T082 (selesai: 13 item klien terpenuhi; interpretasi yang perlu konfirmasi: "divide" Tim Kami dipahami sebagai latar section yang tidak penuh, dan tampilan tombol CTA diseragamkan bold 700) Bandingkan hasil dengan dokumen klien "Fitur yang belum ada untuk merubah tampilan pada website" per item ❌/⚠️ dan catat penyimpangan (SC-001)
 
 ---
 

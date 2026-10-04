@@ -108,7 +108,7 @@
             }"
             class="w-full lg:w-3/5 bg-white shadow-lg rounded-lg p-8 md:p-12"
         >
-            <h2 class="font-headline-lg text-2xl md:text-3xl font-extrabold text-primary mb-8">Kirim pesan ke tim kami</h2>
+            <h2 class="font-headline-lg text-2xl md:text-3xl font-bold text-primary mb-8">Kirim pesan ke tim kami</h2>
 
             <template x-if="submitted">
                 <div class="bg-primary/10 text-primary p-6 rounded-lg text-center" role="status">
@@ -116,7 +116,7 @@
                     <p class="font-semibold">Terima kasih! Pesan Anda telah kami terima.</p>
                     <p class="font-body-sm text-body-sm mt-1">Tim kami akan segera menghubungi Anda kembali.</p>
                     <template x-if="whatsappUrl">
-                        <a :href="whatsappUrl" target="_blank" class="inline-flex items-center gap-2 mt-4 bg-primary text-white px-6 py-3 rounded-lg font-semibold">
+                        <a :href="whatsappUrl" target="_blank" class="inline-flex items-center gap-2 mt-4 bg-primary text-white px-6 py-3 rounded-lg font-bold">
                             <span class="material-symbols-outlined">chat</span> Buka WhatsApp
                         </a>
                     </template>

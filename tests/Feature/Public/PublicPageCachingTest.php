@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Public;
 
+use App\Http\Controllers\Public\ArticleController;
 use App\Models\Article;
 use App\Models\ArticleCategory;
 use App\Models\Category;
@@ -10,6 +11,7 @@ use App\Models\PortfolioCategory;
 use App\Models\PortfolioProject;
 use App\Models\Product;
 use App\Models\TeamMember;
+use App\Models\Testimonial;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Crypt;
@@ -99,12 +101,17 @@ class PublicPageCachingTest extends TestCase
             ->assertSee('Nama Sudah Diubah', escape: false)
             ->assertDontSee('Nama Awal', escape: false);
 
-        // relatedProducts adalah query turunan — ter-cache.
-        $related = Product::factory()->create(['category_id' => $category->id, 'name' => 'Produk Terkait Baru']);
-        $this->get('/produk/'.$product->slug)->assertDontSee('Produk Terkait Baru', escape: false);
+        // relatedProducts adalah query turunan yang di-cache, tetapi perubahan lewat model
+        // (seperti dari panel admin) menaikkan versi cache sehingga langsung tampil.
+        Product::factory()->create(['category_id' => $category->id, 'name' => 'Produk Terkait Baru']);
+        $this->get('/produk/'.$product->slug)->assertSee('Produk Terkait Baru', escape: false);
+
+        // Perubahan di luar model (query langsung) tetap mengikuti TTL cache.
+        DB::table('products')->where('name', 'Produk Terkait Baru')->update(['name' => 'Produk Terkait Diubah Langsung']);
+        $this->get('/produk/'.$product->slug)->assertDontSee('Produk Terkait Diubah Langsung', escape: false);
 
         Carbon::setTestNow(now()->addMinutes(6));
-        $this->get('/produk/'.$product->slug)->assertSee('Produk Terkait Baru', escape: false);
+        $this->get('/produk/'.$product->slug)->assertSee('Produk Terkait Diubah Langsung', escape: false);
     }
 
     public function test_artikel_index_serves_stale_data_within_ttl_then_fresh_after_expiry(): void
@@ -208,5 +215,83 @@ class PublicPageCachingTest extends TestCase
 
         $this->assertDatabaseHas('contact_submissions', ['name' => 'Budi Santoso']);
         $this->assertDatabaseHas('contact_submissions', ['name' => 'Siti Aminah']);
+    }
+
+    public function test_new_portfolio_category_and_project_appear_on_every_filter_variant_immediately(): void
+    {
+        $first = PortfolioCategory::factory()->create(['name' => 'Kategori Lama', 'slug' => 'kategori-lama']);
+        PortfolioProject::factory()->create(['title' => 'Proyek Lama', 'portfolio_category_id' => $first->id]);
+
+        $this->get('/portfolio')->assertOk()->assertSee('Kategori Lama', escape: false);
+        $this->get('/portfolio?kategori=kategori-lama')->assertOk()->assertSee('Proyek Lama', escape: false);
+
+        $second = PortfolioCategory::factory()->create(['name' => 'Kategori Baru', 'slug' => 'kategori-baru']);
+        PortfolioProject::factory()->create(['title' => 'Proyek Baru', 'portfolio_category_id' => $second->id]);
+
+        $this->get('/portfolio')->assertOk()
+            ->assertSee('Kategori Baru', escape: false)
+            ->assertSee('Proyek Baru', escape: false);
+        $this->get('/portfolio?kategori=kategori-baru')->assertOk()->assertSee('Proyek Baru', escape: false);
+        $this->get('/portfolio?kategori=kategori-lama')->assertOk()
+            ->assertSee('Kategori Baru', escape: false)
+            ->assertDontSee('Proyek Baru', escape: false);
+    }
+
+    public function test_model_changes_are_visible_immediately_on_product_article_and_home_pages(): void
+    {
+        $this->get('/produk')->assertOk();
+        $this->get('/artikel')->assertOk();
+        $this->get('/')->assertOk();
+
+        Product::factory()->create(['name' => 'Produk Segar']);
+        Article::factory()->create(['title' => 'Artikel Segar']);
+        Testimonial::factory()->create(['name' => 'Testimoni Segar']);
+
+        $this->get('/produk')->assertOk()->assertSee('Produk Segar', escape: false);
+        $this->get('/artikel')->assertOk()->assertSee('Artikel Segar', escape: false);
+        $this->get('/')->assertOk()
+            ->assertSee('Produk Segar', escape: false)
+            ->assertSee('Testimoni Segar', escape: false);
+    }
+
+    public function test_deleting_a_model_also_refreshes_cached_pages(): void
+    {
+        $product = Product::factory()->create(['name' => 'Produk Akan Dihapus']);
+
+        $this->get('/produk')->assertOk()->assertSee('Produk Akan Dihapus', escape: false);
+
+        $product->delete();
+
+        $this->get('/produk')->assertOk()->assertDontSee('Produk Akan Dihapus', escape: false);
+    }
+
+    public function test_faq_changes_through_the_model_are_visible_immediately(): void
+    {
+        FaqItem::query()->delete();
+        $this->get('/faq')->assertOk();
+
+        FaqItem::factory()->create(['question' => 'Pertanyaan Segar?']);
+
+        $this->get('/faq')->assertOk()->assertSee('Pertanyaan Segar?', escape: false);
+    }
+
+    public function test_view_count_increments_do_not_bump_the_public_cache_version(): void
+    {
+        $article = Article::factory()->create();
+        $before = ArticleController::publicPageVersion();
+
+        $this->get('/artikel/'.$article->slug)->assertOk();
+        $this->get('/artikel/'.$article->slug)->assertOk();
+
+        $this->assertSame($before, ArticleController::publicPageVersion());
+    }
+
+    public function test_saving_any_public_model_bumps_the_cache_version(): void
+    {
+        $before = ArticleController::publicPageVersion();
+
+        Product::factory()->create();
+
+        $this->assertGreaterThan($before, ArticleController::publicPageVersion());
     }
 }

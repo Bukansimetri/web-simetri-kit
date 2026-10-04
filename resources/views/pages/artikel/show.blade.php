@@ -21,7 +21,7 @@
         </nav>
 
         <span class="inline-block bg-surface-container-low text-primary px-3 py-1 rounded-full text-xs font-label-bold text-label-bold uppercase tracking-wider mb-4">{{ $article->articleCategory->name }}</span>
-        <h1 class="font-headline-xl text-3xl md:text-5xl font-extrabold text-on-surface tracking-tight leading-tight mb-4">{{ $article->title }}</h1>
+        <h1 class="font-headline-xl text-3xl md:text-5xl font-bold text-on-surface tracking-tight leading-tight mb-4">{{ $article->title }}</h1>
         <div class="flex items-center gap-4 text-sm text-outline mb-10">
             <span>{{ $article->published_at?->translatedFormat('d F Y') }}</span>
             <span class="w-1 h-1 rounded-full bg-outline-variant"></span>

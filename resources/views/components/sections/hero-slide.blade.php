@@ -48,11 +48,11 @@
 
                 @if (filled($banner->heading))
                     @if ($isFirst)
-                        <h1 class="font-headline-xl text-3xl md:text-5xl font-extrabold tracking-tight leading-tight mb-6 {{ $headingClasses }}">
+                        <h1 class="font-headline-xl text-3xl md:text-5xl font-bold tracking-tight leading-tight mb-6 {{ $headingClasses }}">
                             {{ $banner->heading }}
                         </h1>
                     @else
-                        <h2 class="font-headline-xl text-3xl md:text-5xl font-extrabold tracking-tight leading-tight mb-6 {{ $headingClasses }}">
+                        <h2 class="font-headline-xl text-3xl md:text-5xl font-bold tracking-tight leading-tight mb-6 {{ $headingClasses }}">
                             {{ $banner->heading }}
                         </h2>
                     @endif

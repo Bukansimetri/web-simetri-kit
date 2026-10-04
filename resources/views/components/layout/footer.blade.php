@@ -55,14 +55,14 @@
                 @if ($logoUrl)
                     <img src="{{ $logoUrl }}" alt="{{ $appName }}" class="h-10 w-auto object-contain">
                 @else
-                    <div class="font-headline-lg text-headline-lg font-extrabold text-3xl text-primary-container tracking-tight">
+                    <div class="font-headline-lg text-headline-lg font-bold text-3xl text-primary-container tracking-tight">
                         {{ $appName }}
                     </div>
                 @endif
             </div>
-            <p class="text-white/60 text-sm leading-relaxed">
-                Menginspirasi masa depan berkelanjutan melalui inovasi tenaga surya yang elegan dan presisi tinggi untuk masyarakat Indonesia.
-            </p>
+            @if (filled($site->footer_description))
+                <p class="text-white/60 text-sm leading-relaxed">{!! nl2br(e($site->footer_description)) !!}</p>
+            @endif
         </div>
 
         @foreach ($footerColumns as $title => $links)

@@ -16,10 +16,7 @@ class HomeController extends Controller
     public function __invoke(): View
     {
         $data = $this->rememberPublicPage('public-page:home', function () {
-            $products = Product::query()
-                ->orderBy('order')
-                ->take(3)
-                ->get();
+            $products = Product::forHome();
 
             $banners = Banner::live()->get();
 

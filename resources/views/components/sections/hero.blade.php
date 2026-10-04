@@ -23,7 +23,7 @@
                 <span>{{ $badge }}</span>
             </div>
 
-            <h1 class="font-headline-xl text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-6">
+            <h1 class="font-headline-xl text-3xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-6">
                 {{ $title }}
             </h1>
 
@@ -36,7 +36,7 @@
                     <span>Konsultasi Gratis</span>
                     <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </a>
-                <a href="{{ url('/#kalkulator') }}" class="bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold px-8 py-4 rounded-lg transition-colors flex items-center justify-center">
+                <a href="{{ url('/#kalkulator') }}" class="bg-white/10 hover:bg-white/20 border border-white/30 text-white font-bold px-8 py-4 rounded-lg transition-colors flex items-center justify-center">
                     Pelajari Cara Kerja
                 </a>
             </div>

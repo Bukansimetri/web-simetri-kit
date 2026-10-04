@@ -38,7 +38,7 @@
             @if (filled($calculatorCta->body))
                 <p class="font-body-md text-body-md text-white/90 mb-10">{{ $calculatorCta->body }}</p>
             @endif
-            <a href="{{ url('/#kalkulator') }}" class="inline-flex items-center justify-center bg-white text-primary-container px-8 py-4 font-label-bold text-label-bold hover:bg-surface transition-all hover:-translate-y-0.5 rounded-lg">
+            <a href="{{ url('/#kalkulator') }}" class="inline-flex items-center justify-center bg-white text-primary-container px-8 py-4 font-label-bold text-label-bold font-bold hover:bg-surface transition-all hover:-translate-y-0.5 rounded-lg">
                 {{ $calculatorCta->primary_label }} <span class="material-symbols-outlined ml-2">arrow_forward</span>
             </a>
         </div>

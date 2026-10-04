@@ -77,13 +77,13 @@ class CallToActionRenderTest extends TestCase
         return LegacyMarkup::FRAGMENTS[self::FRAGMENT_BY_PLACEMENT[$a->value]][0] === LegacyMarkup::FRAGMENTS[self::FRAGMENT_BY_PLACEMENT[$b->value]][0];
     }
 
-    public function test_home_form_button_label_changes_but_link_stays(): void
+    public function test_home_form_button_label_changes_but_link_goes_to_the_calculator(): void
     {
         $this->updateCta(CtaPlacement::Home, ['secondary_label' => 'Minta Penawaran']);
 
         $fragment = LegacyMarkup::extract($this->get('/')->getContent(), LegacyMarkup::FRAGMENTS['home-cta'][1]);
 
-        $this->assertMatchesRegularExpression('#href="[^"]*/kontak"[^>]*> Minta Penawaran </a>#', $fragment);
+        $this->assertMatchesRegularExpression('#href="[^"]*/\#kalkulator"[^>]*> Minta Penawaran </a>#', $fragment);
     }
 
     public function test_product_detail_body_inserts_product_name(): void

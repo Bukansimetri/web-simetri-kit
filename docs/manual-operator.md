@@ -328,7 +328,7 @@ Semua pertanyaan dan jawaban (FAQ) dikelola dari satu menu ini. Setiap entri pun
 Produk yang ditampilkan di situs.
 
 - Kolom wajib: **Nama Produk**, **Slug**, **Kategori**, **Urutan Tampil**, **Gambar Produk**, **Deskripsi Singkat**, **Deskripsi Lengkap**, **Harga**.
-- Kolom opsional: **Harga Coret** (untuk menampilkan diskon), daftar spesifikasi (**Label**/**Nilai**), daftar keunggulan (**Icon**/**Judul**/**Deskripsi**), **Judul Pencarian**, **Deskripsi Pencarian**, **Gambar SEO / Share Sosial**.
+- Kolom opsional: **Tampilkan di Beranda** (pilih maksimal 3 produk untuk section "Solusi Untuk Setiap Kebutuhan" di halaman depan; bila belum ada yang dipilih, tiga produk dengan urutan teratas yang tampil, dan percobaan memilih produk keempat ditolak), **Harga Coret** (untuk menampilkan diskon), daftar spesifikasi (**Label**/**Nilai**), daftar keunggulan (**Icon**/**Judul**/**Deskripsi**), **Judul Pencarian**, **Deskripsi Pencarian**, **Gambar SEO / Share Sosial**.
 
 > **Perhatian:** sama seperti menu **Halaman**, hindari mengubah **Slug** produk yang sudah lama tayang tanpa berkoordinasi dengan developer.
 
@@ -404,6 +404,7 @@ Menu di grup **Pengaturan Situs** masing-masing adalah satu halaman pengaturan (
 - **Identitas Situs**: **Nama Situs**, **Tagline**, **Deskripsi Situs**.
 - **Informasi Perusahaan**: **Nama Perusahaan**, **Email Perusahaan**, **Telepon Perusahaan**, **Alamat Perusahaan** — tampil di footer dan halaman kontak situs.
 - **Pengaturan Regional**: **Bahasa Default** dan **Zona Waktu**. Zona Waktu ini yang dipakai perhitungan hari/minggu di halaman Dasbor.
+- **Footer**: **Deskripsi Footer** — teks di bagian kiri footer semua halaman. Dikosongkan berarti tidak ada teks yang tampil.
 - **Informasi Legal**: **Teks Hak Cipta**, **URL Syarat & Ketentuan**, **URL Kebijakan Privasi**, **URL Kebijakan Cookie**.
 - **Pesan Error**: **Pesan Halaman Tidak Ditemukan (404)**, **Pesan Gangguan Sistem (500)** — teks yang dilihat pengunjung saat menemui error tersebut.
 - **Kontak & Notifikasi**: **Nomor WhatsApp Bisnis**, **Email Notifikasi Kontak** (alamat yang menerima notifikasi setiap ada pesan masuk baru).

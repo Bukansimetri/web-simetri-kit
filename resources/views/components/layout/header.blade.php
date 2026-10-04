@@ -80,7 +80,7 @@
     <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-3 items-center">
         <a href="{{ url('/') }}"
            :class="scrolled ? 'text-primary' : '{{ $overHero ? 'text-white' : 'text-primary' }}'"
-           class="font-headline-lg text-headline-lg font-extrabold tracking-tight transition-colors flex items-center gap-2">
+           class="font-headline-lg text-headline-lg font-bold tracking-tight transition-colors flex items-center gap-2">
             @if ($logoUrl)
                 <img src="{{ $logoUrl }}" alt="{{ $appName }}" class="h-9 w-auto object-contain">
             @else
@@ -115,7 +115,7 @@
                     @endforeach
                 </div>
             @endif
-            <a href="{{ url('/kontak') }}" class="btn-fill bg-primary-container text-white text-sm font-medium px-5 py-2.5 rounded-lg shadow-md hover:-translate-y-0.5 transition-transform">
+            <a href="{{ url('/kontak') }}" class="btn-fill bg-primary-container text-white text-sm font-bold px-5 py-2.5 rounded-lg shadow-md hover:-translate-y-0.5 transition-transform">
                 Konsultasi Gratis
             </a>
         </div>
@@ -133,7 +133,7 @@
                 {{ $link['label'] }}
             </a>
         @endforeach
-        <a href="{{ url('/kontak') }}" class="bg-primary-container text-white text-sm font-medium px-5 py-3 rounded-lg text-center">
+        <a href="{{ url('/kontak') }}" class="bg-primary-container text-white text-sm font-bold px-5 py-3 rounded-lg text-center">
             Konsultasi Gratis
         </a>
     </nav>

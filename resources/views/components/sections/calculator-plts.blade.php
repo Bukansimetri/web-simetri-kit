@@ -5,7 +5,7 @@
     <div x-data="pltsCalculatorComponent()" class="bg-white p-8 md:p-12 shadow-2xl border border-gray-50/50 max-w-6xl mx-auto rounded-lg">
         <div class="text-center mb-10">
             <span class="inline-block text-xs font-bold uppercase tracking-wider text-primary bg-primary/5 border border-primary/20 rounded-full px-3 py-1 mb-4">Kalkulator Detail (Opsional)</span>
-            <h2 class="font-headline-xl text-3xl md:text-5xl font-extrabold tracking-tight mb-3 text-primary">Kalkulator Detail Sistem PLTS</h2>
+            <h2 class="font-headline-xl text-3xl md:text-5xl font-bold tracking-tight mb-3 text-primary">Kalkulator Detail Sistem PLTS</h2>
             <p class="font-medium text-base md:text-lg max-w-2xl mx-auto text-secondary">Tentukan kebutuhan daya, kondisi atap, dan pilih komponen satu per satu untuk estimasi yang lebih rinci.</p>
         </div>
 

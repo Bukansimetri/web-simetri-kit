@@ -225,4 +225,79 @@ class ProductResourceTest extends TestCase
         $this->assertSame('Deskripsi SEO kustom.', $product->meta_description);
         $this->assertStringEndsWith('.webp', $product->meta_image_path);
     }
+
+    public function test_show_on_home_toggle_is_saved(): void
+    {
+        $user = User::factory()->create();
+        $product = Product::factory()->create(['show_on_home' => false]);
+
+        Livewire::actingAs($user)
+            ->test(EditProduct::class, ['record' => $product->getRouteKey()])
+            ->fillForm(['show_on_home' => true])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $this->assertTrue($product->fresh()->show_on_home);
+    }
+
+    public function test_marking_a_fourth_product_for_home_is_rejected_with_a_clear_message(): void
+    {
+        $user = User::factory()->create();
+        Product::factory()->count(3)->create(['show_on_home' => true]);
+        $fourth = Product::factory()->create(['show_on_home' => false]);
+
+        Livewire::actingAs($user)
+            ->test(EditProduct::class, ['record' => $fourth->getRouteKey()])
+            ->fillForm(['show_on_home' => true])
+            ->call('save')
+            ->assertHasFormErrors(['show_on_home']);
+
+        $this->assertFalse($fourth->fresh()->show_on_home);
+    }
+
+    public function test_editing_an_already_marked_product_is_allowed_when_three_are_marked(): void
+    {
+        $user = User::factory()->create();
+        $marked = Product::factory()->count(3)->create(['show_on_home' => true]);
+
+        Livewire::actingAs($user)
+            ->test(EditProduct::class, ['record' => $marked->first()->getRouteKey()])
+            ->fillForm(['short_description' => 'Deskripsi diperbarui.'])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $this->assertTrue($marked->first()->fresh()->show_on_home);
+    }
+
+    public function test_unmarking_is_always_allowed_and_creating_with_the_toggle_respects_the_limit(): void
+    {
+        $user = User::factory()->create();
+        $category = Category::factory()->create();
+        Product::factory()->count(3)->create(['show_on_home' => true]);
+
+        Livewire::actingAs($user)
+            ->test(CreateProduct::class)
+            ->fillForm([
+                'name' => 'Produk Keempat',
+                'category_id' => $category->id,
+                'short_description' => 'Deskripsi singkat.',
+                'description' => 'Deskripsi lengkap.',
+                'price' => 1000000,
+                'show_on_home' => true,
+            ])
+            ->call('create')
+            ->assertHasFormErrors(['show_on_home']);
+
+        $this->assertDatabaseMissing('products', ['name' => 'Produk Keempat']);
+    }
+
+    public function test_table_shows_the_home_column(): void
+    {
+        $user = User::factory()->create();
+        Product::factory()->create(['show_on_home' => true]);
+
+        Livewire::actingAs($user)
+            ->test(ListProducts::class)
+            ->assertTableColumnExists('show_on_home');
+    }
 }

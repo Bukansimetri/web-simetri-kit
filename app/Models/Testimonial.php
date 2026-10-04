@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Concerns\FlushesPublicPageCache;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 
 class Testimonial extends Model
 {
+    use FlushesPublicPageCache;
     use HasFactory;
 
     /**

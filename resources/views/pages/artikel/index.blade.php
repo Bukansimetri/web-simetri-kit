@@ -137,7 +137,7 @@
                 @if (filled($indexCta->body))
                     <p class="font-body-md text-body-md text-on-surface-variant mb-8 max-w-xl mx-auto">{{ $indexCta->body }}</p>
                 @endif
-                <a href="{{ url('/kontak') }}" class="btn-fill inline-flex items-center gap-2 bg-primary-container text-white px-8 py-4 rounded-lg font-label-bold text-label-bold hover:scale-105 transition-transform">
+                <a href="{{ url('/kontak') }}" class="btn-fill inline-flex items-center gap-2 bg-primary-container text-white px-8 py-4 rounded-lg font-label-bold text-label-bold font-bold hover:scale-105 transition-transform">
                     {{ $indexCta->primary_label }} <span class="material-symbols-outlined">arrow_forward</span>
                 </a>
             </div>

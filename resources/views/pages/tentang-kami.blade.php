@@ -34,15 +34,17 @@
             </div>
             <div class="w-full md:w-[60%]">
                 <span class="text-sm font-bold text-secondary uppercase tracking-widest block mb-4">{{ $whoWeAre->value('eyebrow') }}</span>
-                <h2 class="font-headline-lg text-3xl md:text-4xl font-extrabold text-primary leading-tight tracking-tight mb-6">{{ $whoWeAre->value('heading') }}</h2>
+                <h2 class="font-headline-lg text-3xl md:text-4xl font-bold text-primary leading-tight tracking-tight mb-6">{{ $whoWeAre->value('heading') }}</h2>
                 <div class="text-lg text-on-surface-variant mb-8 leading-relaxed [&_p]:mb-0">
                     {!! \App\Support\PageContent\PageContent::richText($whoWeAre->value('body')) !!}
                 </div>
-                <div class="pl-8 border-l-4 border-secondary">
-                    <div class="font-headline-lg text-2xl md:text-3xl font-bold text-primary leading-snug [&_p]:mb-0">
-                        &ldquo;{!! \App\Support\PageContent\PageContent::richText($whoWeAre->value('quote')) !!}&rdquo;
+                @if (filled(trim(preg_replace('/[\s\x{00A0}]+/u', ' ', html_entity_decode(strip_tags((string) $whoWeAre->value('quote')), ENT_QUOTES | ENT_HTML5)))))
+                    <div class="pl-8 border-l-4 border-secondary">
+                        <div class="font-headline-lg text-2xl md:text-3xl font-bold text-primary leading-snug [&_p]:mb-0">
+                            &ldquo;{!! \App\Support\PageContent\PageContent::richText($whoWeAre->value('quote')) !!}&rdquo;
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </section>
@@ -52,7 +54,7 @@
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[300px] md:text-[400px] text-surface-container-high/50 font-serif leading-none select-none z-0">&rdquo;</div>
         <div class="relative z-10 max-w-4xl mx-auto text-center">
             <p class="text-sm font-bold text-outline uppercase tracking-[0.3em] mb-4">{{ $vision->value('eyebrow') }}</p>
-            <h2 class="text-2xl md:text-4xl font-extrabold text-primary mb-4 leading-tight tracking-tight">
+            <h2 class="text-2xl md:text-4xl font-bold text-primary mb-4 leading-tight tracking-tight">
                 {{ $vision->value('heading') }}
             </h2>
             <p class="text-secondary font-medium text-base md:text-lg max-w-2xl mx-auto leading-relaxed">{{ $vision->value('subtext') }}</p>
@@ -66,7 +68,7 @@
             @if (filled($mission->eyebrow))
                 <span class="text-sm font-bold text-secondary uppercase tracking-widest block mb-4">{{ $mission->eyebrow }}</span>
             @endif
-            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-3 text-primary">{{ \App\Support\PageContent\PageContent::multiline($mission->title) }}</h2>
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-3 text-primary">{{ \App\Support\PageContent\PageContent::multiline($mission->title) }}</h2>
             @if (filled($mission->subtitle))
                 <p class="text-secondary text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">{{ $mission->subtitle }}</p>
             @endif
@@ -102,7 +104,7 @@
     @if ($values)
     <section class="reveal-element py-24 px-6 max-w-7xl mx-auto mb-12">
         <div class="mb-12 text-center">
-            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-3 text-primary">{{ \App\Support\PageContent\PageContent::multiline($values->title) }}</h2>
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-3 text-primary">{{ \App\Support\PageContent\PageContent::multiline($values->title) }}</h2>
             @if (filled($values->subtitle))
                 <p class="text-secondary text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">{{ $values->subtitle }}</p>
             @endif
@@ -147,7 +149,7 @@
                     <div class="w-full md:flex-1 text-center py-4 md:py-0">
                         <div class="flex flex-col items-center justify-center gap-2">
                             <span class="material-symbols-outlined text-primary text-4xl mb-1">{{ $stat->icon }}</span>
-                            <span class="font-headline-lg text-4xl font-extrabold text-primary tracking-tight">{{ $stat->title }}</span>
+                            <span class="font-headline-lg text-4xl font-bold text-primary tracking-tight">{{ $stat->title }}</span>
                             <span class="text-xs font-semibold text-on-surface-variant uppercase tracking-wider">{{ $stat->description }}</span>
                         </div>
                     </div>

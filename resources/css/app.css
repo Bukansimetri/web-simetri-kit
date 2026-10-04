@@ -122,11 +122,11 @@
     --text-headline-lg: 32px;
     --text-headline-lg--line-height: 40px;
     --text-headline-lg--letter-spacing: -0.01em;
-    --text-headline-lg--font-weight: 600;
+    --text-headline-lg--font-weight: 700;
 
     --text-headline-lg-mobile: 28px;
     --text-headline-lg-mobile--line-height: 36px;
-    --text-headline-lg-mobile--font-weight: 600;
+    --text-headline-lg-mobile--font-weight: 700;
 
     --text-body-md: 16px;
     --text-body-md--line-height: 24px;
@@ -149,6 +149,21 @@ html {
 body {
     background-color: var(--color-background);
     overflow-x: hidden;
+}
+
+/*
+ * Judul (h1-h6) dan tombol CTA seragam bold (700) di seluruh situs publik
+ * (spec 031 US5). Sengaja tanpa @layer agar mengalahkan utilitas ukuran
+ * seperti `text-2xl` yang tidak membawa bobot font sehingga judul jatuh ke 400.
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.btn-fill {
+    font-weight: 700;
 }
 
 /*

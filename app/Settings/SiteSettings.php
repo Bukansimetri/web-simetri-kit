@@ -69,6 +69,8 @@ class SiteSettings extends Settings
 
     public bool $career_module_enabled;
 
+    public ?string $footer_description;
+
     public static function group(): string
     {
         return 'site';
