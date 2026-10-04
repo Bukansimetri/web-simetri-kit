@@ -26,7 +26,7 @@ class ClientLogoResource extends Resource
 
     protected static ?string $navigationLabel = 'Logo Klien';
 
-    protected static ?string $navigationGroup = 'Konten Halaman';
+    protected static ?string $navigationGroup = 'Tentang Kami';
 
     protected static ?int $navigationSort = 5;
 

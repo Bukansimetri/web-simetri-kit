@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(JobOpeningSeeder::class);
         $this->call(FaqItemSeeder::class);
         $this->call(MenuSeeder::class);
+        $this->call(PageContentSeeder::class);
 
         // Konten demo (Layanan/Produk, Tim, Testimoni, Portfolio) SENGAJA
         // tidak dipanggil di sini — lihat `php artisan demo:seed` (AMC-229,

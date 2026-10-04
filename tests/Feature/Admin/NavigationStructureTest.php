@@ -2,6 +2,21 @@
 
 namespace Tests\Feature\Admin;
 
+use App\Filament\Resources\AboutMissionResource;
+use App\Filament\Resources\AboutTrustResource;
+use App\Filament\Resources\AboutValueResource;
+use App\Filament\Resources\BannerResource;
+use App\Filament\Resources\CallToActionResource;
+use App\Filament\Resources\CareerValueResource;
+use App\Filament\Resources\ClientLogoResource;
+use App\Filament\Resources\CustomPageResource;
+use App\Filament\Resources\HowItWorksStepResource;
+use App\Filament\Resources\JobOpeningResource;
+use App\Filament\Resources\PageBlockResource;
+use App\Filament\Resources\RecruitmentStepResource;
+use App\Filament\Resources\TeamMemberResource;
+use App\Filament\Resources\TestimonialResource;
+use App\Filament\Resources\WhyChooseItemResource;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Spatie\Permission\Models\Permission;
@@ -47,7 +62,18 @@ class NavigationStructureTest extends TestCase
         // cuma dideklarasikan tanpa dipakai resource manapun).
         $response->assertSee('Lead Kalkulator', escape: false);
         $response->assertSee('Pesan Masuk', escape: false);
-        $response->assertSee('Halaman Tentang Kami', escape: false);
+        // Grup per halaman (029-why-choose-admin): menu section memakai label
+        // pendek karena nama grup sudah memberi konteks halamannya.
+        foreach (['Beranda', 'Tentang Kami', 'Karir'] as $group) {
+            $response->assertSee($group, escape: false);
+        }
+
+        foreach (['Mengapa Beralih', 'Cara Kerja', 'Mengapa Bergabung', 'Proses Rekrutmen', 'Misi', 'Nilai', 'Trust Strip', 'Blok Halaman'] as $label) {
+            $response->assertSee($label, escape: false);
+        }
+
+        $response->assertSee(CallToActionResource::getUrl('index'), escape: false);
+        $response->assertDontSee('Halaman Tentang Kami', escape: false);
 
         // Terjemahan Shield/Activity Log ke Bahasa Indonesia (APP_LOCALE=id
         // + override lang/vendor/filament-shield/id).
@@ -73,5 +99,29 @@ class NavigationStructureTest extends TestCase
 
         $response->assertOk();
         $response->assertDontSee('Log Aktivitas', escape: false);
+    }
+
+    public function test_each_content_menu_is_in_its_page_group_with_unique_order(): void
+    {
+        $expected = [
+            'Beranda' => [BannerResource::class, WhyChooseItemResource::class, HowItWorksStepResource::class],
+            'Tentang Kami' => [AboutMissionResource::class, AboutValueResource::class, AboutTrustResource::class, TeamMemberResource::class, ClientLogoResource::class, TestimonialResource::class],
+            'Karir' => [JobOpeningResource::class, CareerValueResource::class, RecruitmentStepResource::class],
+            'Konten Halaman' => [CustomPageResource::class, PageBlockResource::class, CallToActionResource::class],
+        ];
+
+        foreach ($expected as $group => $resources) {
+            $sorts = [];
+
+            foreach ($resources as $resource) {
+                $this->assertSame($group, $resource::getNavigationGroup(), "{$resource} salah grup");
+                $sorts[] = $resource::getNavigationSort();
+            }
+
+            $this->assertSame($sorts, array_values(array_unique($sorts)), "Urutan menu bentrok di grup {$group}");
+            $sorted = $sorts;
+            sort($sorted);
+            $this->assertSame($sorted, $sorts, "Menu di grup {$group} tidak berurutan sesuai daftar");
+        }
     }
 }
