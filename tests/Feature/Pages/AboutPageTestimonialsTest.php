@@ -66,7 +66,7 @@ class AboutPageTestimonialsTest extends TestCase
         $this->get('/')
             ->assertOk()
             ->assertSee('Klien Beranda', escape: false)
-            ->assertSee('Apa Kata Mereka Tentang SUOER?', escape: false)
+            ->assertSee('Partner Kami', escape: false)
             ->assertDontSee('Klien Nonaktif Beranda', escape: false);
     }
 }

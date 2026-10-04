@@ -4,6 +4,7 @@
     $site = app(\App\Settings\SiteSettings::class);
     $appName = $site->site_name ?: config('app.name');
     $contactInfo = \App\Support\PageContent\PageContent::block(\App\Enums\PageBlockType::ContactInfo);
+    $hero = \App\Support\PageContent\PageContent::block(\App\Enums\PageBlockType::ContactHero);
 @endphp
 
 @section('title', \App\Support\Seo\PageTitle::forStatic('kontak', 'Kontak'))
@@ -18,10 +19,12 @@
                 <li class="text-primary font-semibold">Kontak</li>
             </ol>
         </nav>
-        <h1 class="font-headline-xl text-4xl md:text-5xl font-extrabold text-primary tracking-tight mb-4">Mari Wujudkan Rumah Hemat Energi</h1>
-        <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">
-            Tim kami siap membantu menjawab pertanyaan dan memberikan konsultasi gratis untuk kebutuhan energi surya Anda.
-        </p>
+        <h1 class="font-headline-xl text-4xl md:text-5xl font-extrabold text-primary tracking-tight mb-4">{{ $hero->value('title') }}</h1>
+        @if (filled($hero->value('subtitle')))
+            <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">
+                {{ $hero->value('subtitle') }}
+            </p>
+        @endif
     </section>
 
     <section class="px-6 max-w-7xl mx-auto pb-24 flex flex-col lg:flex-row gap-8">

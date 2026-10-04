@@ -2,34 +2,35 @@
 
 @php
     $appName = app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name');
+    $hero = \App\Support\PageContent\PageContent::block(\App\Enums\PageBlockType::PortfolioHero);
 @endphp
 
 @section('title', \App\Support\Seo\PageTitle::forStatic('portfolio_index', 'Portfolio'))
 @section('meta_description', 'Proyek dan instalasi energi surya yang telah dikerjakan '.$appName.'.')
 
 @section('content')
-    <section class="pt-32 pb-12 px-6 max-w-7xl mx-auto text-center">
-        <h1 class="font-headline-xl text-headline-xl text-on-surface mb-4">Portfolio</h1>
-        <p class="font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto">
-            Proyek nyata yang telah kami kerjakan bersama klien &amp; mitra.
-        </p>
-    </section>
+    <x-sections.page-hero
+        :title="$hero->value('title')"
+        breadcrumb="Portofolio"
+        :subtitle="$hero->value('subtitle')"
+        :image="\App\Support\PageContent\PageContent::imageUrl($hero->value('image_path'), \App\Enums\PageBlockType::PortfolioHero->defaultImagePath())"
+    />
 
-    <section class="px-6 max-w-7xl mx-auto pb-24">
+    <section class="reveal-element px-6 max-w-7xl mx-auto py-16 pb-24">
         @if ($categories->isNotEmpty())
             <div class="flex flex-wrap justify-center gap-3 mb-12">
                 <a href="{{ url('/portfolio') }}"
                    @class([
-                       'px-4 py-2 rounded-full text-sm font-label-bold text-label-bold transition-colors',
-                       'bg-primary text-white' => ! $activeSlug,
-                       'bg-surface-variant text-on-surface-variant hover:bg-surface-container-high' => $activeSlug,
+                       'px-5 py-2 rounded-full text-sm font-label-bold text-label-bold border transition-colors',
+                       'bg-primary-container text-white border-primary-container' => ! $activeSlug,
+                       'bg-white text-on-surface border-outline-variant hover:bg-surface-container' => $activeSlug,
                    ])>Semua</a>
                 @foreach ($categories as $category)
                     <a href="{{ url('/portfolio').'?kategori='.$category->slug }}"
                        @class([
-                           'px-4 py-2 rounded-full text-sm font-label-bold text-label-bold transition-colors',
-                           'bg-primary text-white' => $activeSlug === $category->slug,
-                           'bg-surface-variant text-on-surface-variant hover:bg-surface-container-high' => $activeSlug !== $category->slug,
+                           'px-5 py-2 rounded-full text-sm font-label-bold text-label-bold border transition-colors',
+                           'bg-primary-container text-white border-primary-container' => $activeSlug === $category->slug,
+                           'bg-white text-on-surface border-outline-variant hover:bg-surface-container' => $activeSlug !== $category->slug,
                        ])>{{ $category->name }}</a>
                 @endforeach
             </div>
@@ -37,23 +38,9 @@
 
         @forelse ($projects as $project)
             @if ($loop->first)
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @endif
-            <a href="{{ route('portfolio.show', $project) }}" class="group block rounded-lg overflow-hidden bg-surface-container-low border border-surface-container-low hover:-translate-y-1 transition-transform">
-                <div class="aspect-video bg-surface-container overflow-hidden">
-                    @if ($project->coverImageUrl())
-                        <img src="{{ $project->coverImageUrl() }}" alt="{{ $project->title }}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
-                    @else
-                        <div class="w-full h-full flex items-center justify-center text-outline">
-                            <span class="material-symbols-outlined text-5xl">image</span>
-                        </div>
-                    @endif
-                </div>
-                <div class="p-5">
-                    <span class="text-xs font-label-bold text-label-bold text-secondary uppercase tracking-widest">{{ $project->portfolioCategory->name }}</span>
-                    <h3 class="font-headline-lg text-headline-lg text-lg text-on-surface mt-1">{{ $project->title }}</h3>
-                </div>
-            </a>
+            <x-sections.project-card :project="$project" />
             @if ($loop->last)
                 </div>
             @endif

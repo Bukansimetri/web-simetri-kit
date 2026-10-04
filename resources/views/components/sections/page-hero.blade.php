@@ -9,7 +9,7 @@
     $heroImage = $image ?: asset('images/mockup/produk-1.jpg');
 @endphp
 
-<section class="relative pt-32 pb-16 h-[45vh] md:h-[50vh] min-h-[380px] w-full flex items-end overflow-hidden">
+<section class="relative pt-32 pb-16 min-h-[max(45vh,380px)] md:min-h-[max(50vh,380px)] w-full flex items-end overflow-hidden">
     <div class="absolute inset-0 z-0">
         <img src="{{ $heroImage }}" alt="" class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/90 via-inverse-surface/40 to-transparent"></div>

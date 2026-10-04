@@ -68,6 +68,62 @@ class PortfolioPageTest extends TestCase
         $response->assertSee('Belum ada proyek', escape: false);
     }
 
+    public function test_index_uses_hero_banner_with_breadcrumb_and_default_copy(): void
+    {
+        $this->get('/portfolio')
+            ->assertOk()
+            ->assertSee('Portofolio Proyek')
+            ->assertSee('images/mockup/artikel-1.jpg')
+            ->assertSeeInOrder(['Beranda', 'Portofolio'], escape: false);
+    }
+
+    public function test_card_shows_category_title_summary_and_detail_link(): void
+    {
+        $cat = PortfolioCategory::factory()->create(['name' => 'Residensial']);
+        $project = PortfolioProject::factory()->create([
+            'title' => 'Villa Tropis',
+            'slug' => 'villa-tropis',
+            'description' => '<p>Desain sistem solar panel arsitektural yang memadukan estetika villa.</p>',
+            'portfolio_category_id' => $cat->id,
+        ]);
+
+        $this->get('/portfolio')
+            ->assertOk()
+            ->assertSee('Residensial')
+            ->assertSee('Villa Tropis')
+            ->assertSee('Desain sistem solar panel arsitektural')
+            ->assertSee('Lihat Detail Proyek')
+            ->assertSee(route('portfolio.show', $project));
+    }
+
+    public function test_card_without_summary_or_cover_still_renders(): void
+    {
+        $cat = PortfolioCategory::factory()->create();
+        PortfolioProject::factory()->create([
+            'title' => 'Tanpa Detail',
+            'description' => '',
+            'images' => [],
+            'portfolio_category_id' => $cat->id,
+        ]);
+
+        $this->get('/portfolio')
+            ->assertOk()
+            ->assertSee('Tanpa Detail')
+            ->assertSee('data-project-image-placeholder', escape: false)
+            ->assertSee('Lihat Detail Proyek');
+    }
+
+    public function test_filter_pills_mark_active_category(): void
+    {
+        $a = PortfolioCategory::factory()->create(['name' => 'Residensial', 'slug' => 'residensial']);
+        PortfolioCategory::factory()->create(['name' => 'Industri', 'slug' => 'industri']);
+
+        $html = $this->get('/portfolio?kategori=residensial')->assertOk()->getContent();
+
+        $this->assertMatchesRegularExpression('/bg-primary-container text-white[^"]*"[^>]*>Residensial</', $html);
+        $this->assertDoesNotMatchRegularExpression('/bg-primary-container text-white[^"]*"[^>]*>Semua</', $html);
+    }
+
     public function test_detail_shows_active_project_with_optional_metadata(): void
     {
         $cat = PortfolioCategory::factory()->create();

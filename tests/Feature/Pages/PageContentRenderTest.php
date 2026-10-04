@@ -89,7 +89,7 @@ class PageContentRenderTest extends TestCase
         }
     }
 
-    public function test_how_it_works_decoration_follows_position_not_item(): void
+    public function test_how_it_works_numbers_follow_position_not_item(): void
     {
         SectionItem::query()->where('title', 'Inverter')->update(['order' => 0]);
         SectionItem::query()->where('title', 'Panel & PV Cell')->update(['order' => 5]);
@@ -97,17 +97,49 @@ class PageContentRenderTest extends TestCase
         $fragment = $this->howItWorksFragment();
 
         $this->assertMatchesRegularExpression(
-            '/relative group md:mt-0 .*?>01<\/div><div class="[^"]*-rotate-1 [^"]*"><h4[^>]*>Inverter<\/h4>/',
+            '/>01<\/div><div class="[^"]*"><h4[^>]*>Inverter<\/h4>/',
             $fragment,
         );
     }
 
-    public function test_how_it_works_emphasized_step_has_highlighted_number(): void
+    public function test_home_sections_are_flat_without_rotation_or_offsets(): void
     {
-        $this->assertMatchesRegularExpression(
-            '/bg-primary-container">03<\/div><div[^>]*><h4[^>]*>Inverter<\/h4>/',
-            $this->howItWorksFragment(),
-        );
+        $html = $this->get('/')->assertOk()->getContent();
+
+        foreach ([$this->whyChooseFragment($html), LegacyMarkup::extract($html, LegacyMarkup::FRAGMENTS['home-how-it-works'][1])] as $fragment) {
+            $this->assertDoesNotMatchRegularExpression('/(?<![\w-])-?rotate-\d/', $fragment);
+            $this->assertStringNotContainsString('-translate-y-', $fragment);
+            $this->assertStringNotContainsString('md:mt-12', $fragment);
+            $this->assertStringNotContainsString('md:mt-16', $fragment);
+        }
+    }
+
+    public function test_why_choose_is_centered_with_equal_height_cards_and_small_icons(): void
+    {
+        $fragment = $this->whyChooseFragment($this->get('/')->assertOk()->getContent());
+
+        $this->assertStringContainsString('text-center', $fragment);
+        $this->assertStringContainsString('items-stretch', $fragment);
+        $this->assertSame(3, substr_count($fragment, 'h-full'));
+        $this->assertSame(3, substr_count($fragment, 'w-10 h-10'));
+        $this->assertStringNotContainsString('w-14 h-14', $fragment);
+    }
+
+    public function test_why_choose_emphasis_is_only_a_brand_border(): void
+    {
+        $fragment = $this->whyChooseFragment($this->get('/')->assertOk()->getContent());
+
+        $this->assertSame(1, substr_count($fragment, 'border-2 border-primary-container'));
+        $this->assertStringNotContainsString('bg-primary-container shadow-lg', $fragment);
+    }
+
+    public function test_how_it_works_numbers_turn_blue_only_on_hover(): void
+    {
+        $fragment = $this->howItWorksFragment();
+
+        $this->assertSame(4, substr_count($fragment, 'group-hover:bg-primary-container'));
+        $this->assertSame(4, substr_count($fragment, 'bg-white text-primary group-hover'));
+        $this->assertDoesNotMatchRegularExpression('/(?<!hover:)bg-primary-container">0\d<\/div>/', $fragment);
     }
 
     public function test_how_it_works_is_hidden_without_active_items(): void
@@ -123,7 +155,7 @@ class PageContentRenderTest extends TestCase
 
         $fragment = $this->whyChooseFragment($this->get('/')->assertOk()->getContent());
 
-        $this->assertStringNotContainsString('bg-primary-container shadow-lg', $fragment);
+        $this->assertStringNotContainsString('border-primary-container', $fragment);
         $this->assertStringNotContainsString('Garansi Panjang', $fragment);
     }
 
@@ -133,7 +165,7 @@ class PageContentRenderTest extends TestCase
 
         $fragment = $this->whyChooseFragment($this->get('/')->assertOk()->getContent());
 
-        $this->assertStringNotContainsString('bg-primary-container shadow-lg', $fragment);
+        $this->assertStringNotContainsString('border-primary-container', $fragment);
     }
 
     private function careerPage(): string

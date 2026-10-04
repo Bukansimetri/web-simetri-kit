@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Admin;
 
+use App\Filament\Clusters\BannerCluster;
 use App\Filament\Resources\AboutMissionResource;
 use App\Filament\Resources\AboutTrustResource;
 use App\Filament\Resources\AboutValueResource;
-use App\Filament\Resources\BannerResource;
 use App\Filament\Resources\CallToActionResource;
 use App\Filament\Resources\CareerValueResource;
 use App\Filament\Resources\ClientLogoResource;
@@ -104,7 +104,7 @@ class NavigationStructureTest extends TestCase
     public function test_each_content_menu_is_in_its_page_group_with_unique_order(): void
     {
         $expected = [
-            'Beranda' => [BannerResource::class, WhyChooseItemResource::class, HowItWorksStepResource::class],
+            'Beranda' => [BannerCluster::class, WhyChooseItemResource::class, HowItWorksStepResource::class],
             'Tentang Kami' => [AboutMissionResource::class, AboutValueResource::class, AboutTrustResource::class, TeamMemberResource::class, ClientLogoResource::class, TestimonialResource::class],
             'Karir' => [JobOpeningResource::class, CareerValueResource::class, RecruitmentStepResource::class],
             'Konten Halaman' => [CustomPageResource::class, PageBlockResource::class, CallToActionResource::class],

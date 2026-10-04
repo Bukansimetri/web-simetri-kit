@@ -3,12 +3,16 @@
 @section('title', \App\Support\Seo\PageTitle::forStatic('produk_index', 'Katalog Produk'))
 @section('meta_description', 'Temukan panel surya dan inverter yang tepat untuk proyek Anda, dari skala rumah tangga hingga industri besar.')
 
+@php
+    $hero = \App\Support\PageContent\PageContent::block(\App\Enums\PageBlockType::ProductsHero);
+@endphp
+
 @section('content')
     <x-sections.page-hero
-        title="Katalog Produk"
+        :title="$hero->value('title')"
         breadcrumb="Produk"
-        subtitle="Temukan panel surya dan inverter yang tepat untuk proyek Anda, dari skala rumah tangga hingga industri besar."
-        :image="asset('images/mockup/produk-1.jpg')"
+        :subtitle="$hero->value('subtitle')"
+        :image="\App\Support\PageContent\PageContent::imageUrl($hero->value('image_path'), \App\Enums\PageBlockType::ProductsHero->defaultImagePath())"
     />
 
     <main class="reveal-element max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop py-20">
@@ -42,7 +46,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
                     @foreach ($products as $product)
                         <div x-show="activeCategory === 'all' || activeCategory === '{{ $product->category_id }}'">
-                            <x-sections.product-card :product="$product" />
+                            <x-sections.product-card :product="$product" simple />
                         </div>
                     @endforeach
                 </div>

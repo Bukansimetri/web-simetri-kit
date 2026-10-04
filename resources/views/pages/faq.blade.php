@@ -2,6 +2,7 @@
 
 @php
     $appName = app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name');
+    $hero = \App\Support\PageContent\PageContent::block(\App\Enums\PageBlockType::FaqHero);
 @endphp
 
 @section('title', \App\Support\Seo\PageTitle::forStatic('faq', 'FAQ'))
@@ -40,10 +41,12 @@
                         <li class="text-primary font-semibold">FAQ</li>
                     </ol>
                 </nav>
-                <h1 class="font-headline-xl text-4xl md:text-5xl font-extrabold mb-4 text-primary-container">Pertanyaan Umum</h1>
-                <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto mb-8">
-                    Temukan jawaban cepat seputar layanan, instalasi, dan produk panel surya kami.
-                </p>
+                <h1 class="font-headline-xl text-4xl md:text-5xl font-extrabold mb-4 text-primary-container">{{ $hero->value('title') }}</h1>
+                @if (filled($hero->value('subtitle')))
+                    <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto mb-8">
+                        {{ $hero->value('subtitle') }}
+                    </p>
+                @endif
                 <div class="max-w-xl mx-auto relative group">
                     <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
                     <input

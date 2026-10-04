@@ -8,6 +8,7 @@ use App\Http\Controllers\Public\ContactController;
 use App\Http\Controllers\Public\CustomPageController;
 use App\Http\Controllers\Public\FaqController;
 use App\Http\Controllers\Public\HomeController;
+use App\Http\Controllers\Public\NewsletterController;
 use App\Http\Controllers\Public\PortfolioController;
 use App\Http\Controllers\Public\ProductController;
 use App\Http\Controllers\Public\SitemapController;
@@ -32,6 +33,7 @@ Route::get('/karir', CareerController::class)->name('karir');
 Route::get('/artikel', [ArticleController::class, 'index'])->name('artikel.index');
 Route::get('/artikel/{article:slug}', [ArticleController::class, 'show'])->name('artikel.show');
 Route::get('/faq', FaqController::class)->name('faq');
+Route::post('/langganan', [NewsletterController::class, 'store'])->name('newsletter.subscribe')->middleware('throttle:5,1');
 
 // Portfolio (spec 010-portfolio-showcase-module) — listing + filter kategori & detail.
 Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio.index');

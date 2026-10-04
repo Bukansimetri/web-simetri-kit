@@ -3,6 +3,7 @@
 namespace Tests\Feature\Database;
 
 use App\Enums\CtaPlacement;
+use App\Enums\PageBlockType;
 use App\Enums\PageSection;
 use App\Models\CallToAction;
 use App\Models\PageBlock;
@@ -28,7 +29,7 @@ class PageContentSeederTest extends TestCase
         $this->assertSame(3, SectionItem::query()->forSection(PageSection::AboutValues)->count());
         $this->assertSame(3, SectionItem::query()->forSection(PageSection::AboutTrust)->count());
         $this->assertSame(7, SectionHeading::query()->count());
-        $this->assertSame(4, PageBlock::query()->count());
+        $this->assertSame(count(PageBlockType::cases()), PageBlock::query()->count());
         $this->assertSame(9, CallToAction::query()->count());
     }
 
@@ -40,7 +41,7 @@ class PageContentSeederTest extends TestCase
 
         $this->assertSame(25, SectionItem::query()->count());
         $this->assertSame(7, SectionHeading::query()->count());
-        $this->assertSame(4, PageBlock::query()->count());
+        $this->assertSame(count(PageBlockType::cases()), PageBlock::query()->count());
         $this->assertSame(9, CallToAction::query()->count());
     }
 
