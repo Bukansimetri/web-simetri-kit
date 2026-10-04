@@ -23,6 +23,7 @@ Manual ini untuk Anda yang mengelola situs Anda lewat panel admin, tanpa perlu l
   - [Konten Halaman → Halaman](#konten-halaman--halaman)
   - [Konten Halaman → Blok Halaman](#konten-halaman--blok-halaman)
   - [Konten Halaman → CTA](#konten-halaman--cta)
+  - [Konten Halaman → FAQ](#konten-halaman--faq)
   - [Beranda dan Karir → Section kartu dan langkah](#beranda-dan-karir--section-kartu-dan-langkah)
   - [Katalog → Produk](#katalog--produk)
   - [Katalog → Kategori Produk](#katalog--kategori-produk)
@@ -110,6 +111,7 @@ Menu paling atas, tanpa grup:
 - **Halaman** — halaman statis tambahan di situs Anda (misal Syarat & Ketentuan, Kebijakan Privasi).
 - **Blok Halaman** — Siapa Kami dan Visi di halaman "Tentang Kami", serta info kontak (jam operasional dan pesan WhatsApp) di halaman "Kontak".
 - **CTA** — teks ajakan bertindak ("Hubungi Kami" dan sejenisnya) di berbagai halaman.
+- **FAQ** — pertanyaan dan jawaban di halaman FAQ, serta bagian tanya-jawab di halaman Produk dan Kontak.
 
 **Katalog**
 
@@ -236,7 +238,7 @@ Menu **Banner** punya dua tab di bagian atas: **Slider Beranda** dan **Banner Ha
 **Banner Halaman** — banner di bagian atas halaman Produk, Tentang Kami, Karir, Artikel, Portfolio, FAQ, dan Kontak. Satu banner per halaman (tanpa tombol tambah atau hapus); tampilan banner mengikuti desain tiap halaman.
 
 - Kolom wajib: **Judul**.
-- Kolom opsional: **Subjudul** (dikosongkan = subjudul disembunyikan) dan, khusus Produk, Tentang Kami, Karir, Artikel, dan Portfolio, **Gambar Latar** (maksimal 10 MB; dikosongkan = gambar bawaan dipakai).
+- Kolom opsional: **Subjudul** (dikosongkan = subjudul disembunyikan) dan **Gambar Latar** (maksimal 10 MB; dikosongkan = gambar bawaan dipakai).
 - Judul banner Tentang Kami dan Karir tidak lagi ikut berubah otomatis saat Nama Situs diganti — ubah manual di sini bila perlu.
 
 ### Tentang Kami → Testimoni
@@ -312,6 +314,15 @@ Menu **CTA** berisi blok ajakan ("Hubungi Kami", "Chat via WhatsApp", dan sejeni
 - Tujuan tombol tidak bisa diubah di sini. Tombol WhatsApp memakai nomor di **Pengaturan Umum**; bila nomor kosong, tombol mengarah ke halaman Kontak.
 - CTA **Detail Produk – Masa Depan Energi**: tulis **{produk}** di paragraf untuk menyisipkan nama produk yang sedang dibuka.
 
+### Konten Halaman → FAQ
+
+Semua pertanyaan dan jawaban (FAQ) dikelola dari satu menu ini. Setiap entri punya **Tempat Tampil**: **Halaman FAQ**, **Halaman Produk** (bagian "Pertanyaan Seputar Produk"), atau **Halaman Kontak** (bagian "Pertanyaan Seputar Konsultasi").
+
+- Kolom wajib: **Tempat Tampil**, **Pertanyaan**, **Jawaban**.
+- Kolom opsional: **Kategori** (hanya untuk Halaman FAQ, dipakai untuk tab kategori di halaman itu).
+- Di daftar, gunakan filter **Tempat Tampil** untuk memilih halaman yang ingin diatur. Klik **Urutkan**, seret barisnya, lalu klik lagi untuk menyimpan urutan tampil.
+- Toggle **Aktif** menentukan apakah entri ditampilkan. Bila semua entri di Halaman Produk atau Halaman Kontak dinonaktifkan atau dihapus, bagian tanya-jawab di halaman itu disembunyikan.
+
 ### Katalog → Produk
 
 Produk yang ditampilkan di situs.
@@ -339,8 +350,10 @@ Daftar peralatan listrik beserta dayanya. Daftar ini dipakai oleh kalkulator est
 Tulisan/artikel yang ditampilkan di halaman blog situs.
 
 - Kolom wajib: **Judul**, **Slug**, **Kategori**, **Ringkasan**, **Isi Artikel**.
-- Kolom opsional: **Redaksi**, **Gambar Sampul**, **Status** (misal draft/terbit), **Tanggal Publish**, **Judul Pencarian**, **Deskripsi Pencarian**, **Gambar SEO / Share Sosial**.
-- Artikel dengan **Status** selain terbit tidak akan tampil di situs meski sudah disimpan.
+- Kolom opsional: **Redaksi**, **Gambar Sampul**, **Keterangan Gambar** (tampil di bawah gambar sampul), **Produk Terkait** (maksimal 4 produk yang tampil di bawah artikel, urutannya bisa diseret), **Status** (misal draft/terbit), **Tanggal Publish**, **Judul Pencarian**, **Deskripsi Pencarian**, **Gambar SEO / Share Sosial**.
+- Artikel dengan **Status** selain terbit tidak akan tampil di situs meski sudah disimpan. Untuk memeriksa draf atau artikel terjadwal sebelum terbit, buka halaman edit lalu klik **Preview**; halaman pratinjau hanya bisa dilihat oleh admin yang sedang masuk.
+- Di daftar artikel, kolom **Dilihat** menunjukkan berapa kali artikel dibuka pengunjung.
+- Tag yang Anda isi dipakai pengunjung untuk memfilter artikel lewat bagian **Tag Populer** di halaman Artikel. Daftar artikel di situs dimuat bertahap lewat tombol **Muat lebih banyak**.
 - Pengunjung dapat mencari artikel lewat kotak **Cari Artikel** di halaman Artikel. Pencarian mencocokkan kata kunci pada **Judul** dan **Ringkasan**, jadi tulis keduanya dengan kata yang biasa dicari pengunjung.
 
 ### Blog → Kategori Artikel
@@ -370,6 +383,7 @@ Lowongan pekerjaan yang ditampilkan di halaman karir situs.
 
 - Kolom wajib: **Judul Posisi**, **Lokasi**, **Tipe Pekerjaan**, **Deskripsi**.
 - Toggle **Aktif** menentukan apakah lowongan ini ditampilkan.
+- Setiap lowongan aktif punya halaman detail yang menampilkan deskripsi lengkap dan tombol **Lamar Sekarang**; di halaman Karir hanya dua baris awal deskripsi yang tampil, jadi tulis kalimat pembuka yang jelas.
 
 Halaman karir situs Anda bisa dinonaktifkan sepenuhnya lewat **Modul Karir Aktif** di menu **Pengaturan Umum** (lihat [Pengaturan situs](#pengaturan-situs)). Saat dimatikan, halaman karir tidak lagi bisa diakses pengunjung dan tautan "Karir" hilang dari navigasi, tetapi data Lowongan Kerja yang sudah tersimpan tidak terhapus.
 

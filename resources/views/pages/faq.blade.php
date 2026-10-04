@@ -30,33 +30,23 @@
             },
         }"
     >
-        {{-- Hero --}}
-        <section class="relative px-6 pt-40 pb-16 overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-surface-container to-background -z-10"></div>
-            <div class="max-w-3xl mx-auto text-center">
-                <nav class="flex justify-center text-sm text-outline mb-6">
-                    <ol class="flex items-center gap-2">
-                        <li><a class="hover:text-primary transition-colors" href="{{ url('/') }}">Beranda</a></li>
-                        <li class="flex items-center"><span class="material-symbols-outlined text-base">chevron_right</span></li>
-                        <li class="text-primary font-semibold">FAQ</li>
-                    </ol>
-                </nav>
-                <h1 class="font-headline-xl text-4xl md:text-5xl font-extrabold mb-4 text-primary-container">{{ $hero->value('title') }}</h1>
-                @if (filled($hero->value('subtitle')))
-                    <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto mb-8">
-                        {{ $hero->value('subtitle') }}
-                    </p>
-                @endif
-                <div class="max-w-xl mx-auto relative group">
-                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
-                    <input
-                        type="text"
-                        x-model="q"
-                        placeholder="Cari pertanyaan..."
-                        aria-label="Cari pertanyaan"
-                        class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-3 pl-12 pr-4 shadow-sm font-body-md text-body-md focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/30 transition-all"
-                    >
-                </div>
+        <x-sections.page-hero
+            :title="$hero->value('title')"
+            breadcrumb="FAQ"
+            :subtitle="$hero->value('subtitle')"
+            :image="\App\Support\PageContent\PageContent::imageUrl($hero->value('image_path'), \App\Enums\PageBlockType::FaqHero->defaultImagePath())"
+        />
+
+        <section class="px-6 max-w-3xl mx-auto pt-16">
+            <div class="max-w-xl mx-auto relative group">
+                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
+                <input
+                    type="text"
+                    x-model="q"
+                    placeholder="Cari pertanyaan..."
+                    aria-label="Cari pertanyaan"
+                    class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-3 pl-12 pr-4 shadow-sm font-body-md text-body-md focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/30 transition-all"
+                >
             </div>
         </section>
 

@@ -14,23 +14,12 @@
 @section('meta_description', 'Mengenal '.$appName.' lebih dekat — visi, misi, dan nilai-nilai kami dalam menghadirkan solusi energi surya.')
 
 @section('content')
-    {{-- Page Hero --}}
-    <section class="relative pt-32 pb-16 h-[50vh] min-h-[400px] w-full flex items-end overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <img src="{{ \App\Support\PageContent\PageContent::imageUrl($hero->value('image_path'), 'images/mockup/produk-1.jpg') }}" alt="Solar array modern di atap gedung komersial" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/90 via-inverse-surface/40 to-transparent"></div>
-        </div>
-        <div class="relative z-10 w-full px-6 max-w-7xl mx-auto pb-8">
-            <p class="text-sm font-semibold text-white/70 uppercase tracking-widest mb-4">
-                <a href="{{ url('/') }}" class="hover:text-primary-fixed transition-colors">Beranda</a>
-                <span class="mx-2 text-white/40">/</span> Tentang Kami
-            </p>
-            <h1 class="font-headline-xl text-4xl md:text-6xl font-extrabold text-white max-w-4xl leading-tight tracking-tight">{{ $hero->value('title') }}</h1>
-            @if (filled($hero->value('subtitle')))
-                <p class="mt-4 text-lg md:text-xl text-white/90 max-w-2xl leading-relaxed">{{ $hero->value('subtitle') }}</p>
-            @endif
-        </div>
-    </section>
+    <x-sections.page-hero
+        :title="$hero->value('title')"
+        breadcrumb="Tentang Kami"
+        :subtitle="$hero->value('subtitle')"
+        :image="\App\Support\PageContent\PageContent::imageUrl($hero->value('image_path'), \App\Enums\PageBlockType::AboutHero->defaultImagePath())"
+    />
 
     {{-- Siapa Kami --}}
     <section class="reveal-element py-24 px-6 max-w-7xl mx-auto">

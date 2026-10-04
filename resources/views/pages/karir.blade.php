@@ -44,7 +44,9 @@
 
     {{-- Open Positions --}}
     <section id="positions" class="reveal-element px-6 max-w-5xl mx-auto py-12">
-        <h2 class="font-headline-lg text-2xl md:text-3xl font-extrabold text-on-surface mb-8">Posisi Terbuka</h2>
+        <div class="text-center mb-12">
+            <h2 class="font-headline-lg text-2xl md:text-3xl font-extrabold mb-2 text-primary-container">Posisi Terbuka</h2>
+        </div>
 
         @if ($jobOpenings->isEmpty())
             <div class="bg-surface-container-low rounded-lg p-8 text-center">

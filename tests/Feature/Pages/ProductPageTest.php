@@ -101,12 +101,20 @@ class ProductPageTest extends TestCase
             ->assertSee('aspect-video', escape: false);
     }
 
-    public function test_index_category_filter_still_renders_buttons_for_each_category(): void
+    public function test_index_has_no_category_filter_and_lists_products_of_every_category(): void
     {
-        $a = Category::factory()->create(['name' => 'Panel']);
-        Product::factory()->create(['category_id' => $a->id]);
+        $panel = Category::factory()->create(['name' => 'Panel Rahasia']);
+        $inverter = Category::factory()->create(['name' => 'Inverter Rahasia']);
+        Product::factory()->create(['name' => 'Produk Panel', 'category_id' => $panel->id]);
+        Product::factory()->create(['name' => 'Produk Inverter', 'category_id' => $inverter->id]);
 
-        $this->get('/produk')->assertOk()->assertSee('Semua')->assertSee('Panel');
+        $html = $this->get('/produk')->assertOk()->getContent();
+
+        $this->assertStringContainsString('Produk Panel', $html);
+        $this->assertStringContainsString('Produk Inverter', $html);
+        $this->assertStringNotContainsString('Panel Rahasia', $html);
+        $this->assertStringNotContainsString('Inverter Rahasia', $html);
+        $this->assertStringNotContainsString('activeCategory', $html);
     }
 
     public function test_related_products_on_detail_page_keep_the_full_card(): void

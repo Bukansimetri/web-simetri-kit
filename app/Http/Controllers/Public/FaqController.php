@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Public;
 
 use App\Concerns\CachesPublicPages;
+use App\Enums\FaqPlacement;
 use App\Http\Controllers\Controller;
 use App\Models\FaqItem;
 use App\Support\Seo\JsonLd;
@@ -16,7 +17,7 @@ class FaqController extends Controller
     {
         $faqItems = $this->rememberPublicPage(
             'public-page:faq',
-            fn () => FaqItem::query()->orderBy('order')->get()
+            fn () => FaqItem::query()->forPlacement(FaqPlacement::Faq)->active()->orderBy('order')->get()
         );
 
         return view('pages.faq', [

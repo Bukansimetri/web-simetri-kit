@@ -55,7 +55,7 @@ class LegacyMarkup
      *
      * @var list<string>
      */
-    public const REDESIGNED = ['home-why-choose', 'home-how-it-works'];
+    public const REDESIGNED = ['home-why-choose', 'home-how-it-works', 'faq-hero', 'kontak-hero', 'tentang-kami-hero'];
 
     public static function fixturePath(string $name): string
     {

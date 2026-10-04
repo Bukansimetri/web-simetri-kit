@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Public;
 
 use App\Concerns\CachesPublicPages;
+use App\Enums\FaqPlacement;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\FaqItem;
 use App\Models\Product;
 use App\Support\Seo\JsonLd;
 use Illuminate\View\View;
@@ -17,9 +18,13 @@ class ProductController extends Controller
     {
         $data = $this->rememberPublicPage('public-page:produk.index', function () {
             $products = Product::query()->orderBy('order')->get();
-            $categories = Category::query()->orderBy('order')->get();
+            $productFaqs = FaqItem::query()
+                ->forPlacement(FaqPlacement::Product)
+                ->active()
+                ->orderBy('order')
+                ->get();
 
-            return compact('products', 'categories');
+            return compact('products', 'productFaqs');
         });
 
         return view('pages.produk.index', $data);

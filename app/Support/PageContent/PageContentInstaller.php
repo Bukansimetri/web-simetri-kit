@@ -3,9 +3,11 @@
 namespace App\Support\PageContent;
 
 use App\Enums\CtaPlacement;
+use App\Enums\FaqPlacement;
 use App\Enums\PageBlockType;
 use App\Enums\PageSection;
 use App\Models\CallToAction;
+use App\Models\FaqItem;
 use App\Models\PageBlock;
 use App\Models\SectionHeading;
 use App\Models\SectionItem;
@@ -39,6 +41,39 @@ class PageContentInstaller
                 ['placement' => $placement->value],
                 DefaultPageContent::forCurrentSite(DefaultPageContent::ctas()[$placement->value]),
             );
+        }
+
+        self::installFaqs();
+    }
+
+    /**
+     * FAQ Produk dan Kontak ditanam hanya bila tempat itu belum punya entri sama sekali, agar editan admin tidak tertimpa.
+     */
+    private static function installFaqs(): void
+    {
+        if (! Schema::hasColumn('faq_items', 'placement')) {
+            return;
+        }
+
+        foreach (DefaultPageContent::faqs() as $placement => $entries) {
+            $placement = FaqPlacement::from($placement);
+
+            if (FaqItem::query()->forPlacement($placement)->exists()) {
+                continue;
+            }
+
+            foreach ($entries as $order => $entry) {
+                $values = DefaultPageContent::forCurrentSite($entry);
+
+                FaqItem::query()->create([
+                    'question' => $values['question'],
+                    'answer' => $values['answer'],
+                    'category' => null,
+                    'placement' => $placement,
+                    'is_active' => true,
+                    'order' => $order,
+                ]);
+            }
         }
     }
 

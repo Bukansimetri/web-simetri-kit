@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Public;
 
+use App\Enums\FaqPlacement;
 use App\Http\Controllers\Controller;
 use App\Mail\ContactSubmissionThankYou;
 use App\Models\ContactSubmission;
+use App\Models\FaqItem;
 use App\Notifications\NewContactSubmission;
 use App\Services\SubmissionGuard;
 use App\Settings\SiteSettings;
@@ -30,6 +32,11 @@ class ContactController extends Controller
     {
         return view('pages.kontak', [
             'formToken' => SubmissionGuard::issueToken(),
+            'consultFaqs' => FaqItem::query()
+                ->forPlacement(FaqPlacement::Contact)
+                ->active()
+                ->orderBy('order')
+                ->get(),
         ]);
     }
 

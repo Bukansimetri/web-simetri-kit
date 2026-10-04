@@ -7,6 +7,7 @@ use App\Filament\Resources\ArticleResource\Pages\EditArticle;
 use App\Filament\Resources\ArticleResource\Pages\ListArticles;
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -242,5 +243,83 @@ class ArticleResourceTest extends TestCase
         $this->assertSame('Judul SEO Kustom', $article->meta_title);
         $this->assertSame('Deskripsi SEO kustom.', $article->meta_description);
         $this->assertStringEndsWith('.webp', $article->meta_image_path);
+    }
+
+    public function test_admin_can_save_image_caption_and_ordered_related_products_without_duplicates(): void
+    {
+        $user = User::factory()->create();
+        $category = ArticleCategory::factory()->create();
+        $first = Product::factory()->create(['name' => 'Inverter A']);
+        $second = Product::factory()->create(['name' => 'Baterai B']);
+
+        Livewire::actingAs($user)
+            ->test(CreateArticle::class)
+            ->fillForm([
+                'title' => 'Artikel Dengan Produk',
+                'article_category_id' => $category->id,
+                'excerpt' => 'Ringkasan.',
+                'content' => '<p>Isi.</p>',
+                'image_caption' => 'Keterangan foto utama',
+                'publish_status' => 'now',
+                'relatedProductRows' => [
+                    ['product_id' => $second->id],
+                    ['product_id' => $first->id],
+                ],
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $article = Article::where('title', 'Artikel Dengan Produk')->firstOrFail();
+
+        $this->assertSame('Keterangan foto utama', $article->image_caption);
+        $this->assertSame([$second->id, $first->id], $article->relatedProducts()->pluck('products.id')->all());
+    }
+
+    public function test_duplicate_related_product_is_rejected(): void
+    {
+        $user = User::factory()->create();
+        $category = ArticleCategory::factory()->create();
+        $product = Product::factory()->create();
+
+        Livewire::actingAs($user)
+            ->test(CreateArticle::class)
+            ->fillForm([
+                'title' => 'Artikel Duplikat',
+                'article_category_id' => $category->id,
+                'excerpt' => 'Ringkasan.',
+                'content' => '<p>Isi.</p>',
+                'publish_status' => 'now',
+                'relatedProductRows' => [
+                    ['product_id' => $product->id],
+                    ['product_id' => $product->id],
+                ],
+            ])
+            ->call('create')
+            ->assertHasFormErrors();
+
+        $this->assertDatabaseMissing('articles', ['title' => 'Artikel Duplikat']);
+    }
+
+    public function test_preview_action_is_on_the_edit_page_and_points_to_the_preview_route(): void
+    {
+        $user = User::factory()->create();
+        $article = Article::factory()->create(['published_at' => null]);
+
+        Livewire::actingAs($user)
+            ->test(EditArticle::class, ['record' => $article->getRouteKey()])
+            ->assertActionExists('preview')
+            ->assertActionHasUrl('preview', route('artikel.preview', $article))
+            ->assertActionShouldOpenUrlInNewTab('preview');
+    }
+
+    public function test_table_shows_view_count_column(): void
+    {
+        $user = User::factory()->create();
+        $article = Article::factory()->create(['view_count' => 321]);
+
+        Livewire::actingAs($user)
+            ->test(ListArticles::class)
+            ->assertTableColumnExists('view_count')
+            ->assertSee('321');
     }
 }

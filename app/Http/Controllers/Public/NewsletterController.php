@@ -63,7 +63,7 @@ class NewsletterController extends Controller
             return response()->json(['message' => self::SUCCESS_MESSAGE], 201);
         }
 
-        return redirect(url('/artikel').'#langganan')->with('newsletter_status', self::SUCCESS_MESSAGE);
+        return redirect($this->backUrl($request))->with('newsletter_status', self::SUCCESS_MESSAGE);
     }
 
     /**
@@ -75,6 +75,20 @@ class NewsletterController extends Controller
             return response()->json(['message' => $message, 'errors' => $errors], $status);
         }
 
-        return redirect(url('/artikel').'#langganan')->with('newsletter_error', $message)->withInput($request->only('email'));
+        return redirect($this->backUrl($request))->with('newsletter_error', $message)->withInput($request->only('email'));
+    }
+
+    /**
+     * Kembali ke halaman asal formulir (daftar atau detail artikel); bila bukan dari situs ini, ke daftar artikel.
+     */
+    private function backUrl(Request $request): string
+    {
+        $previous = (string) url()->previous();
+        $host = parse_url($previous, PHP_URL_HOST);
+        $path = parse_url($previous, PHP_URL_PATH) ?: '';
+
+        $isOwnArticlePage = $host === $request->getHost() && str_starts_with($path, '/artikel');
+
+        return ($isOwnArticlePage ? strtok($previous, '#') : url('/artikel')).'#langganan';
     }
 }

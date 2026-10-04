@@ -111,4 +111,55 @@ class PageBannerRenderTest extends TestCase
 
         $this->get('/portfolio')->assertOk()->assertSee('images/mockup/artikel-1.jpg');
     }
+
+    /**
+     * @return array<string, array{0: PageBlockType, 1: string, 2: string, 3: string}>
+     */
+    public static function newlyUnifiedPages(): array
+    {
+        return [
+            'faq' => [PageBlockType::FaqHero, '/faq', 'FAQ', 'images/mockup/artikel-4.jpg'],
+            'kontak' => [PageBlockType::ContactHero, '/kontak', 'Kontak', 'images/mockup/home-1.jpg'],
+            'tentang-kami' => [PageBlockType::AboutHero, '/tentang-kami', 'Tentang Kami', 'images/mockup/produk-1.jpg'],
+        ];
+    }
+
+    #[DataProvider('newlyUnifiedPages')]
+    public function test_faq_contact_and_about_use_the_shared_hero(PageBlockType $type, string $path, string $breadcrumb, string $defaultImage): void
+    {
+        $html = $this->get($path)->assertOk()->getContent();
+
+        $this->assertStringContainsString('min-h-[max(45vh,380px)]', $html);
+        $this->assertStringContainsString($defaultImage, $html);
+        $this->assertMatchesRegularExpression('#Beranda</a>\s*<span[^>]*>/</span>\s*'.preg_quote($breadcrumb, '#').'#', $html);
+        $this->assertStringNotContainsString('pt-40 pb-16', $html);
+    }
+
+    #[DataProvider('newlyUnifiedPages')]
+    public function test_uploaded_image_replaces_default_and_missing_file_falls_back_for_unified_pages(PageBlockType $type, string $path, string $breadcrumb, string $defaultImage): void
+    {
+        Storage::fake('public');
+        Storage::disk('public')->put('page-banners/uji.webp', 'x');
+
+        $this->setBlock($type, ['image_path' => 'page-banners/uji.webp']);
+        $this->get($path)->assertOk()
+            ->assertSee(Storage::disk('public')->url('page-banners/uji.webp'))
+            ->assertDontSee($defaultImage);
+
+        $this->setBlock($type, ['image_path' => 'page-banners/hilang.webp']);
+        $this->get($path)->assertOk()->assertSee($defaultImage);
+    }
+
+    public function test_contact_page_still_renders_the_contact_form_below_the_banner(): void
+    {
+        $this->get('/kontak')->assertOk()->assertSee('Pertanyaan Seputar Konsultasi', escape: false);
+    }
+
+    public function test_faq_page_keeps_its_search_box_below_the_banner(): void
+    {
+        $html = $this->get('/faq')->assertOk()->getContent();
+
+        $this->assertStringContainsString('Cari pertanyaan', $html);
+        $this->assertLessThan(strpos($html, 'Cari pertanyaan'), strpos($html, 'min-h-[max(45vh,380px)]'));
+    }
 }
