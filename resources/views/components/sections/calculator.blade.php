@@ -79,25 +79,25 @@
                         <p class="text-sm text-primary/70">Pilih jumlah peralatan listrik di rumah Anda:</p>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <template x-for="item in appliances" :key="item.key">
-                                <div class="flex items-center justify-between bg-surface-container-low p-3 border border-transparent rounded-lg h-20">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-primary shadow-sm overflow-hidden">
+                                <div class="flex items-center justify-between gap-2 bg-surface-container-low p-2.5 border border-transparent rounded-lg h-20">
+                                    <div class="flex items-center gap-2 min-w-0 flex-1">
+                                        <div class="w-8 h-8 shrink-0 rounded-lg bg-white flex items-center justify-center text-primary shadow-sm overflow-hidden">
                                             <template x-if="item.iconImage">
-                                                <img :src="item.iconImage" alt="" class="w-6 h-6 object-contain">
+                                                <img :src="item.iconImage" alt="" class="w-5 h-5 object-contain">
                                             </template>
                                             <template x-if="!item.iconImage">
-                                                <span class="material-symbols-outlined" x-text="item.icon"></span>
+                                                <span class="material-symbols-outlined !text-[20px]" x-text="item.icon"></span>
                                             </template>
                                         </div>
-                                        <div class="flex flex-col">
-                                            <span class="font-bold text-sm text-on-surface" x-text="item.label"></span>
-                                            <span class="text-[10px] text-primary/60" x-text="'~' + item.watt + 'W'"></span>
+                                        <div class="flex flex-col min-w-0">
+                                            <span class="font-medium text-xs leading-tight text-on-surface line-clamp-2" :title="item.label" x-text="item.label"></span>
+                                            <span class="text-[11px] font-normal text-primary/60 truncate" x-text="'~' + item.watt + 'W'"></span>
                                         </div>
                                     </div>
-                                    <div class="flex items-center bg-white rounded-lg border border-outline-variant overflow-hidden h-10">
-                                        <button type="button" @click="item.qty = Math.max(0, item.qty - 1); resetResult()" class="w-7 h-7 flex items-center justify-center text-primary hover:bg-primary/5">-</button>
-                                        <input type="number" min="0" x-model.number="item.qty" @input="resetResult()" class="w-8 h-7 text-center bg-transparent border-none p-0 text-xs font-bold focus:ring-0">
-                                        <button type="button" @click="item.qty++; resetResult()" class="w-7 h-7 flex items-center justify-center text-primary hover:bg-primary/5">+</button>
+                                    <div class="grid grid-cols-[1.75rem_1fr_1.75rem] items-center shrink-0 w-20 h-8 bg-white rounded-lg border border-outline-variant overflow-hidden">
+                                        <button type="button" @click="item.qty = Math.max(0, item.qty - 1); resetResult()" aria-label="Kurangi" class="relative h-8 flex items-center justify-center text-primary text-base font-medium hover:bg-primary/5 before:absolute before:inset-y-0 before:left-0 before:-right-1">-</button>
+                                        <input type="number" min="0" x-model.number="item.qty" @input="resetResult()" aria-label="Jumlah" class="w-full h-8 text-center bg-transparent border-none p-0 text-xs font-semibold focus:ring-0 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none">
+                                        <button type="button" @click="item.qty++; resetResult()" aria-label="Tambah" class="relative h-8 flex items-center justify-center text-primary text-base font-medium hover:bg-primary/5 before:absolute before:inset-y-0 before:right-0 before:-left-1">+</button>
                                     </div>
                                 </div>
                             </template>
