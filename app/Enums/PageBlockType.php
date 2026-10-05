@@ -83,6 +83,8 @@ enum PageBlockType: string
             self::CareerHero => 'images/mockup/home-3.jpg',
             self::ArticlesHero => 'images/mockup/artikel-3.jpg',
             self::PortfolioHero => 'images/mockup/artikel-1.jpg',
+            self::FaqHero => 'images/mockup/artikel-4.jpg',
+            self::ContactHero => 'images/mockup/home-1.jpg',
             default => null,
         };
     }
@@ -93,7 +95,7 @@ enum PageBlockType: string
     public function imageMaxWidth(): ?int
     {
         return match ($this) {
-            self::AboutHero, self::ProductsHero, self::CareerHero, self::ArticlesHero, self::PortfolioHero => 1920,
+            self::AboutHero, self::ProductsHero, self::CareerHero, self::ArticlesHero, self::PortfolioHero, self::FaqHero, self::ContactHero => 1920,
             self::AboutWhoWeAre => 1000,
             default => null,
         };

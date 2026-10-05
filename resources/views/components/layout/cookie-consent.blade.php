@@ -25,10 +25,10 @@
                 <button type="button" @click="openPreferences()" class="underline hover:text-white ml-1">Atur preferensi</button>
             </p>
             <div class="flex items-center gap-3 shrink-0">
-                <button type="button" @click="rejectAll()" class="px-5 py-2.5 rounded-lg text-sm font-medium border border-white/30 text-white hover:bg-white/10 transition-colors">
+                <button type="button" @click="rejectAll()" class="px-5 py-2.5 rounded-lg text-sm font-bold border border-white/30 text-white hover:bg-white/10 transition-colors">
                     Tolak
                 </button>
-                <button type="button" @click="acceptAll()" class="px-5 py-2.5 rounded-lg text-sm font-medium bg-primary-container text-white hover:bg-primary-container/90 transition-colors">
+                <button type="button" @click="acceptAll()" class="px-5 py-2.5 rounded-lg text-sm font-bold bg-primary-container text-white hover:bg-primary-container/90 transition-colors">
                     Terima
                 </button>
             </div>
@@ -74,7 +74,7 @@
                 <button type="button" @click="preferencesOpen = false" class="px-4 py-2 text-sm font-medium text-on-surface-variant hover:text-on-background transition-colors">
                     Batal
                 </button>
-                <button type="button" @click="savePreferences()" class="px-5 py-2.5 rounded-lg text-sm font-medium bg-primary-container text-white hover:bg-primary-container/90 transition-colors">
+                <button type="button" @click="savePreferences()" class="px-5 py-2.5 rounded-lg text-sm font-bold bg-primary-container text-white hover:bg-primary-container/90 transition-colors">
                     Simpan Preferensi
                 </button>
             </div>

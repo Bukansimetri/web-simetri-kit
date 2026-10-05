@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ArticleResource\Pages;
 
+use App\Concerns\CachesPublicPages;
 use App\Filament\Resources\ArticleResource;
 use Filament\Resources\Pages\CreateRecord;
 
@@ -21,5 +22,10 @@ class CreateArticle extends CreateRecord
     protected function afterCreate(): void
     {
         $this->record->syncTags($this->data['tags'] ?? []);
+
+        (new class
+        {
+            use CachesPublicPages;
+        })::bumpPublicPageVersion();
     }
 }

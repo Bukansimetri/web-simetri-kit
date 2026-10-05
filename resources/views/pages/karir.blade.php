@@ -23,7 +23,7 @@
     @if ($values)
     <section class="reveal-element px-6 max-w-7xl mx-auto py-20">
         <div class="text-center mb-12">
-            <h2 class="font-headline-lg text-2xl md:text-3xl font-extrabold mb-2 text-primary-container">{{ \App\Support\PageContent\PageContent::multiline($values->title) }}</h2>
+            <h2 class="font-headline-lg text-2xl md:text-3xl font-bold mb-2 text-primary-container">{{ \App\Support\PageContent\PageContent::multiline($values->title) }}</h2>
             @if (filled($values->subtitle))
                 <p class="font-body-md text-body-md text-on-surface-variant">{{ $values->subtitle }}</p>
             @endif
@@ -44,7 +44,9 @@
 
     {{-- Open Positions --}}
     <section id="positions" class="reveal-element px-6 max-w-5xl mx-auto py-12">
-        <h2 class="font-headline-lg text-2xl md:text-3xl font-extrabold text-on-surface mb-8">Posisi Terbuka</h2>
+        <div class="text-center mb-12">
+            <h2 class="font-headline-lg text-2xl md:text-3xl font-bold mb-2 text-primary-container">Posisi Terbuka</h2>
+        </div>
 
         @if ($jobOpenings->isEmpty())
             <div class="bg-surface-container-low rounded-lg p-8 text-center">
@@ -63,7 +65,7 @@
     @if ($process)
     <section class="reveal-element px-6 max-w-7xl mx-auto py-12 mb-12">
         <div class="bg-surface-container-low rounded-2xl p-8 md:p-12 border border-surface-container">
-            <h2 class="font-headline-lg text-2xl md:text-3xl font-extrabold text-center mb-10 text-primary-container">{{ \App\Support\PageContent\PageContent::multiline($process->title) }}</h2>
+            <h2 class="font-headline-lg text-2xl md:text-3xl font-bold text-center mb-10 text-primary-container">{{ \App\Support\PageContent\PageContent::multiline($process->title) }}</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
                 <div class="hidden md:block absolute top-6 left-[12.5%] right-[12.5%] h-0.5 bg-outline-variant z-0"></div>
                 @foreach ($process->items as $step)

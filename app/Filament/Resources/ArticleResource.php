@@ -5,10 +5,12 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ArticleResource\Pages;
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\Product;
 use App\Support\ImageUploads;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -83,6 +85,10 @@ class ArticleResource extends Resource
                             ->helperText('Rekomendasi dimensi: 1200×630px (opsional, tidak ada validasi ukuran). Gambar otomatis dikonversi ke format WebP.')
                             ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/webp'])
                             ->saveUploadedFileUsing(fn ($file) => ImageUploads::storeAsWebp($file, 'articles')),
+                        TextInput::make('image_caption')
+                            ->label('Keterangan Gambar')
+                            ->helperText('Opsional. Tampil di bawah gambar sampul pada halaman artikel.')
+                            ->maxLength(255),
                     ]),
                 Section::make('Konten')
                     ->schema([
@@ -94,6 +100,27 @@ class ArticleResource extends Resource
                         RichEditor::make('content')
                             ->label('Isi Artikel')
                             ->required(),
+                    ]),
+                Section::make('Produk Terkait')
+                    ->description('Opsional. Produk yang tampil di bawah artikel (maksimal 4, urutan bisa diseret).')
+                    ->schema([
+                        Repeater::make('relatedProductRows')
+                            ->label('')
+                            ->relationship()
+                            ->orderColumn('sort_order')
+                            ->reorderable()
+                            ->defaultItems(0)
+                            ->maxItems(4)
+                            ->addActionLabel('Tambah Produk')
+                            ->schema([
+                                Select::make('product_id')
+                                    ->label('Produk')
+                                    ->options(fn () => Product::query()->orderBy('name')->pluck('name', 'id'))
+                                    ->searchable()
+                                    ->required()
+                                    ->distinct()
+                                    ->disableOptionsWhenSelectedInSiblingRepeaterItems(),
+                            ]),
                     ]),
                 Section::make('Status Publikasi')
                     ->schema([
@@ -194,6 +221,10 @@ class ArticleResource extends Resource
                     ->dateTime('d M Y H:i')
                     ->sortable()
                     ->placeholder('Draft'),
+                TextColumn::make('view_count')
+                    ->label('Dilihat')
+                    ->numeric()
+                    ->sortable(),
             ])
             ->actions([
                 EditAction::make(),

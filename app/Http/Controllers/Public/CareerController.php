@@ -9,7 +9,7 @@ use Illuminate\View\View;
 
 class CareerController extends Controller
 {
-    public function __invoke(): View
+    public function index(): View
     {
         abort_unless(app(SiteSettings::class)->career_module_enabled, 404);
 
@@ -19,5 +19,12 @@ class CareerController extends Controller
             ->get();
 
         return view('pages.karir', ['jobOpenings' => $jobOpenings]);
+    }
+
+    public function show(JobOpening $jobOpening): View
+    {
+        abort_unless(app(SiteSettings::class)->career_module_enabled && $jobOpening->is_active, 404);
+
+        return view('pages.karir.show', ['job' => $jobOpening]);
     }
 }

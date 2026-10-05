@@ -105,7 +105,7 @@
         <div class="absolute inset-0 bg-primary/5 -z-10"></div>
         <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div class="flex flex-col gap-6">
-                <h2 class="font-headline-xl text-3xl md:text-4xl font-extrabold text-primary tracking-tight">{{ \App\Support\PageContent\PageContent::multiline($detailCta->title) }}</h2>
+                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold text-primary tracking-tight">{{ \App\Support\PageContent\PageContent::multiline($detailCta->title) }}</h2>
                 @if (filled($detailCta->body))
                     <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
                         {{ \App\Support\PageContent\PageContent::withProductName($detailCta->body, $product->name) }}

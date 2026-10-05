@@ -50,6 +50,7 @@ class SiteSettingsPage extends Page implements HasForms
             'company_address' => $settings->company_address,
             'default_language' => $settings->default_language,
             'timezone' => $settings->timezone,
+            'footer_description' => $settings->footer_description,
             'copyright_text' => $settings->copyright_text,
             'terms_url' => $settings->terms_url,
             'privacy_url' => $settings->privacy_url,
@@ -117,6 +118,15 @@ class SiteSettingsPage extends Page implements HasForms
                             ->rule(Rule::in(array_keys(SiteSettings::TIMEZONE_OPTIONS))),
                     ])
                     ->columns(2),
+                Section::make('Footer')
+                    ->description('Teks yang tampil di bagian kiri footer semua halaman.')
+                    ->schema([
+                        Textarea::make('footer_description')
+                            ->label('Deskripsi Footer')
+                            ->rows(3)
+                            ->maxLength(500)
+                            ->helperText('Kosongkan untuk tidak menampilkan teks deskripsi.'),
+                    ]),
                 Section::make('Informasi Legal')
                     ->description('Ditampilkan sebagai teks hak cipta dan tautan legal di footer (FR-006, FR-007).')
                     ->schema([
@@ -195,6 +205,7 @@ class SiteSettingsPage extends Page implements HasForms
         $settings->company_address = $data['company_address'] ?? null;
         $settings->default_language = $data['default_language'];
         $settings->timezone = $data['timezone'];
+        $settings->footer_description = $data['footer_description'] ?? null;
         $settings->copyright_text = $data['copyright_text'] ?? null;
         $settings->terms_url = $data['terms_url'] ?? null;
         $settings->privacy_url = $data['privacy_url'] ?? null;

@@ -12,6 +12,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
@@ -19,6 +20,7 @@ use Filament\Resources\Resource;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
@@ -69,7 +71,25 @@ class ProductResource extends Resource
                             ->numeric()
                             ->default(0)
                             ->required()
-                            ->helperText('Angka lebih kecil tampil lebih dulu di daftar Produk & section "Produk Kami" Home.'),
+                            ->helperText('Angka lebih kecil tampil lebih dulu di daftar Produk & section "Solusi Untuk Setiap Kebutuhan" Beranda.'),
+                        Toggle::make('show_on_home')
+                            ->label('Tampilkan di Beranda')
+                            ->helperText('Pilih maksimal '.Product::HOME_LIMIT.' produk untuk section "Solusi Untuk Setiap Kebutuhan". Bila belum ada yang dipilih, '.Product::HOME_LIMIT.' produk teratas yang tampil.')
+                            ->default(false)
+                            ->rule(fn (?Product $record): \Closure => function (string $attribute, mixed $value, \Closure $fail) use ($record): void {
+                                if (! $value) {
+                                    return;
+                                }
+
+                                $others = Product::query()
+                                    ->where('show_on_home', true)
+                                    ->when($record, fn ($query) => $query->whereKeyNot($record->getKey()))
+                                    ->count();
+
+                                if ($others >= Product::HOME_LIMIT) {
+                                    $fail('Maksimal '.Product::HOME_LIMIT.' produk dapat ditampilkan di Beranda.');
+                                }
+                            }),
                     ])
                     ->columns(2),
                 Section::make('Galeri Gambar')
@@ -196,6 +216,9 @@ class ProductResource extends Resource
                 TextColumn::make('order')
                     ->label('Urutan')
                     ->sortable(),
+                IconColumn::make('show_on_home')
+                    ->label('Beranda')
+                    ->boolean(),
             ])
             ->actions([
                 EditAction::make(),

@@ -158,4 +158,123 @@ class ArticlePageTest extends TestCase
 
         $response->assertNotFound();
     }
+
+    public function test_index_loads_six_articles_at_a_time_with_a_load_more_link(): void
+    {
+        foreach (range(1, 14) as $i) {
+            Article::factory()->create(['title' => sprintf('Artikel Nomor %02d', $i), 'published_at' => now()->subMinutes($i)]);
+        }
+
+        $first = $this->get('/artikel')->assertOk();
+        $html = $first->getContent();
+
+        $this->assertSame(6, preg_match_all('/id="artikel-\d+" data-article-item/', $html));
+        $first->assertSee('Artikel Nomor 01')->assertSee('Artikel Nomor 06')->assertDontSee('Artikel Nomor 07');
+        $first->assertSee('Muat lebih banyak');
+        $this->assertStringContainsString('halaman=2#artikel-7', $html);
+
+        $second = $this->get('/artikel?halaman=2')->assertOk();
+        $this->assertSame(12, preg_match_all('/id="artikel-\d+" data-article-item/', $second->getContent()));
+        $this->assertStringContainsString('id="artikel-7"', $second->getContent());
+        $this->assertStringContainsString('halaman=3#artikel-13', $second->getContent());
+
+        $third = $this->get('/artikel?halaman=3')->assertOk();
+        $this->assertSame(14, preg_match_all('/id="artikel-\d+" data-article-item/', $third->getContent()));
+        $third->assertDontSee('Muat lebih banyak');
+    }
+
+    public function test_load_more_keeps_search_category_and_tag_parameters(): void
+    {
+        $category = ArticleCategory::factory()->create();
+        foreach (range(1, 8) as $i) {
+            $article = Article::factory()->create(['title' => "Inverter seri {$i}", 'article_category_id' => $category->id]);
+            $article->attachTag('hybrid');
+        }
+
+        $html = $this->get('/artikel?q=inverter&kategori='.$category->id.'&tag=hybrid')->assertOk()->getContent();
+
+        $this->assertStringContainsString('q=inverter', $html);
+        $this->assertStringContainsString('kategori='.$category->id, $html);
+        $this->assertStringContainsString('tag=hybrid', $html);
+        $this->assertStringContainsString('halaman=2', $html);
+        $this->assertSame(6, preg_match_all('/id="artikel-\d+" data-article-item/', $html));
+    }
+
+    public function test_page_parameter_is_sanitized(): void
+    {
+        Article::factory()->create(['title' => 'Satu-satunya']);
+
+        $this->get('/artikel?halaman=-5')->assertOk()->assertSee('Satu-satunya');
+        $this->get('/artikel?halaman=abc')->assertOk()->assertSee('Satu-satunya');
+        $this->get('/artikel?halaman=999999')->assertOk()->assertSee('Satu-satunya');
+        $this->get('/artikel?halaman[]=2')->assertOk();
+    }
+
+    public function test_category_filter_works_on_the_server_and_unknown_category_is_ignored(): void
+    {
+        $edukasi = ArticleCategory::factory()->create(['name' => 'Edukasi']);
+        $berita = ArticleCategory::factory()->create(['name' => 'Berita']);
+        Article::factory()->create(['title' => 'Tentang Edukasi', 'article_category_id' => $edukasi->id]);
+        Article::factory()->create(['title' => 'Tentang Berita', 'article_category_id' => $berita->id]);
+
+        $this->get('/artikel?kategori='.$edukasi->id)->assertOk()
+            ->assertSee('Tentang Edukasi')
+            ->assertDontSee('Tentang Berita');
+
+        $this->get('/artikel?kategori=99999')->assertOk()
+            ->assertSee('Tentang Edukasi')
+            ->assertSee('Tentang Berita');
+    }
+
+    public function test_tag_filter_narrows_and_unknown_tag_shows_everything(): void
+    {
+        $withTag = Article::factory()->create(['title' => 'Artikel Bertag']);
+        $withTag->attachTag('Baterai');
+        Article::factory()->create(['title' => 'Artikel Tanpa Tag']);
+
+        $this->get('/artikel?tag=baterai')->assertOk()
+            ->assertSee('Artikel Bertag')
+            ->assertDontSee('Artikel Tanpa Tag')
+            ->assertSee('Hapus filter');
+
+        $this->get('/artikel?tag=tidak-ada')->assertOk()
+            ->assertSee('Artikel Bertag')
+            ->assertSee('Artikel Tanpa Tag');
+    }
+
+    public function test_popular_tags_come_from_published_articles_only_ordered_by_usage_and_capped_at_ten(): void
+    {
+        foreach (range(1, 3) as $i) {
+            Article::factory()->create()->attachTag('Sering');
+        }
+        Article::factory()->create()->attachTag('Jarang');
+        Article::factory()->create(['published_at' => null])->attachTag('HanyaDraf');
+        foreach (range(1, 11) as $i) {
+            Article::factory()->create()->attachTag("Tag Unik {$i}");
+        }
+
+        $html = $this->get('/artikel')->assertOk()->getContent();
+
+        $this->assertStringContainsString('Tag Populer', $html);
+        $this->assertStringContainsString('>Sering<', $html);
+        $this->assertStringNotContainsString('HanyaDraf', $html);
+        $this->assertLessThan(strpos($html, '>Jarang<') ?: PHP_INT_MAX, strpos($html, '>Sering<'));
+        $this->assertSame(10, preg_match_all('#href="[^"]*[?&]tag=[^"]*"#', $html));
+    }
+
+    public function test_active_tag_is_highlighted_in_the_sidebar(): void
+    {
+        Article::factory()->create()->attachTag('Surya');
+
+        $html = $this->get('/artikel?tag=surya')->assertOk()->getContent();
+
+        $this->assertMatchesRegularExpression('#bg-primary-container text-white"[^>]*>Surya</a>#', $html);
+    }
+
+    public function test_sidebar_omits_popular_tags_when_none_exist(): void
+    {
+        Article::factory()->create();
+
+        $this->get('/artikel')->assertOk()->assertDontSee('Tag Populer');
+    }
 }

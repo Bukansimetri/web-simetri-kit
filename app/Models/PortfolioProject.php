@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Concerns\FlushesPublicPageCache;
 use App\Concerns\HasSeoMetadata;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,6 +12,7 @@ use Illuminate\Support\Str;
 
 class PortfolioProject extends Model
 {
+    use FlushesPublicPageCache;
     use HasFactory;
     use HasSeoMetadata;
 

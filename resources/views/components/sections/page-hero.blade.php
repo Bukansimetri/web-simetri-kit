@@ -21,7 +21,7 @@
                 <span class="mx-2 text-white/40">/</span> {{ $breadcrumb }}
             </p>
         @endif
-        <h1 class="font-headline-xl text-4xl md:text-6xl font-extrabold text-white max-w-4xl leading-tight tracking-tight">{{ $title }}</h1>
+        <h1 class="font-headline-xl text-4xl md:text-6xl font-bold text-white max-w-4xl leading-tight tracking-tight">{{ $title }}</h1>
         @if ($subtitle)
             <p class="mt-4 text-lg md:text-xl text-white/90 max-w-2xl leading-relaxed">{{ $subtitle }}</p>
         @endif

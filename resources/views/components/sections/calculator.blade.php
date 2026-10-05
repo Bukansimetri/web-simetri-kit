@@ -17,7 +17,7 @@
 <section id="kalkulator" class="reveal-element relative z-20 max-w-6xl mx-auto px-6 -mt-32 mb-32">
     <div x-data="calculatorComponent(@js($formToken), @js($appliances))" class="bg-white p-8 md:p-12 shadow-2xl border border-gray-50/50 max-w-5xl mx-auto rounded-lg">
         <div class="text-center mb-10">
-            <h2 class="font-headline-xl text-3xl md:text-5xl font-extrabold tracking-tight mb-3 text-primary">Hitung Estimasi Penghematan</h2>
+            <h2 class="font-headline-xl text-3xl md:text-5xl font-bold tracking-tight mb-3 text-primary">Hitung Estimasi Penghematan</h2>
             <p class="font-medium text-base md:text-lg max-w-2xl mx-auto text-secondary">Dapatkan analisis transparan untuk potensi efisiensi energi Anda.</p>
         </div>
 

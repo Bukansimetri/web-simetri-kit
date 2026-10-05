@@ -2,15 +2,19 @@
 
 namespace App\Models;
 
+use App\Concerns\FlushesPublicPageCache;
 use App\Concerns\HasSeoMetadata;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Tags\HasTags;
 
 class Article extends Model
 {
+    use FlushesPublicPageCache;
     use HasFactory;
     use HasSeoMetadata;
     use HasTags;
@@ -25,6 +29,7 @@ class Article extends Model
         'content',
         'redaksi',
         'image_path',
+        'image_caption',
         'article_category_id',
         'published_at',
         'meta_title',
@@ -39,6 +44,7 @@ class Article extends Model
     {
         return [
             'published_at' => 'datetime',
+            'view_count' => 'integer',
         ];
     }
 
@@ -55,6 +61,28 @@ class Article extends Model
         $words = str_word_count(strip_tags((string) $this->content));
 
         return max(1, (int) ceil($words / 200));
+    }
+
+    /**
+     * Baris produk terkait (untuk editor admin), berurutan.
+     *
+     * @return HasMany<ArticleRelatedProduct, $this>
+     */
+    public function relatedProductRows(): HasMany
+    {
+        return $this->hasMany(ArticleRelatedProduct::class)->orderBy('sort_order');
+    }
+
+    /**
+     * Produk terkait yang ditampilkan di halaman detail, berurutan.
+     *
+     * @return BelongsToMany<Product, $this>
+     */
+    public function relatedProducts(): BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'article_product')
+            ->withPivot('sort_order')
+            ->orderBy('article_product.sort_order');
     }
 
     public function articleCategory(): BelongsTo

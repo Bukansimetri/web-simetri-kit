@@ -5,7 +5,7 @@
 <section class="reveal-element py-24 px-6 overflow-hidden">
     <div class="max-w-7xl mx-auto">
         <div class="text-center mb-20">
-            <h2 class="font-headline-xl text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-primary">{{ \App\Support\PageContent\PageContent::multiline($content->title) }}</h2>
+            <h2 class="font-headline-xl text-3xl md:text-5xl font-bold tracking-tight mb-4 text-primary">{{ \App\Support\PageContent\PageContent::multiline($content->title) }}</h2>
             @if (filled($content->subtitle))
                 <p class="text-base md:text-lg font-medium max-w-2xl mx-auto text-secondary">{{ $content->subtitle }}</p>
             @endif

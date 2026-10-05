@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Concerns\FlushesPublicPageCache;
 use App\Enums\BannerOverlayStyle;
 use App\Enums\BannerTextPosition;
 use App\Support\HtmlSanitizer;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Cache;
 
 class Banner extends Model
 {
+    use FlushesPublicPageCache;
     use HasFactory;
 
     /**

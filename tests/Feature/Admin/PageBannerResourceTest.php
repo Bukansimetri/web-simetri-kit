@@ -75,18 +75,11 @@ class PageBannerResourceTest extends TestCase
             ->assertRedirect(BannerResource::getUrl('index'));
     }
 
-    public function test_only_pages_with_image_banners_get_an_image_field(): void
+    public function test_every_page_banner_has_an_image_title_and_subtitle_field(): void
     {
-        foreach ([PageBlockType::ProductsHero, PageBlockType::CareerHero, PageBlockType::AboutHero, PageBlockType::ArticlesHero, PageBlockType::PortfolioHero] as $type) {
+        foreach (PageBlockType::pageBanners() as $type) {
             $this->edit($type)
                 ->assertFormFieldExists('data.image_path')
-                ->assertFormFieldExists('data.title')
-                ->assertFormFieldExists('data.subtitle');
-        }
-
-        foreach ([PageBlockType::FaqHero, PageBlockType::ContactHero] as $type) {
-            $this->edit($type)
-                ->assertFormFieldDoesNotExist('data.image_path')
                 ->assertFormFieldExists('data.title')
                 ->assertFormFieldExists('data.subtitle');
         }

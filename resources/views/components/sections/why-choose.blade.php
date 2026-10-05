@@ -4,7 +4,7 @@
 @if ($content)
 <section class="reveal-element py-24 px-6 max-w-7xl mx-auto">
     <div class="mb-16 text-center max-w-3xl mx-auto">
-        <h2 class="font-headline-xl text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-primary">{{ \App\Support\PageContent\PageContent::multiline($content->title) }}</h2>
+        <h2 class="font-headline-xl text-3xl md:text-5xl font-bold tracking-tight mb-4 text-primary">{{ \App\Support\PageContent\PageContent::multiline($content->title) }}</h2>
         @if (filled($content->subtitle))
             <p class="text-base md:text-lg font-medium leading-relaxed text-secondary">{{ $content->subtitle }}</p>
         @endif

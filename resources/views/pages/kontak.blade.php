@@ -11,23 +11,14 @@
 @section('meta_description', 'Hubungi tim '.$appName.' untuk konsultasi gratis kebutuhan panel surya Anda.')
 
 @section('content')
-    <section class="pt-40 pb-12 px-6 max-w-7xl mx-auto text-center">
-        <nav class="flex justify-center text-sm text-outline mb-4">
-            <ol class="flex items-center gap-2">
-                <li><a class="hover:text-primary transition-colors" href="{{ url('/') }}">Beranda</a></li>
-                <li class="flex items-center"><span class="material-symbols-outlined text-sm">chevron_right</span></li>
-                <li class="text-primary font-semibold">Kontak</li>
-            </ol>
-        </nav>
-        <h1 class="font-headline-xl text-4xl md:text-5xl font-extrabold text-primary tracking-tight mb-4">{{ $hero->value('title') }}</h1>
-        @if (filled($hero->value('subtitle')))
-            <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">
-                {{ $hero->value('subtitle') }}
-            </p>
-        @endif
-    </section>
+    <x-sections.page-hero
+        :title="$hero->value('title')"
+        breadcrumb="Kontak"
+        :subtitle="$hero->value('subtitle')"
+        :image="\App\Support\PageContent\PageContent::imageUrl($hero->value('image_path'), \App\Enums\PageBlockType::ContactHero->defaultImagePath())"
+    />
 
-    <section class="px-6 max-w-7xl mx-auto pb-24 flex flex-col lg:flex-row gap-8">
+    <section class="px-6 max-w-7xl mx-auto pt-16 pb-24 flex flex-col lg:flex-row gap-8">
         {{-- Form Kontak (AMC-216: submit sungguhan ke POST /kontak) --}}
         <div
             x-data="{
@@ -117,7 +108,7 @@
             }"
             class="w-full lg:w-3/5 bg-white shadow-lg rounded-lg p-8 md:p-12"
         >
-            <h2 class="font-headline-lg text-2xl md:text-3xl font-extrabold text-primary mb-8">Kirim pesan ke tim kami</h2>
+            <h2 class="font-headline-lg text-2xl md:text-3xl font-bold text-primary mb-8">Kirim pesan ke tim kami</h2>
 
             <template x-if="submitted">
                 <div class="bg-primary/10 text-primary p-6 rounded-lg text-center" role="status">
@@ -125,7 +116,7 @@
                     <p class="font-semibold">Terima kasih! Pesan Anda telah kami terima.</p>
                     <p class="font-body-sm text-body-sm mt-1">Tim kami akan segera menghubungi Anda kembali.</p>
                     <template x-if="whatsappUrl">
-                        <a :href="whatsappUrl" target="_blank" class="inline-flex items-center gap-2 mt-4 bg-primary text-white px-6 py-3 rounded-lg font-semibold">
+                        <a :href="whatsappUrl" target="_blank" class="inline-flex items-center gap-2 mt-4 bg-primary text-white px-6 py-3 rounded-lg font-bold">
                             <span class="material-symbols-outlined">chat</span> Buka WhatsApp
                         </a>
                     </template>
@@ -253,33 +244,5 @@
     </section>
 
     {{-- FAQ Konsultasi --}}
-    @php
-        $consultFaqs = [
-            ['q' => 'Setelah kirim pesan, apa langkah selanjutnya?', 'a' => 'Tim ahli energi surya kami akan meninjau pesan Anda dan membalas dalam maksimal 1x24 jam kerja. Kami mengatur diskusi awal via telepon atau video call untuk memahami kebutuhan energi dan kondisi lokasi Anda sebelum menjadwalkan survei teknis.'],
-            ['q' => 'Apakah survei lokasi berbayar?', 'a' => 'Untuk area Jabodetabek, survei lokasi awal gratis. Untuk area di luar Jabodetabek, biaya survei didiskusikan terlebih dahulu dan dapat diakumulasikan ke nilai proyek jika Anda memutuskan menggunakan layanan kami.'],
-            ['q' => 'Bisa konsultasi tanpa datang ke kantor?', 'a' => 'Tentu. Mayoritas konsultasi awal kami dilakukan daring untuk kenyamanan Anda. Kami memakai data satelit awal untuk estimasi kapasitas atap sebelum tim teknis melakukan kunjungan fisik.'],
-        ];
-    @endphp
-    <section class="reveal-element bg-surface-container-lowest border-t border-surface-container-high px-6 py-20">
-        <div class="max-w-3xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="font-headline-lg text-2xl md:text-3xl font-extrabold text-primary mb-4">Pertanyaan Seputar Konsultasi</h2>
-                <p class="font-body-md text-body-md text-on-surface-variant">Informasi singkat mengenai proses setelah Anda menghubungi kami.</p>
-            </div>
-            <div class="space-y-4" x-data="{ open: 0 }">
-                @foreach ($consultFaqs as $i => $faq)
-                    <div class="bg-white rounded-lg overflow-hidden shadow-sm border border-surface-container-low">
-                        <button type="button" @click="open = open === {{ $i }} ? null : {{ $i }}"
-                                class="w-full flex justify-between items-center gap-4 p-6 text-left font-headline-lg text-lg text-on-surface hover:text-primary transition-colors">
-                            <span>{{ $faq['q'] }}</span>
-                            <span class="material-symbols-outlined transition-transform shrink-0" :class="open === {{ $i }} && 'rotate-180'">expand_more</span>
-                        </button>
-                        <div x-show="open === {{ $i }}" x-cloak x-transition class="px-6 pb-6 -mt-1 font-body-md text-body-md text-on-surface-variant">
-                            {{ $faq['a'] }}
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
+    <x-sections.faq-list band title="Pertanyaan Seputar Konsultasi" subtitle="Informasi singkat mengenai proses setelah Anda menghubungi kami." :items="$consultFaqs" />
 @endsection

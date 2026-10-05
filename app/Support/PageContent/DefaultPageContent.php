@@ -3,6 +3,7 @@
 namespace App\Support\PageContent;
 
 use App\Enums\CtaPlacement;
+use App\Enums\FaqPlacement;
 use App\Enums\PageBlockType;
 use App\Enums\PageSection;
 use App\Settings\SiteSettings;
@@ -167,10 +168,12 @@ class DefaultPageContent
                 'subtitle' => 'Temukan pembaruan terkini seputar inovasi energi surya, tips efisiensi pemakaian daya, serta studi kasus instalasi di Indonesia.',
             ],
             PageBlockType::FaqHero->value => [
+                'image_path' => null,
                 'title' => 'Pertanyaan Umum',
                 'subtitle' => 'Temukan jawaban cepat seputar layanan, instalasi, dan produk panel surya kami.',
             ],
             PageBlockType::ContactHero->value => [
+                'image_path' => null,
                 'title' => 'Mari Wujudkan Rumah Hemat Energi',
                 'subtitle' => 'Tim kami siap membantu menjawab pertanyaan dan memberikan konsultasi gratis untuk kebutuhan energi surya Anda.',
             ],
@@ -241,6 +244,27 @@ class DefaultPageContent
                 'body' => 'Kirimkan CV Anda — kami hubungi saat ada posisi sesuai',
                 'primary_label' => 'Hubungi Kami',
                 'secondary_label' => null,
+            ],
+        ];
+    }
+
+    /**
+     * FAQ bawaan untuk halaman Produk dan Kontak (sebelumnya tertulis di Blade), per tempat tampil.
+     *
+     * @return array<string, list<array{question: string, answer: string}>>
+     */
+    public static function faqs(): array
+    {
+        return [
+            FaqPlacement::Product->value => [
+                ['question' => 'Berapa lama garansi panel?', 'answer' => 'Panel surya {app_name} dilengkapi dengan garansi kinerja linier hingga 25 tahun, memastikan efisiensi panel tidak akan turun di bawah 80% dalam kurun waktu tersebut. Inverter biasanya memiliki garansi standar 5 hingga 10 tahun tergantung model.'],
+                ['question' => 'Apakah bisa custom kapasitas?', 'answer' => 'Sangat bisa. Kami merancang sistem berdasarkan kebutuhan beban listrik spesifik dan luas atap yang tersedia. Tim teknisi kami akan melakukan survey untuk merancang kapasitas yang paling optimal.'],
+                ['question' => 'Bagaimana proses instalasinya?', 'answer' => 'Proses dimulai dari survey lokasi, perancangan sistem, pengajuan izin (jika on-grid), instalasi fisik oleh teknisi bersertifikat kami, hingga tahap commissioning dan serah terima pengoperasian sistem kepada Anda.'],
+            ],
+            FaqPlacement::Contact->value => [
+                ['question' => 'Setelah kirim pesan, apa langkah selanjutnya?', 'answer' => 'Tim ahli energi surya kami akan meninjau pesan Anda dan membalas dalam maksimal 1x24 jam kerja. Kami mengatur diskusi awal via telepon atau video call untuk memahami kebutuhan energi dan kondisi lokasi Anda sebelum menjadwalkan survei teknis.'],
+                ['question' => 'Apakah survei lokasi berbayar?', 'answer' => 'Untuk area Jabodetabek, survei lokasi awal gratis. Untuk area di luar Jabodetabek, biaya survei didiskusikan terlebih dahulu dan dapat diakumulasikan ke nilai proyek jika Anda memutuskan menggunakan layanan kami.'],
+                ['question' => 'Bisa konsultasi tanpa datang ke kantor?', 'answer' => 'Tentu. Mayoritas konsultasi awal kami dilakukan daring untuk kenyamanan Anda. Kami memakai data satelit awal untuk estimasi kapasitas atap sebelum tim teknis melakukan kunjungan fisik.'],
             ],
         ];
     }

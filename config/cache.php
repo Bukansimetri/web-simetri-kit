@@ -13,6 +13,7 @@ use App\Models\TeamMember;
 use App\Models\Testimonial;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Spatie\Tags\Tag;
 
 return [
 
@@ -163,6 +164,7 @@ return [
         ClientLogo::class,
         TeamMember::class,
         FaqItem::class,
+        Tag::class,
     ],
 
 ];
