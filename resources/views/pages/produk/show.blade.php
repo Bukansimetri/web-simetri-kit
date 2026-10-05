@@ -1,5 +1,8 @@
 @extends('layouts.public')
 
+@use('App\Enums\PublicSection')
+@use('App\Support\PageContent\SectionVisibility')
+
 @section('title', \App\Support\Seo\PageTitle::forContent('produk_show', $product->meta_title, $product->name))
 @section('meta_description', $product->seoDescription())
 @section('og_title', $product->seoTitle())
@@ -97,6 +100,7 @@
         </div>
     </section>
 
+    @if (SectionVisibility::shows(PublicSection::ProductDetailCta))
     {{-- Masa Depan Energi Anda --}}
     @php
         $detailCta = \App\Support\PageContent\PageContent::cta(\App\Enums\CtaPlacement::ProductDetail);
@@ -124,6 +128,7 @@
             </div>
         </div>
     </section>
+    @endif
 
     @if ($relatedProducts->isNotEmpty())
         <section class="reveal-element px-margin-mobile md:px-margin-desktop py-[80px] max-w-[1280px] mx-auto">

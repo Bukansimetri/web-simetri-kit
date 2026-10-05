@@ -85,6 +85,15 @@ sudo chown -R www-data:www-data /var/www/client-acme/storage /var/www/client-acm
 > **pastikan Nama Situs sudah benar sebelum deploy**. Setelah itu teks
 > sepenuhnya mengikuti isian admin.
 
+> **Urutan deploy & Tampilan Section**: jalankan `php artisan migrate --force`
+> **bersamaan dengan atau sebelum** kode baru melayani lalu lintas. Pengaturan
+> situs dibaca di setiap request, jadi kode yang butuh pengaturan baru tanpa
+> migrasinya (misalnya `footer_description`) membuat seluruh situs 500 sampai
+> migrasi selesai. Pengaturan **Tampilan Section** (`section_visibility`) sengaja
+> dibuat tahan terhadap urutan ini: bila migrasinya belum berjalan, semua section
+> dianggap tampil sehingga tampilan situs tidak berubah. Bawaan setelah migrasi
+> juga semua section tampil.
+
 ### 4. Konfigurasi web server
 
 Arahkan document root **Nginx/Apache ke folder `public/`** proyek (BUKAN ke root proyek). Contoh virtual host Nginx minimal:

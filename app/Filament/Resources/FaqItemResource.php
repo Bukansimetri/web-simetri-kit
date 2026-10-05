@@ -3,7 +3,9 @@
 namespace App\Filament\Resources;
 
 use App\Enums\FaqPlacement;
+use App\Enums\PublicSection;
 use App\Filament\Resources\FaqItemResource\Pages;
+use App\Filament\Support\SectionVisibilityColumn;
 use App\Models\FaqItem;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -87,6 +89,7 @@ class FaqItemResource extends Resource
                     ->placeholder('—'),
                 ToggleColumn::make('is_active')
                     ->label('Aktif'),
+                SectionVisibilityColumn::make(fn (FaqItem $record): ?PublicSection => PublicSection::forFaqPlacement($record->placement)),
             ])
             ->filters([
                 SelectFilter::make('placement')

@@ -3,6 +3,8 @@
 namespace App\Filament\Support\Pages;
 
 use App\Enums\PageSection;
+use App\Enums\PublicSection;
+use App\Filament\Concerns\ShowsHiddenSectionNotice;
 use App\Models\SectionHeading;
 use App\Support\ImageUploads;
 use App\Support\MaterialSymbolsIcons;
@@ -17,6 +19,16 @@ use Filament\Resources\Pages\ListRecords;
 
 abstract class ListSectionItems extends ListRecords
 {
+    use ShowsHiddenSectionNotice;
+
+    /**
+     * @return list<PublicSection>
+     */
+    protected function relatedPublicSections(): array
+    {
+        return [PublicSection::fromPageSection(static::getResource()::section())];
+    }
+
     protected function getHeaderActions(): array
     {
         /** @var PageSection $section */

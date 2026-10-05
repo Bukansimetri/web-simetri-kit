@@ -10,6 +10,7 @@
     $cta = \App\Support\PageContent\PageContent::cta($placement);
 @endphp
 
+@if (\App\Support\PageContent\SectionVisibility::shows(\App\Enums\PublicSection::fromCta($placement)))
 <section class="reveal-element py-24 px-6 bg-primary text-center">
     <div class="max-w-4xl mx-auto">
         <h2 class="font-headline-xl text-3xl md:text-5xl font-bold text-white mb-10 leading-tight">
@@ -21,3 +22,4 @@
         </a>
     </div>
 </section>
+@endif

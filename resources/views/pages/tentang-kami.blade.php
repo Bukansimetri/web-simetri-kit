@@ -1,5 +1,8 @@
 @extends('layouts.public')
 
+@use('App\Enums\PublicSection')
+@use('App\Support\PageContent\SectionVisibility')
+
 @php
     $appName = app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name');
     $hero = \App\Support\PageContent\PageContent::block(\App\Enums\PageBlockType::AboutHero);
@@ -21,6 +24,7 @@
         :image="\App\Support\PageContent\PageContent::imageUrl($hero->value('image_path'), \App\Enums\PageBlockType::AboutHero->defaultImagePath())"
     />
 
+    @if (SectionVisibility::shows(PublicSection::AboutWhoWeAre))
     {{-- Siapa Kami --}}
     <section class="reveal-element py-24 px-6 max-w-7xl mx-auto">
         <div class="flex flex-col md:flex-row gap-16 md:gap-24 items-center">
@@ -48,7 +52,9 @@
             </div>
         </div>
     </section>
+    @endif
 
+    @if (SectionVisibility::shows(PublicSection::AboutVision))
     {{-- Visi --}}
     <section class="reveal-element py-32 px-6 bg-white relative overflow-hidden">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[300px] md:text-[400px] text-surface-container-high/50 font-serif leading-none select-none z-0">&rdquo;</div>
@@ -60,7 +66,9 @@
             <p class="text-secondary font-medium text-base md:text-lg max-w-2xl mx-auto leading-relaxed">{{ $vision->value('subtext') }}</p>
         </div>
     </section>
+    @endif
 
+    @if (SectionVisibility::shows(PublicSection::AboutMission))
     {{-- Misi --}}
     @if ($mission)
     <section class="reveal-element py-24 px-6 max-w-7xl mx-auto">
@@ -99,7 +107,9 @@
         </div>
     </section>
     @endif
+    @endif
 
+    @if (SectionVisibility::shows(PublicSection::AboutValues))
     {{-- Nilai (Bento Grid) --}}
     @if ($values)
     <section class="reveal-element py-24 px-6 max-w-7xl mx-auto mb-12">
@@ -139,7 +149,9 @@
         </div>
     </section>
     @endif
+    @endif
 
+    @if (SectionVisibility::shows(PublicSection::AboutTrust))
     {{-- Trust Strip --}}
     @if ($trust)
     <section class="reveal-element py-16 bg-white border-y border-surface-container-low">
@@ -158,12 +170,19 @@
         </div>
     </section>
     @endif
+    @endif
 
-    <x-sections.team-members :members="$teamMembers" />
+    @if (SectionVisibility::shows(PublicSection::AboutTeam))
+        <x-sections.team-members :members="$teamMembers" />
+    @endif
 
-    <x-sections.testimonials :testimonials="$testimonials" />
+    @if (SectionVisibility::shows(PublicSection::AboutTestimonials))
+        <x-sections.testimonials :testimonials="$testimonials" />
+    @endif
 
-    <x-sections.client-logos :logos="$clientLogos" />
+    @if (SectionVisibility::shows(PublicSection::AboutClientLogos))
+        <x-sections.client-logos :logos="$clientLogos" />
+    @endif
 
     <x-sections.cta-band :placement="\App\Enums\CtaPlacement::About" />
 @endsection

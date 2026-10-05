@@ -1,5 +1,8 @@
 @extends('layouts.public')
 
+@use('App\Enums\PublicSection')
+@use('App\Support\PageContent\SectionVisibility')
+
 @php
     $appName = app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name');
 
@@ -19,6 +22,7 @@
         :image="\App\Support\PageContent\PageContent::imageUrl($hero->value('image_path'), \App\Enums\PageBlockType::CareerHero->defaultImagePath())"
     />
 
+    @if (SectionVisibility::shows(PublicSection::CareerValues))
     {{-- Values --}}
     @if ($values)
     <section class="reveal-element px-6 max-w-7xl mx-auto py-20">
@@ -41,6 +45,7 @@
         </div>
     </section>
     @endif
+    @endif
 
     {{-- Open Positions --}}
     <section id="positions" class="reveal-element px-6 max-w-5xl mx-auto py-12">
@@ -61,6 +66,7 @@
         @endif
     </section>
 
+    @if (SectionVisibility::shows(PublicSection::CareerProcess))
     {{-- Recruitment Process --}}
     @if ($process)
     <section class="reveal-element px-6 max-w-7xl mx-auto py-12 mb-12">
@@ -78,6 +84,7 @@
             </div>
         </div>
     </section>
+    @endif
     @endif
 
     <x-sections.cta-band

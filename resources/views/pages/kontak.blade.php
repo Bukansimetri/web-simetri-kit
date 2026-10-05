@@ -1,5 +1,8 @@
 @extends('layouts.public')
 
+@use('App\Enums\PublicSection')
+@use('App\Support\PageContent\SectionVisibility')
+
 @php
     $site = app(\App\Settings\SiteSettings::class);
     $appName = $site->site_name ?: config('app.name');
@@ -244,5 +247,7 @@
     </section>
 
     {{-- FAQ Konsultasi --}}
-    <x-sections.faq-list band title="Pertanyaan Seputar Konsultasi" subtitle="Informasi singkat mengenai proses setelah Anda menghubungi kami." :items="$consultFaqs" />
+    @if (SectionVisibility::shows(PublicSection::ContactFaq))
+        <x-sections.faq-list band title="Pertanyaan Seputar Konsultasi" subtitle="Informasi singkat mengenai proses setelah Anda menghubungi kami." :items="$consultFaqs" />
+    @endif
 @endsection
