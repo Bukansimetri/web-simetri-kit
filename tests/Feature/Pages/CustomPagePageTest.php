@@ -13,15 +13,15 @@ class CustomPagePageTest extends TestCase
     public function test_custom_page_show_displays_title_and_content(): void
     {
         $page = CustomPage::factory()->create([
-            'title' => 'Kebijakan Privasi',
-            'slug' => 'kebijakan-privasi',
+            'title' => 'Halaman Uji',
+            'slug' => 'halaman-uji',
             'content' => '<h2>Pendahuluan</h2><p>Kami menghargai privasi Anda.</p>',
         ]);
 
-        $response = $this->get('/halaman/kebijakan-privasi');
+        $response = $this->get('/halaman/halaman-uji');
 
         $response->assertOk();
-        $response->assertSee('Kebijakan Privasi', escape: false);
+        $response->assertSee('Halaman Uji', escape: false);
         $response->assertSee('Kami menghargai privasi Anda.', escape: false);
         $response->assertSee('<h2>Pendahuluan</h2>', escape: false);
     }

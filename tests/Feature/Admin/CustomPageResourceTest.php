@@ -29,20 +29,20 @@ class CustomPageResourceTest extends TestCase
         Livewire::actingAs(User::factory()->create())
             ->test(CreateCustomPage::class)
             ->fillForm([
-                'title' => 'Kebijakan Privasi',
-                'content' => '<p>Isi kebijakan privasi.</p>',
+                'title' => 'Halaman Contoh',
+                'content' => '<p>Isi halaman contoh.</p>',
             ])
             ->call('create')
             ->assertHasNoFormErrors();
 
-        $page = CustomPage::where('title', 'Kebijakan Privasi')->first();
+        $page = CustomPage::where('title', 'Halaman Contoh')->first();
 
         $this->assertNotNull($page);
-        $this->assertSame('kebijakan-privasi', $page->slug);
+        $this->assertSame('halaman-contoh', $page->slug);
 
-        $this->get('/halaman/kebijakan-privasi')
+        $this->get('/halaman/halaman-contoh')
             ->assertOk()
-            ->assertSee('Isi kebijakan privasi.', escape: false);
+            ->assertSee('Isi halaman contoh.', escape: false);
     }
 
     public function test_slug_auto_generates_from_title_when_blank(): void
@@ -64,7 +64,7 @@ class CustomPageResourceTest extends TestCase
         Livewire::actingAs(User::factory()->create())
             ->test(CreateCustomPage::class)
             ->fillForm([
-                'title' => 'Kebijakan Privasi',
+                'title' => 'Halaman Contoh',
                 'slug' => 'privasi',
                 'content' => 'x',
             ])

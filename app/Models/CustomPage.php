@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Concerns\HasSeoMetadata;
+use App\Enums\CustomPageTemplate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,11 +18,29 @@ class CustomPage extends Model
     protected $fillable = [
         'title',
         'slug',
+        'template',
         'content',
+        'legal',
         'meta_title',
         'meta_description',
         'meta_image_path',
     ];
+
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'template' => CustomPageTemplate::class,
+            'legal' => 'array',
+        ];
+    }
+
+    public function isLegal(): bool
+    {
+        return $this->template === CustomPageTemplate::Legal;
+    }
 
     public function getRouteKeyName(): string
     {
@@ -51,7 +70,7 @@ class CustomPage extends Model
 
     protected function seoDescriptionFallback(): ?string
     {
-        return $this->content;
+        return $this->isLegal() ? ($this->legal['subtitle'] ?? null) : $this->content;
     }
 
     protected function seoImageFallbackUrl(): ?string

@@ -5,6 +5,7 @@ namespace Tests\Feature\Database;
 use App\Enums\FaqPlacement;
 use App\Models\FaqItem;
 use App\Support\PageContent\PageContentInstaller;
+use Database\Seeders\FaqItemSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -60,8 +61,33 @@ class FaqDefaultsInstallerTest extends TestCase
         $this->assertTrue($legacy->is_active);
     }
 
-    public function test_demo_seeder_is_not_required_for_the_defaults(): void
+    public function test_installer_plants_five_faq_page_entries_with_categories(): void
     {
-        $this->assertSame(0, FaqItem::query()->forPlacement(FaqPlacement::Faq)->count());
+        $items = FaqItem::query()->forPlacement(FaqPlacement::Faq)->orderBy('order')->get();
+
+        $this->assertSame(
+            ['Instalasi', 'Produk & Teknologi', 'Biaya & Penghematan', 'Garansi', 'Perawatan'],
+            $items->pluck('category')->all(),
+        );
+        $this->assertSame('Berapa lama proses instalasi panel surya?', $items->first()->question);
+        $this->assertStringContainsString('Rata-rata pelanggan SUOER menghemat', $items[2]->answer);
+        $this->assertTrue($items->every->is_active);
+    }
+
+    public function test_faq_page_defaults_are_not_planted_when_the_placement_already_has_entries(): void
+    {
+        FaqItem::query()->forPlacement(FaqPlacement::Faq)->delete();
+        FaqItem::query()->create(['question' => 'Milik admin?', 'answer' => 'Ya.', 'order' => 0]);
+
+        PageContentInstaller::install();
+
+        $this->assertSame(['Milik admin?'], FaqItem::query()->forPlacement(FaqPlacement::Faq)->pluck('question')->all());
+    }
+
+    public function test_faq_seeder_does_not_duplicate_the_defaults(): void
+    {
+        $this->seed(FaqItemSeeder::class);
+
+        $this->assertSame(5, FaqItem::query()->forPlacement(FaqPlacement::Faq)->count());
     }
 }
