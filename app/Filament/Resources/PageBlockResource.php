@@ -3,7 +3,9 @@
 namespace App\Filament\Resources;
 
 use App\Enums\PageBlockType;
+use App\Enums\PublicSection;
 use App\Filament\Resources\PageBlockResource\Pages;
+use App\Filament\Support\SectionVisibilityColumn;
 use App\Models\PageBlock;
 use App\Support\ImageUploads;
 use Filament\Forms\Components\Component;
@@ -131,6 +133,7 @@ class PageBlockResource extends Resource
                 TextColumn::make('block')
                     ->label('Blok')
                     ->formatStateUsing(fn (PageBlockType $state): string => $state->label()),
+                SectionVisibilityColumn::make(fn (PageBlock $record): ?PublicSection => PublicSection::forPageBlock($record->block)),
             ])
             ->actions([
                 EditAction::make(),

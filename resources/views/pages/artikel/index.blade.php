@@ -1,5 +1,8 @@
 @extends('layouts.public')
 
+@use('App\Enums\PublicSection')
+@use('App\Support\PageContent\SectionVisibility')
+
 @php
     $appName = app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name');
     $hero = \App\Support\PageContent\PageContent::block(\App\Enums\PageBlockType::ArticlesHero);
@@ -123,6 +126,7 @@
         </div>
     </section>
 
+    @if (SectionVisibility::shows(PublicSection::ArticleCta))
     {{-- CTA --}}
     @php
         $indexCta = \App\Support\PageContent\PageContent::cta(\App\Enums\CtaPlacement::ArticleIndex);
@@ -143,4 +147,6 @@
             </div>
         </div>
     </section>
+    @endif
+
 @endsection

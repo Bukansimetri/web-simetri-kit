@@ -1,5 +1,8 @@
 @extends('layouts.public')
 
+@use('App\Enums\PublicSection')
+@use('App\Support\PageContent\SectionVisibility')
+
 @php
     $site = app(\App\Settings\SiteSettings::class);
 @endphp
@@ -37,10 +40,15 @@
          (14 Sep 2026). Aktifkan kembali dengan menghapus comment di bawah. --}}
     {{-- <x-sections.calculator-plts /> --}}
 
-    <x-sections.why-choose />
+    @if (SectionVisibility::shows(PublicSection::HomeWhyChoose))
+        <x-sections.why-choose />
+    @endif
 
-    <x-sections.how-it-works />
+    @if (SectionVisibility::shows(PublicSection::HomeHowItWorks))
+        <x-sections.how-it-works />
+    @endif
 
+    @if (SectionVisibility::shows(PublicSection::HomeSolutions))
     {{-- Produk Kami --}}
     <section class="reveal-element py-32 px-6 mt-12 bg-surface-container-lowest">
         <div class="max-w-7xl mx-auto">
@@ -91,7 +99,9 @@
             </div>
         </div>
     </section>
+    @endif
 
+    @if (SectionVisibility::shows(PublicSection::HomeTestimonials))
     {{-- Testimoni --}}
     @if ($testimonials->isNotEmpty())
         <section class="reveal-element py-24 px-6 max-w-7xl mx-auto">
@@ -134,7 +144,9 @@
             </div>
         </section>
     @endif
+    @endif
 
+    @if (SectionVisibility::shows(PublicSection::HomeCta))
     {{-- CTA Penutup --}}
     @php
         $cta = \App\Support\PageContent\PageContent::cta(\App\Enums\CtaPlacement::Home);
@@ -162,4 +174,5 @@
             </div>
         </div>
     </section>
+    @endif
 @endsection

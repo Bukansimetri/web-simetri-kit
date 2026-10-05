@@ -4,6 +4,7 @@ namespace Tests\Feature\Settings;
 
 use App\Filament\Pages\AppearanceSettingsPage;
 use App\Filament\Pages\ScriptSettingsPage;
+use App\Filament\Pages\SectionVisibilitySettingsPage;
 use App\Filament\Pages\SeoSettingsPage;
 use App\Filament\Pages\SiteSettingsPage;
 use App\Filament\Pages\SocialSettingsPage;
@@ -30,7 +31,7 @@ class SettingsPagesAccessTest extends TestCase
         $user = User::factory()->create();
         $user->assignRole('super_admin');
 
-        foreach ([SiteSettingsPage::class, AppearanceSettingsPage::class, SeoSettingsPage::class, SocialSettingsPage::class, ScriptSettingsPage::class] as $page) {
+        foreach ([SiteSettingsPage::class, AppearanceSettingsPage::class, SeoSettingsPage::class, SocialSettingsPage::class, ScriptSettingsPage::class, SectionVisibilitySettingsPage::class] as $page) {
             Livewire::actingAs($user)->test($page)->assertSuccessful();
         }
     }

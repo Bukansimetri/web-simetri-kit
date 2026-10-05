@@ -41,6 +41,7 @@ Manual ini untuk Anda yang mengelola situs Anda lewat panel admin, tanpa perlu l
   - [Media Sosial](#media-sosial)
   - [Scripts & Analytics](#scripts--analytics)
   - [Kalkulator Estimasi](#kalkulator-estimasi)
+  - [Tampilan Section](#tampilan-section)
 - [Pengguna dan peran](#pengguna-dan-peran)
   - [Pengguna](#pengguna)
   - [Peran](#peran)
@@ -154,6 +155,7 @@ Menu paling atas, tanpa grup:
 - **Media Sosial** — tautan akun media sosial yang tampil di situs.
 - **Scripts & Analytics** — kode dari pihak ketiga (misal alat statistik pengunjung).
 - **Kalkulator Estimasi** — asumsi perhitungan (tarif listrik, dsb.) yang dipakai kalkulator estimasi di situs.
+- **Tampilan Section** — menyalakan atau mematikan section tertentu di halaman situs (misal Testimoni, CTA, FAQ) tanpa menghapus isinya.
 
 **Sistem**
 
@@ -443,6 +445,19 @@ Tempat memasang kode dari layanan pihak ketiga (misal alat statistik pengunjung,
 Asumsi yang dipakai kalkulator estimasi penghematan di situs: **Tarif Listrik per kWh (Rp)**, **Cakupan Panel Surya (%)**, **Eskalasi Tarif Listrik per Tahun (%)**, **Faktor Investasi (kelipatan hemat tahun 1)**, **Jam Matahari Efektif per Hari**, **Masa Proyeksi (tahun)**.
 
 > **Perhatian:** mengubah angka di sini mengubah hasil hitungan untuk pengunjung yang memakai kalkulator setelah perubahan disimpan. Lead yang sudah masuk sebelumnya (di menu **Lead Kalkulator**) tetap menyimpan hasil hitungan lama dan tidak ikut berubah. Pastikan angka yang Anda masukkan sudah benar sebelum menyimpan.
+
+
+### Tampilan Section
+
+Menentukan section mana yang tampil di halaman situs. Buka menu **Tampilan Section** di grup **Pengaturan Situs**.
+
+- Section dikelompokkan per halaman (Beranda, Tentang Kami, Karir, Produk, Detail Produk, Artikel, Detail Artikel, FAQ, Kontak). Setiap section punya satu toggle **Tampilkan**; matikan toggle lalu klik **Simpan** untuk menyembunyikannya.
+- Semua section tampil secara bawaan. Menyembunyikan section **tidak menghapus** isinya; menyalakannya kembali langsung menampilkan isi yang sama.
+- Section yang semua itemnya dinonaktifkan atau dihapus tetap tersembunyi walau toggle-nya menyala.
+- Judul tiap kelompok menunjukkan jumlah section yang sedang disembunyikan. Klik **Edit isi** di samping toggle untuk membuka menu yang mengatur isi section itu.
+- Testimoni di Beranda dan di Tentang Kami punya toggle masing-masing, begitu juga tiap CTA.
+- Banner di atas halaman, daftar utama (Produk, Artikel, Portfolio, Lowongan), formulir Kontak, dan kalkulator tidak punya toggle karena selalu tampil.
+- Menu yang mengatur isi section (misal Mengapa Beralih, Cara Kerja, Testimoni, Tim, Logo Klien, Misi, Nilai, Trust Strip, Mengapa Bergabung, Proses Rekrutmen, CTA, Blok Halaman, FAQ, dan Produk) menampilkan peringatan **Section ini sedang disembunyikan dari situs** bila section terkait dimatikan. Di menu CTA, Blok Halaman, dan FAQ, kolom **Tayang** memberi label **Disembunyikan** pada baris yang section-nya sedang tidak tampil.
 
 ## Pengguna dan peran
 

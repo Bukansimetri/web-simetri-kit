@@ -3,7 +3,9 @@
 namespace App\Filament\Resources;
 
 use App\Enums\CtaPlacement;
+use App\Enums\PublicSection;
 use App\Filament\Resources\CallToActionResource\Pages;
+use App\Filament\Support\SectionVisibilityColumn;
 use App\Models\CallToAction;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Textarea;
@@ -101,6 +103,7 @@ class CallToActionResource extends Resource
                 TextColumn::make('title')
                     ->label('Judul')
                     ->limit(60),
+                SectionVisibilityColumn::make(fn (CallToAction $record): PublicSection => PublicSection::fromCta($record->placement)),
             ])
             ->actions([
                 EditAction::make(),

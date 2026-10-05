@@ -60,6 +60,7 @@ class NavigationStructureTest extends TestCase
         // Item yang dipindah ke grup baru harus tetap tampil dengan label
         // aslinya (bukti navigationGroup baru benar-benar dipakai, bukan
         // cuma dideklarasikan tanpa dipakai resource manapun).
+        $response->assertSee('Tampilan Section', escape: false);
         $response->assertSee('Lead Kalkulator', escape: false);
         $response->assertSee('Pesan Masuk', escape: false);
         // Grup per halaman (029-why-choose-admin): menu section memakai label

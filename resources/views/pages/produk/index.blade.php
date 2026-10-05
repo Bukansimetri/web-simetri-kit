@@ -1,5 +1,8 @@
 @extends('layouts.public')
 
+@use('App\Enums\PublicSection')
+@use('App\Support\PageContent\SectionVisibility')
+
 @section('title', \App\Support\Seo\PageTitle::forStatic('produk_index', 'Katalog Produk'))
 @section('meta_description', 'Temukan panel surya dan inverter yang tepat untuk proyek Anda, dari skala rumah tangga hingga industri besar.')
 
@@ -27,11 +30,13 @@
         @endif
     </main>
 
-    {{-- CTA Kalkulator --}}
     @php
         $calculatorCta = \App\Support\PageContent\PageContent::cta(\App\Enums\CtaPlacement::ProductCalculator);
         $closingCta = \App\Support\PageContent\PageContent::cta(\App\Enums\CtaPlacement::ProductClosing);
     @endphp
+
+    @if (SectionVisibility::shows(PublicSection::ProductCtaCalculator))
+    {{-- CTA Kalkulator --}}
     <section class="bg-primary-container py-20 px-margin-mobile md:px-margin-desktop my-12">
         <div class="max-w-3xl mx-auto text-center">
             <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-6">{{ \App\Support\PageContent\PageContent::multiline($calculatorCta->title) }}</h2>
@@ -43,10 +48,14 @@
             </a>
         </div>
     </section>
+    @endif
 
+    @if (SectionVisibility::shows(PublicSection::ProductFaq))
     {{-- FAQ Seputar Produk --}}
     <x-sections.faq-list title="Pertanyaan Seputar Produk" :items="$productFaqs" />
+    @endif
 
+    @if (SectionVisibility::shows(PublicSection::ProductCtaClosing))
     {{-- CTA Penutup --}}
     <section class="bg-primary-container text-on-primary py-20 px-margin-mobile md:px-margin-desktop">
         <div class="max-w-4xl mx-auto text-center flex flex-col items-center">
@@ -59,4 +68,6 @@
             </a>
         </div>
     </section>
+    @endif
+
 @endsection
