@@ -249,13 +249,20 @@ class DefaultPageContent
     }
 
     /**
-     * FAQ bawaan untuk halaman Produk dan Kontak (sebelumnya tertulis di Blade), per tempat tampil.
+     * FAQ bawaan per tempat tampil: Halaman FAQ (dari data contoh), serta Produk dan Kontak (sebelumnya tertulis di Blade).
      *
-     * @return array<string, list<array{question: string, answer: string}>>
+     * @return array<string, list<array{question: string, answer: string, category?: string}>>
      */
     public static function faqs(): array
     {
         return [
+            FaqPlacement::Faq->value => [
+                ['category' => 'Instalasi', 'question' => 'Berapa lama proses instalasi panel surya?', 'answer' => 'Untuk instalasi rumah tangga standar, proses pemasangan biasanya memakan waktu 1-3 hari kerja setelah survei lokasi dan persetujuan desain sistem.'],
+                ['category' => 'Produk & Teknologi', 'question' => 'Apakah panel surya bekerja saat mendung atau hujan?', 'answer' => 'Ya, panel surya tetap menghasilkan listrik saat mendung meski dengan output lebih rendah dibanding cuaca cerah. Produksi listrik akan berhenti hanya saat malam hari.'],
+                ['category' => 'Biaya & Penghematan', 'question' => 'Berapa besar penghematan tagihan listrik bulanan?', 'answer' => 'Rata-rata pelanggan {app_name} menghemat 50-80% dari tagihan listrik bulanan, tergantung kapasitas sistem dan pola konsumsi listrik rumah tangga.'],
+                ['category' => 'Garansi', 'question' => 'Bagaimana dengan garansi produk dan layanan?', 'answer' => 'Panel surya {app_name} dilengkapi garansi performa hingga 25 tahun, garansi produk 10-12 tahun, dan garansi pengerjaan instalasi profesional.'],
+                ['category' => 'Perawatan', 'question' => 'Apakah sistem perlu perawatan rutin?', 'answer' => 'Perawatan minimal — cukup pembersihan panel dari debu secara berkala. Tim {app_name} menyediakan layanan monitoring dan maintenance opsional.'],
+            ],
             FaqPlacement::Product->value => [
                 ['question' => 'Berapa lama garansi panel?', 'answer' => 'Panel surya {app_name} dilengkapi dengan garansi kinerja linier hingga 25 tahun, memastikan efisiensi panel tidak akan turun di bawah 80% dalam kurun waktu tersebut. Inverter biasanya memiliki garansi standar 5 hingga 10 tahun tergantung model.'],
                 ['question' => 'Apakah bisa custom kapasitas?', 'answer' => 'Sangat bisa. Kami merancang sistem berdasarkan kebutuhan beban listrik spesifik dan luas atap yang tersedia. Tim teknisi kami akan melakukan survey untuk merancang kapasitas yang paling optimal.'],

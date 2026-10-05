@@ -10,6 +10,8 @@ class CustomPageController extends Controller
 {
     public function __invoke(CustomPage $customPage): View
     {
-        return view('pages.custom-page.show', ['customPage' => $customPage]);
+        $view = $customPage->isLegal() ? 'pages.custom-page.legal' : 'pages.custom-page.show';
+
+        return view($view, ['customPage' => $customPage]);
     }
 }

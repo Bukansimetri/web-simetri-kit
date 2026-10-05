@@ -47,7 +47,7 @@ class PageContentInstaller
     }
 
     /**
-     * FAQ Produk dan Kontak ditanam hanya bila tempat itu belum punya entri sama sekali, agar editan admin tidak tertimpa.
+     * FAQ (halaman FAQ, Produk, Kontak) ditanam hanya bila tempat itu belum punya entri sama sekali, agar editan admin tidak tertimpa.
      */
     private static function installFaqs(): void
     {
@@ -68,7 +68,7 @@ class PageContentInstaller
                 FaqItem::query()->create([
                     'question' => $values['question'],
                     'answer' => $values['answer'],
-                    'category' => null,
+                    'category' => $values['category'] ?? null,
                     'placement' => $placement,
                     'is_active' => true,
                     'order' => $order,

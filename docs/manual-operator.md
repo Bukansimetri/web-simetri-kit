@@ -222,7 +222,10 @@ Tempat menyimpan gambar dan file yang Anda unggah, dikelompokkan dalam folder. A
 
 Halaman statis tambahan di situs Anda (misal Syarat & Ketentuan, Kebijakan Privasi), dibuka lewat alamat situsanda.com/halaman/nama-halaman.
 
-- Kolom wajib: **Judul**, **Slug** (bagian alamat halaman, dibuat otomatis dari Judul), **Isi Halaman**.
+- Kolom wajib: **Judul**, **Slug** (bagian alamat halaman, dibuat otomatis dari Judul), **Template**, dan **Isi Halaman** (khusus template Standar).
+- **Template** **Standar** menampilkan satu kolom teks bebas. **Dokumen Legal** menampilkan halaman berstruktur dengan daftar isi, pasal bernomor, dan kartu. Kebijakan Privasi dan Syarat & Ketentuan sudah terpasang dengan template ini setelah pembaruan; teks bawaannya perlu Anda tinjau dan sesuaikan sebelum dipakai.
+- Untuk **Dokumen Legal**, isi bagian **Dokumen Legal**: **Gambar Latar Judul**, **Subjudul**, **Paragraf Pembuka**, **Kotak Sorotan**, daftar **Bagian / Pasal** (tombol **Tambah Bagian**, seret untuk mengurutkan; nomor dan daftar isi dibuat otomatis), **Kartu** di dalam tiap bagian (ikon, judul, teks), **Kotak Kontak (Sidebar)**, **Berkas PDF**, dan **CTA Penutup**. Bagian yang dikosongkan tidak ditampilkan.
+- Tombol unduh PDF hanya tampil bila **Berkas PDF** diunggah (PDF saja, maksimal 10 MB). Tombol WhatsApp di kotak kontak memakai nomor di **Pengaturan Umum** dan disembunyikan bila nomor kosong.
 - Ada juga kolom opsional **Judul Pencarian**, **Deskripsi Pencarian**, dan **Gambar SEO / Share Sosial** untuk tampilan di hasil pencarian dan saat dibagikan ke media sosial.
 
 > **Perhatian:** Bila halaman ini sudah tayang dan sudah dibagikan/diindeks, mengubah **Slug** akan mengubah alamatnya — tautan lama yang sudah dibagikan (atau sudah masuk mesin pencari) tidak akan menemukan halaman ini lagi. Hindari mengubah slug halaman yang sudah lama tayang tanpa berkoordinasi dengan developer.

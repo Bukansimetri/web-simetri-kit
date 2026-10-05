@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\CustomPageTemplate;
 use App\Models\CustomPage;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -20,5 +21,17 @@ class CustomPageFactory extends Factory
             'slug' => Str::slug($title).'-'.fake()->unique()->numberBetween(1, 100000),
             'content' => '<h2>'.fake()->sentence().'</h2><p>'.fake()->paragraph().'</p>',
         ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $legal
+     */
+    public function legal(array $legal = []): static
+    {
+        return $this->state(fn (): array => [
+            'template' => CustomPageTemplate::Legal,
+            'content' => null,
+            'legal' => $legal,
+        ]);
     }
 }

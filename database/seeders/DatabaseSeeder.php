@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ArticleSeeder::class);
         $this->call(JobOpeningSeeder::class);
         $this->call(FaqItemSeeder::class);
+        $this->call(LegalPageSeeder::class);
         $this->call(MenuSeeder::class);
         $this->call(PageContentSeeder::class);
 

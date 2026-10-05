@@ -26,6 +26,8 @@ class StructuredDataTest extends TestCase
 
     public function test_faq_page_has_no_faq_page_schema_when_no_items(): void
     {
+        FaqItem::query()->delete();
+
         $response = $this->get('/faq');
 
         $response->assertOk();
