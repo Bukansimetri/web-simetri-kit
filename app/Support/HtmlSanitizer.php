@@ -23,6 +23,7 @@ class HtmlSanitizer
      */
     private const ALLOWED_TAGS = [
         'p', 'br', 'span', 'div', 'strong', 'b', 'em', 'i', 'u', 'a', 'img', 'ul', 'ol', 'li', 'small',
+        'h2', 'h3', 'h4', 'blockquote',
     ];
 
     /**

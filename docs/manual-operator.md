@@ -387,8 +387,9 @@ Kelompok/kategori untuk menu **Portfolio**.
 Lowongan pekerjaan yang ditampilkan di halaman karir situs.
 
 - Kolom wajib: **Judul Posisi**, **Lokasi**, **Tipe Pekerjaan**, **Deskripsi**.
+- **Deskripsi** memakai editor teks berformat: Anda bisa membuat judul bagian (misal "Tanggung Jawab", "Kualifikasi"), daftar berbutir atau bernomor, huruf tebal atau miring, kutipan, dan tautan. Lowongan lama yang berisi teks biasa otomatis diubah menjadi paragraf saat pembaruan, tampilannya tidak berubah.
 - Toggle **Aktif** menentukan apakah lowongan ini ditampilkan.
-- Setiap lowongan aktif punya halaman detail yang menampilkan deskripsi lengkap dan tombol **Lamar Sekarang**; di halaman Karir hanya dua baris awal deskripsi yang tampil, jadi tulis kalimat pembuka yang jelas.
+- Setiap lowongan aktif punya halaman detail yang menampilkan deskripsi lengkap dan tombol **Lamar Sekarang**; di halaman Karir hanya dua baris awal deskripsi yang tampil (sebagai teks biasa tanpa format), jadi tulis kalimat pembuka yang jelas.
 
 Halaman karir situs Anda bisa dinonaktifkan sepenuhnya lewat **Modul Karir Aktif** di menu **Pengaturan Umum** (lihat [Pengaturan situs](#pengaturan-situs)). Saat dimatikan, halaman karir tidak lagi bisa diakses pengunjung dan tautan "Karir" hilang dari navigasi, tetapi data Lowongan Kerja yang sudah tersimpan tidak terhapus.
 

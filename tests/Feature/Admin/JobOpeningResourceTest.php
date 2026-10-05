@@ -137,4 +137,41 @@ class JobOpeningResourceTest extends TestCase
         $this->assertDatabaseMissing('job_openings', ['id' => $job->id]);
         $this->get('/karir')->assertOk()->assertDontSee('Lowongan Dihapus', escape: false);
     }
+
+    public function test_formatted_description_is_saved_as_is(): void
+    {
+        $html = '<h2>Kualifikasi</h2><ul><li>Berpengalaman</li></ul><p><strong>Tebal</strong> dan <a href="https://contoh.test">tautan</a></p>';
+
+        Livewire::actingAs(User::factory()->create())
+            ->test(CreateJobOpening::class)
+            ->fillForm([
+                'title' => 'Teknisi',
+                'location' => 'Jakarta',
+                'employment_type' => 'full-time',
+                'description' => $html,
+                'is_active' => true,
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $this->assertStringContainsString('<h2>Kualifikasi</h2>', JobOpening::query()->where('title', 'Teknisi')->value('description'));
+    }
+
+    public function test_description_that_looks_empty_is_rejected(): void
+    {
+        foreach (['<p></p>', '<p>   </p>', '<p>&nbsp;</p>'] as $empty) {
+            Livewire::actingAs(User::factory()->create())
+                ->test(CreateJobOpening::class)
+                ->fillForm([
+                    'title' => 'Kosong',
+                    'location' => 'Jakarta',
+                    'employment_type' => 'full-time',
+                    'description' => $empty,
+                ])
+                ->call('create')
+                ->assertHasFormErrors(['description']);
+        }
+
+        $this->assertDatabaseMissing('job_openings', ['title' => 'Kosong']);
+    }
 }

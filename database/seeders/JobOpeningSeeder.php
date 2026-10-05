@@ -18,19 +18,19 @@ class JobOpeningSeeder extends Seeder
                 'title' => 'Solar Panel Installation Technician',
                 'location' => 'Jakarta & Sekitarnya',
                 'employment_type' => 'full-time',
-                'description' => 'Bertanggung jawab memasang dan memelihara sistem panel surya di lokasi klien residensial & komersial.',
+                'description' => '<p>Bertanggung jawab memasang dan memelihara sistem panel surya di lokasi klien residensial &amp; komersial.</p>',
             ],
             [
                 'title' => 'Sales Consultant - Solar Energy',
                 'location' => 'Jakarta',
                 'employment_type' => 'full-time',
-                'description' => 'Mengedukasi calon klien tentang manfaat energi surya dan menyusun penawaran sistem sesuai kebutuhan mereka.',
+                'description' => '<p>Mengedukasi calon klien tentang manfaat energi surya dan menyusun penawaran sistem sesuai kebutuhan mereka.</p>',
             ],
             [
                 'title' => 'Magang - Engineering',
                 'location' => 'Jakarta / Remote',
                 'employment_type' => 'internship',
-                'description' => 'Membantu tim engineering dalam desain sistem dan dokumentasi teknis proyek instalasi panel surya.',
+                'description' => '<p>Membantu tim engineering dalam desain sistem dan dokumentasi teknis proyek instalasi panel surya.</p>',
             ],
         ];
 

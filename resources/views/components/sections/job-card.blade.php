@@ -11,7 +11,7 @@
         <p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-2 mb-3">
             <span class="material-symbols-outlined text-sm">location_on</span> {{ $job->location }}
         </p>
-        <p class="font-body-sm text-body-sm text-on-surface-variant max-w-2xl line-clamp-2">{{ $job->description }}</p>
+        <p class="font-body-sm text-body-sm text-on-surface-variant max-w-2xl line-clamp-2">{{ $job->descriptionExcerpt() }}</p>
     </div>
 
     <div class="shrink-0 flex flex-col sm:flex-row gap-3">

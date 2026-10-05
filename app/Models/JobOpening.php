@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Concerns\FlushesPublicPageCache;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class JobOpening extends Model
 {
@@ -43,5 +44,18 @@ class JobOpening extends Model
         return [
             'is_active' => 'boolean',
         ];
+    }
+
+    /**
+     * Ringkasan teks polos dari deskripsi berformat: antar blok dipisah spasi,
+     * tanpa tag, untuk kartu lowongan dan deskripsi meta.
+     */
+    public function descriptionExcerpt(?int $limit = null): string
+    {
+        $spaced = preg_replace('#</(p|li|h[1-6]|blockquote|div)>|<br\s*/?>#i', ' ', (string) $this->description);
+        $text = html_entity_decode(strip_tags((string) $spaced), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        $text = trim((string) preg_replace('/[\s\x{00A0}]+/u', ' ', $text));
+
+        return $limit === null ? $text : Str::limit($text, $limit);
     }
 }

@@ -4,8 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\JobOpeningResource\Pages;
 use App\Models\JobOpening;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
@@ -49,10 +49,20 @@ class JobOpeningResource extends Resource
                     ->options(JobOpening::EMPLOYMENT_TYPES)
                     ->required()
                     ->rule(Rule::in(array_keys(JobOpening::EMPLOYMENT_TYPES))),
-                Textarea::make('description')
+                RichEditor::make('description')
                     ->label('Deskripsi')
                     ->required()
-                    ->rows(4),
+                    ->toolbarButtons(['h2', 'h3', 'bold', 'italic', 'underline', 'link', 'bulletList', 'orderedList', 'blockquote', 'undo', 'redo'])
+                    ->rules([
+                        fn (): \Closure => function (string $attribute, mixed $value, \Closure $fail): void {
+                            $text = preg_replace('/[\s\x{00A0}]+/u', '', html_entity_decode(strip_tags((string) $value), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+
+                            if ($text === '') {
+                                $fail('Deskripsi wajib diisi.');
+                            }
+                        },
+                    ])
+                    ->columnSpanFull(),
                 Toggle::make('is_active')
                     ->label('Aktif')
                     ->helperText('Lowongan nonaktif tidak tampil di halaman publik /karir, tapi tetap tersimpan di sini.')
