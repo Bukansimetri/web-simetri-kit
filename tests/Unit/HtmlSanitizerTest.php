@@ -57,4 +57,28 @@ class HtmlSanitizerTest extends TestCase
         $this->assertStringContainsString('href="tel:0800"', $clean);
         $this->assertStringContainsString('href="/relatif"', $clean);
     }
+
+    public function test_headings_and_blockquote_are_allowed(): void
+    {
+        $html = '<h2>Kualifikasi</h2><h3>Wajib</h3><h4>Nilai Plus</h4><blockquote>Kutipan</blockquote>';
+
+        $this->assertSame($html, HtmlSanitizer::clean($html));
+    }
+
+    public function test_heading_attributes_are_still_sanitized(): void
+    {
+        $clean = HtmlSanitizer::clean('<h2 onclick="x()">Judul</h2>');
+
+        $this->assertStringNotContainsString('onclick', $clean);
+        $this->assertStringContainsString('<h2>Judul</h2>', $clean);
+    }
+
+    public function test_other_headings_and_pre_are_unwrapped(): void
+    {
+        $clean = HtmlSanitizer::clean('<h1>Besar</h1><pre>kode</pre>');
+
+        $this->assertStringNotContainsString('<h1', $clean);
+        $this->assertStringNotContainsString('<pre', $clean);
+        $this->assertStringContainsString('Besar', $clean);
+    }
 }

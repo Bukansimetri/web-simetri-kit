@@ -4,6 +4,7 @@ namespace Tests\Feature\Pages;
 
 use App\Models\JobOpening;
 use App\Settings\SiteSettings;
+use App\Support\PageContent\JobDescriptionConverter;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -27,7 +28,7 @@ class JobOpeningDetailTest extends TestCase
 
     public function test_detail_shows_full_description_location_type_and_apply_button(): void
     {
-        $description = "Baris pertama tugas.\nBaris kedua tanggung jawab.\n\n".str_repeat('Kualifikasi panjang. ', 60);
+        $description = JobDescriptionConverter::toHtml("Baris pertama tugas.\nBaris kedua tanggung jawab.\n\n".str_repeat('Kualifikasi panjang. ', 60));
         $job = JobOpening::factory()->create([
             'title' => 'Teknisi Instalasi',
             'location' => 'Bandung',
@@ -45,7 +46,7 @@ class JobOpeningDetailTest extends TestCase
             ->assertSee('Lamar Sekarang')
             ->assertSee(url('/kontak'))
             ->assertSee('Kembali ke Karir');
-        $this->assertStringContainsString('whitespace-pre-line', $response->getContent());
+        $this->assertStringContainsString('<br>', $response->getContent());
     }
 
     public function test_description_is_escaped(): void
