@@ -9,6 +9,8 @@ use App\Filament\Resources\CallToActionResource\Pages\ListCallToActions;
 use App\Models\CallToAction;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -91,5 +93,47 @@ class CallToActionResourceTest extends TestCase
             ->fillForm(['secondary_label' => ''])
             ->call('save')
             ->assertHasFormErrors(['secondary_label' => 'required']);
+    }
+
+    public function test_image_field_only_exists_for_product_detail(): void
+    {
+        Livewire::actingAs($this->admin())
+            ->test(EditCallToAction::class, ['record' => $this->cta(CtaPlacement::ProductDetail)->getRouteKey()])
+            ->assertFormFieldIsVisible('image_path');
+
+        Livewire::actingAs($this->admin())
+            ->test(EditCallToAction::class, ['record' => $this->cta(CtaPlacement::Faq)->getRouteKey()])
+            ->assertFormFieldIsHidden('image_path');
+    }
+
+    public function test_admin_can_upload_product_detail_image_as_webp(): void
+    {
+        Storage::fake('public');
+        $cta = $this->cta(CtaPlacement::ProductDetail);
+
+        Livewire::actingAs($this->admin())
+            ->test(EditCallToAction::class, ['record' => $cta->getRouteKey()])
+            ->fillForm(['image_path' => UploadedFile::fake()->image('cta.jpg', 1920, 1080)])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $cta->refresh();
+        $this->assertNotNull($cta->image_path);
+        $this->assertStringStartsWith('cta/', $cta->image_path);
+        $this->assertStringEndsWith('.webp', $cta->image_path);
+        Storage::disk('public')->assertExists($cta->image_path);
+    }
+
+    public function test_image_is_optional(): void
+    {
+        $cta = $this->cta(CtaPlacement::ProductDetail);
+
+        Livewire::actingAs($this->admin())
+            ->test(EditCallToAction::class, ['record' => $cta->getRouteKey()])
+            ->fillForm(['title' => 'Masa Depan Energi'])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $this->assertNull($cta->refresh()->image_path);
     }
 }

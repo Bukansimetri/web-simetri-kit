@@ -119,6 +119,14 @@
                     {{ $detailCta->primary_label }} <span class="material-symbols-outlined text-lg">arrow_forward</span>
                 </a>
             </div>
+            @php
+                $detailCtaImage = \App\Support\PageContent\PageContent::imageUrl($detailCta->image_path, null);
+            @endphp
+            @if ($detailCtaImage)
+                <div class="aspect-video rounded-lg overflow-hidden bg-surface-container">
+                    <img src="{{ $detailCtaImage }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
+                </div>
+            @else
             <div class="h-[300px] rounded-lg overflow-hidden bg-surface-container">
                 @if (count($product->imageUrls()) > 0)
                     <img src="{{ $product->coverImageUrl() }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
@@ -126,6 +134,7 @@
                     <div class="w-full h-full flex items-center justify-center text-outline"><span class="material-symbols-outlined text-6xl">solar_power</span></div>
                 @endif
             </div>
+            @endif
         </div>
     </section>
     @endif

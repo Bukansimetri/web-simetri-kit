@@ -21,6 +21,10 @@ class EditCallToAction extends EditRecord
             $data['secondary_label'] = null;
         }
 
+        if (! $this->getRecord()->placement->supportsImage()) {
+            unset($data['image_path']);
+        }
+
         return $data;
     }
 }

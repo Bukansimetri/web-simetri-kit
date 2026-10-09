@@ -6,6 +6,7 @@ use App\Enums\CtaPlacement;
 use App\Models\CallToAction;
 use App\Settings\SiteSettings;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Storage;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Support\LegacyMarkup;
 use Tests\TestCase;
@@ -91,6 +92,26 @@ class CallToActionRenderTest extends TestCase
         $this->updateCta(CtaPlacement::ProductDetail, ['body' => 'Beli {produk} sekarang']);
 
         $this->get('/produk/produk-uji')->assertOk()->assertSee('Beli produk uji sekarang', escape: false);
+    }
+
+    public function test_product_detail_uses_uploaded_cta_image(): void
+    {
+        Storage::fake('public');
+        Storage::disk('public')->put('cta/hero.webp', 'x');
+        $this->updateCta(CtaPlacement::ProductDetail, ['image_path' => 'cta/hero.webp']);
+
+        $this->get('/produk/produk-uji')
+            ->assertOk()
+            ->assertSee('aspect-video', escape: false)
+            ->assertSee(Storage::disk('public')->url('cta/hero.webp'), escape: false);
+    }
+
+    public function test_product_detail_ignores_cta_image_missing_from_disk(): void
+    {
+        Storage::fake('public');
+        $this->updateCta(CtaPlacement::ProductDetail, ['image_path' => 'cta/hilang.webp']);
+
+        $this->get('/produk/produk-uji')->assertOk()->assertDontSee('cta/hilang.webp', escape: false);
     }
 
     public function test_missing_cta_row_falls_back_to_default_text(): void

@@ -21,6 +21,7 @@ class CallToAction extends Model
         'body',
         'primary_label',
         'secondary_label',
+        'image_path',
     ];
 
     /**

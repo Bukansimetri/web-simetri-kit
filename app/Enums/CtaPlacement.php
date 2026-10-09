@@ -50,4 +50,9 @@ enum CtaPlacement: string
     {
         return $this === self::ProductDetail;
     }
+
+    public function supportsImage(): bool
+    {
+        return $this === self::ProductDetail;
+    }
 }

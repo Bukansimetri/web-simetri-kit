@@ -7,6 +7,8 @@ use App\Enums\PublicSection;
 use App\Filament\Resources\CallToActionResource\Pages;
 use App\Filament\Support\SectionVisibilityColumn;
 use App\Models\CallToAction;
+use App\Support\ImageUploads;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -84,6 +86,18 @@ class CallToActionResource extends Resource
                     ->required(fn (?CallToAction $record): bool => (bool) $placementOf($record)?->hasSecondaryButton())
                     ->visible(fn (?CallToAction $record): bool => (bool) $placementOf($record)?->hasSecondaryButton())
                     ->maxLength(40),
+                FileUpload::make('image_path')
+                    ->label('Gambar')
+                    ->helperText('Opsional. Gunakan rasio 16:9 (persegi panjang), disarankan 1280×720 px. Maks 10MB. Gambar otomatis dikonversi ke WebP dan dikecilkan ke lebar 1280px. Bila kosong, memakai foto sampul produk yang sedang dibuka.')
+                    ->image()
+                    ->disk('public')
+                    ->directory('cta')
+                    ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/webp'])
+                    ->maxSize(10240)
+                    ->imageEditor()
+                    ->imageEditorAspectRatios(['16:9'])
+                    ->saveUploadedFileUsing(fn ($file) => ImageUploads::storeAsWebp($file, 'cta', maxWidth: 1280))
+                    ->visible(fn (?CallToAction $record): bool => (bool) $placementOf($record)?->supportsImage()),
                 Placeholder::make('hint')
                     ->hiddenLabel()
                     ->content('Tujuan tombol mengikuti pengaturan situs dan tidak bisa diubah di sini.'),
