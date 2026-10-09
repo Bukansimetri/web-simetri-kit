@@ -70,7 +70,7 @@
                         @if ($featured)
                             <div class="absolute top-3 right-3 z-10 bg-primary-container text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm">Terpopuler</div>
                         @endif
-                        <div class="{{ $featured ? 'h-56' : 'h-52' }} overflow-hidden">
+                        <div class="aspect-square overflow-hidden">
                             <img src="{{ $cover }}" alt="{{ $product->name }}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         </div>
                         <div class="p-8 flex-1 flex flex-col justify-between">

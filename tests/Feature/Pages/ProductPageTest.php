@@ -98,7 +98,7 @@ class ProductPageTest extends TestCase
         $this->get('/produk')
             ->assertOk()
             ->assertSee('data-product-image-placeholder', escape: false)
-            ->assertSee('aspect-video', escape: false);
+            ->assertSee('aspect-square', escape: false);
     }
 
     public function test_index_has_no_category_filter_and_lists_products_of_every_category(): void

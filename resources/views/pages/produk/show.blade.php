@@ -22,7 +22,7 @@
             @php $images = $product->imageUrls(); @endphp
             @if (count($images) > 0)
                 <div x-data="{ active: 0, images: {{ json_encode($images, JSON_UNESCAPED_SLASHES) }} }" class="flex flex-col gap-4">
-                    <div class="relative bg-surface-container rounded-lg overflow-hidden h-[400px] md:h-[500px]">
+                    <div class="relative bg-surface-container rounded-lg overflow-hidden aspect-square">
                         <img :src="images[active]" alt="{{ $product->name }}" class="w-full h-full object-cover">
                     </div>
                     @if (count($images) > 1)
