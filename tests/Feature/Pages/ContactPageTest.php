@@ -4,6 +4,7 @@ namespace Tests\Feature\Pages;
 
 use App\Mail\ContactSubmissionThankYou;
 use App\Models\ContactSubmission;
+use App\Models\ContactTopic;
 use App\Notifications\NewContactSubmission;
 use App\Services\SubmissionGuard;
 use App\Settings\SiteSettings;
@@ -58,6 +59,50 @@ class ContactPageTest extends TestCase
         $response->assertSee('name="phone"', escape: false);
         $response->assertSee('name="email"', escape: false);
         $response->assertSee('name="pesan"', escape: false);
+    }
+
+    public function test_contact_page_lists_seeded_topics_in_order(): void
+    {
+        $this->get('/kontak')->assertOk()->assertSeeInOrder([
+            'Konsultasi Umum',
+            'Residensial',
+            'Komersial &amp; Industri',
+            'Pompa Air Tenaga Surya',
+        ], escape: false);
+    }
+
+    public function test_contact_page_shows_admin_added_topic_and_hides_inactive_ones(): void
+    {
+        ContactTopic::factory()->create(['name' => 'Instalasi Baru', 'slug' => 'instalasi-baru', 'order' => 9]);
+        ContactTopic::query()->where('slug', 'pompa')->update(['is_active' => false]);
+
+        $this->get('/kontak')
+            ->assertOk()
+            ->assertSee('value="instalasi-baru"', escape: false)
+            ->assertDontSee('Pompa Air Tenaga Surya');
+    }
+
+    public function test_admin_added_topic_is_accepted_on_submit(): void
+    {
+        Mail::fake();
+        ContactTopic::factory()->create(['slug' => 'instalasi-baru']);
+
+        $this->postJson('/kontak', $this->payload(['kebutuhan' => 'instalasi-baru']))->assertCreated();
+
+        $this->assertDatabaseHas('contact_submissions', ['topic' => 'instalasi-baru']);
+    }
+
+    public function test_unknown_or_inactive_topic_is_rejected(): void
+    {
+        ContactTopic::query()->where('slug', 'pompa')->update(['is_active' => false]);
+
+        $this->postJson('/kontak', $this->payload(['kebutuhan' => 'pompa']))
+            ->assertStatus(422)
+            ->assertJsonValidationErrors(['kebutuhan']);
+        $this->postJson('/kontak', $this->payload(['kebutuhan' => 'tidak-ada']))
+            ->assertStatus(422)
+            ->assertJsonValidationErrors(['kebutuhan']);
+        $this->assertSame(0, ContactSubmission::count());
     }
 
     public function test_submitting_valid_data_saves_the_submission(): void

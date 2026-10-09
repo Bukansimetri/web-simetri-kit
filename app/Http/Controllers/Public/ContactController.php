@@ -6,6 +6,7 @@ use App\Enums\FaqPlacement;
 use App\Http\Controllers\Controller;
 use App\Mail\ContactSubmissionThankYou;
 use App\Models\ContactSubmission;
+use App\Models\ContactTopic;
 use App\Models\FaqItem;
 use App\Notifications\NewContactSubmission;
 use App\Services\SubmissionGuard;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class ContactController extends Controller
@@ -32,6 +34,7 @@ class ContactController extends Controller
     {
         return view('pages.kontak', [
             'formToken' => SubmissionGuard::issueToken(),
+            'topics' => ContactTopic::query()->active()->ordered()->get(),
             'consultFaqs' => FaqItem::query()
                 ->forPlacement(FaqPlacement::Contact)
                 ->active()
@@ -57,7 +60,7 @@ class ContactController extends Controller
             'nama' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'regex:/^[0-9+\-\s]{8,15}$/'],
             'email' => ['required', 'email', 'max:255'],
-            'kebutuhan' => ['nullable', 'string', 'in:umum,residensial,komersial,pompa'],
+            'kebutuhan' => ['nullable', 'string', Rule::exists('contact_topics', 'slug')->where('is_active', true)],
             'pesan' => ['required', 'string'],
         ], [
             'phone.regex' => 'Nomor HP/WhatsApp tidak valid.',

@@ -163,10 +163,9 @@
                     <label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="kebutuhan">Topik Kebutuhan</label>
                     <select id="kebutuhan" name="kebutuhan" x-model="form.kebutuhan" class="w-full bg-surface-container border border-transparent rounded-lg px-6 py-4">
                         <option value="">Pilih topik</option>
-                        <option value="umum">Konsultasi Umum</option>
-                        <option value="residensial">Residensial</option>
-                        <option value="komersial">Komersial &amp; Industri</option>
-                        <option value="pompa">Pompa Air Tenaga Surya</option>
+                        @foreach ($topics as $topic)
+                            <option value="{{ $topic->slug }}">{{ $topic->name }}</option>
+                        @endforeach
                     </select>
                 </div>
 
