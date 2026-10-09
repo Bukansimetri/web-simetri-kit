@@ -43,9 +43,9 @@
          },
      }"
      class="bg-primary-container text-white rounded-lg shadow-md p-6">
-    <h2 class="font-headline-lg text-headline-lg text-lg mb-2 flex items-center gap-2">
+    <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug mb-2 flex items-center gap-2">
         <span class="material-symbols-outlined">mail</span> Update Mingguan
-    </h2>
+    </h3>
     <p class="text-sm text-white/80 mb-5">Dapatkan tips perawatan dan promo eksklusif langsung ke email Anda.</p>
 
     <p x-show="done" x-cloak role="status" class="text-sm font-semibold bg-white/15 rounded-lg px-4 py-3" x-text="message">{{ $status }}</p>
@@ -61,7 +61,7 @@
         <input type="hidden" name="form_token" value="{{ \App\Services\SubmissionGuard::issueToken() }}">
         <input type="text" name="website" x-model="honeypot" tabindex="-1" autocomplete="off" class="absolute -left-[9999px] w-px h-px opacity-0" aria-hidden="true">
         <label for="newsletter-email" class="sr-only">Alamat email Anda</label>
-        <input id="newsletter-email" type="email" name="email" x-model="email" value="{{ old('email') }}" required maxlength="255" placeholder="Alamat email Anda" class="w-full rounded-lg bg-white/15 border-0 px-4 py-3 text-sm text-white placeholder:text-white/60 focus:ring-2 focus:ring-white">
+        <input id="newsletter-email" type="email" name="email" x-model="email" value="{{ old('email') }}" required maxlength="255" placeholder="Alamat email Anda" class="form-control bg-white/15 text-white placeholder:text-white/60 focus:border-white focus:shadow-[0_0_0_2px_rgba(255,255,255,0.6)]">
         <p x-show="error" x-text="error" role="alert" class="text-sm text-white font-semibold">{{ $serverError }}</p>
         <button type="submit" :disabled="submitting" class="w-full bg-white text-primary-container font-bold rounded-lg py-3 text-sm hover:bg-surface transition-colors disabled:opacity-60">
             <span x-show="! submitting">Langganan</span><span x-show="submitting" x-cloak>Mengirim...</span>

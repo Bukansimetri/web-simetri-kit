@@ -38,7 +38,7 @@
             </div>
             <div class="w-full md:w-[60%]">
                 <span class="text-sm font-bold text-secondary uppercase tracking-widest block mb-4">{{ $whoWeAre->value('eyebrow') }}</span>
-                <h2 class="font-headline-lg text-3xl md:text-4xl font-bold text-primary leading-tight tracking-tight mb-6">{{ $whoWeAre->value('heading') }}</h2>
+                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary mb-6">{{ $whoWeAre->value('heading') }}</h2>
                 <div class="text-lg text-on-surface-variant mb-8 leading-relaxed [&_p]:mb-0">
                     {!! \App\Support\PageContent\PageContent::richText($whoWeAre->value('body')) !!}
                 </div>
@@ -60,7 +60,7 @@
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[300px] md:text-[400px] text-surface-container-high/50 font-serif leading-none select-none z-0">&rdquo;</div>
         <div class="relative z-10 max-w-4xl mx-auto text-center">
             <p class="text-sm font-bold text-outline uppercase tracking-[0.3em] mb-4">{{ $vision->value('eyebrow') }}</p>
-            <h2 class="text-2xl md:text-4xl font-bold text-primary mb-4 leading-tight tracking-tight">
+            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary mb-4">
                 {{ $vision->value('heading') }}
             </h2>
             <p class="text-secondary font-medium text-base md:text-lg max-w-2xl mx-auto leading-relaxed">{{ $vision->value('subtext') }}</p>
@@ -76,7 +76,7 @@
             @if (filled($mission->eyebrow))
                 <span class="text-sm font-bold text-secondary uppercase tracking-widest block mb-4">{{ $mission->eyebrow }}</span>
             @endif
-            <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-3 text-primary">{{ \App\Support\PageContent\PageContent::multiline($mission->title) }}</h2>
+            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight mb-3 text-primary">{{ \App\Support\PageContent\PageContent::multiline($mission->title) }}</h2>
             @if (filled($mission->subtitle))
                 <p class="text-secondary text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">{{ $mission->subtitle }}</p>
             @endif
@@ -87,7 +87,7 @@
                     <div class="flex gap-5">
                         <span class="material-symbols-outlined text-secondary shrink-0 text-3xl mt-0.5">check_circle</span>
                         <div>
-                            <h4 class="font-headline-lg text-xl font-bold text-primary mb-2">{{ $point->title }}</h4>
+                            <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-primary mb-2">{{ $point->title }}</h3>
                             <p class="text-on-surface-variant leading-relaxed">{{ $point->description }}</p>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                     <div class="flex gap-5">
                         <span class="material-symbols-outlined text-secondary shrink-0 text-3xl mt-0.5">check_circle</span>
                         <div>
-                            <h4 class="font-headline-lg text-xl font-bold text-primary mb-2">{{ $point->title }}</h4>
+                            <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-primary mb-2">{{ $point->title }}</h3>
                             <p class="text-on-surface-variant leading-relaxed">{{ $point->description }}</p>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
     @if ($values)
     <section class="reveal-element py-24 px-6 max-w-7xl mx-auto mb-12">
         <div class="mb-12 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-3 text-primary">{{ \App\Support\PageContent\PageContent::multiline($values->title) }}</h2>
+            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight mb-3 text-primary">{{ \App\Support\PageContent\PageContent::multiline($values->title) }}</h2>
             @if (filled($values->subtitle))
                 <p class="text-secondary text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">{{ $values->subtitle }}</p>
             @endif
@@ -127,7 +127,7 @@
                     <div class="w-12 h-12 bg-primary-container text-white flex items-center justify-center mb-4 rounded-lg shadow-md">
                         <span class="material-symbols-outlined text-2xl">{{ $values->featured['icon'] }}</span>
                     </div>
-                    <h3 class="font-headline-lg text-2xl md:text-3xl font-bold text-white mb-3 leading-snug">{{ $values->featured['title'] }}</h3>
+                    <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-white mb-3">{{ $values->featured['title'] }}</h3>
                     <p class="text-white/90 text-sm md:text-base max-w-xl leading-relaxed">{{ $values->featured['description'] }}</p>
                 </div>
             </div>
@@ -139,7 +139,7 @@
                                 <span class="material-symbols-outlined text-2xl">{{ $value->icon }}</span>
                             </div>
                             <div>
-                                <h4 class="font-headline-lg text-lg font-bold text-primary mb-1.5">{{ $value->title }}</h4>
+                                <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-primary mb-1.5">{{ $value->title }}</h3>
                                 <p class="text-on-surface-variant text-sm leading-relaxed">{{ $value->description }}</p>
                             </div>
                         </div>

@@ -78,6 +78,7 @@
                         @endif
                     </div>
                 @else
+                    <h2 class="sr-only">Daftar artikel</h2>
                     <div id="artikel-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         @foreach ($articles as $article)
                             <div id="artikel-{{ $loop->iteration }}" data-article-item>
@@ -137,7 +138,7 @@
             <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-tertiary-fixed rounded-full blur-3xl opacity-50 pointer-events-none"></div>
             <div class="relative z-10">
                 <span class="material-symbols-outlined text-5xl text-primary mb-4">forum</span>
-                <h2 class="font-headline-lg text-2xl md:text-3xl mb-4 text-primary">{{ \App\Support\PageContent\PageContent::multiline($indexCta->title) }}</h2>
+                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight mb-4 text-primary">{{ \App\Support\PageContent\PageContent::multiline($indexCta->title) }}</h2>
                 @if (filled($indexCta->body))
                     <p class="font-body-md text-body-md text-on-surface-variant mb-8 max-w-xl mx-auto">{{ $indexCta->body }}</p>
                 @endif

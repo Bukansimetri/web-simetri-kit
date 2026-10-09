@@ -5,7 +5,7 @@
         <div class="max-w-7xl mx-auto">
             <div class="mb-16 text-center">
                 <span class="text-sm font-bold text-secondary uppercase tracking-widest block mb-4">Tim Kami</span>
-                <h2 class="font-headline-lg text-headline-lg md:text-5xl text-primary">Orang di balik {{ app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name') }}</h2>
+                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary">Orang di balik {{ app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name') }}</h2>
             </div>
 
             <div class="flex flex-wrap justify-center gap-8">
@@ -26,7 +26,7 @@
                             </div>
                         @endif
 
-                        <h3 class="font-headline-lg text-headline-lg text-lg text-primary">{{ $member->name }}</h3>
+                        <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-primary">{{ $member->name }}</h3>
                         <p class="text-sm font-label-bold text-label-bold text-secondary mb-2">{{ $member->position }}</p>
                         <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">{{ $member->bio }}</p>
 

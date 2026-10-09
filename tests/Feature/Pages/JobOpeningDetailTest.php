@@ -96,7 +96,7 @@ class JobOpeningDetailTest extends TestCase
     {
         $html = $this->get('/karir')->assertOk()->getContent();
 
-        $this->assertMatchesRegularExpression('#<div class="text-center mb-12">\s*<h2 class="font-headline-lg text-2xl md:text-3xl [^"]*text-primary-container">Posisi Terbuka</h2>#', $html);
-        $this->assertMatchesRegularExpression('#<div class="text-center mb-12">\s*<h2 class="font-headline-lg text-2xl md:text-3xl [^"]*text-primary-container">Mengapa Bergabung#', $html);
+        $this->assertMatchesRegularExpression('#<div class="text-center mb-12">\s*<h2 class="font-headline-xl text-3xl md:text-4xl [^"]*text-primary-container">Posisi Terbuka</h2>#', $html);
+        $this->assertMatchesRegularExpression('#<div class="text-center mb-12">\s*<h2 class="font-headline-xl text-3xl md:text-4xl [^"]*text-primary-container">Mengapa Bergabung#', $html);
     }
 }

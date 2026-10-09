@@ -21,7 +21,7 @@
         </nav>
 
         <span class="inline-block bg-surface-container-low text-primary px-3 py-1 rounded-full text-xs font-label-bold text-label-bold uppercase tracking-wider mb-4">{{ $article->articleCategory->name }}</span>
-        <h1 class="font-headline-xl text-3xl md:text-5xl font-bold text-on-surface tracking-tight leading-tight mb-4">{{ $article->title }}</h1>
+        <h1 class="font-headline-xl text-3xl md:text-5xl font-bold tracking-tight leading-tight text-on-surface mb-4">{{ $article->title }}</h1>
         <div class="flex items-center gap-4 text-sm text-outline mb-10">
             <span>{{ $article->published_at?->translatedFormat('d F Y') }}</span>
             <span class="w-1 h-1 rounded-full bg-outline-variant"></span>
@@ -53,7 +53,7 @@
             @endif
         </figure>
 
-        <div class="prose-content font-body-md text-body-md text-on-surface-variant leading-relaxed space-y-4">
+        <div class="rich-content font-body-md text-body-md text-on-surface-variant leading-relaxed space-y-4">
             {!! $article->content !!}
         </div>
 
@@ -67,7 +67,7 @@
 
         @if ($article->relatedProducts->isNotEmpty())
             <section class="mt-12 pt-8 border-t border-surface-container-low">
-                <h2 class="font-headline-lg text-2xl text-primary mb-6">Produk Terkait</h2>
+                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary mb-6">Produk Terkait</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     @foreach ($article->relatedProducts->take(4) as $product)
                         <x-sections.product-card :product="$product" simple />
@@ -78,9 +78,10 @@
     </article>
 
     <aside class="space-y-6 lg:sticky lg:top-28">
+        <h2 class="sr-only">Artikel terbaru dan berlangganan</h2>
         @if ($latest->isNotEmpty())
             <div class="bg-white border border-outline-variant/20 rounded-lg shadow-sm p-6">
-                <h2 class="font-headline-lg text-headline-lg text-lg text-on-surface mb-4">Artikel Terbaru</h2>
+                <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-on-surface mb-4">Artikel Terbaru</h3>
                 <ul class="space-y-4">
                     @foreach ($latest as $item)
                         <li>
@@ -107,7 +108,7 @@
 
     @if ($related->isNotEmpty())
         <section class="reveal-element px-6 pb-24 max-w-7xl mx-auto">
-            <h2 class="font-headline-lg text-2xl md:text-3xl text-primary mb-8">Artikel Terkait</h2>
+            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary mb-8">Artikel Terkait</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 @foreach ($related as $item)
                     <x-sections.article-card :article="$item" />

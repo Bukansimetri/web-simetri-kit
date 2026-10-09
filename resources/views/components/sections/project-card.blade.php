@@ -16,7 +16,7 @@
     </div>
     <div class="p-6 flex flex-col flex-1">
         <span class="text-[11px] font-label-bold text-label-bold uppercase tracking-wider text-primary-container mb-2">{{ $project->portfolioCategory->name }}</span>
-        <h3 class="font-headline-lg text-headline-lg text-lg text-on-surface mb-2">{{ $project->title }}</h3>
+        <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-on-surface mb-2">{{ $project->title }}</h3>
         @if ($summary !== '')
             <p class="font-body-sm text-body-sm text-on-surface-variant mb-4 line-clamp-3">{{ $summary }}</p>
         @endif

@@ -27,7 +27,7 @@
     @if ($values)
     <section class="reveal-element px-6 max-w-7xl mx-auto py-20">
         <div class="text-center mb-12">
-            <h2 class="font-headline-lg text-2xl md:text-3xl font-bold mb-2 text-primary-container">{{ \App\Support\PageContent\PageContent::multiline($values->title) }}</h2>
+            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight mb-2 text-primary-container">{{ \App\Support\PageContent\PageContent::multiline($values->title) }}</h2>
             @if (filled($values->subtitle))
                 <p class="font-body-md text-body-md text-on-surface-variant">{{ $values->subtitle }}</p>
             @endif
@@ -38,7 +38,7 @@
                     <div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <span class="material-symbols-outlined text-white">{{ $value->icon }}</span>
                     </div>
-                    <h3 class="font-headline-lg text-xl mb-3 text-on-surface">{{ $value->title }}</h3>
+                    <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug mb-3 text-on-surface">{{ $value->title }}</h3>
                     <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">{{ $value->description }}</p>
                 </div>
             @endforeach
@@ -50,7 +50,7 @@
     {{-- Open Positions --}}
     <section id="positions" class="reveal-element px-6 max-w-5xl mx-auto py-12">
         <div class="text-center mb-12">
-            <h2 class="font-headline-lg text-2xl md:text-3xl font-bold mb-2 text-primary-container">Posisi Terbuka</h2>
+            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight mb-2 text-primary-container">Posisi Terbuka</h2>
         </div>
 
         @if ($jobOpenings->isEmpty())
@@ -71,13 +71,13 @@
     @if ($process)
     <section class="reveal-element px-6 max-w-7xl mx-auto py-12 mb-12">
         <div class="bg-surface-container-low rounded-2xl p-8 md:p-12 border border-surface-container">
-            <h2 class="font-headline-lg text-2xl md:text-3xl font-bold text-center mb-10 text-primary-container">{{ \App\Support\PageContent\PageContent::multiline($process->title) }}</h2>
+            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-center mb-10 text-primary-container">{{ \App\Support\PageContent\PageContent::multiline($process->title) }}</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
                 <div class="hidden md:block absolute top-6 left-[12.5%] right-[12.5%] h-0.5 bg-outline-variant z-0"></div>
                 @foreach ($process->items as $step)
                     <div class="relative z-10 flex flex-col items-center text-center">
                         <div class="w-12 h-12 rounded-full bg-primary-container text-white flex items-center justify-center font-label-bold text-label-bold text-lg mb-4 shadow-sm">{{ \App\Enums\PageSection::RecruitmentProcess->stepNumber($loop->iteration) }}</div>
-                        <h4 class="font-headline-lg text-base font-bold mb-2 text-on-surface">{{ $step->title }}</h4>
+                        <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug mb-2 text-on-surface">{{ $step->title }}</h3>
                         <p class="font-body-sm text-body-sm text-on-surface-variant">{{ $step->description }}</p>
                     </div>
                 @endforeach

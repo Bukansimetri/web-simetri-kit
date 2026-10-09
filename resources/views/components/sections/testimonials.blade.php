@@ -5,7 +5,7 @@
         <div class="max-w-7xl mx-auto">
             <div class="mb-16 text-center">
                 <span class="text-sm font-bold text-secondary uppercase tracking-widest block mb-4">Testimoni</span>
-                <h2 class="font-headline-lg text-headline-lg md:text-5xl text-primary">Partner Kami</h2>
+                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary">Partner Kami</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

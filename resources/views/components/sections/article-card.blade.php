@@ -15,7 +15,7 @@
     </div>
     <div class="p-6 flex flex-col flex-1">
         <span class="text-xs text-outline mb-2">{{ $article->published_at?->translatedFormat('d F Y') }}</span>
-        <h3 class="font-headline-lg text-headline-lg text-lg text-on-surface mb-2 line-clamp-3">{{ $article->title }}</h3>
+        <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-on-surface mb-2 line-clamp-3">{{ $article->title }}</h3>
         <p class="font-body-sm text-body-sm text-on-surface-variant mb-4 line-clamp-3">{{ $article->excerpt }}</p>
         <span class="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-primary-container group-hover:text-primary transition-colors">
             Baca Selengkapnya <span class="material-symbols-outlined text-base">arrow_forward</span>

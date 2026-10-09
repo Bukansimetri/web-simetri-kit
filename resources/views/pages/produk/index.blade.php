@@ -22,6 +22,7 @@
         @if ($products->isEmpty())
             <p class="text-on-surface-variant">Produk belum tersedia saat ini.</p>
         @else
+            <h2 class="sr-only">Daftar produk</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
                 @foreach ($products as $product)
                     <x-sections.product-card :product="$product" simple />
@@ -39,7 +40,7 @@
     {{-- CTA Kalkulator --}}
     <section class="bg-primary-container py-20 px-margin-mobile md:px-margin-desktop my-12">
         <div class="max-w-3xl mx-auto text-center">
-            <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-6">{{ \App\Support\PageContent\PageContent::multiline($calculatorCta->title) }}</h2>
+            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-white mb-6">{{ \App\Support\PageContent\PageContent::multiline($calculatorCta->title) }}</h2>
             @if (filled($calculatorCta->body))
                 <p class="font-body-md text-body-md text-white/90 mb-10">{{ $calculatorCta->body }}</p>
             @endif
@@ -59,7 +60,7 @@
     {{-- CTA Penutup --}}
     <section class="bg-primary-container text-on-primary py-20 px-margin-mobile md:px-margin-desktop">
         <div class="max-w-4xl mx-auto text-center flex flex-col items-center">
-            <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-6">{{ \App\Support\PageContent\PageContent::multiline($closingCta->title) }}</h2>
+            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-white mb-6">{{ \App\Support\PageContent\PageContent::multiline($closingCta->title) }}</h2>
             @if (filled($closingCta->body))
                 <p class="font-body-md text-body-md text-white/90 mb-10">{{ $closingCta->body }}</p>
             @endif
