@@ -13,6 +13,7 @@ Manual ini untuk Anda yang mengelola situs Anda lewat panel admin, tanpa perlu l
   - [Pesan Masuk](#pesan-masuk)
   - [Lead Kalkulator](#lead-kalkulator)
   - [Langganan Newsletter](#langganan-newsletter)
+  - [Topik Form Kontak](#topik-form-kontak)
 - [Mengelola konten](#mengelola-konten)
   - [Content → Media Manager](#content--media-manager)
   - [Beranda → Banner](#beranda--banner)
@@ -125,6 +126,7 @@ Menu paling atas, tanpa grup:
 - **Lead Kalkulator** — calon pelanggan yang mengisi kalkulator estimasi penghematan di situs.
 - **Pesan Masuk** — pesan dari pengunjung yang mengisi form kontak di situs.
 - **Langganan Newsletter** — alamat email pengunjung yang mendaftar lewat kartu "Update Mingguan" di halaman Artikel.
+- **Topik Form Kontak** — pilihan di dropdown "Topik Kebutuhan" pada form kontak di situs.
 
 **Blog**
 
@@ -201,6 +203,15 @@ Daftar alamat email pengunjung yang mendaftar lewat kartu **Update Mingguan** di
 - Alamat yang sama tidak akan tercatat dua kali, meski didaftarkan berulang.
 - Pendaftar tidak bisa ditambahkan atau diubah dari panel. Untuk menghapus satu alamat, klik **Hapus** di barisnya. Untuk beberapa sekaligus, centang barisnya lalu pilih hapus massal.
 - Panel hanya menyimpan daftarnya; email tidak dikirim otomatis dari sini.
+
+### Topik Form Kontak
+
+Daftar pilihan pada dropdown **Topik Kebutuhan** di form kontak situs Anda.
+
+- Klik **Buat** untuk menambah topik. Isi **Nama Topik** (teks yang dilihat pengunjung); **Slug** terisi otomatis dan menjadi identitas topik di Pesan Masuk.
+- **Urutan Tampil** menentukan posisi di dropdown: angka lebih kecil tampil lebih dulu.
+- Matikan toggle **Aktif** untuk menyembunyikan topik dari form tanpa menghapusnya.
+- Pesan lama tetap menyimpan topik saat pesan itu dikirim, meski topiknya kemudian diubah atau dihapus.
 
 ## Mengelola konten
 
