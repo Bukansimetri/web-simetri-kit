@@ -17,7 +17,7 @@
             <span class="mx-2">/</span>
             <a href="{{ url('/portfolio').'?kategori='.$project->portfolioCategory->slug }}" class="hover:text-primary transition-colors">{{ $project->portfolioCategory->name }}</a>
         </p>
-        <h1 class="font-headline-xl text-headline-xl text-on-surface mb-8">{{ $project->title }}</h1>
+        <h1 class="font-headline-xl text-3xl md:text-5xl font-bold tracking-tight leading-tight text-on-surface mb-8">{{ $project->title }}</h1>
 
         @if (! empty($images))
             <div class="space-y-4 mb-10">

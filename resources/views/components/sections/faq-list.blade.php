@@ -8,7 +8,7 @@
     ])>
         <div class="max-w-3xl mx-auto">
             <div class="text-center mb-12">
-                <h2 class="font-headline-lg text-headline-lg text-primary-container">{{ $title }}</h2>
+                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary-container">{{ $title }}</h2>
                 @if (filled($subtitle))
                     <p class="font-body-md text-body-md text-on-surface-variant mt-4">{{ $subtitle }}</p>
                 @endif

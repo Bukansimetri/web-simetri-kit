@@ -1,8 +1,9 @@
 @props(['search' => '', 'popularTags' => collect(), 'activeTag' => null, 'activeCategory' => null])
 
 <aside class="space-y-6 lg:sticky lg:top-28">
+    <h2 class="sr-only">Pencarian dan informasi tambahan</h2>
     <div class="bg-white border border-outline-variant/20 rounded-lg shadow-sm p-6">
-        <h2 class="font-headline-lg text-headline-lg text-lg text-on-surface mb-4">Cari Artikel</h2>
+        <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-on-surface mb-4">Cari Artikel</h3>
         <form method="GET" action="{{ url('/artikel') }}" role="search" class="relative">
             @if ($activeCategory)
                 <input type="hidden" name="kategori" value="{{ $activeCategory->id }}">
@@ -11,7 +12,7 @@
                 <input type="hidden" name="tag" value="{{ $activeTag->slug }}">
             @endif
             <label for="artikel-search" class="sr-only">Cari artikel</label>
-            <input id="artikel-search" type="search" name="q" value="{{ $search }}" maxlength="100" placeholder="Ketik topik atau masalah..." class="w-full rounded-lg bg-surface-container border-0 pl-4 pr-12 py-3 text-sm text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary-container">
+            <input id="artikel-search" type="search" name="q" value="{{ $search }}" maxlength="100" placeholder="Ketik topik atau masalah..." class="form-control pr-12">
             <button type="submit" class="absolute inset-y-0 right-0 px-4 text-outline hover:text-primary transition-colors" aria-label="Cari">
                 <span class="material-symbols-outlined">search</span>
             </button>
@@ -20,7 +21,7 @@
 
     @if ($popularTags->isNotEmpty())
         <div class="bg-white border border-outline-variant/20 rounded-lg shadow-sm p-6">
-            <h2 class="font-headline-lg text-headline-lg text-lg text-on-surface mb-4">Tag Populer</h2>
+            <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-on-surface mb-4">Tag Populer</h3>
             <div class="flex flex-wrap gap-2">
                 @foreach ($popularTags as $tag)
                     @php $isActive = $activeTag && $activeTag->getKey() === $tag->getKey(); @endphp

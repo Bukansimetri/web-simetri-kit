@@ -97,7 +97,7 @@ class PageContentRenderTest extends TestCase
         $fragment = $this->howItWorksFragment();
 
         $this->assertMatchesRegularExpression(
-            '/>01<\/div><div class="[^"]*"><h4[^>]*>Inverter<\/h4>/',
+            '/>01<\/div><div class="[^"]*"><h3[^>]*>Inverter<\/h3>/',
             $fragment,
         );
     }
@@ -190,8 +190,8 @@ class PageContentRenderTest extends TestCase
     {
         $fragment = LegacyMarkup::extract($this->careerPage(), LegacyMarkup::FRAGMENTS['karir-recruitment'][1]);
 
-        $this->assertMatchesRegularExpression('/>1<\/div><h4[^>]*>Lamar<\/h4>/', $fragment);
-        $this->assertMatchesRegularExpression('/>4<\/div><h4[^>]*>Penawaran<\/h4>/', $fragment);
+        $this->assertMatchesRegularExpression('/>1<\/div><h3[^>]*>Lamar<\/h3>/', $fragment);
+        $this->assertMatchesRegularExpression('/>4<\/div><h3[^>]*>Penawaran<\/h3>/', $fragment);
     }
 
     public function test_recruitment_process_box_is_hidden_without_active_steps(): void

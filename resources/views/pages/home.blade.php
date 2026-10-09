@@ -53,7 +53,7 @@
     <section class="reveal-element py-32 px-6 mt-12 bg-surface-container-lowest">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="font-headline-xl text-3xl md:text-5xl font-bold tracking-tight mb-4 text-primary">Solusi Untuk Setiap Kebutuhan</h2>
+                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight mb-4 text-primary">Solusi Untuk Setiap Kebutuhan</h2>
                 <p class="text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed text-secondary">
                     Dirancang spesifik untuk berbagai skala, dari atap hunian minimalis hingga kompleks industri masif.
                 </p>
@@ -75,7 +75,7 @@
                         </div>
                         <div class="p-8 flex-1 flex flex-col justify-between">
                             <div>
-                                <h3 class="font-headline-lg text-2xl text-primary mb-2">{{ $product->name }}</h3>
+                                <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-primary mb-2">{{ $product->name }}</h3>
                                 <p class="text-sm text-on-surface-variant leading-relaxed">{{ $product->short_description }}</p>
                             </div>
                             @if ($featured)
@@ -107,7 +107,7 @@
         <section class="reveal-element py-24 px-6 max-w-7xl mx-auto">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <span class="text-xs font-bold text-secondary uppercase tracking-widest block mb-4">Testimoni</span>
-                <h2 class="font-headline-xl text-3xl md:text-5xl font-bold tracking-tight text-primary">Partner Kami</h2>
+                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary">Partner Kami</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
@@ -133,7 +133,7 @@
                                 </div>
                             @endif
                             <div>
-                                <h4 class="font-bold text-sm text-primary">{{ $testimonial->name }}</h4>
+                                <h4 class="font-headline-lg text-base md:text-lg font-bold leading-snug text-primary">{{ $testimonial->name }}</h4>
                                 @if ($testimonial->attribution)
                                     <p class="text-xs text-outline font-medium">{{ $testimonial->attribution }}</p>
                                 @endif
@@ -156,7 +156,7 @@
             <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-primary-container rounded-full blur-3xl opacity-40"></div>
             <div class="absolute top-10 right-10 w-32 h-32 bg-surface-container-low rounded-full blur-2xl opacity-20"></div>
             <div class="relative z-10">
-                <h2 class="font-headline-xl text-3xl md:text-5xl font-bold text-white tracking-tight mb-6">{{ \App\Support\PageContent\PageContent::multiline($cta->title) }}</h2>
+                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-white mb-6">{{ \App\Support\PageContent\PageContent::multiline($cta->title) }}</h2>
                 @if (filled($cta->body))
                     <p class="text-white/90 font-medium mb-10 max-w-xl mx-auto text-base md:text-lg leading-relaxed">
                         {{ $cta->body }}

@@ -16,9 +16,9 @@
             <span class="mx-2">/</span>
             {{ $customPage->title }}
         </p>
-        <h1 class="font-headline-xl text-headline-xl text-on-surface mb-8">{{ $customPage->title }}</h1>
+        <h1 class="font-headline-xl text-3xl md:text-5xl font-bold tracking-tight leading-tight text-on-surface mb-8">{{ $customPage->title }}</h1>
 
-        <div class="font-body-md text-body-md text-on-surface-variant leading-relaxed space-y-4">
+        <div class="rich-content font-body-md text-body-md text-on-surface-variant leading-relaxed space-y-4">
             {!! $customPage->content !!}
         </div>
     </article>

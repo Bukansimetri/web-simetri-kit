@@ -11,7 +11,7 @@
             </div>
         @endif
     </div>
-    <h3 class="font-headline-lg text-headline-lg text-lg text-primary-container text-center px-4 py-5 line-clamp-2">{{ $product->name }}</h3>
+    <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-primary-container text-center px-4 py-5 line-clamp-2">{{ $product->name }}</h3>
 </a>
 @else
 
@@ -30,7 +30,7 @@
         {{ $product->category->name }}
     </span>
 
-    <h3 class="font-headline-lg text-headline-lg text-primary-container mb-3">{{ $product->name }}</h3>
+    <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-primary-container mb-3">{{ $product->name }}</h3>
     <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">{{ $product->short_description }}</p>
 
     <div class="flex items-center gap-3 mb-6">

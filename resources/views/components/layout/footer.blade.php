@@ -67,7 +67,7 @@
 
         @foreach ($footerColumns as $title => $links)
             <div>
-                <h4 class="font-bold text-white mb-6">{{ $title }}</h4>
+                <p class="font-bold text-white mb-6">{{ $title }}</p>
                 <ul class="space-y-4 text-white/60 text-sm">
                     @foreach ($links as $link)
                         <li>
@@ -82,7 +82,7 @@
 
         @if (filled($site->company_name) || filled($site->company_address) || filled($site->company_email) || filled($site->company_phone))
         <div>
-            <h4 class="font-bold text-white mb-6">Kontak</h4>
+            <p class="font-bold text-white mb-6">Kontak</p>
             <ul class="space-y-4 text-white/60 text-sm">
                 @if ($site->company_name)
                     <li class="text-white font-semibold">{{ $site->company_name }}</li>

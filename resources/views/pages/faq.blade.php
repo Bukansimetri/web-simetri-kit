@@ -45,7 +45,7 @@
                     x-model="q"
                     placeholder="Cari pertanyaan..."
                     aria-label="Cari pertanyaan"
-                    class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-3 pl-12 pr-4 shadow-sm font-body-md text-body-md focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/30 transition-all"
+                    class="form-control bg-surface-container-lowest border-outline-variant pl-12 shadow-sm"
                 >
             </div>
         </section>
@@ -91,6 +91,7 @@
                 @endif
 
                 {{-- Daftar accordion --}}
+                <h2 class="sr-only">Daftar pertanyaan</h2>
                 <div @class([
                     'flex flex-col gap-3',
                     'md:col-span-9' => $categories->count() > 1,
@@ -106,7 +107,7 @@
                             <button type="button" @click="open = open === {{ $item->id }} ? null : {{ $item->id }}"
                                     class="w-full flex items-center justify-between gap-4 p-6 text-left"
                                     :aria-expanded="open === {{ $item->id }}">
-                                <h3 class="font-headline-lg text-body-md font-semibold transition-colors"
+                                <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug transition-colors"
                                     :class="open === {{ $item->id }} ? 'text-primary' : 'text-on-surface'">{{ $item->question }}</h3>
                                 <span class="material-symbols-outlined text-primary transition-transform shrink-0" :class="open === {{ $item->id }} && 'rotate-180'">expand_more</span>
                             </button>

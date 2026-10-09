@@ -17,7 +17,7 @@
 <section id="kalkulator" class="reveal-element relative z-20 max-w-6xl mx-auto px-6 -mt-32 mb-32">
     <div x-data="calculatorComponent(@js($formToken), @js($appliances))" class="bg-white p-8 md:p-12 shadow-2xl border border-gray-50/50 max-w-5xl mx-auto rounded-lg">
         <div class="text-center mb-10">
-            <h2 class="font-headline-xl text-3xl md:text-5xl font-bold tracking-tight mb-3 text-primary">Hitung Estimasi Penghematan</h2>
+            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight mb-3 text-primary">Hitung Estimasi Penghematan</h2>
             <p class="font-medium text-base md:text-lg max-w-2xl mx-auto text-secondary">Dapatkan analisis transparan untuk potensi efisiensi energi Anda.</p>
         </div>
 
@@ -61,12 +61,12 @@
                             <div class="relative">
                                 <span class="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-gray-400">Rp</span>
                                 <input type="text" inputmode="numeric" x-model="billInput" @input="formatBillInput()" placeholder="2.500.000"
-                                       class="w-full pl-12 pr-4 py-4 bg-surface-container-low border border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-lg font-semibold rounded-lg">
+                                       class="form-control pl-12 py-4 text-lg font-semibold">
                             </div>
                         </div>
                         <div x-show="category === 'residential'" class="space-y-2">
                             <label class="block text-sm font-bold text-primary/70">Kapasitas Daya PLN (VA)</label>
-                            <select x-model="vaCapacity" class="w-full px-4 py-4 bg-surface-container-low border border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm cursor-pointer rounded-lg">
+                            <select x-model="vaCapacity" class="form-control">
                                 @foreach ($vaOptions as $va)
                                     <option value="{{ $va }}">{{ number_format((int) $va, 0, ',', '.') }} VA</option>
                                 @endforeach
@@ -108,19 +108,19 @@
                     <div class="grid grid-cols-2 gap-4 mt-6">
                         <div class="space-y-2">
                             <label class="block text-sm font-bold text-primary/70">Nama Lengkap</label>
-                            <input type="text" x-model="lead.name" placeholder="Budi Santoso" class="w-full px-4 py-3.5 bg-surface-container-low border border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm rounded-lg">
+                            <input type="text" x-model="lead.name" placeholder="Budi Santoso" class="form-control">
                         </div>
                         <div class="space-y-2">
                             <label class="block text-sm font-bold text-primary/70">Nomor WhatsApp</label>
-                            <input type="tel" x-model="lead.phone" placeholder="0812..." class="w-full px-4 py-3.5 bg-surface-container-low border border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm rounded-lg">
+                            <input type="tel" x-model="lead.phone" placeholder="0812..." class="form-control">
                         </div>
                         <div class="space-y-2">
                             <label class="block text-sm font-bold text-primary/70">Email <span class="font-normal text-outline">(opsional)</span></label>
-                            <input type="email" x-model="lead.email" placeholder="budi@email.com" class="w-full px-4 py-3.5 bg-surface-container-low border border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm rounded-lg">
+                            <input type="email" x-model="lead.email" placeholder="budi@email.com" class="form-control">
                         </div>
                         <div class="space-y-2">
                             <label class="block text-sm font-bold text-primary/70">Area</label>
-                            <select x-model="lead.area" class="w-full px-4 py-3.5 bg-surface-container-low border border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm cursor-pointer rounded-lg">
+                            <select x-model="lead.area" class="form-control">
                                 @foreach ($areaOptions as $area)
                                     <option value="{{ $area }}">{{ $area }}</option>
                                 @endforeach
@@ -151,7 +151,7 @@
                 <div class="md:w-1/2 bg-surface-container-low flex flex-col justify-center border border-primary/10 rounded-lg relative overflow-hidden">
                     <div class="w-full h-full p-6 flex flex-col gap-6 transition-all duration-300" :class="result ? '' : 'blur-sm pointer-events-none select-none'">
                         <div class="flex justify-between items-center">
-                            <h3 class="font-headline-lg text-sm text-primary">Proyeksi Hemat vs Investasi</h3>
+                            <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-primary">Proyeksi Hemat vs Investasi</h3>
                             <div class="flex gap-3">
                                 <div class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-primary"></div><span class="text-[10px] font-medium">Hemat</span></div>
                                 <div class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-outline-variant"></div><span class="text-[10px] font-medium">Investasi</span></div>

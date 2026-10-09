@@ -59,11 +59,12 @@
     >
         <div class="grid grid-cols-1 lg:grid-cols-[300px_minmax(0,1fr)] gap-8 items-start">
             <aside class="space-y-6 lg:sticky lg:top-28">
+                <h2 class="sr-only">Daftar isi dan bantuan</h2>
                 @if ($sections->isNotEmpty())
                     <nav class="bg-white rounded-2xl border border-outline-variant/40 p-6 shadow-sm" aria-label="Daftar isi">
                         <div class="flex items-center gap-2 border-b border-outline-variant/40 pb-4 mb-4">
                             <span class="material-symbols-outlined text-primary">format_list_bulleted</span>
-                            <h2 class="text-lg font-bold text-on-surface tracking-tight">Daftar Isi</h2>
+                            <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-on-surface">Daftar Isi</h3>
                         </div>
                         <ul class="flex flex-col gap-1 text-sm font-medium">
                             @foreach ($sections as $index => $section)
@@ -98,7 +99,7 @@
                     <div class="rounded-2xl bg-primary-fixed/40 border border-primary-fixed p-6 space-y-4">
                         <span class="material-symbols-outlined text-primary text-3xl">contact_support</span>
                         @if (filled($legal['contact_title'] ?? null))
-                            <h3 class="text-lg font-bold text-on-surface">{{ $legal['contact_title'] }}</h3>
+                            <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-on-surface">{{ $legal['contact_title'] }}</h3>
                         @endif
                         @if (filled($legal['contact_text'] ?? null))
                             <p class="text-sm text-on-surface-variant leading-relaxed">{{ $legal['contact_text'] }}</p>
@@ -131,7 +132,7 @@
                         <span class="material-symbols-outlined text-primary text-3xl shrink-0">verified_user</span>
                         <div>
                             @if (filled($legal['highlight_title'] ?? null))
-                                <h3 class="text-lg font-bold text-on-surface">{{ $legal['highlight_title'] }}</h3>
+                                <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-on-surface">{{ $legal['highlight_title'] }}</h3>
                             @endif
                             @if (filled($legal['highlight_body'] ?? null))
                                 <p class="mt-1 text-on-surface-variant leading-relaxed">{{ $legal['highlight_body'] }}</p>
@@ -156,7 +157,7 @@
                                 @if (filled($section['label'] ?? null))
                                     <p class="text-xs font-semibold uppercase tracking-widest text-primary/70">Pasal {{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) }} · {{ $section['label'] }}</p>
                                 @endif
-                                <h2 class="text-xl md:text-2xl font-bold text-on-surface tracking-tight">{{ $section['title'] }}</h2>
+                                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-on-surface">{{ $section['title'] }}</h2>
                             </div>
                         </div>
 
@@ -173,7 +174,7 @@
                                         @if (filled($card['icon'] ?? null))
                                             <span class="material-symbols-outlined text-primary mb-2">{{ $card['icon'] }}</span>
                                         @endif
-                                        <h3 class="text-sm font-bold text-on-surface">{{ $card['title'] }}</h3>
+                                        <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-on-surface">{{ $card['title'] }}</h3>
                                         @if (filled($card['text'] ?? null))
                                             <p class="mt-1 text-sm text-on-surface-variant leading-relaxed">{{ $card['text'] }}</p>
                                         @endif
@@ -194,7 +195,7 @@
     @if (filled($legal['cta_title'] ?? null))
         <section class="py-20 px-6 bg-primary text-center">
             <div class="max-w-3xl mx-auto">
-                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold text-white leading-tight">{{ $legal['cta_title'] }}</h2>
+                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-white">{{ $legal['cta_title'] }}</h2>
                 @if (filled($legal['cta_body'] ?? null))
                     <p class="mt-4 text-white/90 text-lg">{{ $legal['cta_body'] }}</p>
                 @endif

@@ -5,7 +5,7 @@
     <div x-data="pltsCalculatorComponent()" class="bg-white p-8 md:p-12 shadow-2xl border border-gray-50/50 max-w-6xl mx-auto rounded-lg">
         <div class="text-center mb-10">
             <span class="inline-block text-xs font-bold uppercase tracking-wider text-primary bg-primary/5 border border-primary/20 rounded-full px-3 py-1 mb-4">Kalkulator Detail (Opsional)</span>
-            <h2 class="font-headline-xl text-3xl md:text-5xl font-bold tracking-tight mb-3 text-primary">Kalkulator Detail Sistem PLTS</h2>
+            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight mb-3 text-primary">Kalkulator Detail Sistem PLTS</h2>
             <p class="font-medium text-base md:text-lg max-w-2xl mx-auto text-secondary">Tentukan kebutuhan daya, kondisi atap, dan pilih komponen satu per satu untuk estimasi yang lebih rinci.</p>
         </div>
 
@@ -29,7 +29,7 @@
             <div class="lg:col-span-2 flex flex-col gap-6">
 
                 <div x-show="step === 1" x-cloak>
-                    <h3 class="font-headline-lg text-xl font-bold text-primary mb-1">Pemakaian Listrik</h3>
+                    <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-primary mb-1">Pemakaian Listrik</h3>
                     <p class="text-sm text-secondary mb-6">Pilih cara input sesuai data yang tersedia. Kalau ragu, pakai daya PLN dulu.</p>
 
                     <div class="mb-6">
@@ -44,7 +44,7 @@
                     <div x-show="mode === 'pln'" class="space-y-5">
                         <div>
                             <label class="block text-sm font-bold text-primary/70 mb-2">Daya terpasang PLN</label>
-                            <select x-model="plnVa" class="w-full px-4 py-3.5 bg-surface-container-low border border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm rounded-lg">
+                            <select x-model="plnVa" class="form-control">
                                 <option value="900">900 VA</option>
                                 <option value="1300">1.300 VA</option>
                                 <option value="2200">2.200 VA</option>
@@ -87,10 +87,10 @@
                         <div class="space-y-2">
                             <template x-for="(item, index) in appliances" :key="index">
                                 <div class="grid grid-cols-2 md:grid-cols-[1.6fr_0.8fr_0.5fr_0.7fr_36px] gap-2 items-center bg-surface-container-low rounded-lg p-2 md:p-0 md:bg-transparent">
-                                    <input type="text" x-model="item.name" class="col-span-2 md:col-span-1 px-3 py-2 bg-white md:bg-surface-container-low border border-transparent focus:border-primary text-sm rounded-lg" aria-label="Nama alat">
-                                    <input type="number" min="0" x-model.number="item.w" class="px-3 py-2 bg-white md:bg-surface-container-low border border-transparent focus:border-primary text-sm rounded-lg" aria-label="Watt">
-                                    <input type="number" min="0" x-model.number="item.q" class="px-3 py-2 bg-white md:bg-surface-container-low border border-transparent focus:border-primary text-sm rounded-lg" aria-label="Unit">
-                                    <input type="number" min="0" max="24" step="0.5" x-model.number="item.h" class="px-3 py-2 bg-white md:bg-surface-container-low border border-transparent focus:border-primary text-sm rounded-lg" aria-label="Jam per hari">
+                                    <input type="text" x-model="item.name" class="col-span-2 md:col-span-1 form-control form-control-sm bg-white md:bg-surface-container-low" aria-label="Nama alat">
+                                    <input type="number" min="0" x-model.number="item.w" class="form-control form-control-sm bg-white md:bg-surface-container-low" aria-label="Watt">
+                                    <input type="number" min="0" x-model.number="item.q" class="form-control form-control-sm bg-white md:bg-surface-container-low" aria-label="Unit">
+                                    <input type="number" min="0" max="24" step="0.5" x-model.number="item.h" class="form-control form-control-sm bg-white md:bg-surface-container-low" aria-label="Jam per hari">
                                     <button type="button" @click="removeAppliance(index)" class="w-9 h-9 flex items-center justify-center rounded-lg border border-outline-variant text-secondary hover:text-error hover:border-error/40 hover:bg-error/5" aria-label="Hapus alat">
                                         <span class="material-symbols-outlined text-lg">close</span>
                                     </button>
@@ -106,7 +106,7 @@
                 </div>
 
                 <div x-show="step === 2" x-cloak>
-                    <h3 class="font-headline-lg text-xl font-bold text-primary mb-1">Kondisi Pemakaian</h3>
+                    <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-primary mb-1">Kondisi Pemakaian</h3>
                     <p class="text-sm text-secondary mb-6">Menentukan berapa banyak dari pemakaian harian yang realistis dicover panel.</p>
 
                     <div class="bg-primary/5 border-l-4 border-primary rounded-lg px-4 py-3 text-sm text-secondary mb-6 leading-relaxed">
@@ -136,7 +136,7 @@
                 </div>
 
                 <div x-show="step === 3" x-cloak>
-                    <h3 class="font-headline-lg text-xl font-bold text-primary mb-1">Kondisi Atap</h3>
+                    <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-primary mb-1">Kondisi Atap</h3>
                     <p class="text-sm text-secondary mb-6">Jenis atap menentukan harga bracket. Luas atap menentukan pilihan panel mana yang muat.</p>
 
                     <div class="mb-6">
@@ -162,7 +162,7 @@
                 </div>
 
                 <div x-show="step === 4" x-cloak>
-                    <h3 class="font-headline-lg text-xl font-bold text-primary mb-1">Pilih Panel Surya</h3>
+                    <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-primary mb-1">Pilih Panel Surya</h3>
                     <p class="text-sm text-secondary mb-6" x-text="'Kebutuhan ' + formatNumber(calc.wpNeed) + ' Wp. Atap tersedia ' + formatNumber(roofArea) + ' m2. Pilihan yang tidak muat ditandai dan tidak bisa dipilih.'"></p>
 
                     <div class="space-y-3">
@@ -205,7 +205,7 @@
                 </div>
 
                 <div x-show="step === 5" x-cloak>
-                    <h3 class="font-headline-lg text-xl font-bold text-primary mb-1">Pilih Inverter</h3>
+                    <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-primary mb-1">Pilih Inverter</h3>
                     <p class="text-sm text-secondary mb-6" x-text="(useBattery ? 'Array ' + formatNumber(calc.arrayWp) + ' Wp dengan baterai, hanya inverter hybrid ditampilkan. ' : 'Array ' + formatNumber(calc.arrayWp) + ' Wp tanpa baterai. ') + 'Kapasitas minimal ' + formatNumber(calc.arrayWp / 1000, 1) + ' kVA.'"></p>
 
                     <div class="space-y-3">
@@ -241,7 +241,7 @@
                 </div>
 
                 <div x-show="step === 6" x-cloak>
-                    <h3 class="font-headline-lg text-xl font-bold text-primary mb-1">Pilih Baterai</h3>
+                    <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-primary mb-1">Pilih Baterai</h3>
                     <p class="text-sm text-secondary mb-6" x-text="'Pemakaian malam sekitar ' + formatNumber(calc.nightKwh, 1) + ' kWh. Dengan depth of discharge 80%, jumlah unit dihitung otomatis.'"></p>
 
                     <div class="space-y-3">
@@ -272,10 +272,10 @@
                 </div>
 
                 <div x-show="step === 7" x-cloak>
-                    <h3 class="font-headline-lg text-xl font-bold text-primary mb-1">Ringkasan</h3>
+                    <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-primary mb-1">Ringkasan</h3>
                     <p class="text-sm text-secondary mb-6">Klik langkah manapun di atas untuk mengubah pilihan.</p>
 
-                    <h4 class="text-sm font-bold text-primary mb-3">Konfigurasi Sistem</h4>
+                    <h4 class="font-headline-lg text-base md:text-lg font-bold leading-snug text-primary mb-3">Konfigurasi Sistem</h4>
                     <div class="space-y-0 mb-6">
                         <div class="flex justify-between py-2.5 border-b border-outline-variant/20 text-sm">
                             <span class="text-secondary">Atap</span>
@@ -296,24 +296,24 @@
                     </div>
 
                     <div class="bg-surface-container-low rounded-xl p-5 md:p-6">
-                        <h4 class="text-sm font-bold text-primary mb-1">Isi data Anda untuk melihat rincian biaya & estimasi hemat</h4>
+                        <h4 class="font-headline-lg text-base md:text-lg font-bold leading-snug text-primary mb-1">Isi data Anda untuk melihat rincian biaya & estimasi hemat</h4>
                         <p class="text-xs text-secondary mb-4">Tim kami juga akan menghubungi Anda untuk konsultasi lebih lanjut.</p>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-bold text-primary/70 mb-1.5">Nama Lengkap</label>
-                                <input type="text" x-model="lead.name" placeholder="Budi Santoso" class="w-full px-4 py-3 bg-white border border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm rounded-lg">
+                                <input type="text" x-model="lead.name" placeholder="Budi Santoso" class="form-control bg-white">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-primary/70 mb-1.5">Nomor WhatsApp</label>
-                                <input type="tel" x-model="lead.phone" placeholder="0812..." class="w-full px-4 py-3 bg-white border border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm rounded-lg">
+                                <input type="tel" x-model="lead.phone" placeholder="0812..." class="form-control bg-white">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-primary/70 mb-1.5">Email <span class="font-normal text-outline">(opsional)</span></label>
-                                <input type="email" x-model="lead.email" placeholder="budi@email.com" class="w-full px-4 py-3 bg-white border border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm rounded-lg">
+                                <input type="email" x-model="lead.email" placeholder="budi@email.com" class="form-control bg-white">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-primary/70 mb-1.5">Area</label>
-                                <select x-model="lead.area" class="w-full px-4 py-3 bg-white border border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm rounded-lg">
+                                <select x-model="lead.area" class="form-control bg-white">
                                     @foreach ($pltsAreaOptions as $area)
                                         <option value="{{ $area }}">{{ $area }}</option>
                                     @endforeach
@@ -332,7 +332,7 @@
                     <div class="relative mt-6 overflow-hidden rounded-xl border border-primary/10">
                         <div class="transition-all duration-300" :class="resultsUnlocked ? '' : 'blur-sm pointer-events-none select-none'">
                             <div class="bg-surface-container-low p-5 md:p-6">
-                                <h4 class="text-sm font-bold text-primary mb-3">Rincian Biaya</h4>
+                                <h4 class="font-headline-lg text-base md:text-lg font-bold leading-snug text-primary mb-3">Rincian Biaya</h4>
                                 <div class="space-y-0">
                                     <div class="flex justify-between py-2 border-b border-outline-variant/20 text-sm">
                                         <span class="text-secondary" x-text="'Panel surya (' + formatNumber(calc.arrayWp) + ' Wp x ' + formatRupiah(panel ? panel.rp : 0) + ')'"></span>
@@ -366,7 +366,7 @@
                             </div>
 
                             <div class="p-5 md:p-6 border-t border-outline-variant/20">
-                                <h4 class="text-sm font-bold text-primary mb-4">Asumsi Perhitungan Penghematan</h4>
+                                <h4 class="font-headline-lg text-base md:text-lg font-bold leading-snug text-primary mb-4">Asumsi Perhitungan Penghematan</h4>
                                 <div class="space-y-5">
                                     <div>
                                         <label class="flex justify-between text-xs font-bold text-primary/70 mb-2">
@@ -405,7 +405,7 @@
 
                             <div class="p-5 md:p-6 border-t border-outline-variant/20">
                                 <div class="flex justify-between items-center mb-4">
-                                    <h4 class="text-sm font-bold text-primary">Akumulasi Penghematan vs Investasi</h4>
+                                    <h4 class="font-headline-lg text-base md:text-lg font-bold leading-snug text-primary">Akumulasi Penghematan vs Investasi</h4>
                                     <div class="flex gap-3">
                                         <div class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-primary-container"></div><span class="text-[10px] font-medium text-secondary">Hemat</span></div>
                                         <div class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-outline-variant"></div><span class="text-[10px] font-medium text-secondary">Investasi</span></div>

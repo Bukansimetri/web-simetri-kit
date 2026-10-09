@@ -111,7 +111,7 @@
             }"
             class="w-full lg:w-3/5 bg-white shadow-lg rounded-lg p-8 md:p-12"
         >
-            <h2 class="font-headline-lg text-2xl md:text-3xl font-bold text-primary mb-8">Kirim pesan ke tim kami</h2>
+            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary mb-8">Kirim pesan ke tim kami</h2>
 
             <template x-if="submitted">
                 <div class="bg-primary/10 text-primary p-6 rounded-lg text-center" role="status">
@@ -134,7 +134,7 @@
                     <input
                         id="nama" name="nama" type="text" x-model="form.nama"
                         placeholder="Masukkan nama Anda"
-                        class="w-full bg-surface-container border border-transparent rounded-lg px-6 py-4 focus:border-primary-container focus:ring-0"
+                        class="form-control"
                     >
                     <p x-show="errors.nama" x-cloak x-text="errors.nama" class="text-sm text-error mt-1"></p>
                 </div>
@@ -144,7 +144,7 @@
                     <input
                         id="phone" name="phone" type="tel" x-model="form.phone"
                         placeholder="Contoh: 08123456789"
-                        class="w-full bg-surface-container border border-transparent rounded-lg px-6 py-4 focus:border-primary-container focus:ring-0"
+                        class="form-control"
                     >
                     <p x-show="errors.phone" x-cloak x-text="errors.phone" class="text-sm text-error mt-1"></p>
                 </div>
@@ -154,14 +154,14 @@
                     <input
                         id="email" name="email" type="email" x-model="form.email"
                         placeholder="nama@email.com"
-                        class="w-full bg-surface-container border border-transparent rounded-lg px-6 py-4 focus:border-primary-container focus:ring-0"
+                        class="form-control"
                     >
                     <p x-show="errors.email" x-cloak x-text="errors.email" class="text-sm text-error mt-1"></p>
                 </div>
 
                 <div>
                     <label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="kebutuhan">Topik Kebutuhan</label>
-                    <select id="kebutuhan" name="kebutuhan" x-model="form.kebutuhan" class="w-full bg-surface-container border border-transparent rounded-lg px-6 py-4">
+                    <select id="kebutuhan" name="kebutuhan" x-model="form.kebutuhan" class="form-control">
                         <option value="">Pilih topik</option>
                         @foreach ($topics as $topic)
                             <option value="{{ $topic->slug }}">{{ $topic->name }}</option>
@@ -174,7 +174,7 @@
                     <textarea
                         id="pesan" name="pesan" rows="4" x-model="form.pesan"
                         placeholder="Ceritakan detail kebutuhan Anda..."
-                        class="w-full bg-surface-container border border-transparent rounded-3xl px-6 py-4 resize-none focus:border-primary-container focus:ring-0"
+                        class="form-control"
                     ></textarea>
                     <p x-show="errors.pesan" x-cloak x-text="errors.pesan" class="text-sm text-error mt-1"></p>
                 </div>
@@ -211,7 +211,7 @@
             <div class="relative z-10 space-y-10">
                 @if ($site->company_address)
                     <div>
-                        <h3 class="text-sm text-primary-fixed-dim uppercase tracking-wider mb-4 flex items-center gap-3">
+                        <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-primary-fixed-dim mb-4 flex items-center gap-3">
                             <span class="material-symbols-outlined">location_on</span> Kantor Pusat
                         </h3>
                         <p class="text-white/90 leading-relaxed">{{ $site->company_address }}</p>
@@ -219,14 +219,14 @@
                 @endif
                 @if ($site->company_email)
                     <div>
-                        <h3 class="text-sm text-primary-fixed-dim uppercase tracking-wider mb-4 flex items-center gap-3">
+                        <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-primary-fixed-dim mb-4 flex items-center gap-3">
                             <span class="material-symbols-outlined">mail</span> Email
                         </h3>
                         <a href="mailto:{{ $site->company_email }}" class="text-white/90 hover:text-white transition-colors">{{ $site->company_email }}</a>
                     </div>
                 @endif
                 <div>
-                    <h3 class="text-sm text-primary-fixed-dim uppercase tracking-wider mb-4 flex items-center gap-3">
+                    <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-primary-fixed-dim mb-4 flex items-center gap-3">
                         <span class="material-symbols-outlined">forum</span> Hubungi Langsung
                     </h3>
                     <a href="{{ $site->whatsappUrl(\App\Support\PageContent\PageContent::whatsappMessage()) ?: '#' }}" class="inline-flex items-center gap-4 group">

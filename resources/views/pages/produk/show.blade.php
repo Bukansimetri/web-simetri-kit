@@ -47,7 +47,7 @@
             @endif
 
             <div class="flex flex-col gap-[24px]">
-                <h1 class="font-headline-xl text-headline-xl text-on-surface">{{ $product->name }}</h1>
+                <h1 class="font-headline-xl text-3xl md:text-5xl font-bold tracking-tight leading-tight text-on-surface">{{ $product->name }}</h1>
                 <div class="flex items-center gap-[12px]">
                     <span class="text-headline-lg font-headline-lg text-primary">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
                     @if ($product->strikethrough_price)
@@ -69,7 +69,7 @@
     <section class="reveal-element px-margin-mobile md:px-margin-desktop py-[80px] bg-surface-container-lowest">
         <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-[24px]">
             <div class="md:col-span-2 bg-surface border border-outline-variant/30 rounded-lg p-[48px]">
-                <h2 class="font-headline-lg text-headline-lg mb-[24px] text-on-surface">Spesifikasi Teknis</h2>
+                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight mb-[24px] text-on-surface">Spesifikasi Teknis</h2>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <tbody>
@@ -91,7 +91,7 @@
                             <span class="material-symbols-outlined">{{ $feature['icon'] }}</span>
                         </div>
                         <div>
-                            <h3 class="font-label-bold text-label-bold text-on-surface mb-[4px]">{{ $feature['title'] }}</h3>
+                            <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-on-surface mb-[4px]">{{ $feature['title'] }}</h3>
                             <p class="font-body-sm text-body-sm text-on-surface-variant">{{ $feature['description'] }}</p>
                         </div>
                     </div>
@@ -109,7 +109,7 @@
         <div class="absolute inset-0 bg-primary/5 -z-10"></div>
         <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div class="flex flex-col gap-6">
-                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold text-primary tracking-tight">{{ \App\Support\PageContent\PageContent::multiline($detailCta->title) }}</h2>
+                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary">{{ \App\Support\PageContent\PageContent::multiline($detailCta->title) }}</h2>
                 @if (filled($detailCta->body))
                     <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
                         {{ \App\Support\PageContent\PageContent::withProductName($detailCta->body, $product->name) }}
@@ -141,7 +141,7 @@
 
     @if ($relatedProducts->isNotEmpty())
         <section class="reveal-element px-margin-mobile md:px-margin-desktop py-[80px] max-w-[1280px] mx-auto">
-            <h2 class="font-headline-lg text-headline-lg text-primary mb-8">Produk Terkait</h2>
+            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary mb-8">Produk Terkait</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
                 @foreach ($relatedProducts as $related)
                     <x-sections.product-card :product="$related" />

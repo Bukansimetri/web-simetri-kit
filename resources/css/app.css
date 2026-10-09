@@ -167,6 +167,85 @@ h6,
 }
 
 /*
+ * Kontrol form seragam (input, select, textarea) di seluruh situs publik:
+ * radius, padding, ukuran font, dan fokus sama di semua halaman. Dropdown
+ * memakai panah sendiri (appearance: none) supaya posisinya selalu rapi di
+ * dalam kolom, tidak bergantung pada panah bawaan tiap browser.
+ * Varian: `.form-control-sm` (sel tabel padat), `bg-white` untuk kartu berwarna.
+ */
+@layer components {
+    .form-control {
+        display: block;
+        width: 100%;
+        border: 1px solid transparent;
+        border-radius: var(--radius-lg);
+        background-color: var(--color-surface-container-low);
+        padding: 0.875rem 1rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        color: var(--color-on-surface);
+        transition:
+            border-color 0.15s ease,
+            box-shadow 0.15s ease;
+    }
+
+    .form-control::placeholder {
+        color: var(--color-outline);
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 20%, transparent);
+    }
+
+    .form-control-sm {
+        padding: 0.5rem 0.75rem;
+    }
+
+    select.form-control {
+        appearance: none;
+        cursor: pointer;
+        padding-right: 2.5rem;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%236f7882' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 7.5 5 5 5-5'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        background-size: 1.25rem 1.25rem;
+    }
+
+    textarea.form-control {
+        resize: none;
+    }
+
+    /*
+     * Judul di dalam isi yang ditulis admin (artikel, halaman kustom, deskripsi
+     * lowongan) memakai skala yang sama di semua halaman.
+     */
+    .rich-content h2,
+    .rich-content h3,
+    .rich-content h4 {
+        font-family: var(--font-headline-lg);
+        color: var(--color-on-surface);
+        line-height: 1.375;
+    }
+
+    .rich-content h2 {
+        margin-top: 2rem;
+        font-size: 1.5rem;
+    }
+
+    .rich-content h3 {
+        margin-top: 1.5rem;
+        font-size: 1.25rem;
+    }
+
+    .rich-content h4 {
+        margin-top: 1rem;
+        font-size: 1.125rem;
+    }
+}
+
+/*
  * Reveal-on-scroll (di-toggle oleh resources/js/scroll-fx.js). Elemen
  * ber-class .reveal-element mulai transparan + sedikit turun, lalu naik
  * saat .is-visible ditambahkan.
