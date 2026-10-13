@@ -36,6 +36,33 @@ class MenuRoutes
     public const NAVBAR_DEFAULTS = ['home', 'tentang-kami', 'produk.index', 'artikel.index', 'karir', 'kontak'];
 
     /**
+     * Kolom footer bawaan: judul kolom (item induk tanpa tautan) beserta
+     * sub-itemnya, sama dengan kolom statis sebelum Menu Builder dipakai.
+     *
+     * @var array<int, array{label: string, children: array<int, array{label: string, route: string}>}>
+     */
+    public const FOOTER_DEFAULTS = [
+        [
+            'label' => 'Solusi',
+            'children' => [
+                ['label' => 'Panel Residensial', 'route' => 'produk.index'],
+                ['label' => 'B2B & Industri', 'route' => 'produk.index'],
+                ['label' => 'Pompa Air Surya', 'route' => 'produk.index'],
+                ['label' => 'Net Metering PLN', 'route' => 'produk.index'],
+            ],
+        ],
+        [
+            'label' => 'Perusahaan',
+            'children' => [
+                ['label' => 'Tentang Kami', 'route' => 'tentang-kami'],
+                ['label' => 'Blog & Artikel', 'route' => 'artikel.index'],
+                ['label' => 'Karir', 'route' => 'karir'],
+                ['label' => 'FAQ', 'route' => 'faq'],
+            ],
+        ],
+    ];
+
+    /**
      * @return array<string, string>
      */
     public static function options(): array

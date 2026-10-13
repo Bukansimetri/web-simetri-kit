@@ -33,6 +33,42 @@ class MenuDefaultsTest extends TestCase
         );
     }
 
+    public function test_installer_creates_default_footer_columns(): void
+    {
+        $footer = MenuLocation::factory()->create(['slug' => 'footer']);
+
+        MenuDefaultsInstaller::install();
+
+        $columns = MenuItem::where('menu_location_id', $footer->id)->root()->orderBy('order_column')->get();
+        $this->assertSame(['Solusi', 'Perusahaan'], $columns->pluck('label')->all());
+        $this->assertSame(
+            ['Tentang Kami', 'Blog & Artikel', 'Karir', 'FAQ'],
+            $columns->last()->children->pluck('label')->all()
+        );
+    }
+
+    public function test_footer_renders_default_columns_from_the_builder(): void
+    {
+        MenuLocation::factory()->create(['slug' => 'footer']);
+        MenuDefaultsInstaller::install();
+
+        $this->get('/')->assertOk()
+            ->assertSeeInOrder(['Solusi', 'Panel Residensial', 'Perusahaan', 'Tentang Kami', 'FAQ'], escape: false);
+    }
+
+    public function test_footer_career_link_is_hidden_when_career_module_is_disabled(): void
+    {
+        MenuLocation::factory()->create(['slug' => 'footer']);
+        MenuDefaultsInstaller::install();
+        $settings = app(SiteSettings::class);
+        $settings->career_module_enabled = false;
+        $settings->save();
+
+        $company = collect(MenuItem::treeForLocation('footer'))->firstWhere('label', 'Perusahaan');
+
+        $this->assertNotContains('Karir', collect($company['children'])->pluck('label')->all());
+    }
+
     public function test_installer_is_idempotent(): void
     {
         $location = $this->navbar();
