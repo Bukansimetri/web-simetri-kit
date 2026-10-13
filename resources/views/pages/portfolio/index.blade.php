@@ -3,13 +3,13 @@
 @php
     $appName = app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name');
     $hero = \App\Support\PageContent\PageContent::block(\App\Enums\PageBlockType::PortfolioHero);
+    $portfolioHeading = \App\Support\PageContent\PageContent::heading('portofolio.daftar');
 @endphp
 
 @section('title', \App\Support\Seo\PageTitle::forStatic('portfolio_index', 'Portfolio'))
 @section('meta_description', 'Proyek dan instalasi energi surya yang telah dikerjakan '.$appName.'.')
 
 @section('content')
-    @php($portfolioHeading = \App\Support\PageContent\PageContent::heading('portofolio.daftar'))
     <x-sections.page-hero
         :title="$hero->value('title')"
         breadcrumb="Portofolio"

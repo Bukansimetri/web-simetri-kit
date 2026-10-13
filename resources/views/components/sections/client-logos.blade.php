@@ -1,5 +1,7 @@
 @props(['logos'])
-@php($heading = \App\Support\PageContent\PageContent::heading('tentang-kami.logo-klien'))
+@php
+    $heading = \App\Support\PageContent\PageContent::heading('tentang-kami.logo-klien');
+@endphp
 
 @php
     $visibleLogos = $logos->filter(fn ($logo) => $logo->logo_path

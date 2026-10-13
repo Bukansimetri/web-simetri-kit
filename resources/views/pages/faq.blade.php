@@ -3,13 +3,13 @@
 @php
     $appName = app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name');
     $hero = \App\Support\PageContent\PageContent::block(\App\Enums\PageBlockType::FaqHero);
+    $faqListHeading = \App\Support\PageContent\PageContent::heading('faq.daftar');
 @endphp
 
 @section('title', \App\Support\Seo\PageTitle::forStatic('faq', 'FAQ'))
 @section('meta_description', 'Pertanyaan yang sering diajukan seputar produk dan layanan '.$appName.'.')
 
 @section('content')
-    @php($faqListHeading = \App\Support\PageContent\PageContent::heading('faq.daftar'))
     <div
         x-data="{
             cat: 'all',

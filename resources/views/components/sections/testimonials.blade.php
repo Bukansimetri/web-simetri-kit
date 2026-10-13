@@ -1,5 +1,7 @@
 @props(['testimonials'])
-@php($heading = \App\Support\PageContent\PageContent::heading('tentang-kami.testimoni'))
+@php
+    $heading = \App\Support\PageContent\PageContent::heading('tentang-kami.testimoni');
+@endphp
 
 @if ($testimonials->isNotEmpty())
     <section class="py-24 px-6 bg-white">

@@ -8,16 +8,14 @@
     $appName = $site->site_name ?: config('app.name');
     $contactInfo = \App\Support\PageContent\PageContent::block(\App\Enums\PageBlockType::ContactInfo);
     $hero = \App\Support\PageContent\PageContent::block(\App\Enums\PageBlockType::ContactHero);
+    $contactFormHeading = \App\Support\PageContent\PageContent::heading('kontak.form');
+    $contactFaqHeading = \App\Support\PageContent\PageContent::heading('kontak.faq');
 @endphp
 
 @section('title', \App\Support\Seo\PageTitle::forStatic('kontak', 'Kontak'))
 @section('meta_description', 'Hubungi tim '.$appName.' untuk konsultasi gratis kebutuhan panel surya Anda.')
 
 @section('content')
-    @php
-        $contactFormHeading = \App\Support\PageContent\PageContent::heading('kontak.form');
-        $contactFaqHeading = \App\Support\PageContent\PageContent::heading('kontak.faq');
-    @endphp
     <x-sections.page-hero
         :title="$hero->value('title')"
         breadcrumb="Kontak"

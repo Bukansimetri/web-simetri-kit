@@ -1,5 +1,7 @@
 @props(['members'])
-@php($heading = \App\Support\PageContent\PageContent::heading('tentang-kami.tim'))
+@php
+    $heading = \App\Support\PageContent\PageContent::heading('tentang-kami.tim');
+@endphp
 
 @if ($members->isNotEmpty())
     <section class="w-full bg-background py-24 px-6">

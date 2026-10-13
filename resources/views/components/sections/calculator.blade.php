@@ -13,8 +13,8 @@
     $appliances = \App\Models\ElectricityAppliance::activeCatalog()
         ->map(fn ($item) => ['key' => $item->slug, 'label' => $item->name, 'icon' => $item->icon, 'iconImage' => $item->iconImageUrl(), 'watt' => $item->watt, 'qty' => 0])
         ->values();
+    $heading = \App\Support\PageContent\PageContent::heading('beranda.kalkulator');
 @endphp
-@php($heading = \App\Support\PageContent\PageContent::heading('beranda.kalkulator'))
 <section id="kalkulator" class="reveal-element relative z-20 max-w-6xl mx-auto px-6 -mt-32 mb-32">
     <div x-data="calculatorComponent(@js($formToken), @js($appliances))" class="bg-white p-8 md:p-12 shadow-2xl border border-gray-50/50 max-w-5xl mx-auto rounded-lg">
         <div class="text-center mb-10">

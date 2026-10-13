@@ -8,10 +8,12 @@
 
 @php
     $hero = \App\Support\PageContent\PageContent::block(\App\Enums\PageBlockType::ProductsHero);
+    $faqHeading = \App\Support\PageContent\PageContent::heading('produk.faq');
+    $calculatorCta = \App\Support\PageContent\PageContent::cta(\App\Enums\CtaPlacement::ProductCalculator);
+    $closingCta = \App\Support\PageContent\PageContent::cta(\App\Enums\CtaPlacement::ProductClosing);
 @endphp
 
 @section('content')
-    @php($faqHeading = \App\Support\PageContent\PageContent::heading('produk.faq'))
     <x-sections.page-hero
         :title="$hero->value('title')"
         breadcrumb="Produk"
@@ -31,11 +33,6 @@
             </div>
         @endif
     </main>
-
-    @php
-        $calculatorCta = \App\Support\PageContent\PageContent::cta(\App\Enums\CtaPlacement::ProductCalculator);
-        $closingCta = \App\Support\PageContent\PageContent::cta(\App\Enums\CtaPlacement::ProductClosing);
-    @endphp
 
     @if (SectionVisibility::shows(PublicSection::ProductCtaCalculator))
     {{-- CTA Kalkulator --}}

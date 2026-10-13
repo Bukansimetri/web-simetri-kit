@@ -8,11 +8,12 @@
 @section('og_title', $product->seoTitle())
 @section('og_image', $product->seoImageUrl() ?? app(\App\Settings\SocialSettings::class)->ogImageUrl())
 
+@php
+    $specificationHeading = \App\Support\PageContent\PageContent::heading('produk-detail.spesifikasi');
+    $relatedProductHeading = \App\Support\PageContent\PageContent::heading('produk-detail.terkait');
+@endphp
+
 @section('content')
-    @php
-        $specificationHeading = \App\Support\PageContent\PageContent::heading('produk-detail.spesifikasi');
-        $relatedProductHeading = \App\Support\PageContent\PageContent::heading('produk-detail.terkait');
-    @endphp
     <section class="px-margin-mobile md:px-margin-desktop pt-32 pb-12 max-w-[1280px] mx-auto">
         <nav aria-label="Breadcrumb" class="flex text-sm text-outline mb-8">
             <ol class="inline-flex items-center flex-wrap gap-y-1">

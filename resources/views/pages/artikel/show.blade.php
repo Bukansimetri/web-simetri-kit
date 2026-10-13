@@ -5,12 +5,13 @@
 @section('og_title', $article->seoTitle())
 @section('og_image', $article->seoImageUrl() ?? app(\App\Settings\SocialSettings::class)->ogImageUrl())
 
+@php
+    $relatedProductHeading = \App\Support\PageContent\PageContent::heading('artikel-detail.produk-terkait');
+    $latestArticleHeading = \App\Support\PageContent\PageContent::heading('artikel-detail.terbaru');
+    $relatedArticleHeading = \App\Support\PageContent\PageContent::heading('artikel-detail.artikel-terkait');
+@endphp
+
 @section('content')
-    @php
-        $relatedProductHeading = \App\Support\PageContent\PageContent::heading('artikel-detail.produk-terkait');
-        $latestArticleHeading = \App\Support\PageContent\PageContent::heading('artikel-detail.terbaru');
-        $relatedArticleHeading = \App\Support\PageContent\PageContent::heading('artikel-detail.artikel-terkait');
-    @endphp
     @if ($isPreview)
         <div class="fixed top-16 inset-x-0 z-40 bg-amber-50 border-b border-amber-200 text-amber-800 text-sm px-4 py-2 text-center">Mode Preview (Admin) — halaman ini hanya terlihat oleh admin, bukan oleh pengunjung.</div>
     @endif

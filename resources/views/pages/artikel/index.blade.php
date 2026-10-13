@@ -6,13 +6,13 @@
 @php
     $appName = app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name');
     $hero = \App\Support\PageContent\PageContent::block(\App\Enums\PageBlockType::ArticlesHero);
+    $articleListHeading = \App\Support\PageContent\PageContent::heading('artikel.daftar');
 @endphp
 
 @section('title', \App\Support\Seo\PageTitle::forStatic('artikel_index', 'Artikel & Blog'))
 @section('meta_description', 'Tips, edukasi, dan berita seputar energi surya dari '.$appName.'.')
 
 @section('content')
-    @php($articleListHeading = \App\Support\PageContent\PageContent::heading('artikel.daftar'))
     <x-sections.page-hero
         :title="$hero->value('title')"
         breadcrumb="Artikel"
