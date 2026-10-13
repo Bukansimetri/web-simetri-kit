@@ -36,6 +36,14 @@ class MenuItemFactory extends Factory
         ]);
     }
 
+    public function route(string $routeName): static
+    {
+        return $this->state(fn () => [
+            'link_type' => MenuItem::LINK_TYPE_ROUTE,
+            'route_name' => $routeName,
+        ]);
+    }
+
     public function internal(Model $linkable): static
     {
         return $this->state(fn () => [

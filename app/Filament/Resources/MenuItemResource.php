@@ -7,6 +7,7 @@ use App\Filament\Resources\MenuItemResource\RelationManagers;
 use App\Models\CustomPage;
 use App\Models\MenuItem;
 use App\Models\MenuLocation;
+use App\Support\Menu\MenuRoutes;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
@@ -74,6 +75,7 @@ class MenuItemResource extends Resource
             Radio::make('link_type')
                 ->label('Tujuan Tautan')
                 ->options([
+                    MenuItem::LINK_TYPE_ROUTE => 'Halaman Bawaan (Beranda, Produk, Kontak, dst.)',
                     MenuItem::LINK_TYPE_INTERNAL => 'Halaman Internal',
                     MenuItem::LINK_TYPE_EXTERNAL => 'URL Eksternal',
                     MenuItem::LINK_TYPE_NONE => 'Tanpa Tautan (label saja)',
@@ -81,6 +83,11 @@ class MenuItemResource extends Resource
                 ->default(MenuItem::LINK_TYPE_NONE)
                 ->live()
                 ->required(),
+            Select::make('route_name')
+                ->label('Halaman Bawaan')
+                ->options(MenuRoutes::options())
+                ->visible(fn ($get) => $get('link_type') === MenuItem::LINK_TYPE_ROUTE)
+                ->required(fn ($get) => $get('link_type') === MenuItem::LINK_TYPE_ROUTE),
             Select::make('linkable_type')
                 ->label('Jenis Halaman')
                 ->options(collect(self::LINKABLE_TYPES)->map(fn (array $type) => $type['label'])->all())
@@ -124,6 +131,10 @@ class MenuItemResource extends Resource
             ->modifyQueryUsing(fn (Builder $query) => $query->root())
             ->defaultSort('order_column')
             ->reorderable('order_column')
+            ->reorderRecordsTriggerAction(fn (Tables\Actions\Action $action, bool $isReordering) => $action
+                ->button()
+                ->icon('heroicon-m-arrows-up-down')
+                ->label($isReordering ? 'Selesai Mengurutkan' : 'Urutkan Menu'))
             ->columns([
                 Tables\Columns\TextColumn::make('label')
                     ->label('Label')
@@ -170,7 +181,7 @@ class MenuItemResource extends Resource
      */
     public static function hasBrokenLink(MenuItem $record): bool
     {
-        return $record->link_type === MenuItem::LINK_TYPE_INTERNAL && $record->resolveUrl() === null;
+        return in_array($record->link_type, [MenuItem::LINK_TYPE_INTERNAL, MenuItem::LINK_TYPE_ROUTE], true) && $record->resolveUrl() === null;
     }
 
     public static function getRelations(): array

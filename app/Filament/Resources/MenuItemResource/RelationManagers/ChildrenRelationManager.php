@@ -30,6 +30,10 @@ class ChildrenRelationManager extends RelationManager
             ->recordTitleAttribute('label')
             ->defaultSort('order_column')
             ->reorderable('order_column')
+            ->reorderRecordsTriggerAction(fn (Tables\Actions\Action $action, bool $isReordering) => $action
+                ->button()
+                ->icon('heroicon-m-arrows-up-down')
+                ->label($isReordering ? 'Selesai Mengurutkan' : 'Urutkan Sub-menu'))
             ->columns([
                 Tables\Columns\TextColumn::make('label')->label('Label'),
                 Tables\Columns\TextColumn::make('link_summary')

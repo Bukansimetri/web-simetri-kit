@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\Menu\MenuRoutes;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,6 +19,8 @@ class MenuItem extends Model
 
     public const LINK_TYPE_EXTERNAL = 'external';
 
+    public const LINK_TYPE_ROUTE = 'route';
+
     public const LINK_TYPE_NONE = 'none';
 
     /**
@@ -31,6 +34,7 @@ class MenuItem extends Model
         'linkable_type',
         'linkable_id',
         'external_url',
+        'route_name',
         'open_in_new_tab',
         'order_column',
         'is_active',
@@ -89,8 +93,17 @@ class MenuItem extends Model
         return match ($this->link_type) {
             self::LINK_TYPE_EXTERNAL => $this->external_url,
             self::LINK_TYPE_INTERNAL => $this->linkable?->getPublicUrl(),
+            self::LINK_TYPE_ROUTE => MenuRoutes::url($this->route_name),
             default => null,
         };
+    }
+
+    /**
+     * Item "Halaman Bawaan" ke modul yang dimatikan (mis. Karir) tidak ditampilkan.
+     */
+    public function isHiddenByModuleToggle(): bool
+    {
+        return $this->link_type === self::LINK_TYPE_ROUTE && MenuRoutes::isHidden($this->route_name);
     }
 
     /**
@@ -106,7 +119,7 @@ class MenuItem extends Model
             'href' => $this->resolveUrl(),
             'target' => $this->open_in_new_tab ? '_blank' : '_self',
             'children' => $this->relationLoaded('children')
-                ? $this->children->map(fn (self $child) => $child->toRenderableArray())->all()
+                ? $this->children->reject(fn (self $child) => $child->isHiddenByModuleToggle())->map(fn (self $child) => $child->toRenderableArray())->values()->all()
                 : [],
         ];
     }
@@ -126,6 +139,8 @@ class MenuItem extends Model
             ->orderBy('order_column')
             ->orderBy('id')
             ->get()
-            ->map(fn (self $item) => $item->toRenderableArray());
+            ->reject(fn (self $item) => $item->isHiddenByModuleToggle())
+            ->map(fn (self $item) => $item->toRenderableArray())
+            ->values();
     }
 }
