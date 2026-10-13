@@ -1,11 +1,13 @@
 @props(['testimonials'])
+@php($heading = \App\Support\PageContent\PageContent::heading('tentang-kami.testimoni'))
 
 @if ($testimonials->isNotEmpty())
     <section class="py-24 px-6 bg-white">
         <div class="max-w-7xl mx-auto">
             <div class="mb-16 text-center">
-                <span class="text-sm font-bold text-secondary uppercase tracking-widest block mb-4">Testimoni</span>
-                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary">Partner Kami</h2>
+                @if (filled($heading->eyebrow))<span class="text-sm font-bold text-secondary uppercase tracking-widest block mb-4">{{ $heading->eyebrow }}</span>@endif
+                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary">{{ $heading->title }}</h2>
+                @if (filled($heading->subtitle))<p class="mt-4 text-base md:text-lg text-secondary">{{ $heading->subtitle }}</p>@endif
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

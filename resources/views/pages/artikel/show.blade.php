@@ -6,6 +6,11 @@
 @section('og_image', $article->seoImageUrl() ?? app(\App\Settings\SocialSettings::class)->ogImageUrl())
 
 @section('content')
+    @php
+        $relatedProductHeading = \App\Support\PageContent\PageContent::heading('artikel-detail.produk-terkait');
+        $latestArticleHeading = \App\Support\PageContent\PageContent::heading('artikel-detail.terbaru');
+        $relatedArticleHeading = \App\Support\PageContent\PageContent::heading('artikel-detail.artikel-terkait');
+    @endphp
     @if ($isPreview)
         <div class="fixed top-16 inset-x-0 z-40 bg-amber-50 border-b border-amber-200 text-amber-800 text-sm px-4 py-2 text-center">Mode Preview (Admin) — halaman ini hanya terlihat oleh admin, bukan oleh pengunjung.</div>
     @endif
@@ -67,7 +72,8 @@
 
         @if ($article->relatedProducts->isNotEmpty())
             <section class="mt-12 pt-8 border-t border-surface-container-low">
-                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary mb-6">Produk Terkait</h2>
+                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary mb-6">{{ $relatedProductHeading->title }}</h2>
+                @if (filled($relatedProductHeading->subtitle))<p class="mb-6 text-secondary">{{ $relatedProductHeading->subtitle }}</p>@endif
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     @foreach ($article->relatedProducts->take(4) as $product)
                         <x-sections.product-card :product="$product" simple />
@@ -81,7 +87,7 @@
         <h2 class="sr-only">Artikel terbaru dan berlangganan</h2>
         @if ($latest->isNotEmpty())
             <div class="bg-white border border-outline-variant/20 rounded-lg shadow-sm p-6">
-                <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-on-surface mb-4">Artikel Terbaru</h3>
+                <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug text-on-surface mb-4">{{ $latestArticleHeading->title }}</h3>
                 <ul class="space-y-4">
                     @foreach ($latest as $item)
                         <li>
@@ -108,7 +114,8 @@
 
     @if ($related->isNotEmpty())
         <section class="reveal-element px-6 pb-24 max-w-7xl mx-auto">
-            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary mb-8">Artikel Terkait</h2>
+            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary mb-8">{{ $relatedArticleHeading->title }}</h2>
+            @if (filled($relatedArticleHeading->subtitle))<p class="mb-8 text-secondary">{{ $relatedArticleHeading->subtitle }}</p>@endif
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 @foreach ($related as $item)
                     <x-sections.article-card :article="$item" />

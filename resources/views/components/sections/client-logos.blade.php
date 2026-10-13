@@ -1,4 +1,5 @@
 @props(['logos'])
+@php($heading = \App\Support\PageContent\PageContent::heading('tentang-kami.logo-klien'))
 
 @php
     $visibleLogos = $logos->filter(fn ($logo) => $logo->logo_path
@@ -8,7 +9,10 @@
 @if ($visibleLogos->isNotEmpty())
     <section class="py-20 px-6 bg-surface-container-low">
         <div class="max-w-7xl mx-auto text-center">
-            <p class="text-sm font-bold text-outline uppercase tracking-[0.3em] mb-12">Dipercaya oleh</p>
+            <div class="mb-12">
+                <h2 class="text-sm font-bold text-outline uppercase tracking-[0.3em]">{{ $heading->title }}</h2>
+                @if (filled($heading->subtitle))<p class="mt-3 text-secondary">{{ $heading->subtitle }}</p>@endif
+            </div>
 
             <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
                 @foreach ($visibleLogos as $logo)

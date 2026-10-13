@@ -29,6 +29,17 @@ class PageContentInstaller
             self::installSection($section, $legacy);
         }
 
+        foreach (DefaultPageContent::headings() as $section => $heading) {
+            if (PageSection::tryFrom($section) !== null) {
+                continue;
+            }
+
+            SectionHeading::query()->firstOrCreate(
+                ['section' => $section],
+                DefaultPageContent::forCurrentSite($heading),
+            );
+        }
+
         foreach (PageBlockType::cases() as $block) {
             $data = DefaultPageContent::forCurrentSite(self::blockData($block, $legacy));
             $row = PageBlock::query()->firstOrCreate(['block' => $block->value], ['data' => $data]);
@@ -178,6 +189,7 @@ class PageContentInstaller
                 'badge_text' => self::keep($legacy, 'siapa_kami_badge_text', $defaults['badge_text']),
                 'eyebrow' => self::keep($legacy, 'siapa_kami_eyebrow', $defaults['eyebrow']),
                 'heading' => self::keep($legacy, 'siapa_kami_heading', $defaults['heading']),
+                'subtitle' => $defaults['subtitle'],
                 'body' => self::keep($legacy, 'siapa_kami_body', $defaults['body']),
                 'quote' => self::keep($legacy, 'siapa_kami_quote', $defaults['quote']),
             ],

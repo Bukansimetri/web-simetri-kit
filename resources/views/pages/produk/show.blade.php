@@ -9,6 +9,10 @@
 @section('og_image', $product->seoImageUrl() ?? app(\App\Settings\SocialSettings::class)->ogImageUrl())
 
 @section('content')
+    @php
+        $specificationHeading = \App\Support\PageContent\PageContent::heading('produk-detail.spesifikasi');
+        $relatedProductHeading = \App\Support\PageContent\PageContent::heading('produk-detail.terkait');
+    @endphp
     <section class="px-margin-mobile md:px-margin-desktop pt-32 pb-12 max-w-[1280px] mx-auto">
         <nav aria-label="Breadcrumb" class="flex text-sm text-outline mb-8">
             <ol class="inline-flex items-center flex-wrap gap-y-1">
@@ -69,7 +73,8 @@
     <section class="reveal-element px-margin-mobile md:px-margin-desktop py-[80px] bg-surface-container-lowest">
         <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-[24px]">
             <div class="md:col-span-2 bg-surface border border-outline-variant/30 rounded-lg p-[48px]">
-                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight mb-[24px] text-on-surface">Spesifikasi Teknis</h2>
+                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight mb-[24px] text-on-surface">{{ $specificationHeading->title }}</h2>
+                @if (filled($specificationHeading->subtitle))<p class="mb-6 text-on-surface-variant">{{ $specificationHeading->subtitle }}</p>@endif
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <tbody>
@@ -141,7 +146,8 @@
 
     @if ($relatedProducts->isNotEmpty())
         <section class="reveal-element px-margin-mobile md:px-margin-desktop py-[80px] max-w-[1280px] mx-auto">
-            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary mb-8">Produk Terkait</h2>
+            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary mb-8">{{ $relatedProductHeading->title }}</h2>
+            @if (filled($relatedProductHeading->subtitle))<p class="mb-8 text-secondary">{{ $relatedProductHeading->subtitle }}</p>@endif
             <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
                 @foreach ($relatedProducts as $related)
                     <x-sections.product-card :product="$related" />

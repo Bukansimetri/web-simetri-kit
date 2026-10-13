@@ -9,6 +9,7 @@
     $values = \App\Support\PageContent\PageContent::section(\App\Enums\PageSection::CareerValues);
     $process = \App\Support\PageContent\PageContent::section(\App\Enums\PageSection::RecruitmentProcess);
     $hero = \App\Support\PageContent\PageContent::block(\App\Enums\PageBlockType::CareerHero);
+    $openingHeading = \App\Support\PageContent\PageContent::heading('karir.lowongan');
 @endphp
 
 @section('title', \App\Support\Seo\PageTitle::forStatic('karir', 'Karir'))
@@ -50,7 +51,8 @@
     {{-- Open Positions --}}
     <section id="positions" class="reveal-element px-6 max-w-5xl mx-auto py-12">
         <div class="text-center mb-12">
-            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight mb-2 text-primary-container">Posisi Terbuka</h2>
+            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight mb-2 text-primary-container">{{ \App\Support\PageContent\PageContent::multiline($openingHeading->title) }}</h2>
+            @if (filled($openingHeading->subtitle))<p class="text-on-surface-variant">{{ $openingHeading->subtitle }}</p>@endif
         </div>
 
         @if ($jobOpenings->isEmpty())
@@ -72,6 +74,7 @@
     <section class="reveal-element px-6 max-w-7xl mx-auto py-12 mb-12">
         <div class="bg-surface-container-low rounded-2xl p-8 md:p-12 border border-surface-container">
             <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-center mb-10 text-primary-container">{{ \App\Support\PageContent\PageContent::multiline($process->title) }}</h2>
+            @if (filled($process->subtitle))<p class="text-center text-on-surface-variant -mt-6 mb-10">{{ $process->subtitle }}</p>@endif
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
                 <div class="hidden md:block absolute top-6 left-[12.5%] right-[12.5%] h-0.5 bg-outline-variant z-0"></div>
                 @foreach ($process->items as $step)

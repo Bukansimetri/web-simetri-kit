@@ -19,6 +19,19 @@ use Illuminate\Support\Str;
  */
 class PageContent
 {
+    public static function heading(string $section): SectionHeading
+    {
+        $heading = SectionHeading::query()->where('section', $section)->first();
+        $defaults = DefaultPageContent::forCurrentSite(DefaultPageContent::headings()[$section]);
+
+        return new SectionHeading([
+            'section' => $section,
+            'title' => $heading?->title ?? $defaults['title'],
+            'subtitle' => $heading ? $heading->subtitle : $defaults['subtitle'],
+            'eyebrow' => $heading ? $heading->eyebrow : ($defaults['eyebrow'] ?? null),
+        ]);
+    }
+
     /**
      * Null bila section tidak punya item aktif, sehingga section tidak dirender.
      */

@@ -9,6 +9,7 @@
 @section('meta_description', 'Proyek dan instalasi energi surya yang telah dikerjakan '.$appName.'.')
 
 @section('content')
+    @php($portfolioHeading = \App\Support\PageContent\PageContent::heading('portofolio.daftar'))
     <x-sections.page-hero
         :title="$hero->value('title')"
         breadcrumb="Portofolio"
@@ -17,6 +18,10 @@
     />
 
     <section class="reveal-element px-6 max-w-7xl mx-auto py-16 pb-24">
+        <div class="text-center mb-12">
+            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary">{{ $portfolioHeading->title }}</h2>
+            @if (filled($portfolioHeading->subtitle))<p class="mt-3 text-secondary">{{ $portfolioHeading->subtitle }}</p>@endif
+        </div>
         @if ($categories->isNotEmpty())
             <div class="flex flex-wrap justify-center gap-3 mb-12">
                 <a href="{{ url('/portfolio') }}"
@@ -38,7 +43,7 @@
 
         @forelse ($projects as $project)
             @if ($loop->first)
-                <h2 class="sr-only">Daftar proyek</h2>
+                <h2 class="sr-only">{{ $portfolioHeading->title }}</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @endif
             <x-sections.project-card :project="$project" />

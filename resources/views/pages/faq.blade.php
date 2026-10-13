@@ -9,6 +9,7 @@
 @section('meta_description', 'Pertanyaan yang sering diajukan seputar produk dan layanan '.$appName.'.')
 
 @section('content')
+    @php($faqListHeading = \App\Support\PageContent\PageContent::heading('faq.daftar'))
     <div
         x-data="{
             cat: 'all',
@@ -56,6 +57,10 @@
             </section>
         @else
             <section class="reveal-element px-6 max-w-7xl mx-auto py-16 grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                <div class="md:col-span-12 text-center">
+                    <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary">{{ $faqListHeading->title }}</h2>
+                    @if (filled($faqListHeading->subtitle))<p class="mt-3 text-secondary">{{ $faqListHeading->subtitle }}</p>@endif
+                </div>
                 @if ($categories->count() > 1)
                     {{-- Sidebar kategori (desktop) --}}
                     <aside class="hidden md:flex flex-col gap-1 md:col-span-3 md:sticky md:top-28">
@@ -91,7 +96,7 @@
                 @endif
 
                 {{-- Daftar accordion --}}
-                <h2 class="sr-only">Daftar pertanyaan</h2>
+                <h2 class="sr-only">{{ $faqListHeading->title }}</h2>
                 <div @class([
                     'flex flex-col gap-3',
                     'md:col-span-9' => $categories->count() > 1,

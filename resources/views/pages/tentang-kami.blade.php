@@ -39,6 +39,7 @@
             <div class="w-full md:w-[60%]">
                 <span class="text-sm font-bold text-secondary uppercase tracking-widest block mb-4">{{ $whoWeAre->value('eyebrow') }}</span>
                 <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary mb-6">{{ $whoWeAre->value('heading') }}</h2>
+                @if (filled($whoWeAre->value('subtitle')))<p class="text-secondary text-base md:text-lg font-medium mb-6">{{ $whoWeAre->value('subtitle') }}</p>@endif
                 <div class="text-lg text-on-surface-variant mb-8 leading-relaxed [&_p]:mb-0">
                     {!! \App\Support\PageContent\PageContent::richText($whoWeAre->value('body')) !!}
                 </div>

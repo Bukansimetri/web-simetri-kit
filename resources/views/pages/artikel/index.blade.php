@@ -12,6 +12,7 @@
 @section('meta_description', 'Tips, edukasi, dan berita seputar energi surya dari '.$appName.'.')
 
 @section('content')
+    @php($articleListHeading = \App\Support\PageContent\PageContent::heading('artikel.daftar'))
     <x-sections.page-hero
         :title="$hero->value('title')"
         breadcrumb="Artikel"
@@ -34,6 +35,10 @@
     @endphp
 
     <section class="reveal-element px-6 max-w-7xl mx-auto py-16">
+        <div class="mb-10">
+            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary">{{ $articleListHeading->title }}</h2>
+            @if (filled($articleListHeading->subtitle))<p class="mt-3 text-secondary">{{ $articleListHeading->subtitle }}</p>@endif
+        </div>
         <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_320px] gap-10 items-start">
             <div id="artikel">
                 @if ($categories->isNotEmpty())
@@ -78,7 +83,7 @@
                         @endif
                     </div>
                 @else
-                    <h2 class="sr-only">Daftar artikel</h2>
+                    <h2 class="sr-only">{{ $articleListHeading->title }}</h2>
                     <div id="artikel-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         @foreach ($articles as $article)
                             <div id="artikel-{{ $loop->iteration }}" data-article-item>

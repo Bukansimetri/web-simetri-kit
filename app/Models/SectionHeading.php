@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\PageSection;
 use Database\Factories\SectionHeadingFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -26,13 +25,4 @@ class SectionHeading extends Model
         'featured_description',
     ];
 
-    /**
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'section' => PageSection::class,
-        ];
-    }
 }

@@ -14,6 +14,10 @@
 @section('meta_description', 'Hubungi tim '.$appName.' untuk konsultasi gratis kebutuhan panel surya Anda.')
 
 @section('content')
+    @php
+        $contactFormHeading = \App\Support\PageContent\PageContent::heading('kontak.form');
+        $contactFaqHeading = \App\Support\PageContent\PageContent::heading('kontak.faq');
+    @endphp
     <x-sections.page-hero
         :title="$hero->value('title')"
         breadcrumb="Kontak"
@@ -111,7 +115,8 @@
             }"
             class="w-full lg:w-3/5 bg-white shadow-lg rounded-lg p-8 md:p-12"
         >
-            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary mb-8">Kirim pesan ke tim kami</h2>
+            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary mb-8">{{ \App\Support\PageContent\PageContent::multiline($contactFormHeading->title) }}</h2>
+            @if (filled($contactFormHeading->subtitle))<p class="text-on-surface-variant mb-8">{{ $contactFormHeading->subtitle }}</p>@endif
 
             <template x-if="submitted">
                 <div class="bg-primary/10 text-primary p-6 rounded-lg text-center" role="status">
@@ -247,6 +252,6 @@
 
     {{-- FAQ Konsultasi --}}
     @if (SectionVisibility::shows(PublicSection::ContactFaq))
-        <x-sections.faq-list band title="Pertanyaan Seputar Konsultasi" subtitle="Informasi singkat mengenai proses setelah Anda menghubungi kami." :items="$consultFaqs" />
+        <x-sections.faq-list band :title="$contactFaqHeading->title" :subtitle="$contactFaqHeading->subtitle" :items="$consultFaqs" />
     @endif
 @endsection

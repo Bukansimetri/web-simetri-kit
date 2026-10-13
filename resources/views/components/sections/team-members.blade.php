@@ -1,11 +1,13 @@
 @props(['members'])
+@php($heading = \App\Support\PageContent\PageContent::heading('tentang-kami.tim'))
 
 @if ($members->isNotEmpty())
     <section class="w-full bg-background py-24 px-6">
         <div class="max-w-7xl mx-auto">
             <div class="mb-16 text-center">
-                <span class="text-sm font-bold text-secondary uppercase tracking-widest block mb-4">Tim Kami</span>
-                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary">Orang di balik {{ app(\App\Settings\SiteSettings::class)->site_name ?: config('app.name') }}</h2>
+                @if (filled($heading->eyebrow))<span class="text-sm font-bold text-secondary uppercase tracking-widest block mb-4">{{ $heading->eyebrow }}</span>@endif
+                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary">{{ $heading->title }}</h2>
+                @if (filled($heading->subtitle))<p class="mt-4 text-base md:text-lg text-secondary">{{ $heading->subtitle }}</p>@endif
             </div>
 
             <div class="flex flex-wrap justify-center gap-8">

@@ -1,6 +1,7 @@
 @php
     $status = session('newsletter_status');
     $serverError = session('newsletter_error');
+    $heading = \App\Support\PageContent\PageContent::heading('artikel.newsletter');
 @endphp
 
 <div id="langganan"
@@ -44,9 +45,9 @@
      }"
      class="bg-primary-container text-white rounded-lg shadow-md p-6">
     <h3 class="font-headline-lg text-lg md:text-xl font-bold leading-snug mb-2 flex items-center gap-2">
-        <span class="material-symbols-outlined">mail</span> Update Mingguan
+        <span class="material-symbols-outlined">mail</span> {{ $heading->title }}
     </h3>
-    <p class="text-sm text-white/80 mb-5">Dapatkan tips perawatan dan promo eksklusif langsung ke email Anda.</p>
+    @if (filled($heading->subtitle))<p class="text-sm text-white/80 mb-5">{{ $heading->subtitle }}</p>@endif
 
     <p x-show="done" x-cloak role="status" class="text-sm font-semibold bg-white/15 rounded-lg px-4 py-3" x-text="message">{{ $status }}</p>
 

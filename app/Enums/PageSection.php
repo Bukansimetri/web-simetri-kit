@@ -100,7 +100,7 @@ enum PageSection: string
 
     public function hasSubtitle(): bool
     {
-        return ! in_array($this, [self::RecruitmentProcess, self::AboutTrust], true);
+        return $this !== self::AboutTrust;
     }
 
     public function hasEyebrow(): bool

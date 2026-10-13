@@ -90,6 +90,7 @@ class PageBlockResource extends Resource
                 TextInput::make('data.badge_text')->label('Teks Badge Overlay')->maxLength(120),
                 TextInput::make('data.eyebrow')->label('Label Kecil')->maxLength(60),
                 TextInput::make('data.heading')->label('Judul')->maxLength(255),
+                Textarea::make('data.subtitle')->label('Subjudul')->rows(2)->maxLength(500),
                 RichEditor::make('data.body')->label('Paragraf')->toolbarButtons(['bold', 'italic'])->maxLength(1000),
                 RichEditor::make('data.quote')->label('Kutipan')->toolbarButtons(['bold', 'italic'])->maxLength(500),
             ],

@@ -37,6 +37,28 @@ class DefaultPageContent
     public static function headings(): array
     {
         return [
+            'beranda.kalkulator' => ['title' => 'Hitung Estimasi Penghematan', 'subtitle' => 'Dapatkan analisis transparan untuk potensi efisiensi energi Anda.'],
+            'beranda.testimoni' => ['title' => 'Partner Kami', 'subtitle' => null, 'eyebrow' => 'Testimoni'],
+            'tentang-kami.tim' => ['title' => 'Orang di balik {app_name}', 'subtitle' => null, 'eyebrow' => 'Tim Kami'],
+            'tentang-kami.testimoni' => ['title' => 'Partner Kami', 'subtitle' => null, 'eyebrow' => 'Testimoni'],
+            'tentang-kami.logo-klien' => ['title' => 'Dipercaya oleh', 'subtitle' => null],
+            'karir.lowongan' => ['title' => 'Posisi Terbuka', 'subtitle' => null],
+            'produk.faq' => ['title' => 'Pertanyaan Seputar Produk', 'subtitle' => null],
+            'faq.daftar' => ['title' => 'Daftar pertanyaan', 'subtitle' => null],
+            'artikel.daftar' => ['title' => 'Daftar artikel', 'subtitle' => null],
+            'artikel.newsletter' => ['title' => 'Update Mingguan', 'subtitle' => 'Dapatkan tips perawatan dan promo eksklusif langsung ke email Anda.'],
+            'produk-detail.spesifikasi' => ['title' => 'Spesifikasi Teknis', 'subtitle' => null],
+            'produk-detail.terkait' => ['title' => 'Produk Terkait', 'subtitle' => null],
+            'artikel-detail.produk-terkait' => ['title' => 'Produk Terkait', 'subtitle' => null],
+            'artikel-detail.terbaru' => ['title' => 'Artikel Terbaru', 'subtitle' => null],
+            'artikel-detail.artikel-terkait' => ['title' => 'Artikel Terkait', 'subtitle' => null],
+            'kontak.form' => ['title' => 'Kirim pesan ke tim kami', 'subtitle' => null],
+            'kontak.faq' => ['title' => 'Pertanyaan Seputar Konsultasi', 'subtitle' => 'Informasi singkat mengenai proses setelah Anda menghubungi kami.'],
+            'portofolio.daftar' => ['title' => 'Daftar proyek', 'subtitle' => null],
+            'beranda.solusi' => [
+                'title' => 'Solusi Untuk Setiap Kebutuhan',
+                'subtitle' => 'Dirancang spesifik untuk berbagai skala, dari atap hunian minimalis hingga kompleks industri masif.',
+            ],
             PageSection::WhyChoose->value => [
                 'title' => "Mengapa Beralih\nBersama {app_name}?",
                 'subtitle' => 'Investasi cerdas untuk masa depan, dirancang dengan presisi tinggi khusus kondisi iklim Indonesia.',
@@ -139,6 +161,7 @@ class DefaultPageContent
                 'badge_text' => 'Bagian dari Sinar Mas Elektrindo',
                 'eyebrow' => 'Tentang Kami',
                 'heading' => 'Menghadirkan Energi Surya Andal & Terpercaya untuk Indonesia',
+                'subtitle' => null,
                 'body' => 'Sebagai bagian dari <strong>PT Sinar Mas Elektrindo</strong>, {app_name} hadir membawa komitmen kuat dalam menghadirkan solusi energi surya yang inovatif, efisien, dan andal. Kami memadukan kekuatan infrastruktur global dengan pemahaman mendalam tentang kebutuhan lokal Indonesia.',
                 'quote' => 'Misi kami bukan sekadar menjual panel, tetapi menjadi <span class="text-secondary">mitra transformasi energi</span> yang memberdayakan masyarakat dan bisnis menuju masa depan yang lebih hijau.',
             ],

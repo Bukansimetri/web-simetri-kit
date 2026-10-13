@@ -11,6 +11,7 @@
 @endphp
 
 @section('content')
+    @php($faqHeading = \App\Support\PageContent\PageContent::heading('produk.faq'))
     <x-sections.page-hero
         :title="$hero->value('title')"
         breadcrumb="Produk"
@@ -53,7 +54,7 @@
 
     @if (SectionVisibility::shows(PublicSection::ProductFaq))
     {{-- FAQ Seputar Produk --}}
-    <x-sections.faq-list title="Pertanyaan Seputar Produk" :items="$productFaqs" />
+    <x-sections.faq-list :title="$faqHeading->title" :subtitle="$faqHeading->subtitle" :items="$productFaqs" />
     @endif
 
     @if (SectionVisibility::shows(PublicSection::ProductCtaClosing))

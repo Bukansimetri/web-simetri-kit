@@ -14,11 +14,12 @@
         ->map(fn ($item) => ['key' => $item->slug, 'label' => $item->name, 'icon' => $item->icon, 'iconImage' => $item->iconImageUrl(), 'watt' => $item->watt, 'qty' => 0])
         ->values();
 @endphp
+@php($heading = \App\Support\PageContent\PageContent::heading('beranda.kalkulator'))
 <section id="kalkulator" class="reveal-element relative z-20 max-w-6xl mx-auto px-6 -mt-32 mb-32">
     <div x-data="calculatorComponent(@js($formToken), @js($appliances))" class="bg-white p-8 md:p-12 shadow-2xl border border-gray-50/50 max-w-5xl mx-auto rounded-lg">
         <div class="text-center mb-10">
-            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight mb-3 text-primary">Hitung Estimasi Penghematan</h2>
-            <p class="font-medium text-base md:text-lg max-w-2xl mx-auto text-secondary">Dapatkan analisis transparan untuk potensi efisiensi energi Anda.</p>
+            <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight mb-3 text-primary">{{ \App\Support\PageContent\PageContent::multiline($heading->title) }}</h2>
+            @if (filled($heading->subtitle))<p class="font-medium text-base md:text-lg max-w-2xl mx-auto text-secondary">{{ $heading->subtitle }}</p>@endif
         </div>
 
         <div class="flex flex-col gap-8">

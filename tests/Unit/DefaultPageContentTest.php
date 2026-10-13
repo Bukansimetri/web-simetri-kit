@@ -16,6 +16,17 @@ class DefaultPageContentTest extends TestCase
 {
     public function test_headings_match_legacy_text(): void
     {
+        $headings = DefaultPageContent::headings();
+        $legacyKeys = [
+            'beranda.mengapa-beralih',
+            'beranda.cara-kerja',
+            'karir.mengapa-bergabung',
+            'karir.proses-rekrutmen',
+            'tentang-kami.misi',
+            'tentang-kami.nilai',
+            'tentang-kami.trust-strip',
+        ];
+
         $this->assertSame([
             'beranda.mengapa-beralih' => [
                 'title' => "Mengapa Beralih\nBersama {app_name}?",
@@ -50,7 +61,10 @@ class DefaultPageContentTest extends TestCase
                 'title' => 'Trust Strip',
                 'subtitle' => null,
             ],
-        ], DefaultPageContent::headings());
+        ], array_intersect_key($headings, array_flip($legacyKeys)));
+        $this->assertSame('Solusi Untuk Setiap Kebutuhan', $headings['beranda.solusi']['title']);
+        $this->assertSame('Hitung Estimasi Penghematan', $headings['beranda.kalkulator']['title']);
+        $this->assertSame('Kirim pesan ke tim kami', $headings['kontak.form']['title']);
     }
 
     public function test_items_match_legacy_text(): void

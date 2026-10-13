@@ -5,6 +5,7 @@
 
 @php
     $site = app(\App\Settings\SiteSettings::class);
+    $solutionsHeading = \App\Support\PageContent\PageContent::heading('beranda.solusi');
 @endphp
 
 @section('title', \App\Support\Seo\PageTitle::forStatic('home', $site->tagline ?: ''))
@@ -28,6 +29,7 @@
 @endphp
 
 @section('content')
+    @php($testimonialHeading = \App\Support\PageContent\PageContent::heading('beranda.testimoni'))
     @if ($liveBanners->isNotEmpty())
         <x-sections.hero-slider :banners="$liveBanners" />
     @else
@@ -53,9 +55,9 @@
     <section class="reveal-element py-32 px-6 mt-12 bg-surface-container-lowest">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight mb-4 text-primary">Solusi Untuk Setiap Kebutuhan</h2>
+                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight mb-4 text-primary">{{ \App\Support\PageContent\PageContent::multiline($solutionsHeading->title) }}</h2>
                 <p class="text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed text-secondary">
-                    Dirancang spesifik untuk berbagai skala, dari atap hunian minimalis hingga kompleks industri masif.
+                    {{ $solutionsHeading->subtitle }}
                 </p>
             </div>
 
@@ -106,8 +108,9 @@
     @if ($testimonials->isNotEmpty())
         <section class="reveal-element py-24 px-6 max-w-7xl mx-auto">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-xs font-bold text-secondary uppercase tracking-widest block mb-4">Testimoni</span>
-                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary">Partner Kami</h2>
+                @if (filled($testimonialHeading->eyebrow))<span class="text-xs font-bold text-secondary uppercase tracking-widest block mb-4">{{ $testimonialHeading->eyebrow }}</span>@endif
+                <h2 class="font-headline-xl text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary">{{ $testimonialHeading->title }}</h2>
+                @if (filled($testimonialHeading->subtitle))<p class="mt-4 text-base md:text-lg text-secondary">{{ $testimonialHeading->subtitle }}</p>@endif
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
