@@ -6,6 +6,7 @@
 @php
     $site = app(\App\Settings\SiteSettings::class);
     $solutionsHeading = \App\Support\PageContent\PageContent::heading('beranda.solusi');
+    $testimonialHeading = \App\Support\PageContent\PageContent::heading('beranda.testimoni');
 @endphp
 
 @section('title', \App\Support\Seo\PageTitle::forStatic('home', $site->tagline ?: ''))
@@ -29,7 +30,6 @@
 @endphp
 
 @section('content')
-    @php($testimonialHeading = \App\Support\PageContent\PageContent::heading('beranda.testimoni'))
     @if ($liveBanners->isNotEmpty())
         <x-sections.hero-slider :banners="$liveBanners" />
     @else
@@ -62,7 +62,8 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-                @forelse ($products as $i => $product)
+                @if ($products->isNotEmpty())
+                @foreach ($products as $i => $product)
                     @php $featured = $i === 1; $cover = $product->coverImageUrl() ?? ($productFallbacks[$i] ?? $productFallbacks[0]); @endphp
                     <div @class([
                         'bg-white rounded-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group',
@@ -89,9 +90,10 @@
                             @endif
                         </div>
                     </div>
-                @empty
+                @endforeach
+                @else
                     <p class="text-on-surface-variant col-span-3 text-center py-12">Produk belum tersedia.</p>
-                @endforelse
+                @endif
             </div>
 
             <div class="text-center mt-12">
