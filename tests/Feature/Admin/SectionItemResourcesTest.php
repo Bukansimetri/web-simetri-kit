@@ -324,13 +324,13 @@ class SectionItemResourcesTest extends TestCase
             ->assertHasActionErrors(['title' => 'max']);
     }
 
-    public function test_recruitment_heading_has_no_subtitle_field(): void
+    public function test_recruitment_heading_has_subtitle_field(): void
     {
         Livewire::actingAs($this->admin())
             ->test(ListRecruitmentSteps::class)
             ->mountAction('editSectionHeading')
             ->assertActionDataSet(['title' => 'Proses Rekrutmen'])
-            ->assertFormFieldIsHidden('subtitle', 'mountedActionForm');
+            ->assertFormFieldIsVisible('subtitle', 'mountedActionForm');
     }
 
     /**

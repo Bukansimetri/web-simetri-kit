@@ -112,6 +112,7 @@ Menu paling atas, tanpa grup:
 
 - **Halaman** — halaman statis tambahan di situs Anda (misal Syarat & Ketentuan, Kebijakan Privasi).
 - **Blok Halaman** — Siapa Kami dan Visi di halaman "Tentang Kami", serta info kontak (jam operasional dan pesan WhatsApp) di halaman "Kontak".
+- **Judul Section** — judul dan subjudul tiap section di berbagai halaman situs (misal Mengapa Beralih, Testimoni, Daftar Artikel).
 - **CTA** — teks ajakan bertindak ("Hubungi Kami" dan sejenisnya) di berbagai halaman.
 - **FAQ** — pertanyaan dan jawaban di halaman FAQ, serta bagian tanya-jawab di halaman Produk dan Kontak.
 
@@ -410,7 +411,8 @@ Navigasi situs Anda (misal menu utama di header, menu di footer) diatur lewat du
 
 - **Lokasi Menu** adalah tempat navigasinya. Kolom wajib: **Nama Lokasi**, **Slug**. Kolom opsional: **Keterangan**.
 - **Item Menu** adalah tiap tautan yang tampil di sebuah Lokasi Menu. Kolom wajib: **Lokasi Menu**, **Label** (teks yang tampil), **Tujuan Tautan** (misal ke halaman internal atau alamat eksternal). Bila tujuannya halaman internal: **Jenis Halaman** dan **Halaman**. Bila alamat eksternal: **URL Eksternal**. Kolom opsional: **Buka di Tab Baru**. Toggle **Aktif** menentukan apakah item ini ditampilkan.
-- Urutan tampil Item Menu bisa diatur dengan menyeret (drag) barisnya di tabel.
+- Tujuan **Halaman Bawaan** menautkan ke halaman situs seperti Beranda, Produk, Artikel, Karir, Kontak, dan FAQ. Menu bawaan navbar dan footer sudah tersedia sebagai item bertipe ini, sehingga bisa diurutkan bersama item buatan Anda. Item Karir otomatis tersembunyi bila modul karir dimatikan di Pengaturan Umum.
+- Urutan tampil Item Menu diatur dengan menekan tombol **Urutkan Menu**, lalu menyeret (drag) barisnya di tabel dan menekan **Selesai Mengurutkan**. Sub-menu diurutkan dengan cara yang sama lewat tombol **Urutkan Sub-menu**.
 
 ## Pengaturan situs
 
