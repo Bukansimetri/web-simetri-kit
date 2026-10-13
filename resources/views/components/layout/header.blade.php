@@ -23,7 +23,9 @@
             // sudah terhapus (FR-011) — tetap tampil sebagai label, arahkan
             // ke '#' alih-alih menghilangkannya dari navbar.
             'href' => $item['href'] ?? '#',
-            'active' => $item['href'] !== null && request()->url() === $item['href'],
+            // Aktif juga di halaman turunannya (mis. /produk/{slug} menyalakan Produk), kecuali Beranda.
+            'active' => $item['href'] !== null && (request()->url() === $item['href']
+                || ($item['href'] !== url('/') && str_starts_with(request()->url(), rtrim($item['href'], '/').'/'))),
         ])->all();
     } else {
         $navLinks = array_filter([

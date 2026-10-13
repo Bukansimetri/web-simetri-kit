@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\MenuLocation;
+use App\Support\Menu\MenuDefaultsInstaller;
 use Illuminate\Database\Seeder;
 
 class MenuSeeder extends Seeder
@@ -23,5 +24,7 @@ class MenuSeeder extends Seeder
             ['slug' => 'footer'],
             ['name' => 'Footer', 'description' => 'Tampil di footer seluruh halaman publik']
         );
+
+        MenuDefaultsInstaller::install();
     }
 }
